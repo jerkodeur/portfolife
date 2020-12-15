@@ -52,7 +52,7 @@ const PortfolioLanding = () => {
                     {/* End Single Slide */}
                 </div>
             </div>
-            {/* End Slider Area   */} 
+            {/* End Slider Area   */}
 
             {/* Start About Area */}
             <div id="about" className="fix">
@@ -81,7 +81,7 @@ const PortfolioLanding = () => {
                     </div>
                 </div>
             </div>
-            
+
             {/* End About Area */}
 
             {/* Start Service Area  */}
@@ -102,9 +102,9 @@ const PortfolioLanding = () => {
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
-            {/* End Service Area  */} 
+            {/* End Service Area  */}
 
             {/* Start Portfolio Area */}
             <div id="portfolio" className="fix">
@@ -120,7 +120,7 @@ const PortfolioLanding = () => {
                                 </div>
                             </div>
                             <div className="row">
-                                <PortfolioList styevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
+                                <PortfolioList stylevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
                             </div>
                             <div className="row">
                                 <div className="col-lg-12">
@@ -166,8 +166,8 @@ const PortfolioLanding = () => {
                                     </div>
                                 </div>
                             ))}
-                        </div>    
-                    </div>    
+                        </div>
+                    </div>
                 </div>
             </div>
             {/* End Blog Area */}

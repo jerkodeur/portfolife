@@ -1,5 +1,5 @@
 /*====================
-    Slider Area 
+    Slider Area
 ======================*/
 
 
@@ -15,7 +15,7 @@
 .slider-fixed--height {
     min-height: 1080px;
     width: 100%;
-    
+
     @media #{$laptop-device} {
         min-height: 900px;
     }
@@ -32,11 +32,11 @@
 
 
 /*----------------------
-Slider Default Style 
+Slider Default Style
 ------------------------*/
 .slide {
     .inner {
-        padding-top: 100px;
+        padding-top: 75px;
         @media #{$sm-layout} {
             padding-top: 70px;
         }
@@ -76,6 +76,9 @@ Slider Default Style
                 }
             }
         }
+        p {
+            color: #fff;
+        }
     }
     &.slide-style-1 {
         .inner {
@@ -109,7 +112,7 @@ Slider Default Style
             padding-top: 150px;
             padding-bottom: 150px;
         }
-        
+
 
         &.fullscreen {
             min-height: 950px;
@@ -177,7 +180,7 @@ Slider Default Style
                 padding-top: 30px;
             }
             > span {
-                color: #fff;
+                color: #ffffff;
                 font-size: 15px;
                 text-transform: uppercase;
                 letter-spacing: 4px;
@@ -190,7 +193,7 @@ Slider Default Style
                     color: #ffffff;
                     font-size: 100px;
                     font-weight: 900;
-                    
+
                     @media #{$lg-layout} {
                         font-size: 72px;
                     }
@@ -275,7 +278,7 @@ Slider Default Style
     &.slider-style-3 {
         .inner {
             > span {
-                color: #1f1f25;
+                color: #FFF;
                 font-size: 15px;
                 text-transform: uppercase;
                 letter-spacing: 4px;
@@ -288,13 +291,13 @@ Slider Default Style
             }
             h1 {
                 &.title {
-                    color: #1f1f25;
-                    font-size: 75px;
+                    color: #FFF;
+                    font-size: 50px;
                     font-weight: 900;
                     font-family: 'Montserrat', sans-serif;
-                    line-height: 90px;
+                    line-height: 80px;
                     text-transform: inherit;
-                    width: 70%;
+                    width: 80%;
 
                     @media #{$lg-layout} {
                         font-size: 70px;
@@ -345,7 +348,7 @@ Slider Default Style
 }
 
 /*-------------------------
-Personal Portfolio  
+Personal Portfolio
 --------------------------*/
 .personal-portfolio-slider {
     position: relative;
@@ -497,7 +500,7 @@ Personal Portfolio
 
 
 /*--------------------------
-    Slider Digital Agency  
+    Slider Digital Agency
 ----------------------------*/
 
 .slider-digital-agency {
@@ -509,7 +512,7 @@ Personal Portfolio
 
 
 /* ----------------------
-    Slider Videi Bg 
+    Slider Videi Bg
 ------------------------*/
 
 .slider-video-bg {
@@ -611,7 +614,7 @@ Personal Portfolio
 }
 
 /*-------------------------
-For Slider Service 
+For Slider Service
 ---------------------------*/
 
 .slide {
@@ -620,7 +623,7 @@ For Slider Service
         @media #{$lg-layout} {
             margin-top: 20px;
         }
-        
+
         @media #{$laptop-device} {
             margin-top: 0px;
         }
@@ -637,7 +640,7 @@ For Slider Service
 }
 
 /*=======================
-    Slider Paralax 
+    Slider Paralax
 =========================*/
 
 .slider-paralax,
@@ -660,7 +663,7 @@ For Slider Service
 }
 
 /*--------------------------
-Slick Animation For Slider  
+Slick Animation For Slider
 -----------------------------*/
 .slick-slide {
     &.slick-current {
@@ -785,7 +788,7 @@ Slider Default Button And Dot STyle
 }
 
 /*--------------------
-Custom Animation  
+Custom Animation
 ----------------------*/
 
 @-webkit-keyframes customOne {
@@ -834,7 +837,7 @@ Custom Animation
 }
 
 /*---------------------
-    Box Model  
+    Box Model
 ----------------------*/
 
 .box-model .service-wrapper {

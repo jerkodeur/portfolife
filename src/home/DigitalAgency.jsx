@@ -59,14 +59,14 @@ class DigitalAgency extends Component{
         let title = 'About',
         description = 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which dont look even slightly believable. If you are going to use a passage of Lorem Ipsum,';
         return(
-            <Fragment> 
-                
+            <Fragment>
+
                 <Helmet pageTitle="Digital Agency" />
 
                 {/* Start Header Area  */}
                 <Header logo="light" color="color-white"/>
                 {/* End Header Area  */}
-                
+
                 {/* Start Slider Area   */}
                 <div className="slider-wrapper color-white">
                     <div className="slider-activation slider-digital-agency">
@@ -105,8 +105,8 @@ class DigitalAgency extends Component{
                        </div>
                         <ServiceList item="6" column="col-lg-4 col-md-6 col-sm-6 col-12 text-center" />
                    </div>
-                </div>  
-                {/* End Service Area  */} 
+                </div>
+                {/* End Service Area  */}
 
                 {/* Start Portfolio Area */}
                 <div className="portfolio-area ptb--120 bg_image bg_image--3">
@@ -121,7 +121,7 @@ class DigitalAgency extends Component{
                                 </div>
                             </div>
                             <div className="row">
-                                <PortfolioList styevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
+                                <PortfolioList stylevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
                             </div>
                             <div className="row">
                                 <div className="col-lg-12">
@@ -208,7 +208,7 @@ class DigitalAgency extends Component{
                                 </div>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                 </div>
                 {/* End Blog Area */}
 
@@ -231,7 +231,7 @@ class DigitalAgency extends Component{
                     </div>
                 </div>
                 {/* End Brand Area */}
-                
+
                 {/* Start call To Action  */}
                 <CallAction />
                 {/* End call To Action  */}

@@ -1,6 +1,7 @@
-// Contact Styles 
+// Contact Styles
 
 .contact-form--1 {
+    text-align: center;
     label {
         display: block;
         margin-bottom: 0;
@@ -32,7 +33,7 @@
 
 
 /*==========================
-    Contact Address 
+    Contact Address
 ============================*/
 
 .rn-address {
@@ -79,7 +80,7 @@
                 font-size: 16px;
             }
             br {
-                
+
                 @media #{$lg-layout} {
                     display: none;
                 }

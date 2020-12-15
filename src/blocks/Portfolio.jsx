@@ -83,7 +83,7 @@ const Portfolio = () => {
             {/* Start Header Area  */}
             <Header headertransparent="header--transparent" colorblack="color--black" logoname="logo.png" />
             {/* End Header Area  */}
-            
+
             {/* Start Breadcrump Area */}
             <Breadcrumb title={'Portfolio'}   />
             {/* End Breadcrump Area */}
@@ -140,7 +140,7 @@ const Portfolio = () => {
                                 </div>
                             </div>
                             <div className="row">
-                                <PortfolioList styevariation="text-left mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
+                                <PortfolioList stylevariation="text-left mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
                             </div>
                             <div className="row">
                                 <div className="col-lg-12">
@@ -202,13 +202,13 @@ const Portfolio = () => {
                 </ScrollToTop>
             </div>
             {/* End Back To Top */}
-            
+
             {/* Start Footer Area  */}
             <Footer />
             {/* End Footer Area  */}
 
         </>
-        
+
     )
 }
 

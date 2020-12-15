@@ -1,5 +1,5 @@
 /*==================
-    Portfolio Area 
+    Portfolio Area
 ==================*/
 .portfolio {
     position: relative;
@@ -7,7 +7,7 @@
     min-height: 600px;
     width: 100%;
     padding-top: 35%;
-    
+
     @media #{$laptop-device} {
         min-height: 500px;
     }
@@ -35,8 +35,8 @@
         cursor: pointer;
 
         &::before{
-            background-color: #f6004c;
-            background-image: linear-gradient(#f6004c 10%, #000000 100%);
+            background-color: #f6a800;
+            background-image: linear-gradient(#f6a800 10%, #000000 100%);
             position: absolute;
             content: "";
             top: 0;
@@ -55,28 +55,36 @@
         height: 100%;
         width: 100%;
         background-size: cover;
+        background-repeat: no-repeat;
         background-position: center;
         border-radius: 5px;
         background-color: #0a0a0a;
         background-image: url(/assets/images/portfolio/portfolio-1.jpg);
-        transform: scale(1.13) translateZ(0);
         backface-visibility: hidden;
         transition: transform .28s ease;
         z-index: 4;
         &.image-1{
-            background-image: url(/assets/images/portfolio/portfolio-1.jpg);
+            background-image: url(/assets/images/portfolio/urbanpreview.png);
         }
 
         &.image-2{
-            background-image: url(/assets/images/portfolio/portfolio-2.jpg);
+            background-image: url(/assets/images/portfolio/hellopreview.png);
         }
 
         &.image-3{
-            background-image: url(/assets/images/portfolio/portfolio-3.jpg);
+            background-image: url(/assets/images/portfolio/tinypreview.png);
         }
 
         &.image-4 {
-            background-image: url(/assets/images/portfolio/portfolio-4.jpg);
+            background-image: url(/assets/images/portfolio/mymedpreview.png);
+        }
+
+        &.image-5 {
+            background-image: url(/assets/images/portfolio/howtobefatpreview.png);
+        }
+
+        &.image-6 {
+            background-image: url(/assets/images/portfolio/darkRporterpreview.png);
         }
 
         &::after{
@@ -111,16 +119,22 @@
         z-index: 1;
 
         &.image-1{
-            background-image: url(/assets/images/portfolio/portfolio-1.jpg);
+            background-image: url(/assets/images/portfolio/urbanpreview.png);
         }
         &.image-2{
-            background-image: url(/assets/images/portfolio/portfolio-2.jpg);
+            background-image: url(/assets/images/portfolio/hellopreview.png);
         }
         &.image-3{
-            background-image: url(/assets/images/portfolio/portfolio-1.jpg);
+            background-image: url(/assets/images/portfolio/tinypreview.png);
         }
         &.image-4 {
-            background-image: url(/assets/images/portfolio/portfolio-1.jpg);
+            background-image: url(/assets/images/portfolio/mymedpreview.png);
+        }
+        &.image-5 {
+            background-image: url(/assets/images/portfolio/howtobefatpreview.png);
+        }
+        &.image-6 {
+            background-image: url(/assets/images/portfolio/darkRporterpreview.png);
         }
     }
 
@@ -181,15 +195,15 @@
             &.image-1{
                 background-image: url(/assets/images/portfolio/interior/portfolio-1.jpg);
             }
-    
+
             &.image-2{
                 background-image: url(/assets/images/portfolio/interior/portfolio-2.jpg);
             }
-    
+
             &.image-3{
                 background-image: url(/assets/images/portfolio/interior/portfolio-3.jpg);
             }
-    
+
             &.image-4 {
                 background-image: url(/assets/images/portfolio/interior/portfolio-4.jpg);
             }
@@ -208,15 +222,15 @@
             &.image-1{
                 background-image: url(/assets/images/portfolio/interior/portfolio-1.jpg);
             }
-    
+
             &.image-2{
                 background-image: url(/assets/images/portfolio/interior/portfolio-2.jpg);
             }
-    
+
             &.image-3{
                 background-image: url(/assets/images/portfolio/interior/portfolio-3.jpg);
             }
-    
+
             &.image-4 {
                 background-image: url(/assets/images/portfolio/interior/portfolio-4.jpg);
             }
@@ -258,13 +272,13 @@
     }
     &:hover{
         .thumbnail-inner{
-            transform: scale(1.08) translateZ(0);
+            transform: scale(1.02) translateZ(0);
             &::before{
                 opacity: 0.85;
             }
         }
         .thumbnail {
-            transform: scale(1) translateZ(0);
+            transform: scale(1.02) translateZ(0);
             &::after{
                 background-color: rgba(25,25,25,.24);
             }
@@ -273,7 +287,7 @@
             opacity: 0;
             z-index: 9;
         }
-        
+
     }
     &.portfolio-style--2{
         .inner{
@@ -283,7 +297,7 @@
 }
 
 
-// Minimal Portfolio 
+// Minimal Portfolio
 
 .portfolio-tilthover {
     .portfolio {
@@ -349,7 +363,7 @@
                 display: none;
             }
         }
-        
+
         .thumbnail-inner {
             @media #{$large-mobile} {
                 transform: scale(1) translateZ(0);
@@ -380,11 +394,11 @@
             &.image-1 {
                 background-image: url(/assets/images/portfolio/portfolio-static-01.jpg);
             }
-    
+
             &.image-2 {
                 background-image: url(/assets/images/portfolio/portfolio-static-03.jpg);
             }
-    
+
             &.image-3 {
                 background-image: url(/assets/images/portfolio/portfolio-static-03.jpg);
             }
@@ -429,7 +443,6 @@
                 }
             }
             .thumbnail {
-                transform: scale(1) translateZ(0);
                 &::after {
                     background-color: rgba(25,25,25,.24);
                 }
@@ -478,7 +491,7 @@
 
             .bg-blr-image {
                 background-image: url(/assets/images/portfolio/dp-portfolio-01.jpg);
-    
+
                 &.image-1 {
                     background-image: url(/assets/images/portfolio/dp-portfolio-01.jpg);
                 }
@@ -522,15 +535,15 @@
         @media #{$md-layout} {
             margin-left: 15px;
             margin-right: 15px;
-        } 
+        }
         @media #{$lg-layout} {
             margin-left: 15px;
             margin-right: 15px;
-        } 
+        }
         @media #{$sm-layout} {
             margin-left: 10px;
             margin-right: 10px;
-        } 
+        }
     }
 }
 
@@ -572,14 +585,14 @@
     .slick-dots {
         bottom: -60px;
         @media #{$large-mobile} {
-            bottom: -50px; 
+            bottom: -50px;
         }
         li{
             width: 30px;
             margin: 0;
             opacity: .35;
             position: relative;
-            
+
             button{
                 &::before{
                     display: none;
@@ -614,7 +627,7 @@
             }
         }
     }
-    // Dot Light  
+    // Dot Light
     &.dot-light {
         .slick-dots {
             li{
@@ -653,7 +666,7 @@
             font-size: 20px;
             width: 253px;
             height: 101%;
-            
+
             @media #{$lg-layout} {
                 width: 136px;
             }
@@ -693,7 +706,7 @@
                 @media #{$laptop-device} {
                     display: none !important;
                 }
-                
+
             }
             &.slick-next{
                 right: 0;
@@ -760,7 +773,7 @@
 }
 
 .slickdot--20 {
-    .slick-dots { 
+    .slick-dots {
         bottom: -20px;
     }
 }
@@ -770,7 +783,7 @@
 
 
 /*-----------------------------
-Portfolio Style Three  
+Portfolio Style Three
 --------------------------------*/
 .portfolio-style--3 {
     position: relative;
@@ -858,7 +871,7 @@ Portfolio Style Three
             transition: 0.7s;
             opacity: 0;
             visibility: hidden;
-            
+
             @media #{$large-mobile} {
                 margin-top: 22px;
             }

@@ -2,7 +2,7 @@
  *  Utilities
 =================================*/
 /*====================================
-    Google Font  
+    Google Font
 ===================================*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,600,700,800,900|Poppins:300,400,500,600,700,700i&display=swap');
 
@@ -98,14 +98,14 @@ font-family: 'Poppins', sans-serif;
 
 
 /*===============================
-    Background Color 
+    Background Color
 =================================*/
 
 @include config-bg-colors('bg_color--',
 '1'$white,
 '2'$theme-color,
 '3'#f8f9fc,
-'4'#1a1b1f,
+'4'#d4d8e9,
 '5'#f8f9fc,
 '6'#000000,
 '7'#101010
@@ -115,7 +115,7 @@ font-family: 'Poppins', sans-serif;
 
 
 /*===========================
-    Background Image 
+    Background Image
 =============================*/
 .bg_overlay:before {
     position: absolute;
@@ -166,7 +166,7 @@ p:last-child{
 }
 
 /*=========================
-    Text specialized 
+    Text specialized
 ==========================*/
 .text-italic {
     font-style: italic;
@@ -362,7 +362,7 @@ textarea:-ms-input-placeholder {
 
 
 /*=============================
-	Overlay styles 
+	Overlay styles
 ==============================*/
 
 [data-overlay],
@@ -416,7 +416,7 @@ textarea:-ms-input-placeholder {
 
 
 /*------------------------------
-    Scroll Up 
+    Scroll Up
 --------------------------------*/
 #scrollUp {
     width: 40px;

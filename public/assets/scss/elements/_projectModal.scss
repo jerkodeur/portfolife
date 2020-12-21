@@ -1,51 +1,98 @@
 .project-modal {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     .modal-dialog {
         .modal-content {
-            height: 90vh;
-            // padding: 1em;
             border: 1pt solid #ffffff;
-            box-shadow: rgba(205, 207, 199, 0.726) 5px -5px,
-                        rgba(109, 112, 101, 0.726) 10px -10px,
-                        rgba(68, 70, 62, 0.726) 15px -15px,
-                        rgba(0, 0, 0, 0.301) 20px -20px;
+            box-shadow: rgba(205, 207, 199, 0.726) 10px -10px,
+                        rgba(109, 112, 101, 0.726) 20px -20px,
+                        rgba(68, 70, 62, 0.726) 30px -30px,
+                        rgba(0, 0, 0, 0.301) 40px -40px;
             .modal-header {
-                background-color: #fff;
-                border-bottom: 2px #000 solid;
+                background-color: #ffffff;
+                padding-left: 0 !important;
                 padding-bottom: 0;
-            }
-            .modal-body {
-                background-color: #000;
+                display: flex;
+                flex-direction: column;
+                .modal-title {
+                    margin-left: .5em;
+                    font-size: 2.2em;
+                    text-shadow:rgba(177, 180, 168, 0.651) 2px 2px;
+                }
                 .breadcrumb-project {
-                    margin: auto;
                     font-weight: bold;
                     text-transform: uppercase;
 
-                    span:not(.selected):not(.breadcrumb-separator) {
+                    span {
+                    background-color: #000;
+                    padding: 0.5em;
+                    border-bottom: 1px inset rgb(229, 233, 219);
+                    border: 1px solid #000;
+                    border-radius: 8px 8px 0 0;
+                    margin-right: .20em;
+                    padding: 0.5em 2em;
+                    }
+
+                    span:not(.selected) {
                         cursor: pointer;
-                        color: #ffffff;
+                        background-color: rgba(244, 245, 240, 0.561);
+                        color: #000;
                         &:hover {
+                            background-color: $theme-color;
+                            border-color: #fff;
                             padding-bottom: .25em;
                             font-weight: bold;
                             border-bottom: 1px solid #fff;
                         }
                     }
-                    .breadcrumb-separator {
-                        padding: 0 1em;
-                        color: gray;
-                        width: 1rem;
-                    }
                     .selected {
+                        background-color: #000;
+                        color: rgb(229, 233, 219);
                         cursor: unset;
-                        color: $theme-color;
                     }
                 }
+            }
+            .modal-body {
+                max-height: 70vh;
+                overflow: auto;
+                background-color: #000;
             }
             .modal-footer {
                 background-color: $theme-color;
             }
         }
     }
+    .main-description {
+        .project-description {
+            margin: 2rem auto 1rem;
+            color:  rgb(229, 233, 219);
+            font-size: 1.2em;
+            h3 {
+                color: $theme-color;
+            }
+            h4 {
+                font-size: 1.1em;
+                padding-left: .5em;
+                color:#fff
+            }
+            width: 90%;
+        }
+        .display-technos {
+            width: 90%;
+            margin: auto;
+
+            img {
+                height: 4em;
+                padding-right: 1em;
+                margin-top: 1.5em;
+            }
+        }
+    }
+
 }
 .modal-backdrop.show {
     opacity: .25;
+}
+.ReactModal__Body--open {
+    overflow-y: hidden;
 }

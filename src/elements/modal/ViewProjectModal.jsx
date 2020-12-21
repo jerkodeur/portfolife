@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-
+import React, {useState, useEffect} from 'react'
 
 import Modal from 'react-bootstrap/Modal'
 import ModalTitle from 'react-bootstrap/ModalTitle'
@@ -7,41 +6,51 @@ import ModalHeader from 'react-bootstrap/ModalHeader'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalFooter from 'react-bootstrap/ModalFooter'
 
+import ImageSlides from './ProjectDisplay/ImagesSlides'
+import MarkdownDescription from './ProjectDisplay/MarkdownDescription'
+import ShowTechnos from './ProjectDisplay/ShowTechnos'
+
 const ViewProjectModal = (props) => {
-    const {title} = props.values
+    const {mainDatas, technos} = props.project
+    const {show, onHide, isDisplay, toogleDisplay} = props
 
-    const [mainDisplay, setMainDisplay] = useState('description')
+    // const [modalDisplay, setModalDisplay,] = useState('description')
 
+    console.log(props)
     return (
         <div>
             <Modal
                 className="project-modal"
-                show={props.show}
-                onHide={props.onHide}
+                show={show}
+                onHide={onHide}
                 size="xl"
-                centered={true}
+                scrollable={true}
             >
                 <ModalHeader>
-                    <ModalTitle>{title}</ModalTitle>
+                    <ModalTitle>
+                        {mainDatas && mainDatas.title}
+                    </ModalTitle>
+                    <div className="breadcrumb-project">
+                            { isDisplay !== 'description' ?
+                                <span onClick={toogleDisplay}>Description</span>
+                                : <span className='selected'>Description</span>
+                            }
+                            { isDisplay !== 'gallery' ?
+                                <span onClick={toogleDisplay}>Galerie photos</span>
+                                : <span className='selected'>Galerie photos</span>
+                            }
+                    </div>
                 </ModalHeader>
                 <ModalBody>
-                    <div className="breadcrumb-project col-12 text-center">
-                        { mainDisplay !== 'description' ?
-                            <span onClick={() => setMainDisplay('description')}>Description</span>
-                            : <span className='selected'>Description</span>
+                        {
+                            isDisplay === 'description'
+                                ?
+                                <div className='main-description'>
+                                    <ShowTechnos technos={technos} />
+                                    <MarkdownDescription project={props.project} />
+                                </div>
+                                : <ImageSlides />
                         }
-                        <span className="breadcrumb-separator"> ✠ </span>
-                        { mainDisplay !== 'gallery' ?
-                            <span onClick={() => setMainDisplay('gallery')}>Galerie photos</span>
-                            : <span className='selected'>Galerie photos</span>
-                        }
-                    </div>
-                    <div>
-                        Slide avec les images
-                    </div>
-                    <div>
-                        Miniatures
-                    </div>
                 </ModalBody>
                 <ModalFooter>
                     <div>

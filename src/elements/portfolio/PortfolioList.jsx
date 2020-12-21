@@ -19,10 +19,15 @@ const PortfolioList = (props) => {
     }
 
 
-    const toogleDisplay = () => {
-        isDisplay === 'description'
+    const toogleDisplay = (isDefault = 'description') => {
+        isDisplay === 'description' || !isDefault
             ? setIsDisplay('gallery')
             : setIsDisplay('description')
+    }
+
+    const hideModal = () => {
+        setIsDisplay('description')
+        setShowModal(false)
     }
 
     useEffect(() => {
@@ -71,11 +76,10 @@ const PortfolioList = (props) => {
                         </div>
                         <ViewProjectModal
                             show={showModal}
-                            onHide={() => setShowModal(false)}
+                            onHide={() => hideModal()}
                             isDisplay={isDisplay}
                             toogleDisplay={() => toogleDisplay()}
                             project={selectedModal}
-                            onShow={() => document.body.style.overflow = 'hidden'}
                         />
                     </div>
                 )

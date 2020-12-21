@@ -8,6 +8,7 @@ import ModalFooter from 'react-bootstrap/ModalFooter'
 
 import ImageSlides from './ProjectDisplay/ImagesSlides'
 import MarkdownDescription from './ProjectDisplay/MarkdownDescription'
+import ProjectFooter from './ProjectDisplay/ProjectFooter'
 import ShowTechnos from './ProjectDisplay/ShowTechnos'
 
 const ViewProjectModal = (props) => {
@@ -29,6 +30,7 @@ const ViewProjectModal = (props) => {
                 <ModalHeader>
                     <ModalTitle>
                         {mainDatas && mainDatas.title}
+                        <span onClick={onHide}>X</span>
                     </ModalTitle>
                     <div className="breadcrumb-project">
                             { isDisplay !== 'description' ?
@@ -49,14 +51,14 @@ const ViewProjectModal = (props) => {
                                     <ShowTechnos technos={technos} />
                                     <MarkdownDescription project={props.project} />
                                 </div>
-                                : <ImageSlides />
+                                : <ImageSlides/>
                         }
                 </ModalBody>
-                <ModalFooter>
-                    <div>
-                        Différents lien vers le projet
-                    </div>
-                </ModalFooter>
+                { props.project.mainDatas && (props.project.mainDatas.url_test || props.project.mainDatas.url_github) &&
+                    <ModalFooter>
+                        <ProjectFooter project={mainDatas} />
+                    </ModalFooter>
+                }
             </Modal>
         </div>
     )

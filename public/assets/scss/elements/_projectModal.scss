@@ -1,0 +1,51 @@
+.project-modal {
+    .modal-dialog {
+        .modal-content {
+            height: 90vh;
+            // padding: 1em;
+            border: 1pt solid #ffffff;
+            box-shadow: rgba(205, 207, 199, 0.726) 5px -5px,
+                        rgba(109, 112, 101, 0.726) 10px -10px,
+                        rgba(68, 70, 62, 0.726) 15px -15px,
+                        rgba(0, 0, 0, 0.301) 20px -20px;
+            .modal-header {
+                background-color: #fff;
+                border-bottom: 2px #000 solid;
+                padding-bottom: 0;
+            }
+            .modal-body {
+                background-color: #000;
+                .breadcrumb-project {
+                    margin: auto;
+                    font-weight: bold;
+                    text-transform: uppercase;
+
+                    span:not(.selected):not(.breadcrumb-separator) {
+                        cursor: pointer;
+                        color: #ffffff;
+                        &:hover {
+                            padding-bottom: .25em;
+                            font-weight: bold;
+                            border-bottom: 1px solid #fff;
+                        }
+                    }
+                    .breadcrumb-separator {
+                        padding: 0 1em;
+                        color: gray;
+                        width: 1rem;
+                    }
+                    .selected {
+                        cursor: unset;
+                        color: $theme-color;
+                    }
+                }
+            }
+            .modal-footer {
+                background-color: $theme-color;
+            }
+        }
+    }
+}
+.modal-backdrop.show {
+    opacity: .25;
+}

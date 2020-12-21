@@ -1,41 +1,65 @@
-import React, { Component , Fragment } from "react";
-import ScrollToTop from 'react-scroll-up';
-import { FiChevronUp } from "react-icons/fi";
-import HeaderTwo from "../component/header/Header";
+import React, {Component, Fragment} from "react"
+
+import Helmet from "../component/common/Helmet"
+import {FiChevronUp} from "react-icons/fi"
+import ScrollToTop from 'react-scroll-up'
+import Typed from 'typed.js'
+
+import ContactOne from "../elements/contact/ContactOne"
 import FooterTwo from "../component/footer/FooterTwo"
-import Brand from "../elements/Brand";
-import PortfolioList from "../elements/portfolio/PortfolioList";
-import TabTwo from "../elements/tab/TabTwo";
-import ContactOne from "../elements/contact/ContactOne";
-import Helmet from "../component/common/Helmet";
+import HeaderTwo from "../component/header/Header"
+import PortfolioList from "../elements/portfolio/PortfolioList"
+import TabTwo from "../elements/tab/TabTwo"
 
-const SlideList = [
-    {
-        textPosition: 'text-left',
-        category: 'Welcome to my world',
-        title: 'Bonjour, moi c\'est Jérôme !<br />',
-        transition: 'je suis un .....',
-        title2: '<span>Développeur Web / Web Mobile<span />',
-        description: "étant attiré par le domaine de l'informatique depuis mon plus jeune âge, j'ai décidé d'abandonner ma carrière dans la restauration afin de me donner les moyens de réaliser mon rêve de gamin... devenir développeur !",
-        buttonText: '',
-        buttonLink: ''
+class PersonalPortfolio extends Component {
+
+    componentDidMount () {
+        const options = {
+            strings: ['Mobile', 'Fullstack'],
+            typeSpeed: 125,
+            backSpeed: 50,
+            startDelay: 1000,
+            backDelay: 2500,
+            smartBackspace: true,
+            loop: true,
+            loopCount: Infinity,
+            showCursor: false,
+            fadeOut: true,
+            fadeOutClass: 'typed-fade-out',
+            fadeOutDelay: 500,
+        }
+        // this.el refers to the <span> in the render() method
+        this.typed = new Typed(this.el, options)
     }
-]
-class PersonalPortfolio extends Component{
-    render(){
-        let title = 'À Propos de moi',
-        description = "En reconversion dans le domaine du développement Web et Web mobile, j'ai suivi une formation intensive de 5 mois à la Wild Code School, école spécialisée dans les métiers de la tech et du numérique. Aujourd'hui, suite à mon stage dans l'agence Bluesquare.io, je suis en recherche active afin de décrocher mon premier job dans ma nouvelle vie de dev !"
 
-        return(
+    render () {
+        let title = 'À Propos de moi',
+            description = "En reconversion dans le domaine du développement Web et Web mobile, j'ai suivi une formation intensive de 5 mois à la Wild Code School, école spécialisée dans les métiers de la tech et du numérique. Aujourd'hui, suite à mon stage dans l'agence Bluesquare.io, je suis en recherche active afin de décrocher mon premier job dans ma nouvelle vie de dev."
+
+        const SlideList = [
+            {
+                textPosition: 'text-left',
+                category: 'Hello world',
+                title: 'Bonjour, moi c\'est Jérôme !<br />',
+                transition: 'je suis un .....',
+                title2: `<span>Développeur Web <span />`,
+                description: "Je suis attiré par le domaine de l'informatique depuis mon plus jeune âge, j'ai décidé d'abandonner ma carrière dans la restauration afin de me donner les moyens de réaliser mon rêve de gamin... faire du développement mon métier !",
+                buttonText: '',
+                buttonLink: ''
+            }
+        ]
+
+
+        return (
             <Fragment>
                 <Helmet pageTitle="Personal Portfolio" />
 
-                <HeaderTwo logo="symbol-light" color="color-white"/>
+                <HeaderTwo logo="symbol-light" color="color-white" />
 
                 {/* Start Slider Area   */}
                 <div className="slider-wrapper">
                     {/* Start Single Slide */}
-                    {SlideList.map((value , index) => (
+                    {SlideList.map((value, index) => (
                         <div className="slide personal-portfolio-slider slider-paralax slider-style-3 d-flex align-items-center justify-content-center bg_image bg_image--33" key={index}>
                             <div className="container">
                                 <div className="row">
@@ -44,7 +68,16 @@ class PersonalPortfolio extends Component{
                                             {value.category ? <span>{value.category}</span> : ''}
                                             {value.title ? <h1 className="title" dangerouslySetInnerHTML={{__html: value.title}}></h1> : ''}
                                             {value.transition ? <span>{value.transition}</span> : ''}
-                                            {value.title ? <h1 className="title" dangerouslySetInnerHTML={{__html: value.title2}}></h1> : ''}
+                                            {value.title2 ?
+                                                <div className="">
+                                                    <h1 className="title d-inline" dangerouslySetInnerHTML={{__html: value.title2}} />
+                                                    <h1 className='title d-inline'>
+                                                        <span
+                                                        ref={(el) => {this.el = el}}
+                                                        />
+                                                    </h1>
+                                                </div>
+                                                : ''}
                                             {value.description ? <p className="description">{value.description}</p> : ''}
                                             {value.buttonText ? <div className="slide-btn"><a className="rn-button-style--2 btn-primary-color" href={`${value.buttonLink}`}>{value.buttonText}</a></div> : ''}
                                         </div>
@@ -64,7 +97,7 @@ class PersonalPortfolio extends Component{
                             <div className="row row--20 align-items-center ">
                                 <div className="col-lg-4 justify-content-center align-items-end">
                                     <div className="thumbnail">
-                                        <img className="w-100" src="/assets/images/about/about-5.jpg" alt="About Images"/>
+                                        <img className="w-100" src="/assets/images/about/about-5.jpg" alt="About Images" />
                                     </div>
                                 </div>
                                 <div className="col-lg-8">
@@ -73,7 +106,7 @@ class PersonalPortfolio extends Component{
                                             <h2 className="title">{title}</h2>
                                             <p className="description">{description}</p>
                                         </div>
-                                        <div className="row mt--30">
+                                        <div className="row mt--30 tab-container">
                                             <TabTwo tabStyle="tab-style--1" />
                                         </div>
                                     </div>
@@ -151,4 +184,4 @@ class PersonalPortfolio extends Component{
     }
 }
 
-export default PersonalPortfolio;
+export default PersonalPortfolio

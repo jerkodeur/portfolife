@@ -1,0 +1,20 @@
+.Toaster__alert {
+    padding: 0 !important;
+
+    .toaster-success {
+        color: white;
+        font-weight: 700;
+        background-color: $theme-color !important;
+        padding: 1rem;
+    }
+    .toaster-fail {
+        color: white;
+        font-weight: 700;
+        background-color: $pinterest !important;
+        padding: 1rem;
+
+    }
+}
+.Toaster__alert_close {
+    display: none;
+}

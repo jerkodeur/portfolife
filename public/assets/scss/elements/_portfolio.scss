@@ -1,3 +1,12 @@
+:root {
+    --preview-img-0: url(/assets/images/portfolio/portfolio-1.jpg);
+    --preview-img-1: url(/assets/images/portfolio/portfolio-1.jpg);
+    --preview-img-2: url(/assets/images/portfolio/portfolio-1.jpg);
+    --preview-img-3: url(/assets/images/portfolio/portfolio-1.jpg);
+    --preview-img-4: url(/assets/images/portfolio/portfolio-1.jpg);
+    --preview-img-5: url(/assets/images/portfolio/portfolio-1.jpg);
+}
+
 /*==================
     Portfolio Area
 ==================*/
@@ -8,12 +17,12 @@
     width: 100%;
     padding-top: 35%;
 
-    @media #{$laptop-device} {
-        min-height: 500px;
-    }
-    @media #{$lg-layout} {
-        min-height: 500px;
-    }
+    // @media #{$laptop-device} {
+    //     min-height: 500px;
+    // }
+    // @media #{$lg-layout} {
+    //     min-height: 500px;
+    // }
     @media #{$md-layout} {
         min-height: 450px;
     }
@@ -59,32 +68,33 @@
         background-position: center;
         border-radius: 5px;
         background-color: #0a0a0a;
-        background-image: url(/assets/images/portfolio/portfolio-1.jpg);
+        background-image: var(-preview-img);
         backface-visibility: hidden;
         transition: transform .28s ease;
         z-index: 4;
+
+        &.image-0{
+            background-image: var(--preview-img-0);
+        }
+
         &.image-1{
-            background-image: url(/assets/images/portfolio/urbanpreview.png);
+            background-image: var(--preview-img-1);
         }
 
         &.image-2{
-            background-image: url(/assets/images/portfolio/hellopreview.png);
+            background-image: var(--preview-img-2);
         }
 
         &.image-3{
-            background-image: url(/assets/images/portfolio/tinypreview.png);
+            background-image: var(--preview-img-3);
         }
 
-        &.image-4 {
-            background-image: url(/assets/images/portfolio/mymedpreview.png);
+        &.image-4{
+            background-image: var(--preview-img-4);
         }
 
-        &.image-5 {
-            background-image: url(/assets/images/portfolio/howtobefatpreview.png);
-        }
-
-        &.image-6 {
-            background-image: url(/assets/images/portfolio/darkRporterpreview.png);
+        &.image-5{
+            background-image: var(--preview-img-5);
         }
 
         &::after{
@@ -118,23 +128,28 @@
         opacity: 0;
         z-index: 1;
 
+        &.image-0{
+            background-image: var(--preview-img-0);
+        }
+
         &.image-1{
-            background-image: url(/assets/images/portfolio/urbanpreview.png);
+            background-image: var(--preview-img-1);
         }
+
         &.image-2{
-            background-image: url(/assets/images/portfolio/hellopreview.png);
+            background-image: var(--preview-img-2);
         }
+
         &.image-3{
-            background-image: url(/assets/images/portfolio/tinypreview.png);
+            background-image: var(--preview-img-3);
         }
-        &.image-4 {
-            background-image: url(/assets/images/portfolio/mymedpreview.png);
+
+        &.image-4{
+            background-image: var(--preview-img-4);
         }
-        &.image-5 {
-            background-image: url(/assets/images/portfolio/howtobefatpreview.png);
-        }
-        &.image-6 {
-            background-image: url(/assets/images/portfolio/darkRporterpreview.png);
+
+        &.image-5{
+            background-image: var(--preview-img-5);
         }
     }
 
@@ -160,14 +175,28 @@
         }
         .inner {
             p {
-                color: #c6c9d8;
+                display: none;
                 font-size: 14px;
+                color: rgb(231, 221, 221);
+                &:last-of-type {
+                    display: block;
+                    color: #fff;
+                }
             }
             h4 {
                 font-size: 24px;
                 line-height: 36px;
                 a{
                     color: #ffffff;
+                }
+                display: none;
+            }
+            h5 {
+                font-size: 1rem;
+                line-height: 240px;
+                display: none;
+                a{
+                    color: #fff;
                 }
             }
             .portfolio-button{
@@ -179,6 +208,7 @@
                 }
                 a {
                     &.rn-btn{
+                        cursor: pointer;
                         color: #ffffff;
                         border-color: rgba(255,255,255,0.3);
                         &:hover{
@@ -271,6 +301,11 @@
         }
     }
     &:hover{
+        .inner {
+            p, h4, h5 {
+                display: block;
+            }
+        }
         .thumbnail-inner{
             transform: scale(1.02) translateZ(0);
             &::before{

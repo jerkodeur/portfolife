@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import axios from 'axios';
+
 // Create Import File
 import './index.scss';
 
@@ -61,8 +63,14 @@ import PricingTable from "./blocks/PricingTable";
 import { BrowserRouter, Switch, Route  } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
+// Personnal Pages
 
+import Wild from "./component/perso/formation/Wild"
+
+// Define default back url
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL
 class Root extends Component{
+
     render(){
         return(
             <BrowserRouter basename={'/'}>
@@ -89,7 +97,7 @@ class Root extends Component{
                     <Route exact path={`${process.env.PUBLIC_URL}/corporate-business`} component={CorporateBusiness}/>
 
 
-                    {/* Element Layot */}
+                    {/* Element Layout */}
                     <Route exact path={`${process.env.PUBLIC_URL}/service`} component={Service}/>
                     <Route exact path={`${process.env.PUBLIC_URL}/service-details`} component={ServiceDetails}/>
                     <Route exact path={`${process.env.PUBLIC_URL}/contact`} component={Contact}/>
@@ -97,6 +105,9 @@ class Root extends Component{
                     <Route exact path={`${process.env.PUBLIC_URL}/portfolio-details`} component={PortfolioDetails}/>
                     <Route exact path={`${process.env.PUBLIC_URL}/blog`} component={Blog}/>
                     <Route exact path={`${process.env.PUBLIC_URL}/blog-details`} component={BlogDetails}/>
+
+                    {/* Personal Pages */}
+                    <Route exact path={`${process.env.PUBLIC_URL}/formation/wild`} component={Wild}/>
 
 
                     {/* Blocks Elements  */}

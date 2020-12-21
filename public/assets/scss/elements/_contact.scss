@@ -1,10 +1,14 @@
 // Contact Styles
 
 .contact-form--1 {
-    text-align: center;
+
     label {
         display: block;
         margin-bottom: 0;
+        margin-top: 10px;
+        text-align: left;
+        padding-left: .5rem;
+        color: #1f1f25;
     }
 
     input,
@@ -17,7 +21,6 @@
         transition: all 0.3s ease;
         height: 50px;
         line-height: 46px;
-        margin-bottom: 20px;
         outline: none;
         color: #1f1f25;
         font-size: 15px;
@@ -28,6 +31,19 @@
     }
     textarea {
         height: 120px;
+    }
+    .form-errors {
+        color: $pinterest;
+        padding-top: 0;
+        text-align: right;
+        padding-left: 0.5em;
+        margin-bottom: 5em;
+    }
+    button {
+        margin-top: 1rem;
+    }
+    img {
+        max-width: unset;
     }
 }
 

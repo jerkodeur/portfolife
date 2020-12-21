@@ -1,10 +1,12 @@
 /*==========================
-Progressbar Area 
+Progressbar Area
 ============================*/
 .rn-progress-bar{
+    margin-top: 1rem;
     .single-progress{
         position: relative;
-        margin-top: 38px;
+        margin-top: 1rem;
+
         .title{
             font-size: 15px;
             color: $heading-color;
@@ -36,7 +38,7 @@ Progressbar Area
                 top: -8px;
             }
         }
-        
+
         &.custom-color--1 {
             .progress{
                 .progress-bar{
@@ -73,6 +75,16 @@ Progressbar Area
                     color: rgb(229, 82, 154);
                     background-color: rgb(231, 118, 84);
                     background-image: linear-gradient(-224deg, rgb(231, 118, 84) 0px, rgb(229, 82, 154) 100%);
+                }
+            }
+        }
+
+        &.custom-color--5 {
+            .progress{
+                .progress-bar{
+                    color: rgb(49, 170, 49);
+                    background-color: rgb(23, 100, 83);
+                    background-image: linear-gradient(-224deg, rgb(23, 100, 83) 0px, rgb(49, 170, 49) 100%);
                 }
             }
         }
@@ -123,7 +135,7 @@ Progressbar Area
                     &::after{
                         display: none;
                     }
-                   
+
                 }
             }
         }
@@ -150,7 +162,7 @@ Progressbar Area
                     &::after{
                         display: none;
                     }
-                   
+
                 }
             }
 

@@ -6,7 +6,7 @@
 **********************************************************************************/
 
 /**************************************************************
-	
+
 	STYLESHEET INDEXING
 	|
 	|
@@ -28,33 +28,33 @@
 	|
 	|
 	|___Inner Styles
-	|	|___ breadcrump 
-	|	|___ section-title 
+	|	|___ breadcrump
+	|	|___ section-title
 	|	|___ button
 	|	|___ pagination
 	|	|___ socialicon
 	|	|___ footer
 	|
 	|___Elements Styles
-	|	|___ portfolio 
-	|	|___ service 
-	|	|___ slider 
-	|	|___ counterup 
-	|	|___ testimonial 
-	|	|___ brand 
-	|	|___ team 
-	|	|___ callto-action 
-	|	|___ tab 
-	|	|___ accordion 
-	|	|___ list 
-	|	|___ contact 
+	|	|___ portfolio
+	|	|___ service
+	|	|___ slider
+	|	|___ counterup
+	|	|___ testimonial
+	|	|___ brand
+	|	|___ team
+	|	|___ callto-action
+	|	|___ tab
+	|	|___ accordion
+	|	|___ list
+	|	|___ contact
 	|
 	|___BLog Styles
-	|	|___ blog 
-	|	|___ blog-details 
+	|	|___ blog
+	|	|___ blog-details
 	|
 	|___Template Styles
-	|	|___ about 
+	|	|___ about
 	|	|___ portfolio-details
 	|	|___ service-details
 	|	|___ preview
@@ -104,22 +104,24 @@
     Elements Styles
 ***************************************/
 
+@import 'elements/accordion';
+@import 'elements/brand';
+@import 'elements/callto-action';
+@import 'elements/column';
+@import 'elements/contact';
+@import 'elements/counterup';
+@import 'elements/list';
 @import 'elements/portfolio';
+@import 'elements/pricing';
+@import 'elements/progress';
+@import 'elements/projectModal';
 @import 'elements/service';
 @import 'elements/slider';
-@import 'elements/counterup';
-@import 'elements/testimonial';
-@import 'elements/brand';
-@import 'elements/team';
-@import 'elements/callto-action';
 @import 'elements/tab';
-@import 'elements/accordion';
-@import 'elements/list';
-@import 'elements/contact';
-@import 'elements/progress';
-@import 'elements/column';
+@import 'elements/team';
+@import 'elements/testimonial';
+@import 'elements/toast';
 @import 'elements/404';
-@import 'elements/pricing';
 
 
 

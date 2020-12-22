@@ -4,8 +4,8 @@ import ReactMarkdown from 'react-markdown'
 
 const MarkdownDescription = (props) => {
 
-    const {mainDatas, technos} = props.project
-    const {description, ...rest} = mainDatas
+    const {mainDatas} = props.project
+    const {description} = mainDatas
 
     return (
         <div className="project-description">

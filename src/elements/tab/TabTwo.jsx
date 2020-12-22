@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import ProgressMain from "../../blocks/progressbar/ProgressMain"
@@ -39,16 +39,16 @@ const TabsTwo = (props) => {
                                     <div className="single-tab-content">
                                         <ul>
                                             <li>
-                                                <a href="https://bluesquare.io/" target="_blank">
+                                                <a href="https://bluesquare.io/" target="_blank" rel="noopener noreferrer">
                                                     Bluesquare.io </a>
                                                     - Développeur Web / Web Mobile (stage)
                                                 <br />
                                                     [Septembre à Décembre 2020]<br />
                                                     ✠ <small>Refonte d'un site français reconnu de chasseur de têtes = [ <b>SCSS</b> / <b>ReactJs</b> / <b>Laravel</b> ] => Implémenter de nouvelles fonctionnalités dynamiques en React, créer des animations, améliorer et déboguer l'interface graphique.</small><br />
-                                                    ✠ <small>R&D = Développer un centre d'aide pour les clients de l'agence => [<b>PHP</b>, <b>Laravel</b>, <b>InertiaJs</b>, <b>TailWindCSS</b>]</small>
+                                                    ✠ <small>R&D = Développer un centre d'aide pour les clients de l'agence => [<b>PHP</b>, <b>Laravel</b>, <b>InertiaJs</b>, <b>VueJs</b>, <b>TailWindCSS</b>]</small>
                                             </li>
                                             <li>
-                                                <a href="https://www.wildcodeschool.com/fr-FR" target="_blank">
+                                                <a href="https://www.wildcodeschool.com/fr-FR" target="_blank" rel="noopener noreferrer">
                                                     Wild Code School </a>
                                                     - Formation au titre professionnel de développeur Web / Web Mobile
                                                 <br />

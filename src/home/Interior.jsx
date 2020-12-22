@@ -8,7 +8,7 @@ import FooterTwo from "../component/footer/FooterTwo";
 import Helmet from "../component/common/Helmet";
 import TeamOne from "../blocks/team/TeamOne";
 import Slider from "react-slick";
-import { slickDot , portfolioSlick2 } from "../page-demo/script";
+import { portfolioSlick2 } from "../page-demo/script";
 
 
 const SlideList = [
@@ -72,7 +72,7 @@ const ServiceListOne = [
         title: 'Home Interior',
         description: 'I throw myself down among the tall grass by the stream as I lie close to the earth.'
     },
-    
+
 ]
 
 class InteriorLanding extends Component{
@@ -210,8 +210,8 @@ class InteriorLanding extends Component{
                             ))}
                         </div>
                     </div>
-                </div>  
-                {/* End Service Area  */} 
+                </div>
+                {/* End Service Area  */}
 
                 {/* Start Call To Action Area  */}
                 <div className="call-to-action-wrapper call-to-action bg_image bg_image--30 text-white-wrapper ptb--180 ptb_lg--80 ptb_md--80 ptb_sm--80" id="getstart">
@@ -258,7 +258,7 @@ class InteriorLanding extends Component{
                                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing</li>
                                 </ul>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 {/* End Content Box  */}
@@ -288,7 +288,7 @@ class InteriorLanding extends Component{
                     </div>
                 </div>
                 {/* End Testimonial Area */}
-                
+
                 {/* Start Portfolio Area */}
                 <div className="portfolio-area ptb--120 bg_color--1" id="portfolio">
                     <div className="container">

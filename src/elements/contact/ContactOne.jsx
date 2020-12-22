@@ -34,7 +34,7 @@ class ContactOne extends Component {
             } else if(key[0] === 'rnEmail' && !emailRegEx.test(value)) {
                 errors.push({[key[0]]: 'syntax'})
             }
-            this.setState({errors: errors})
+            return this.setState({errors: errors})
         })
         if (errors.length === 0){
             const templateId = 'porfolife_message'
@@ -49,7 +49,6 @@ class ContactOne extends Component {
     sendFeedback = (templateId, variables) => {
 
         init("user_6OIcVDaq2eGBjk8PV1KBA");
-        // console.log(window);
         emailjs.send(
             'gmail', templateId,
             variables

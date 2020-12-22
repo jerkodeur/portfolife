@@ -69,7 +69,7 @@ const PortfolioList = (props) => {
                                     <h4><a href={url_test || void (0)} target={url_test && "_blank"}>{title}</a></h4>
                                     <p>{short_description}</p>
                                     <div className="portfolio-button">
-                                        <a className="rn-btn" onClick={() => toggleModal(project)}>Voir en détail</a>
+                                        <a className="rn-btn" onClick={() => toggleModal(project)} >Voir en détail</a>
                                     </div>
                                 </div>
                             </div>

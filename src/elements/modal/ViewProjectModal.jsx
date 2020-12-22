@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 
 import Modal from 'react-bootstrap/Modal'
 import ModalTitle from 'react-bootstrap/ModalTitle'
@@ -15,9 +15,6 @@ const ViewProjectModal = (props) => {
     const {mainDatas, technos} = props.project
     const {show, onHide, isDisplay, toogleDisplay} = props
 
-    // const [modalDisplay, setModalDisplay,] = useState('description')
-
-    console.log(props)
     return (
         <div>
             <Modal
@@ -34,12 +31,12 @@ const ViewProjectModal = (props) => {
                     </ModalTitle>
                     <div className="breadcrumb-project">
                             { isDisplay !== 'description' ?
-                                <span onClick={toogleDisplay}>Description</span>
-                                : <span className='selected'>Description</span>
+                                <span onClick={toogleDisplay} className="description">Description</span>
+                                : <span className='selected description'>Description</span>
                             }
                             { isDisplay !== 'gallery' ?
-                                <span onClick={toogleDisplay}>Galerie photos</span>
-                                : <span className='selected'>Galerie photos</span>
+                                <span onClick={toogleDisplay} className="gallery">Galerie</span>
+                                : <span className='selected gallery'>Galerie</span>
                             }
                     </div>
                 </ModalHeader>
@@ -51,7 +48,7 @@ const ViewProjectModal = (props) => {
                                     <ShowTechnos technos={technos} />
                                     <MarkdownDescription project={props.project} />
                                 </div>
-                                : <ImageSlides/>
+                                : <ImageSlides nbImages={mainDatas.nb_images} prefix={mainDatas.img_prefix} bgColor={mainDatas.background} />
                         }
                 </ModalBody>
                 { props.project.mainDatas && (props.project.mainDatas.url_test || props.project.mainDatas.url_github) &&

@@ -1,5 +1,4 @@
 import React from 'react'
-import TeamOne from "./team/TeamOne";
 import PageHelmet from "../component/common/Helmet";
 import Breadcrumb from "../elements/common/Breadcrumb";
 import ScrollToTop from 'react-scroll-up';
@@ -18,7 +17,7 @@ const Counters = () => {
             {/* Start Header Area  */}
             <Header headertransparent="header--transparent" colorblack="color--black" logoname="logo.png" />
             {/* End Header Area  */}
-            
+
             {/* Start Breadcrump Area */}
             <Breadcrumb title={'Counters'}   />
             {/* End Breadcrump Area */}
@@ -61,13 +60,13 @@ const Counters = () => {
                 </ScrollToTop>
             </div>
             {/* End Back To Top */}
-            
+
             {/* Start Footer Area  */}
             <Footer />
             {/* End Footer Area  */}
 
         </>
-        
+
     )
 }
 

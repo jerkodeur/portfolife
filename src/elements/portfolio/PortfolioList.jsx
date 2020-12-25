@@ -13,8 +13,9 @@ const PortfolioList = (props) => {
 
     const {column, stylevariation} = props
 
-    const toggleModal = (value) => {
-        setSelectedModal(value)
+    const toggleModal = (project) => {
+        document.documentElement.style.setProperty('--bg-slider', project.mainDatas.background)
+        setSelectedModal(project)
         setShowModal(true)
     }
 
@@ -26,6 +27,7 @@ const PortfolioList = (props) => {
     }
 
     const hideModal = () => {
+        document.documentElement.style.setProperty('--bg-slider', 'rgba(244, 245, 240, 0.561)')
         setIsDisplay('description')
         setShowModal(false)
     }

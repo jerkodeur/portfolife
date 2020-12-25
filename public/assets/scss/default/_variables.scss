@@ -58,16 +58,18 @@ $youtube : #cd201f;
 
 
 // Layouts
+$xl-breakdown:'only screen and (min-width: 1199px)';
+$lg-breakdown:'only screen and (min-width: 992px)';
+$md-breakdown:'only screen and (min-width: 767px)';
+$sm-breakdown-min:'only screen and (min-width: 575px)';
+
 $smlg-device: 'only screen and (max-width: 1199px)';
-
 $extra-device: 'only screen and (min-width: 1600px) and (max-width: 1919px)';
-
 $laptop-device: 'only screen and (min-width: 1200px) and (max-width: 1599px)';
+
 $lg-layout: 'only screen and (min-width: 992px) and (max-width: 1199px)';
 $md-layout:'only screen and (min-width: 768px) and (max-width: 991px)';
-$md-breakdown:'only screen and (min-width: 992px)';
 $sm-layout:'only screen and (max-width: 767px)';
-$sm-breakdown:'only screen and (max-width: 575px)';
 $large-mobile: 'only screen and (max-width: 575px)';
 /* container 450px*/
 $small-mobile: 'only screen and (max-width: 479px)';

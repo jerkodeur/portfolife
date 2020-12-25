@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import Modal from 'react-bootstrap/Modal'
 import ModalTitle from 'react-bootstrap/ModalTitle'
@@ -14,6 +14,10 @@ import ShowTechnos from './ProjectDisplay/ShowTechnos'
 const ViewProjectModal = (props) => {
     const {mainDatas, technos} = props.project
     const {show, onHide, isDisplay, toogleDisplay} = props
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--bg-slider', props.project.background)
+    }, [])
 
     return (
         <div>

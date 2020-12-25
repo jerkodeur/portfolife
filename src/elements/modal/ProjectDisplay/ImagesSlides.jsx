@@ -14,7 +14,7 @@ const ImagesSlides = ({nbImages, prefix, bgColor}) => {
     }
 
     const switchImage = (e) => {
-        const id = e.target.id
+        const id = e.target.name
         if(id === 'down') {
             if(selected - 1 === 0) {
                 return setSelected(nbImages)
@@ -40,7 +40,7 @@ const ImagesSlides = ({nbImages, prefix, bgColor}) => {
         <div className="main-slider">
             <div className="img-control">
                 <div className="left-control">
-                    <FaChevronLeft size="3em" onClick={(e) => switchImage(e)} id="down" />
+                    <FaChevronLeft size="3em" onClick={(e) => switchImage(e)} name="down" />
                 </div>
                 <div className="img-container">
                     {
@@ -48,7 +48,7 @@ const ImagesSlides = ({nbImages, prefix, bgColor}) => {
                     }
                 </div>
                 <div className="right-control">
-                    <FaChevronRight size="3em" onClick={(e) => switchImage(e)} id="up" />
+                    <FaChevronRight size="3em" onClick={(e) => switchImage(e)} name="up" />
                 </div>
             </div>
             <div className="miniatures-container">
@@ -58,6 +58,11 @@ const ImagesSlides = ({nbImages, prefix, bgColor}) => {
                         return <Thumbnail image={image} handleSelect={handleSelect} selected={selected} key={index} id={index + 1} />
                     })
                 }
+            </div>
+            <div className="breadcrumb-img">
+                <small  onClick={(e) => switchImage(e)} name="down" >Précédente</small>
+                <span> ✠ </span>
+                <small onClick={(e) => switchImage(e)} name="up" >Suivante</small>
             </div>
         </div>
     )

@@ -2,15 +2,19 @@ import React, {Component, Fragment} from "react"
 
 import Helmet from "../component/common/Helmet"
 import {FiChevronUp} from "react-icons/fi"
+import ScrollableAnchor, {configureAnchors} from 'react-scrollable-anchor'
 import ScrollToTop from 'react-scroll-up'
 import Typed from 'typed.js'
 
 import ContactOne from "../elements/contact/ContactOne"
 import FooterTwo from "../component/footer/FooterTwo"
-import HeaderTwo from "../component/header/Header"
+import Header from "../component/header/HeaderThree"
 import PortfolioList from "../elements/portfolio/PortfolioList"
 import TabTwo from "../elements/tab/TabTwo"
 
+// Offset all anchors by -60 to account for a fixed header
+// and scroll more quickly than the default 400ms
+configureAnchors({offset: -60, scrollDuration: 2000})
 class PersonalPortfolio extends Component {
 
     componentDidMount () {
@@ -33,8 +37,8 @@ class PersonalPortfolio extends Component {
     }
 
     render () {
-        let title = 'À Propos de moi',
-            description = "En reconversion dans le domaine du développement Web et Web mobile, j'ai suivi une formation intensive de 5 mois à la Wild Code School, école spécialisée dans les métiers de la tech et du numérique. Aujourd'hui, suite à mon stage dans l'agence Bluesquare.io, je suis en recherche active afin de décrocher mon premier job dans ma nouvelle vie de dev."
+        let title = 'À propos de moi',
+            description = "En reconversion dans le domaine du développement Web et Web mobile, j'ai suivi une formation intensive à la Wild Code School, école spécialisée dans les métiers de la tech et du numérique. Aujourd'hui, suite à mon stage dans l'agence Bluesquare.io, je suis en recherche active afin de décrocher mon premier job dans ma nouvelle vie de dev."
 
         const SlideList = [
             {
@@ -43,7 +47,7 @@ class PersonalPortfolio extends Component {
                 title: 'Bonjour, moi c\'est Jérôme !<br />',
                 transition: 'je suis un .....',
                 title2: `<span>Développeur Web <span />`,
-                description: "Je suis attiré par le domaine de l'informatique depuis mon plus jeune âge, j'ai décidé d'abandonner ma carrière dans la restauration afin de me donner les moyens de réaliser mon rêve de gamin... faire du développement mon métier !",
+                description: "Je suis attiré par le domaine de l'informatique depuis mon plus jeune âge. Après un début de carrière dans la restauration et la livraison, j'ai décidé de me donner les moyens de réaliser mon rêve de gamin... faire du développement mon métier !",
                 buttonText: '',
                 buttonLink: ''
             }
@@ -53,8 +57,7 @@ class PersonalPortfolio extends Component {
         return (
             <Fragment>
                 <Helmet pageTitle="Personal Portfolio" />
-
-                <HeaderTwo logo="symbol-light" color="color-white" />
+                    <Header logo="symbol-light" color="color-black" />
 
                 {/* Start Slider Area   */}
                 <div className="slider-wrapper">
@@ -73,7 +76,7 @@ class PersonalPortfolio extends Component {
                                                     <h1 className="title d-inline" dangerouslySetInnerHTML={{__html: value.title2}} />
                                                     <h1 className='title d-inline'>
                                                         <span
-                                                        ref={(el) => {this.el = el}}
+                                                            ref={(el) => {this.el = el}}
                                                         />
                                                     </h1>
                                                 </div>
@@ -91,30 +94,32 @@ class PersonalPortfolio extends Component {
                 {/* End Slider Area   */}
 
                 {/* Start About Area */}
-                <div className="about-area about-position-top pb--60  bg_color--3">
-                    <div className="about-wrapper">
-                        <div className="container">
-                            <div className="row row--20 align-items-center ">
-                                <div className="col-lg-4 justify-content-center align-items-end">
-                                    <div className="thumbnail">
-                                        <img className="w-100" src="/assets/images/about/about-5.jpg" alt="About Images" />
-                                    </div>
-                                </div>
-                                <div className="col-lg-8">
-                                    <div className="about-inner inner pt--100">
-                                        <div className="section-title">
-                                            <h2 className="title">{title}</h2>
-                                            <p className="description">{description}</p>
+                <ScrollableAnchor id={'about'}>
+                    <div className="about-area about-position-top pb--60  bg_color--3">
+                        <div className="about-wrapper">
+                            <div className="container">
+                                <div className="row row--20 align-items-center ">
+                                    <div className="col-lg-4 justify-content-center align-items-end">
+                                        <div className="thumbnail">
+                                            <img className="w-100" src="/assets/images/about/about-5.jpg" alt="About Images" />
                                         </div>
-                                        <div className="row mt--30 tab-container">
-                                            <TabTwo tabStyle="tab-style--1" />
+                                    </div>
+                                    <div className="col-lg-8">
+                                        <div className="about-inner inner pt--100">
+                                            <div className="section-title">
+                                                <h2 className="title">{title}</h2>
+                                                <p className="description">{description}</p>
+                                            </div>
+                                            <div className="row mt--30 tab-container">
+                                                <TabTwo tabStyle="tab-style--1" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </ScrollableAnchor>
                 {/* End About Area */}
 
                 {/* Start Brand Area */}
@@ -138,43 +143,48 @@ class PersonalPortfolio extends Component {
                 {/* End Brand Area */}
 
                 {/* Start Portfolio Area */}
-                <div className="portfolio-area pb--60 bg_color--7">
-                    <div className="portfolio-sacousel-inner mb--55 mb_sm--0">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="section-title text-center service-style--3 mb--30 mb_sm--0">
-                                        <h2 className="title mt--100">Mes derniers projets</h2>
-                                        <p>Découvrez ici mes dernières réalisations, ainsi que les projets sur lesquels j'ai été amené à collaborer.</p>
+                <ScrollableAnchor id={'project'}>
+                    <div className="portfolio-area pb--60 bg_color--7">
+                        <div className="portfolio-sacousel-inner mb--55 mb_sm--0">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <div className="section-title text-center service-style--3 mb--30 mb_sm--0">
+                                            <h2 className="title mt--100">Mes projets</h2>
+                                            <p>Découvrez ici mes dernières réalisations, ainsi que les projets sur lesquels j'ai été amené à collaborer.</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="row">
-                                <PortfolioList stylevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="view-more-btn mt--60 mt_sm--30 text-center">
-                                        <a className="rn-button-style--2 btn-solid" href="/blog"><span>En voir plus</span></a>
-                                    </div>
+                                <div className="row">
+                                    <PortfolioList stylevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
                                 </div>
+                                {/* <div className="row">
+                                    <div className="col-lg-12">
+                                        <div className="view-more-btn mt--60 mt_sm--30 text-center">
+                                            <a className="rn-button-style--2 btn-solid" href="/blog"><span>En voir plus</span></a>
+                                        </div>
+                                    </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
-                </div>
+                </ScrollableAnchor>
                 {/* End Portfolio Area */}
 
                 {/* Start Portfolio Area */}
-                <div className="portfolio-area pb--120 bg_color--1">
-                    <ContactOne />
-                </div>
+
+                <ScrollableAnchor id={'contact'}>
+                    <div className="portfolio-area pb--120 bg_color--1">
+                        <ContactOne />
+                    </div>
+                </ScrollableAnchor>
                 {/* End Portfolio Area */}
 
-                <FooterTwo />
+                {/* <FooterTwo /> */}
 
                 {/* Start Back To Top */}
                 <div className="backto-top">
-                    <ScrollToTop showUnder={160}>
+                    <ScrollToTop showUnder={160} duration={1500} >
                         <FiChevronUp />
                     </ScrollToTop>
                 </div>

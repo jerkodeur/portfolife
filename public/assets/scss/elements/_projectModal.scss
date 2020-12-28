@@ -132,6 +132,7 @@
                             width: 90%;
                             text-align: center;
                             img {
+                                object-fit: contain;
                                 @media #{$lg-breakdown} {
                                     max-height: 52vh;
                                     height: 80%;

@@ -23,7 +23,7 @@ class Header extends Component{
     menuTrigger() {
         document.querySelector('.header-wrapper').classList.toggle('menu-open')
     }
-    
+
     CLoseMenuTrigger() {
         document.querySelector('.header-wrapper').classList.remove('menu-open')
     }

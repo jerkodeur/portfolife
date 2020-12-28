@@ -1,5 +1,5 @@
 /*====================
-Mainmenu Area 
+Mainmenu Area
 =====================*/
 
 .mainmenunav {
@@ -87,7 +87,7 @@ Mainmenu Area
     span{
         &.text-white{
             color: #c6c9d8 !important;
-            
+
         }
     }
 }
@@ -125,7 +125,23 @@ Mainmenu Area
                 @extend %liststyle;
                 > li {
                     > a {
-                        color: rgba(29, 29, 36, 1);
+                        color: #fff;
+                    }
+                    &:hover {
+                        > a {
+                            color: $theme-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.sticky {
+        ul {
+            &.mainmenu {
+                > li {
+                    > a {
+                        color: #000;
                     }
                     &:hover {
                         > a {

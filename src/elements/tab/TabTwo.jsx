@@ -1,19 +1,23 @@
-import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React from "react"
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
 
+import ProgressBdd from "../../blocks/progressbar/ProgressBdd"
 import ProgressMain from "../../blocks/progressbar/ProgressMain"
+import ProgressLanguage from "../../blocks/progressbar/ProgressLanguage"
 import ProgressOther from "../../blocks/progressbar/ProgressOther"
 
 const TabsTwo = (props) => {
 
     const
-    tab1 = "Compétences principales",
-    tab2 = "Autres compétences",
-    tab3 = "Mon parcours"
+        tab1 = "Frameworks",
+        tab2 = "Langages",
+        tab3 = "Base de données",
+        tab4 = "Autres",
+        tab5 = "Mon parcours"
 
-    const { tabStyle } = props
+    const {tabStyle} = props
 
-    return(
+    return (
         <div>
             {/* Start Tabs Area */}
             <div className="tabs-area">
@@ -21,14 +25,24 @@ const TabsTwo = (props) => {
                     <div className="row">
                         <div className="col-lg-12 ">
                             <Tabs>
-                                <TabList  className={`${tabStyle}`}>
+                                <TabList className={`${tabStyle}`}>
                                     <Tab>{tab1}</Tab>
                                     <Tab>{tab2}</Tab>
                                     <Tab>{tab3}</Tab>
+                                    <Tab>{tab4}</Tab>
+                                    <Tab>{tab5}</Tab>
                                 </TabList>
 
                                 <TabPanel>
                                     <ProgressMain />
+                                </TabPanel>
+
+                                <TabPanel>
+                                    <ProgressLanguage />
+                                </TabPanel>
+
+                                <TabPanel>
+                                    <ProgressBdd />
                                 </TabPanel>
 
                                 <TabPanel>
@@ -69,4 +83,4 @@ const TabsTwo = (props) => {
 
 
 
-export default TabsTwo;
+export default TabsTwo

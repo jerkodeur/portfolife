@@ -1,39 +1,35 @@
-import React from 'react';
-import { ProgressBar } from 'react-bootstrap';
+import React from 'react'
+import {ProgressBar} from 'react-bootstrap'
 
 const ProgressMain = (props) => {
     return (
         // Start Single Progressbar
         <div className={`rn-progress-bar ${props.ProgressStyle}`}>
+
             <div className="single-progress custom-color--1">
-                <h6 className="title">HTML 5</h6>
-                <ProgressBar now={88} />
-                <span className="label">88%</span>
+                <h6 className="title">React Js</h6>
+                <ProgressBar now={78} />
+                <span className="label">78%</span>
             </div>
 
             <div className="single-progress custom-color--2">
-                <h6 className="title">CSS 3</h6>
-                <ProgressBar now={75} />
-                <span className="label">75%</span>
+                <h6 className="title">Node JS</h6>
+                <ProgressBar now={66} />
+                <span className="label">66%</span>
             </div>
 
             <div className="single-progress custom-color--3">
-                <h6 className="title">Javascript ES6</h6>
-                <ProgressBar now={80} />
-                <span className="label">80%</span>
+                <h6 className="title">Vue Js</h6>
+                <ProgressBar now={62} />
+                <span className="label">62%</span>
             </div>
 
-            <div className="single-progress custom-color--4">
-                <h6 className="title">PHP</h6>
-                <ProgressBar now={72} />
-                <span className="label">72%</span>
+            <div className="single-progress custom-color--1">
+                <h6 className="title">Laravel</h6>
+                <ProgressBar now={50} />
+                <span className="label">50%</span>
             </div>
 
-            <div className="single-progress custom-color--5">
-                <h6 className="title">MySql</h6>
-                <ProgressBar now={65} />
-                <span className="label">65%</span>
-            </div>
         </div>
         // {/* // End Progress Bar */}
     )

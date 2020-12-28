@@ -57,7 +57,7 @@ const PortfolioList = (props) => {
                 })
                 technoList = technoList.slice(0,technoList.length -2)
 
-                return index < 6 &&(
+                return index < 6 && (
                     <div className={`${column}`} key={id}>
                         <div className={`portfolio ${stylevariation}`}>
                             <div className="thumbnail-inner">

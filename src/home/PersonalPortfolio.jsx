@@ -7,7 +7,6 @@ import ScrollToTop from 'react-scroll-up'
 import Typed from 'typed.js'
 
 import ContactOne from "../elements/contact/ContactOne"
-import FooterTwo from "../component/footer/FooterTwo"
 import Header from "../component/header/HeaderThree"
 import PortfolioList from "../elements/portfolio/PortfolioList"
 import TabTwo from "../elements/tab/TabTwo"

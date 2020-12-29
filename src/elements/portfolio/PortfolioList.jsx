@@ -44,7 +44,7 @@ const PortfolioList = (props) => {
 
                 const {title, url_test, img_prefix, short_description, id, context, context_url} = project.mainDatas
 
-                const image = `assets/images/projects/${img_prefix}/${img_prefix}_preview.png`
+                const image = `/public/assets/images/projects/${img_prefix}/${img_prefix}_preview.png`
                 // Define the preview css image variable for each project
                 document.documentElement.style.setProperty(`--preview-img-${index}`, `url(${image})`)
                 let technoList = ''

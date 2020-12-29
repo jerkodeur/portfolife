@@ -9,7 +9,7 @@ import ProgressOther from "../../blocks/progressbar/ProgressOther"
 const TabsTwo = (props) => {
 
     const
-        tab1 = "Frameworks",
+        tab1 = "En vedette",
         tab2 = "Langages",
         tab3 = "Base de données",
         tab4 = "Autres",

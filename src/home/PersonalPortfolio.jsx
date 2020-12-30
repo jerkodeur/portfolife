@@ -16,6 +16,10 @@ import TabTwo from "../elements/tab/TabTwo"
 configureAnchors({offset: -60, scrollDuration: 2000})
 class PersonalPortfolio extends Component {
 
+    state = {
+        aboutImg: this.getAboutImage()
+    }
+
     componentDidMount () {
         const options = {
             strings: ['Mobile', 'Fullstack'],
@@ -35,6 +39,12 @@ class PersonalPortfolio extends Component {
         this.typed = new Typed(this.el, options)
     }
 
+    getAboutImage() {
+        const prefix = '/assets/images/about/shooting_'
+        const random = Math.ceil(Math.random() * 11)
+        return `${prefix}${random}.jpg`
+    }
+
     render () {
         let title = 'À propos de moi',
             description = "En reconversion dans le domaine du développement Web et Web mobile, j'ai suivi une formation intensive à la Wild Code School, école spécialisée dans les métiers de la tech et du numérique. Aujourd'hui, suite à mon stage dans l'agence Bluesquare.io, je suis en recherche active afin de décrocher mon premier job dans ma nouvelle vie de dev."
@@ -51,7 +61,6 @@ class PersonalPortfolio extends Component {
                 buttonLink: ''
             }
         ]
-
 
         return (
             <Fragment>
@@ -100,7 +109,7 @@ class PersonalPortfolio extends Component {
                                 <div className="row row--20 align-items-end ">
                                     <div className="col-lg-5 justify-content-center align-items-end">
                                         <div className="thumbnail">
-                                            <img className="w-100" src="/assets/images/about/about-5.jpg" alt="About Images" />
+                                            <img className="w-100" src={this.state.aboutImg} alt="About Images" />
                                         </div>
                                     </div>
                                     <div className="col-lg-7">

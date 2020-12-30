@@ -54,7 +54,7 @@ ul{
 }
 
 .single-tab-content {
-    padding-top: 20px;
+    padding-top: 8px;
     p {
         font-weight: 300;
         color: #717173;
@@ -81,6 +81,9 @@ ul{
             line-height: inherit;
             margin-bottom: 15px;
             font-weight: 300;
+            &:last-of-type {
+                margin-bottom: 0;
+            }
             a{
                 font-weight: 500;
                 // display: block;

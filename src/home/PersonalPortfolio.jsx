@@ -97,13 +97,13 @@ class PersonalPortfolio extends Component {
                     <div className="about-area about-position-top pb--60  bg_color--3">
                         <div className="about-wrapper">
                             <div className="container">
-                                <div className="row row--20 align-items-center ">
-                                    <div className="col-lg-4 justify-content-center align-items-end">
+                                <div className="row row--20 align-items-end ">
+                                    <div className="col-lg-5 justify-content-center align-items-end">
                                         <div className="thumbnail">
                                             <img className="w-100" src="/assets/images/about/about-5.jpg" alt="About Images" />
                                         </div>
                                     </div>
-                                    <div className="col-lg-8">
+                                    <div className="col-lg-7">
                                         <div className="about-inner inner pt--100">
                                             <div className="section-title">
                                                 <h2 className="title">{title}</h2>

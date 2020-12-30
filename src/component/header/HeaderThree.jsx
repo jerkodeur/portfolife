@@ -86,7 +86,7 @@ class HeaderThree extends Component{
                         <div className="social-share-inner">
                             <ul className="social-share social-style--2 color-theme d-flex justify-content-start liststyle">
                                 {SocialShare.map((val , i) => (
-                                    <li key={i}><a href={`${val.link}`}>{val.Social}</a></li>
+                                    <li key={i}><a href={`${val.link}`} target="_blank" >{val.Social}</a></li>
                                 ))}
                             </ul>
                         </div>

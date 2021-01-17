@@ -9,19 +9,19 @@ const ProgressMain = (props) => {
             <div className="single-progress custom-color--1">
                 <h6 className="title">React Js</h6>
                 <ProgressBar now={78} />
-                <span className="label">78%</span>
+                <span className="label">77%</span>
             </div>
 
             <div className="single-progress custom-color--2">
                 <h6 className="title">Node JS</h6>
                 <ProgressBar now={66} />
-                <span className="label">66%</span>
+                <span className="label">70%</span>
             </div>
 
             <div className="single-progress custom-color--3">
                 <h6 className="title">Vue Js</h6>
                 <ProgressBar now={62} />
-                <span className="label">62%</span>
+                <span className="label">65%</span>
             </div>
 
             <div className="single-progress custom-color--1">

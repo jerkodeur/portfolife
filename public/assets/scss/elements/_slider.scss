@@ -2,7 +2,6 @@
     Slider Area
 ======================*/
 
-
 @media #{$sm-layout} {
     .bg_image--31 {
         background-position: 67% center !important;
@@ -30,7 +29,6 @@
     }
 }
 
-
 /*----------------------
 Slider Default Style
 ------------------------*/
@@ -48,7 +46,7 @@ Slider Default Style
                 font-size: 125px;
                 font-weight: 900;
                 text-transform: uppercase;
-                font-family: 'Montserrat', sans-serif;
+                font-family: "Montserrat", sans-serif;
                 font-weight: 900;
                 line-height: 130px;
                 @media #{$laptop-device} {
@@ -112,7 +110,6 @@ Slider Default Style
             padding-top: 150px;
             padding-bottom: 150px;
         }
-
 
         &.fullscreen {
             min-height: 950px;
@@ -255,7 +252,7 @@ Slider Default Style
             }
         }
 
-        &.without-overlay{
+        &.without-overlay {
             .inner {
                 p {
                     &.description {
@@ -266,7 +263,7 @@ Slider Default Style
             }
         }
 
-        &.slider-paralax{
+        &.slider-paralax {
             @media #{$laptop-device} {
                 height: auto;
                 padding-top: 150px;
@@ -278,7 +275,7 @@ Slider Default Style
     &.slider-style-3 {
         .inner {
             > span {
-                color: #FFF;
+                color: #fff;
                 font-size: 15px;
                 text-transform: uppercase;
                 letter-spacing: 4px;
@@ -291,10 +288,10 @@ Slider Default Style
             }
             h1 {
                 &.title {
-                    color: #FFF;
+                    color: #fff;
                     font-size: 50px;
                     font-weight: 900;
-                    font-family: 'Montserrat', sans-serif;
+                    font-family: "Montserrat", sans-serif;
                     line-height: 80px;
                     text-transform: inherit;
                     width: 80%;
@@ -315,7 +312,7 @@ Slider Default Style
                         width: 100%;
                     }
 
-                    span{
+                    span {
                         color: $theme-color;
                     }
                 }
@@ -324,22 +321,21 @@ Slider Default Style
     }
 }
 .slider-wrapper {
-    &.color-white{
-        .inner{
-            p{
-                &.description{
+    &.color-white {
+        .inner {
+            p {
+                &.description {
                     color: #ffffff;
                 }
             }
         }
     }
-    .service-wrapper{
+    .service-wrapper {
         @media #{$sm-layout} {
             margin-bottom: -20px;
         }
     }
 }
-
 
 .react-parallax {
     img {
@@ -382,10 +378,9 @@ Personal Portfolio
             opacity: 0;
         }
     }
-
 }
 .slide {
-    &.personal-portfolio-slider ,
+    &.personal-portfolio-slider,
     &.designer-portfolio {
         &.slider-style-3 {
             @media #{$sm-layout} {
@@ -399,15 +394,15 @@ Personal Portfolio
                 min-width: auto;
                 height: auto;
             }
-            .inner{
+            .inner {
                 @media #{$sm-layout} {
                     padding-top: 56px;
                 }
                 @media #{$md-layout} {
                     padding-top: 76px;
                 }
-                h1{
-                    &.title{
+                h1 {
+                    &.title {
                         @media #{$sm-layout} {
                             font-size: 32px;
                             line-height: 49px;
@@ -423,6 +418,13 @@ Personal Portfolio
                         @media #{$laptop-device} {
                             font-size: 54px;
                             line-height: 68px;
+                        }
+
+                        .text-anim {
+                            @media #{$large-mobile} {
+                                display: block;
+                                height: 3rem;
+                            }
                         }
                     }
                 }
@@ -447,7 +449,7 @@ Personal Portfolio
             }
         }
     }
-    &.designer-portfolio{
+    &.designer-portfolio {
         height: 700px;
 
         @media #{$md-layout} {
@@ -482,7 +484,7 @@ Personal Portfolio
                     border: 14px solid #fff;
                     width: 394px;
                     height: 394px;
-                    box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 20px 40px rgba(255,255,255,0.15);
+                    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 20px 40px rgba(255, 255, 255, 0.15);
                     @media #{$large-mobile} {
                         width: auto;
                         height: auto;
@@ -497,8 +499,6 @@ Personal Portfolio
     }
 }
 
-
-
 /*--------------------------
     Slider Digital Agency
 ----------------------------*/
@@ -509,7 +509,6 @@ Personal Portfolio
         border-color: #fff;
     }
 }
-
 
 /* ----------------------
     Slider Videi Bg
@@ -526,12 +525,12 @@ Personal Portfolio
         height: 100%;
         z-index: -1;
     }
-    .inner{
+    .inner {
         position: relative;
         z-index: 2;
     }
-    &[data-black-overlay]{
-        &::before{
+    &[data-black-overlay] {
+        &::before {
             z-index: 1;
         }
     }
@@ -557,9 +556,9 @@ Personal Portfolio
     }
 }
 .slide {
-    &.slide-style-2{
-        &.slider-video-bg{
-            .inner{
+    &.slide-style-2 {
+        &.slider-video-bg {
+            .inner {
                 .title {
                     font-size: 60px;
                     line-height: 80px;
@@ -652,13 +651,14 @@ For Slider Service
     @media #{$laptop-device} {
         height: auto;
         padding-top: 150px;
-        padding-bottom: 150px;
+        padding-bottom: 410px;
     }
     @media #{$md-layout} {
         height: auto;
     }
     @media #{$lg-layout} {
         height: auto;
+        padding-bottom: 290px !important;
     }
 }
 
@@ -720,7 +720,7 @@ Slider Default Button And Dot STyle
             opacity: 1;
             width: 68px;
             height: 68px;
-            border: 2px solid rgba(255,255,255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 100%;
 
             @media #{$md-layout} {
@@ -733,7 +733,7 @@ Slider Default Button And Dot STyle
             @media #{$sm-layout} {
                 display: none !important;
             }
-            &:hover{
+            &:hover {
                 background: #f9004d;
                 border-color: #f9004d;
             }
@@ -751,15 +751,15 @@ Slider Default Button And Dot STyle
                     left: 10px;
                 }
 
-                &::before{
+                &::before {
                     content: url(/assets/images/icons/slick-arrow-left-small.png);
                 }
-                &:hover{
+                &:hover {
                     left: 30px;
                     @media #{$sm-layout} {
                         left: 20px;
                     }
-                    &::before{
+                    &::before {
                         opacity: 1;
                     }
                 }
@@ -770,7 +770,7 @@ Slider Default Button And Dot STyle
                 @media #{$sm-layout} {
                     right: 10px;
                 }
-                &::before{
+                &::before {
                     content: url(/assets/images/icons/slick-arrow-right-small.png);
                 }
                 &:hover {
@@ -778,7 +778,7 @@ Slider Default Button And Dot STyle
                     @media #{$sm-layout} {
                         right: 20px;
                     }
-                    &::before{
+                    &::before {
                         opacity: 1;
                     }
                 }
@@ -824,7 +824,6 @@ Custom Animation
     animation-name: customOne;
 }
 
-
 .theme-gradient {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -832,7 +831,7 @@ Custom Animation
 }
 
 .thumbnail img {
-    opacity: .95;
+    opacity: 0.95;
     // border-radius: 5px;
     // box-shadow: 0 25px 65px rgba(0,0,0,.10);
 }

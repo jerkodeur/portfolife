@@ -1,6 +1,6 @@
 /* Tab Style  */
 
-ul{
+ul {
     &.tab-style--1 {
         @extend %liststyle;
         display: flex;
@@ -10,7 +10,6 @@ ul{
         @media #{$lg-layout} {
             margin: 0 -10px;
         }
-
 
         li {
             position: relative;
@@ -39,18 +38,16 @@ ul{
                 transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1) 0s;
                 height: 2px;
                 bottom: 0;
-
             }
-            &.react-tabs__tab--selected{
+            &.react-tabs__tab--selected {
                 color: $theme-color;
-                &::before{
+                &::before {
                     width: 100%;
                     background: currentColor;
                 }
             }
         }
     }
-
 }
 
 .single-tab-content {
@@ -63,19 +60,18 @@ ul{
     }
 }
 
-
-
-.single-tab-content{
-    ul{
-        &.list-style--1{
-            li{
+.single-tab-content {
+    ul {
+        &.list-style--1 {
+            li {
                 margin-bottom: 10px;
             }
         }
         padding: 0;
+        padding-top: 0.5em;
         margin: 0;
         list-style: none;
-        li{
+        li {
             color: #7e7e7e;
             font-size: 16px;
             line-height: inherit;
@@ -84,29 +80,14 @@ ul{
             &:last-of-type {
                 margin-bottom: 0;
             }
-            a{
+            a {
                 font-weight: 500;
                 // display: block;
                 color: #717173;
-                span{
+                span {
                     font-weight: 300;
                 }
             }
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 # portfolife
 Retrouvez mon portfolio, 
-vous pourrez yretrouver tous mes récents projects, mon histoire, mes compétences...
+vous pourrez y retrouver tous mes récents projects, mon histoire, mes compétences...
 
 Tout une partie de ma vie en somme !
 

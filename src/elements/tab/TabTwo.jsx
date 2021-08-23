@@ -51,64 +51,57 @@ const TabsTwo = (props) => {
 
                 <TabPanel>
                   <div className="single-tab-content">
-                    <ul>
+                    <ul className="career-container">
                       <li>
-                        [Mai à Août 2021]
-                        <br />
-                        <a
-                          href="https://simplon.co/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Simplon.co{" "}
-                        </a>
-                        - Formation développeur back-end PHP Symfony
+                        <ul className="sub-carreer">
+                          <li>Mai à Août 2021</li>
+                          <li className="career-Descr">
+                            <a href="https://simplon.co/" target="_blank" rel="noopener noreferrer">
+                              Simplon.co
+                            </a>
+                            {" "}- Formation développeur back-end PHP Symfony
+                          </li>
+                        </ul>
                       </li>
                       <li>
-                        [Mars 2021]
-                        <br />
-                        Obtention du titre de
-                        <b> développeur Web / Web Mobile</b>
+                        <ul className="sub-carreer">
+                          <li>Mars 2021</li>
+                          <li> Obtention du titre de<b> développeur Web / Web Mobile</b></li>
+                        </ul>
                       </li>
                       <li>
-                        [Septembre à Décembre 2020]
-                        <br />
-                        <a
-                          href="https://bluesquare.io/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Bluesquare.io{" "}
-                        </a>
-                        - Développeur Web / Web Mobile (stage)
-                        <br />✠{" "}
-                        <small>
-                          Refonte d'un site français reconnu de chasseur de
-                          têtes = [ <b>SCSS</b> / <b>ReactJs</b> /{" "}
-                          <b>Laravel</b> ] => Implémenter de nouvelles
-                          fonctionnalités dynamiques en React, créer des
-                          animations, améliorer et déboguer l'interface
-                          graphique.
-                        </small>
-                        <br />✠{" "}
-                        <small>
-                          R&D = Développer un centre d'aide pour les clients de
-                          l'agence => [<b>PHP</b>, <b>Laravel</b>,{" "}
-                          <b>InertiaJs</b>, <b>VueJs</b>, <b>TailWindCSS</b>]
-                        </small>
+                        <ul className="sub-carreer">
+                          <li>Septembre à Décembre 2020</li>
+                          <li>
+                            <a href="https://bluesquare.io/" target="_blank" rel="noopener noreferrer">
+                              Bluesquare.io{" "}
+                            </a>
+                            - Développeur Web / Web Mobile (stage)
+                          </li>
+                          <li>
+                              Refonte d'un site français reconnu de chasseur de
+                              têtes = [ <b>SCSS</b> / <b>ReactJs</b> /{" "}
+                              <b>Laravel</b> ] => Implémenter de nouvelles
+                              fonctionnalités dynamiques en React, créer des
+                              animations, améliorer et déboguer l'interface
+                              graphique.
+                          </li>
+                          <li>
+                              R&D = Développer un centre d'aide pour les clients de
+                              l'agence => [<b>PHP</b>, <b>Laravel</b>,{" "}
+                              <b>InertiaJs</b>, <b>VueJs</b>, <b>TailWindCSS</b>]
+                          </li>
+                        </ul>
                       </li>
                       <li>
-                        [Mars à Juillet 2020]
-                        <br />
-                        <a
-                          href="https://www.wildcodeschool.com/fr-FR"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Wild Code School{" "}
-                        </a>
-                        - Formation au titre professionnel de développeur Web /
-                        Web Mobile
+                        <ul className="sub-carreer">
+                          <li>Mars à Juillet 2020</li>
+                          <li>
+                            <a href="https://www.wildcodeschool.com/fr-FR" target="_blank" rel="noopener noreferrer">
+                              Wild Code School{" "}
+                            </a> - Formation au titre professionnel de développeur Web / Web Mobile
+                          </li>
+                        </ul>
                       </li>
                     </ul>
                   </div>

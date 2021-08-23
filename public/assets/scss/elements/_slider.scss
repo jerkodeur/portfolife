@@ -323,13 +323,12 @@ Slider Default Style
 .slider-wrapper {
     &.color-white {
         .inner {
-            p {
-                &.description {
-                    color: #ffffff;
-                }
+            p.description {
+                color: #ffffff;
             }
         }
     }
+
     .service-wrapper {
         @media #{$sm-layout} {
             margin-bottom: -20px;

@@ -1,10 +1,70 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+
 import ProgressBdd from "../../blocks/progressbar/ProgressBdd";
 import ProgressMain from "../../blocks/progressbar/ProgressMain";
 import ProgressLanguage from "../../blocks/progressbar/ProgressLanguage";
 import ProgressOther from "../../blocks/progressbar/ProgressOther";
+
+const steps = [
+  {
+    start: "Mai 2021",
+    end: "Août 2021",
+    company: "Simplon.co",
+    companyUrl: "https://simplon.co/",
+    companyTechnos: ["php", "Symfony"],
+    title: "Formation développeur back-end PHP Symfony",
+    type: "formation",
+    missions: []
+  },
+  {
+    start: "Septembre 2020",
+    end: "Décembre 2020",
+    company: "Bluesquare.io",
+    companyUrl: "https://bluesquare.io/",
+    companyTechnos: [],
+    title: "Développeur Web / Web Mobile (stage)",
+    type: "stage",
+    missions: [
+      {
+        description: "Refonte d'un site français reconnu de chasseur de têtes",
+        technos: ["Laravel", "ReactJS", "SCSS"],
+        features: [
+          "Implémenter de nouvelles fonctionnalités dynamiques en React",
+          "Créer des animations",
+          "Améliorer et déboguer l'interface graphique"
+        ]
+      },
+      {
+        description: "Développer un centre d'aide pour les clients de l'agence",
+        technos: ["PHP", "VueJS", "Laravel", "InertiaJS", "TailwindCSS"]
+      },
+    ]
+  },
+  {
+    start: "Mars 2021",
+    end: "",
+    company: "",
+    companyUrl: "",
+    companyTechnos: [],
+    title: "Obtention du titre de développeur Web / Web Mobile",
+    type: "diplôme",
+    missions: []
+  },
+  {
+    start: "Mars 2020",
+    end: "Juillet 2020",
+    company: "Wild Code School",
+    companyUrl: "https://www.wildcodeschool.com/fr-FR",
+    companyTechnos: ["Javascript", "ReactJS", "NodeJS"],
+    title: "Développeur Web / Web Mobile",
+    type: "formation",
+    missions: []
+  },
+]
 
 const TabsTwo = (props) => {
   const [tab1, tab2, tab3, tab4, tab5] = [
@@ -14,6 +74,12 @@ const TabsTwo = (props) => {
     "Autres",
     "Mon parcours",
   ];
+
+  const getUniqTechnos = (array) => {
+    const technos = [];
+    array.map(el => technos.push(...el.technos));
+    return([...new Set(technos)])
+  }
 
   const { tabStyle } = props;
 
@@ -52,57 +118,65 @@ const TabsTwo = (props) => {
                 <TabPanel>
                   <div className="single-tab-content">
                     <ul className="career-container">
-                      <li>
-                        <ul className="sub-carreer">
-                          <li>Mai à Août 2021</li>
-                          <li className="career-Descr">
-                            <a href="https://simplon.co/" target="_blank" rel="noopener noreferrer">
-                              Simplon.co
-                            </a>
-                            {" "}- Formation développeur back-end PHP Symfony
+                      {
+                        steps.map((step, index) => (
+                          <li key={index}>
+                            <ul className="sub-carreer">
+                              <li className="date">
+                                {
+                                !step.end ? step.start :
+                                  step.start.split(' ')[1] === step.end.split(' ')[1] ?
+                                    `De ${step.start.split(' ')[0]} à ${step.end.split(' ')[0]} ${step.end.split(' ')[1]}` :
+                                    `De ${step.start} à ${step.end}`
+                                }
+                              </li>
+                              <li className="career-descr">
+                                {
+                                  step.company === '' ?
+                                    <b>{step.title}</b>
+                                    :
+                                    <>
+                                      <a href={step.companyUrl} target="_blank" rel="noopener noreferrer">{step.company}</a> - {' '}{step.title}
+                                    </>
+                                }
+                              </li>
+                              {
+                                step.missions.length > 0 &&
+                                <li className="technos">
+                                  {
+                                    getUniqTechnos(step.missions).map((techno, index) =>
+                                      <span className="techno" key={index}>{techno}</span>
+                                    )
+                                  }
+                                </li>
+                              }
+                              {
+                                step.companyTechnos && step.companyTechnos.length > 0 &&
+                                <li className="technos">
+                                  {
+                                    step.companyTechnos.map((techno, index) =>
+                                      <span className="techno" key={index}>{techno}</span>
+                                    )
+                                  }
+                                </li>
+                              }
+                              {
+                                step.missions.length > 0 && step.missions.map((mission, index) =>
+                                  <div key={index}>
+                                    <li className='description'>
+                                      {mission.description}
+                                      <FontAwesomeIcon icon={faChevronDown} />
+                                    </li>
+                                    {
+                                      mission.features && mission.features.map((feature, index) =>  <li className='feature' key={index}>{feature}</li>)
+                                    }
+                                  </div>
+                                )
+                              }
+                            </ul>
                           </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <ul className="sub-carreer">
-                          <li>Mars 2021</li>
-                          <li> Obtention du titre de<b> développeur Web / Web Mobile</b></li>
-                        </ul>
-                      </li>
-                      <li>
-                        <ul className="sub-carreer">
-                          <li>Septembre à Décembre 2020</li>
-                          <li>
-                            <a href="https://bluesquare.io/" target="_blank" rel="noopener noreferrer">
-                              Bluesquare.io{" "}
-                            </a>
-                            - Développeur Web / Web Mobile (stage)
-                          </li>
-                          <li>
-                              Refonte d'un site français reconnu de chasseur de
-                              têtes = [ <b>SCSS</b> / <b>ReactJs</b> /{" "}
-                              <b>Laravel</b> ] => Implémenter de nouvelles
-                              fonctionnalités dynamiques en React, créer des
-                              animations, améliorer et déboguer l'interface
-                              graphique.
-                          </li>
-                          <li>
-                              R&D = Développer un centre d'aide pour les clients de
-                              l'agence => [<b>PHP</b>, <b>Laravel</b>,{" "}
-                              <b>InertiaJs</b>, <b>VueJs</b>, <b>TailWindCSS</b>]
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <ul className="sub-carreer">
-                          <li>Mars à Juillet 2020</li>
-                          <li>
-                            <a href="https://www.wildcodeschool.com/fr-FR" target="_blank" rel="noopener noreferrer">
-                              Wild Code School{" "}
-                            </a> - Formation au titre professionnel de développeur Web / Web Mobile
-                          </li>
-                        </ul>
-                      </li>
+                        ))
+                      }
                     </ul>
                   </div>
                 </TabPanel>

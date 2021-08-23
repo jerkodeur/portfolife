@@ -47,7 +47,7 @@ class PersonalPortfolio extends Component {
   render() {
     let title = "À propos de moi",
       description =
-        "En reconversion dans le domaine du développement Web et Web mobile, j'ai effectué une formation intensive à la Wild Code School, école spécialisée dans le numérique dans laquelle j'ai fait mes premières armes en Javascript (React / NodeJs). À la suite à mon stage dans l'agence Bluesquare.io, et après avoir obtenu mon titre professionnel, j'ai suivi une nouvelle formation de 3 mois en PHP / Symfony à Simplon.co. Je souhaite à présent réaliser une alternance afin de passer le titre de concepteur/développeur d'applications, ce qui me permettra d'acquérir une expérience suffisante pour démarrer ma nouvelle carrière de développeur.";
+        "En reconversion dans le domaine du développement Web et Web mobile, j'ai effectué une formation intensive à la Wild Code School, école spécialisée dans le numérique dans laquelle j'ai fait mes premières armes en Javascript (React / NodeJs). À la suite de mon stage dans l'agence Bluesquare.io, et après avoir obtenu mon titre professionnel, j'ai suivi une nouvelle formation de 3 mois en PHP / Symfony à Simplon.co. Je souhaite à présent réaliser une alternance afin de passer le titre de concepteur/développeur d'applications, ce qui me permettra d'acquérir une expérience suffisante pour démarrer ma nouvelle carrière de développeur.";
 
     const SlideList = [
       {

@@ -1,15 +1,15 @@
 import React from 'react'
 import {ProgressBar} from 'react-bootstrap'
 
-const ProgressMain = (props) => {
+const ProgressOther = (props) => {
     return (
         // Start Single Progressbar
         <div className={`rn-progress-bar ${props.ProgressStyle}`}>
 
             <div className="single-progress custom-color--3">
                 <h6 className="title">Bootstrap</h6>
-                <ProgressBar now={50} />
-                <span className="label">50%</span>
+                <ProgressBar now={70} />
+                <span className="label">70%</span>
             </div>
 
             <div className="single-progress custom-color--5">
@@ -29,4 +29,4 @@ const ProgressMain = (props) => {
     )
 }
 
-export default ProgressMain
+export default ProgressOther

@@ -128,13 +128,16 @@
     .section-title {
         h2 {
             &.title {
-                margin-bottom: 8px;
+                margin-bottom: 0.25em;
             }
         }
         p {
             &.description {
                 font-weight: 300;
-                color: #717173;
+                color: #332e2e;
+                font-size: 1.2em;
+                line-height: 1.8em;
+                text-align: justify;
                 a {
                     color: rgba(29, 29, 36, 1);
                     &:hover {

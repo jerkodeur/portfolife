@@ -47,7 +47,7 @@ class PersonalPortfolio extends Component {
   render() {
     let title = "À propos de moi",
       description =
-        "En reconversion dans le domaine du développement Web et Web mobile, j'ai effectué une formation intensive à la Wild Code School, école spécialisée dans le numérique dans laquelle j'ai fait mes premières armes en Javascript (React / NodeJs). À la suite à mon stage dans l'agence Bluesquare.io, et après avoir obtenu mon titre professionnel, je suis actuellement une nouvelle formation de 3 mois en PHP / Symfony à Simplon.co.";
+        "En reconversion dans le domaine du développement Web et Web mobile, j'ai effectué une formation intensive à la Wild Code School, école spécialisée dans le numérique dans laquelle j'ai fait mes premières armes en Javascript (React / NodeJs). À la suite de mon stage dans l'agence Bluesquare.io, et après avoir obtenu mon titre professionnel, j'ai suivi une nouvelle formation de 3 mois en PHP / Symfony à Simplon.co. Je souhaite à présent réaliser une alternance afin de passer le titre de concepteur/développeur d'applications, ce qui me permettra d'acquérir une expérience suffisante pour démarrer ma nouvelle carrière de développeur.";
 
     const SlideList = [
       {
@@ -58,6 +58,7 @@ class PersonalPortfolio extends Component {
         title2: `<span>Développeur Web <span />`,
         description:
           "Je suis attiré par le domaine de l'informatique depuis mon plus jeune âge. Après un début de carrière dans la restauration et la livraison, j'ai décidé de me donner les moyens de réaliser mon rêve de gamin... faire du développement mon métier !",
+        description2: "Je suis actuellement à la recherche d'une entreprise afin d'effectuer une alternance de développeur / concepteur d'applications PHP/React.JS chez Simplon.co.",
         buttonText: "",
         buttonLink: "",
       },
@@ -67,7 +68,6 @@ class PersonalPortfolio extends Component {
       <Fragment>
         <Helmet pageTitle="Personal Portfolio" />
         <Header logo="symbol-light" color="color-black" />
-
         {/* Start Slider Area   */}
         <div className="slider-wrapper">
           {/* Start Single Slide */}
@@ -109,7 +109,10 @@ class PersonalPortfolio extends Component {
                         ""
                       )}
                       {value.description ? (
-                        <p className="description">{value.description}</p>
+                        <>
+                          <p className="description">{value.description}</p>
+                          <p className="description2">{value.description2}</p>
+                        </>
                       ) : (
                         ""
                       )}
@@ -166,21 +169,21 @@ class PersonalPortfolio extends Component {
 
         {/* Start Brand Area */}
         {/* <div className="rn-brand-area pb--90 bg_color--1">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="section-title text-center service-style--3 mb--30">
-                                    <h2 className="title">My Best Client</h2>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-12 mt--40 mt_sm--5 mt_md--5">
-                                <Brand branstyle="branstyle--2" />
-                            </div>
-                        </div>
-                    </div>
+          <div className="container">
+              <div className="row">
+                  <div className="col-lg-12">
+                      <div className="section-title text-center service-style--3 mb--30">
+                          <h2 className="title">My Best Client</h2>
+                          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.</p>
+                      </div>
+                  </div>
+              </div>
+              <div className="row">
+                  <div className="col-lg-12 mt--40 mt_sm--5 mt_md--5">
+                      <Brand branstyle="branstyle--2" />
+                  </div>
+              </div>
+          </div>
                 </div> */}
         {/* End Brand Area */}
 
@@ -208,12 +211,12 @@ class PersonalPortfolio extends Component {
                   />
                 </div>
                 {/* <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="view-more-btn mt--60 mt_sm--30 text-center">
-                                            <a className="rn-button-style--2 btn-solid" href="/blog"><span>En voir plus</span></a>
-                                        </div>
-                                    </div>
-                                </div> */}
+                    <div className="col-lg-12">
+                        <div className="view-more-btn mt--60 mt_sm--30 text-center">
+                            <a className="rn-button-style--2 btn-solid" href="/blog"><span>En voir plus</span></a>
+                        </div>
+                    </div>
+                </div> */}
               </div>
             </div>
           </div>

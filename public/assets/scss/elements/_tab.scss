@@ -58,9 +58,6 @@ ul {
         font-size: 18px;
         line-height: 30px;
     }
-}
-
-.single-tab-content {
     ul {
         &.list-style--1 {
             li {
@@ -68,9 +65,7 @@ ul {
             }
         }
         padding: 0;
-        padding-top: 0.5em;
         margin: 0;
-        list-style: none;
         li {
             color: #7e7e7e;
             font-size: 16px;
@@ -81,11 +76,87 @@ ul {
                 margin-bottom: 0;
             }
             a {
-                font-weight: 500;
-                // display: block;
-                color: #717173;
+                font-weight: 700;
+                font-size: 1.1em;
+                color: #000;
+                text-shadow: 1px 1px 3px #d0d0d6;
                 span {
                     font-weight: 300;
+                }
+                &:hover {
+                    text-shadow: 1px 1px 3px $theme-color;
+                }
+            }
+        }
+    }
+    .career-container {
+        margin-top: 0.5em;
+        @media #{$lg-breakdown} {
+            overflow-y: scroll;
+            max-height: 350px;
+        }
+        li {
+            margin: 0;
+            .sub-carreer {
+                margin-right: 0.5em;
+                list-style-type: none;
+                list-style-position: inside;
+                li {
+                    margin: 0.25em 1em;
+                    color: #000;
+                    &.date {
+                        list-style-type: none;
+                        padding-left: 0.5em;
+                        margin: 0;
+                        color: #000;
+                        font-weight: bold;
+                        font-size: 0.9em;
+                        background-color: $theme-color;
+                        box-shadow: 2px 2px 5px #332e2e;
+                        border-radius: 5px;
+                    }
+                    &.career-descr {
+                        list-style-type: none;
+                        margin: 0;
+                        padding: 0.5em 0 0 0.5em;
+                        color: #332e2e;
+                        font-weight: 500;
+                    }
+                    &.feature {
+                        font-size: 0.85em;
+                        font-weight: 500;
+                        color: #332e2e;
+                        list-style-type: disc;
+                        margin-left: 1.5em;
+                    }
+                    &.description {
+                        display: flex;
+                        flex-direction: row;
+                        width: 95%;
+                        justify-content: space-between;
+                        font-weight: 500;
+                        cursor: pointer;
+                    }
+                    &.technos {
+                        margin: 0 0 0.5em 0;
+                        padding: 0;
+                        font-weight: 500;
+                        color: #000;
+                        list-style-type: " ";
+                        .techno {
+                            background-color: $theme-color;
+                            border-radius: 10px;
+                            font-size: 0.75em;
+                            padding: 0.1em 0.45em;
+                            margin: 0.25em;
+                            box-shadow: 2px 2px 3px #332e2e;
+                            &:not(:last-of-type) {
+                                &::after {
+                                    margin-right: 0.25em;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

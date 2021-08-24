@@ -91,7 +91,7 @@ class HeaderThree extends Component{
                             </ul>
                         </div>
                         <div className="header-btn">
-                            <a className="rn-btn dark-color" href="/assets/files/Potié Jérôme - Développeur Web.pdf" download>
+                            <a className="rn-btn dark-color" href="/assets/files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
                                 <span>Télécharger mon CV</span>
                             </a>
                         </div>

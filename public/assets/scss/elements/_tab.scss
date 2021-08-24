@@ -49,7 +49,36 @@ ul {
         }
     }
 }
+.exp-rule {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 0.5em;
+    margin-top: 2em;
+    border-bottom: 1px solid #332e2e;
+    box-shadow: 0 2px 3px #332e2e;
+    background-color: $theme-color;
 
+    div {
+        width: 10%;
+        border-right: 1px solid #332e2e;
+        &.noborder {
+            border-right: none;
+        }
+    }
+}
+.exp-time {
+    margin-top: 0.25em;
+    display: flex;
+    flex-direction: row;
+    width: 101%;
+    &::after {
+        content: "24";
+    }
+    div {
+        width: 10%;
+    }
+}
 .single-tab-content {
     padding-top: 8px;
     p {

@@ -18,6 +18,16 @@ const steps = [
     missions: []
   },
   {
+    start: "Mars 2021",
+    end: "",
+    company: "",
+    companyUrl: "",
+    companyTechnos: [],
+    title: "Obtention du titre de développeur Web / Web Mobile",
+    type: "diplôme",
+    missions: []
+  },
+  {
     start: "Septembre 2020",
     end: "Décembre 2020",
     company: "Bluesquare.io",
@@ -42,22 +52,12 @@ const steps = [
     ]
   },
   {
-    start: "Mars 2021",
-    end: "",
-    company: "",
-    companyUrl: "",
-    companyTechnos: [],
-    title: "Obtention du titre de développeur Web / Web Mobile",
-    type: "diplôme",
-    missions: []
-  },
-  {
     start: "Mars 2020",
     end: "Juillet 2020",
     company: "Wild Code School",
     companyUrl: "https://www.wildcodeschool.com/fr-FR",
     companyTechnos: ["Javascript", "ReactJS", "NodeJS"],
-    title: "Développeur Web / Web Mobile",
+    title: "Formation développeur Web / Web Mobile",
     type: "formation",
     missions: []
   },

@@ -1,14 +1,10 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
-
 import ProgressBdd from "../../blocks/progressbar/ProgressBdd";
 import ProgressMain from "../../blocks/progressbar/ProgressMain";
 import ProgressLanguage from "../../blocks/progressbar/ProgressLanguage";
 import ProgressOther from "../../blocks/progressbar/ProgressOther";
-import { useState } from "react";
 
 const steps = [
   {

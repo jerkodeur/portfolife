@@ -12,7 +12,7 @@ const ExpBar = () => (
             <div></div>
             <div></div>
             <div></div>
-            <div class='noborder'></div>
+            <div className='noborder'></div>
         </div>
         <div className="exp-time">
             <div className="text-left">Exp (mois)</div>

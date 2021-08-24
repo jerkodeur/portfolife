@@ -2,12 +2,13 @@ import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 
 import ProgressBdd from "../../blocks/progressbar/ProgressBdd";
 import ProgressMain from "../../blocks/progressbar/ProgressMain";
 import ProgressLanguage from "../../blocks/progressbar/ProgressLanguage";
 import ProgressOther from "../../blocks/progressbar/ProgressOther";
+import { useState } from "react";
 
 const steps = [
   {
@@ -67,6 +68,7 @@ const steps = [
 ]
 
 const TabsTwo = (props) => {
+
   const [tab1, tab2, tab3, tab4, tab5] = [
     "En vedette",
     "Langages",
@@ -165,10 +167,9 @@ const TabsTwo = (props) => {
                                   <div key={index}>
                                     <li className='description'>
                                       {mission.description}
-                                      <FontAwesomeIcon icon={faChevronDown} />
                                     </li>
                                     {
-                                      mission.features && mission.features.map((feature, index) =>  <li className='feature' key={index}>{feature}</li>)
+                                      mission.features && <ul id={`features${index}`}>{mission.features.map((feature, index) => <li className='feature' key={index}>{feature}</li>)}</ul>
                                     }
                                   </div>
                                 )

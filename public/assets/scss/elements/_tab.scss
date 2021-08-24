@@ -138,14 +138,11 @@ ul {
                         width: 95%;
                         justify-content: space-between;
                         font-weight: 500;
-                        i {
-                            color: #000;
-                        }
+                        cursor: pointer;
                     }
                     &.technos {
                         margin: 0 0 0.5em 0;
                         padding: 0;
-                        // text-align: right;
                         font-weight: 500;
                         color: #000;
                         list-style-type: " ";

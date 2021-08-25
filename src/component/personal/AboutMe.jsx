@@ -19,24 +19,22 @@ const AboutMe = () => {
     }, [])
 
     return (
-        <div className="about-area about-position-top pb--60  bg_color--3">
-            <div className="about-wrapper">
-                <div className="container">
-                    <div className="row row--20">
-                        <div className="col-lg-5 justify-content-center align-items-end">
-                            <div className="thumbnail">
-                                <img src={aboutImg} alt="About Images" />
-                            </div>
+        <div className="about-wrapper">
+            <div className="container">
+                <div className="row row--20">
+                    <div className="col-lg-5 justify-content-center align-items-end">
+                        <div className="thumbnail">
+                            <img src={aboutImg} alt="About Images" />
                         </div>
-                        <div className="col-lg-7">
-                            <div className="about-inner inner pt--100">
-                                <div className="section-title">
-                                <h2 className="title">{title}</h2>
-                                <p className="description">{description}</p>
-                                </div>
-                                <div className="row mt--30 tab-container">
-                                <TabTwo tabStyle="tab-style--1" />
-                                </div>
+                    </div>
+                    <div className="col-lg-7">
+                        <div className="about-inner inner pt--100">
+                            <div className="section-title">
+                            <h2 className="title">{title}</h2>
+                            <p className="description">{description}</p>
+                            </div>
+                            <div className="row mt--30 tab-container">
+                            <TabTwo tabStyle="tab-style--1" />
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ import PageHelmet from "../component/common/Helmet";
 import Slider from "react-slick";
 import { slickDot } from "../page-demo/script";
 import Breadcrumb from "../elements/common/Breadcrumb";
-import PortfolioList from "../elements/portfolio/PortfolioList";
+import PortfolioList from "../component/personal/projects/PortfolioList";
 import ScrollToTop from 'react-scroll-up';
 import { FiChevronUp } from "react-icons/fi";
 import Header from "../component/header/Header";

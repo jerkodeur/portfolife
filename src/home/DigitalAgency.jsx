@@ -7,7 +7,7 @@ import ServiceList from "../elements/service/ServiceList";
 import Header from "../component/header/Header";
 import FooterTwo from "../component/footer/FooterTwo";
 import Testimonial from "../elements/Testimonial";
-import PortfolioList from "../elements/portfolio/PortfolioList";
+import PortfolioList from "../component/personal/projects/PortfolioList";
 import BlogContent from "../elements/blog/BlogContent";
 import Brand from "../elements/Brand";
 import CallAction from "../elements/callaction/CallAction";

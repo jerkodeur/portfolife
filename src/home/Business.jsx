@@ -6,7 +6,7 @@ import { slideSlick } from "../page-demo/script";
 import ServiceList from "../elements/service/ServiceList";
 import BlogContent from "../elements/blog/BlogContent";
 import BrandTwo from "../elements/BrandTwo";
-import PortfolioList from "../elements/portfolio/PortfolioList";
+import PortfolioList from "../component/personal/projects/PortfolioList";
 import Header from "../component/header/Header";
 import FooterTwo from "../component/footer/FooterTwo";
 import CallAction from "../elements/callaction/CallAction";

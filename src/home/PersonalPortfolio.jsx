@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 
 import Helmet from "../component/common/Helmet";
-import { FiChevronUp } from "react-icons/fi";
 import ScrollableAnchor, { configureAnchors } from "react-scrollable-anchor";
 import ScrollToTop from "react-scroll-up";
+import { FiChevronUp } from "react-icons/fi";
 
+import AboutMe from '../component/personal/AboutMe'
+import ConnectForm from "../component/personal/connexion/ConnectForm";
 import ContactOne from "../elements/contact/ContactOne";
 import Header from "../component/header/HeaderThree";
-import Projects from '../component/personal/projects/Projects'
-import AboutMe from '../component/personal/AboutMe'
 import Presentation from '../component/personal/Presentation'
-import { useState } from "react";
+import Projects from '../component/personal/projects/Projects'
 
 // Offset all anchors by -60 to account for a fixed header
 // and scroll more quickly than the default 400ms
@@ -19,20 +19,30 @@ configureAnchors({ offset: -60, scrollDuration: 2000 });
 const PersonalPortfolio = () => {
 
 	const [displayConnection, setDisplayConnection] = useState(false);
+	const [isConnect, setIsConnect] = useState(false);
+
+	useEffect(() => {
+        isConnect && setDisplayConnection(false)
+	}, [isConnect])
 
 	const handleConnexion = () => {
-		setDisplayConnection(!displayConnection);
+		!isConnect && setDisplayConnection(!displayConnection);
+	}
+
+	const switchConnexion = (bool) => {
+		console.log('in function')
+		setIsConnect(bool)
 	}
 
     return (
 		<>
 			<Helmet pageTitle="Personal Portfolio" />
-			<Header logo="symbol-light" color="color-black" toogleConnexion={handleConnexion}/>
+			<Header color="color-black"/>
 			{
-				displayConnection && <div style={{background: 'red'}}>Coucou</div>
+				displayConnection && <ConnectForm switchConnexion={switchConnexion} />
 			}
 
-			<Presentation />
+			<Presentation toogleConnexion={handleConnexion} />
 
 			<ScrollableAnchor id={"about"}>
 				<div className="about-area about-position-top pb--60  bg_color--3">

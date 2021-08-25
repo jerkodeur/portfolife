@@ -40,6 +40,7 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.7.1",
     "jest-watch-typeahead": "0.3.0",
+    "jsonwebtoken": "^8.5.1",
     "mini-css-extract-plugin": "0.5.0",
     "node-sass": "^4.14.1",
     "optimize-css-assets-webpack-plugin": "5.0.1",
@@ -101,15 +102,11 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
+    "browserslist": [
+      ">0.3%",
+      "not ie 11",
       "not dead",
       "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "jest": {

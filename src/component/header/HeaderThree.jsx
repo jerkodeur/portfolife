@@ -1,5 +1,5 @@
 import React from "react";
-import {FaLinkedinIn, FaGithub, FaRegUser  } from "react-icons/fa";
+import {FaLinkedinIn, FaGithub} from "react-icons/fa";
 import { FiX, FiMenu } from "react-icons/fi";
 import Scrollspy from 'react-scrollspy'
 
@@ -9,7 +9,7 @@ const SocialShare = [
 ]
 const HeaderThree = (props) => {
 
-    const { toogleConnexion, logo, color='default-color' } = props;
+    const { color='default-color' } = props;
     const menuTrigger = () => document.querySelector('.header-wrapper').classList.toggle('menu-open')
 
     const CLoseMenuTrigger = () => document.querySelector('.header-wrapper').classList.remove('menu-open')
@@ -52,7 +52,7 @@ const HeaderThree = (props) => {
                     <div className="social-share-inner">
                         <ul className="social-share social-style--2 color-theme d-flex justify-content-start liststyle">
                             {SocialShare.map((val , i) => (
-                                <li key={i}><a href={`${val.link}`} target="_blank" >{val.Social}</a></li>
+                                <li key={i}><a href={`${val.link}`} target="_blank" rel="noopener noreferrer">{val.Social}</a></li>
                             ))}
                         </ul>
                     </div>
@@ -60,11 +60,6 @@ const HeaderThree = (props) => {
                         <a className="rn-btn dark-color" href="/assets/files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
                             <span>Télécharger mon CV</span>
                         </a>
-                    </div>
-                    <div className="social-share-inner">
-                        <ul className="social-share social-style--2 color-theme d-flex justify-content-start liststyle ml-2">
-                                <li><a href="#" onClick={toogleConnexion}><FaRegUser size="20" color="#000" /></a></li>
-                        </ul>
                     </div>
                     {/* Start Humberger Menu  */}
                     <div className="humberger-menu d-block d-lg-none pl--20">

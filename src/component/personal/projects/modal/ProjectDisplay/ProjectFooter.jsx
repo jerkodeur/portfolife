@@ -1,5 +1,4 @@
 import React from 'react'
-import {FaMobile} from 'react-icons/fa'
 
 const ProjectFooter = ({project}) => {
     const view = require('../../../../../../public/assets/images/icons/www.svg')

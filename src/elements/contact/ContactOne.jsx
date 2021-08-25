@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react"
+import React, { Component } from "react"
 import emailjs from 'emailjs-com'
 import {init} from 'emailjs-com'
 import toaster from 'toasted-notes'

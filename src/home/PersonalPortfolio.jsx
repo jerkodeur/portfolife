@@ -21,32 +21,36 @@ const PersonalPortfolio = () => {
 	const [displayConnection, setDisplayConnection] = useState(false);
 	const [isConnect, setIsConnect] = useState(false);
 
+	const pseudo = localStorage.getItem('pseudo');
+
 	useEffect(() => {
         isConnect && setDisplayConnection(false)
 	}, [isConnect])
+
+	useEffect(() => {
+		pseudo && setIsConnect(true);
+	}, [pseudo])
 
 	const handleConnexion = () => {
 		!isConnect && setDisplayConnection(!displayConnection);
 	}
 
 	const switchConnexion = (bool) => {
-		console.log('in function')
 		setIsConnect(bool)
 	}
 
     return (
 		<>
 			<Helmet pageTitle="Personal Portfolio" />
-			<Header color="color-black"/>
+			<Header color="color-black" isConnect={isConnect} switchConnexion={switchConnexion}/>
+
+			<Presentation />
 			{
-				displayConnection && <ConnectForm switchConnexion={switchConnexion} />
+				displayConnection && <ConnectForm switchConnexion={switchConnexion} handleConnexion={handleConnexion} />
 			}
-
-			<Presentation toogleConnexion={handleConnexion} />
-
 			<ScrollableAnchor id={"about"}>
 				<div className="about-area about-position-top pb--60  bg_color--3">
-					<AboutMe />
+					<AboutMe toogleConnexion={handleConnexion} />
 				</div>
 			</ScrollableAnchor>
 

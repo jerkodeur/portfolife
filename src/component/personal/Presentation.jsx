@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
 
-import Proptypes from 'prop-types';
 
 import Typed from "typed.js";
 
@@ -33,7 +32,7 @@ const SlideList = [
     },
 ];
 
-const Presentation = ({ toogleConnexion }) => {
+const Presentation = () => {
 
     useEffect(() => {
         new Typed(document.getElementById('text-anim'), options);
@@ -50,7 +49,7 @@ const Presentation = ({ toogleConnexion }) => {
                             <div className="row">
                                 <div className="col-lg-12 ">
                                     <div className={`inner ${value.textPosition}`}>
-                                        {value.pre && <span onClick={toogleConnexion}>{value.pre}</span>}
+                                        {value.pre && <span>{value.pre}</span>}
                                         {value.title && (
                                             <h1
                                                 className="title"
@@ -87,10 +86,6 @@ const Presentation = ({ toogleConnexion }) => {
             }
         </div>
     )
-}
-
-Presentation.propTypes = {
-    toogleConnexion: Proptypes.func.isRequired
 }
 
 export default Presentation;

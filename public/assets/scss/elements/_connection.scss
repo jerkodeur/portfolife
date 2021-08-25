@@ -1,0 +1,34 @@
+.connect-container {
+    width: 100%;
+    box-shadow: 0 2px 3px $theme-color;
+    .title {
+        display: flex;
+        padding: 0.5em;
+        margin: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $theme-color;
+
+        h2 {
+            font-size: 2em !important;
+            margin: 0 !important;
+        }
+
+        .icon {
+            cursor: pointer;
+            &:hover {
+                color: red;
+            }
+        }
+    }
+    form {
+        width: 70%;
+        margin: 1em 2em;
+        input,
+        button {
+            margin: auto;
+            margin-bottom: 1em;
+        }
+    }
+}

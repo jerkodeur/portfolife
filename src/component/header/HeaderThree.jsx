@@ -1,18 +1,25 @@
 import React from "react";
-import {FaLinkedinIn, FaGithub} from "react-icons/fa";
-import { FiX, FiMenu } from "react-icons/fi";
+
 import Scrollspy from 'react-scrollspy'
+import propTypes from 'prop-types'
+
+import {FaLinkedinIn, FaGithub, FaUserSlash} from "react-icons/fa";
+import { FiX, FiMenu } from "react-icons/fi";
 
 const SocialShare = [
     {Social: <FaGithub size="20" /> , link: 'https://github.com/jerkodeur'},
-    {Social: <FaLinkedinIn size="20" /> , link: 'https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/'},
+    {Social: <FaLinkedinIn size="20" /> , link: 'https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/'}
 ]
-const HeaderThree = (props) => {
+const HeaderThree = ({ color='default-color', isConnect, switchConnexion }) => {
 
-    const { color='default-color' } = props;
     const menuTrigger = () => document.querySelector('.header-wrapper').classList.toggle('menu-open')
 
     const CLoseMenuTrigger = () => document.querySelector('.header-wrapper').classList.remove('menu-open')
+
+    const disconnnect = () => {
+        localStorage.clear();
+        switchConnexion(false)
+    }
 
     // stickyHeader () {}
 
@@ -45,6 +52,7 @@ const HeaderThree = (props) => {
                             <li><a href="#about">À propos de moi</a></li>
                             <li><a href="#project">Mes projets</a></li>
                             <li><a href="#contact">Me contacter</a></li>
+                            {isConnect && <li><a href="#dashboard">Dashboard</a></li>}
                         </Scrollspy>
                     </nav>
                 </div>
@@ -56,6 +64,7 @@ const HeaderThree = (props) => {
                             ))}
                         </ul>
                     </div>
+                    {isConnect && <FaUserSlash size="20" className="text-warning ml-3" onClick={disconnnect} />}
                     <div className="header-btn">
                         <a className="rn-btn dark-color" href="/assets/files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
                             <span>Télécharger mon CV</span>
@@ -74,4 +83,11 @@ const HeaderThree = (props) => {
         </header>
     )
 }
+
+HeaderThree.propTypes = {
+    color: propTypes.string,
+    isConnect: propTypes.bool.isRequired,
+    switchConnexion: propTypes.func.isRequired
+}
+
 export default HeaderThree;

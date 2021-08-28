@@ -1,7 +1,8 @@
 import React from "react";
 
-import Scrollspy from 'react-scrollspy'
 import propTypes from 'prop-types'
+import { NavLink } from "react-router-dom";
+import Scrollspy from 'react-scrollspy'
 
 import {FaLinkedinIn, FaGithub, FaUserSlash} from "react-icons/fa";
 import { FiX, FiMenu } from "react-icons/fi";
@@ -52,7 +53,7 @@ const HeaderThree = ({ color='default-color', isConnect, switchConnexion }) => {
                             <li><a href="#about">À propos de moi</a></li>
                             <li><a href="#project">Mes projets</a></li>
                             <li><a href="#contact">Me contacter</a></li>
-                            {isConnect && <li><a href="#dashboard">Dashboard</a></li>}
+                            {isConnect && <li><NavLink to="/dashboard">Dashboard</NavLink></li>}
                         </Scrollspy>
                     </nav>
                 </div>

@@ -34,6 +34,9 @@ import StudioAgency from './home/StudioAgency';
 import DarkMainDemo from './dark/MainDemo';
 // import DarkPortfolioLanding from './dark/PortfolioLanding';
 
+//Dashboard
+import Dashboard from './dashboard/Dashboard';
+
 // Element Layout
 import Service from "./elements/Service";
 import ServiceDetails from "./elements/ServiceDetails";
@@ -76,6 +79,7 @@ class Root extends Component{
             <BrowserRouter basename={'/'}>
                 <Switch>
                     <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home}/>
+                    <Route exact path={`${process.env.PUBLIC_URL}/dashboard`} component={Dashboard}/>
                     {/* <Route exact path={`${process.env.PUBLIC_URL}/main-demo`} component={MainDemo}/> */}
                     <Route exact path={`${process.env.PUBLIC_URL}/dark-main-demo`} component={DarkMainDemo}/>
                     {/* <Route exact path={`${process.env.PUBLIC_URL}/startup`} component={Startup}/> */}

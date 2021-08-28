@@ -5,40 +5,74 @@ body {
     overflow: inherit;
 }
 .dashboard {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
     background-color: #fff;
     width: 100%;
     height: 100%;
 
     .navbar {
-        background-color: #000;
+        background-color: rgb(34, 33, 33);
         width: 100%;
         h2 {
             font-size: 1.4em;
-            text-shadow: 1px 1px rgb(112, 111, 111);
+            text-shadow: 1px 1px 0 #000;
             color: $theme-color;
-            padding: 0.5em 0.25%;
+            opacity: 0.65;
+            padding: 0.5em;
             margin: 0;
+            &:hover {
+                opacity: 1;
+                color: $theme-color;
+                text-shadow: 2px 2px 3px rgb(34, 33, 33);
+            }
         }
     }
 
     .main-layout {
         display: flex;
-        // justify-content: start;
         flex-direction: row;
         width: 100%;
         height: 100%;
         .sidebar {
-            background-color: #000;
+            background-color: rgb(34, 33, 33);
             width: 15%;
             color: #fff;
             height: 100%;
-            // min-height: 100% !important;
+            .category {
+                padding-top: 0.5em;
+                .title {
+                    font-size: 1.2em;
+                    margin-bottom: 0.5em;
+                    color: #fff;
+                    box-shadow: -2px -8px 26px $theme-color;
+                    font-weight: bold;
+                    padding: 0.5em 0 0.5em 0.5em;
+                }
+                li:not(.title) {
+                    padding-left: 1.5em;
+                    color: rgb(218, 208, 208);
+                    &:hover {
+                        color: #fff;
+                        text-shadow: 1px 1px #000 2px;
+                        font-weight: bold;
+                    }
+                }
+            }
+            a {
+                &.active {
+                    color: $theme-color;
+                    font-weight: bold;
+                }
+            }
         }
         .main-content {
-            width: 90%;
+            width: 85%;
             background-color: red;
             height: 100%;
-            // min-height: 100% !important;
         }
     }
 }

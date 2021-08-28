@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 
 import Axios from 'axios'
 
-import ViewProjectModal from "../modal/ViewProjectModal"
+import ViewProjectModal from "./modal/ViewProjectModal"
 
 const PortfolioList = (props) => {
 

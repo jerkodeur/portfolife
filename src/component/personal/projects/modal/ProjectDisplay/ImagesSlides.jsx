@@ -31,7 +31,7 @@ const ImagesSlides = ({nbImages, prefix, bgColor}) => {
     }
 
     useEffect(() => {
-        const image = require(`../../../../public/assets/images/projects/${prefix}/${prefix}_img_${selected}.png`)
+        const image = require(`../../../../../../public/assets/images/projects/${prefix}/${prefix}_img_${selected}.png`)
         setImgName(image)
         document.documentElement.style.setProperty('--bg-slider', bgColor)
     }, [selected, bgColor, prefix])
@@ -54,7 +54,7 @@ const ImagesSlides = ({nbImages, prefix, bgColor}) => {
             <div className="miniatures-container">
                 {
                     [...Array(nbImages)].map((item, index) => {
-                        const image = require(`../../../../public/assets/images/projects/${prefix}/${prefix}_img_${index + 1}.png`)
+                        const image = require(`../../../../../../public/assets/images/projects/${prefix}/${prefix}_img_${index + 1}.png`)
                         return <Thumbnail image={image} handleSelect={handleSelect} selected={selected} key={index} id={index + 1} />
                     })
                 }

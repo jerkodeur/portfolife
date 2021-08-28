@@ -5,7 +5,7 @@ import HeaderThree from "../component/header/HeaderThree";
 import FooterTwo from "../component/footer/FooterTwo";
 import TabTwo from "../elements/tab/TabTwo";
 import ContactOne from "../elements/contact/ContactOne";
-import PortfolioList from "../elements/portfolio/PortfolioList";
+import PortfolioList from "../component/personal/projects/PortfolioList";
 import ServiceList from "../elements/service/ServiceList";
 import BlogContent from "../elements/blog/BlogContent";
 import Helmet from "../component/common/Helmet";

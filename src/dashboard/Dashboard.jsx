@@ -2,10 +2,10 @@ import React from "react";
 
 import { Route, useRouteMatch } from "react-router";
 
-import Home from "./pages/projects/Home";
+import Home from "./Home";
 import Navbar from "./Navbar";
-import ProjectList from "./pages/projects/List";
-import ProjectNew from "./pages/projects/New";
+import ProjectList from "./pages/projects/ProjectList";
+import NewProject from "./pages/projects/NewProject";
 import Sidebar from "./Sidebar";
 
 const Dashboard = () => {
@@ -18,7 +18,7 @@ const Dashboard = () => {
         <main className="main-container">
           <Route exact path={`${path}/`} component={Home} />
           <Route path={`${path}/projects`} component={ProjectList} />
-          <Route path={`${path}/new-project`} component={ProjectNew} />
+          <Route path={`${path}/new-project`} component={NewProject} />
         </main>
       </div>
     </div>

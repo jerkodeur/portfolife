@@ -1,19 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink, useRouteMatch } from "react-router-dom";
 
 const Sidebar = () => {
-    const { url } = useRouteMatch();
+  const { url } = useRouteMatch();
 
-    return (
-        <nav className="sidebar">
-            <ul className="category">
-                <li className="title">Projects</li>
-                <li><NavLink to={`${url}/projects`}>Liste des projets</NavLink></li>
-                <li><NavLink to={`${url}/new-project`}>Nouveau Projet</NavLink></li>
-            </ul>
-        </nav>
-    )
-}
+  return (
+    <nav className="sidebar">
+      <ul className="category">
+        <li className="title">Projects</li>
+        <li>
+          <NavLink to={`${url}/projects`}>Liste des projets</NavLink>
+        </li>
+        <li>
+          <NavLink to={`${url}/new-project`}>Nouveau Projet</NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

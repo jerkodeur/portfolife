@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-const Toast = ({content, styleType }) => (
-    <div>
-        <div className={styleType}>{ content }</div>
-    </div>
-    )
+const Toast = ({ content, styleType }) => (
+  <div>
+    <div className={styleType}>{content}</div>
+  </div>
+);
 
-export default Toast
+export default Toast;

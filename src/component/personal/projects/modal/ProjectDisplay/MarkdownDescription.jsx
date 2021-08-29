@@ -1,17 +1,16 @@
-import React from 'react'
+import React from "react";
 
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
 
 const MarkdownDescription = (props) => {
+  const { mainDatas } = props.project;
+  const { description } = mainDatas;
 
-    const {mainDatas} = props.project
-    const {description} = mainDatas
+  return (
+    <div className="project-description">
+      <ReactMarkdown>{description}</ReactMarkdown>
+    </div>
+  );
+};
 
-    return (
-        <div className="project-description">
-            <ReactMarkdown>{description}</ReactMarkdown>
-        </div>
-    )
-}
-
-export default MarkdownDescription
+export default MarkdownDescription;

@@ -48,7 +48,7 @@ const steps = [
       {
         description: "Développer un centre d'aide pour les clients de l'agence",
         technos: ["PHP", "VueJS", "Laravel", "InertiaJS", "TailwindCSS"]
-      },
+      }
     ]
   },
   {
@@ -60,24 +60,23 @@ const steps = [
     title: "Formation développeur Web / Web Mobile",
     type: "formation",
     missions: []
-  },
-]
+  }
+];
 
 const TabsTwo = (props) => {
-
   const [tab1, tab2, tab3, tab4, tab5] = [
     "En vedette",
     "Langages",
     "Base de données",
     "Autres",
-    "Mon parcours",
+    "Mon parcours"
   ];
 
   const getUniqTechnos = (array) => {
     const technos = [];
-    array.map(el => technos.push(...el.technos));
-    return([...new Set(technos)])
-  }
+    array.map((el) => technos.push(...el.technos));
+    return [...new Set(technos)];
+  };
 
   const { tabStyle } = props;
 
@@ -116,64 +115,78 @@ const TabsTwo = (props) => {
                 <TabPanel>
                   <div className="single-tab-content">
                     <ul className="career-container">
-                      {
-                        steps.map((step, index) => (
-                          <li key={index}>
-                            <ul className="sub-carreer">
-                              <li className="date">
-                                {
-                                !step.end ? step.start :
-                                  step.start.split(' ')[1] === step.end.split(' ')[1] ?
-                                    `De ${step.start.split(' ')[0]} à ${step.end.split(' ')[0]} ${step.end.split(' ')[1]}` :
-                                    `De ${step.start} à ${step.end}`
-                                }
+                      {steps.map((step, index) => (
+                        <li key={index}>
+                          <ul className="sub-carreer">
+                            <li className="date">
+                              {!step.end
+                                ? step.start
+                                : step.start.split(" ")[1] ===
+                                  step.end.split(" ")[1]
+                                ? `De ${step.start.split(" ")[0]} à ${
+                                    step.end.split(" ")[0]
+                                  } ${step.end.split(" ")[1]}`
+                                : `De ${step.start} à ${step.end}`}
+                            </li>
+                            <li className="career-descr">
+                              {step.company === "" ? (
+                                <b>{step.title}</b>
+                              ) : (
+                                <>
+                                  <a
+                                    href={step.companyUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {step.company}
+                                  </a>{" "}
+                                  - {step.title}
+                                </>
+                              )}
+                            </li>
+                            {step.missions.length > 0 && (
+                              <li className="technos">
+                                {getUniqTechnos(step.missions).map(
+                                  (techno, index) => (
+                                    <span className="techno" key={index}>
+                                      {techno}
+                                    </span>
+                                  )
+                                )}
                               </li>
-                              <li className="career-descr">
-                                {
-                                  step.company === '' ?
-                                    <b>{step.title}</b>
-                                    :
-                                    <>
-                                      <a href={step.companyUrl} target="_blank" rel="noopener noreferrer">{step.company}</a> - {' '}{step.title}
-                                    </>
-                                }
-                              </li>
-                              {
-                                step.missions.length > 0 &&
+                            )}
+                            {step.companyTechnos &&
+                              step.companyTechnos.length > 0 && (
                                 <li className="technos">
-                                  {
-                                    getUniqTechnos(step.missions).map((techno, index) =>
-                                      <span className="techno" key={index}>{techno}</span>
-                                    )
-                                  }
+                                  {step.companyTechnos.map((techno, index) => (
+                                    <span className="techno" key={index}>
+                                      {techno}
+                                    </span>
+                                  ))}
                                 </li>
-                              }
-                              {
-                                step.companyTechnos && step.companyTechnos.length > 0 &&
-                                <li className="technos">
-                                  {
-                                    step.companyTechnos.map((techno, index) =>
-                                      <span className="techno" key={index}>{techno}</span>
-                                    )
-                                  }
-                                </li>
-                              }
-                              {
-                                step.missions.length > 0 && step.missions.map((mission, index) =>
-                                  <div key={index}>
-                                    <li className='description'>
-                                      {mission.description}
-                                    </li>
-                                    {
-                                      mission.features && <ul id={`features${index}`}>{mission.features.map((feature, index) => <li className='feature' key={index}>{feature}</li>)}</ul>
-                                    }
-                                  </div>
-                                )
-                              }
-                            </ul>
-                          </li>
-                        ))
-                      }
+                              )}
+                            {step.missions.length > 0 &&
+                              step.missions.map((mission, index) => (
+                                <div key={index}>
+                                  <li className="description">
+                                    {mission.description}
+                                  </li>
+                                  {mission.features && (
+                                    <ul id={`features${index}`}>
+                                      {mission.features.map(
+                                        (feature, index) => (
+                                          <li className="feature" key={index}>
+                                            {feature}
+                                          </li>
+                                        )
+                                      )}
+                                    </ul>
+                                  )}
+                                </div>
+                              ))}
+                          </ul>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </TabPanel>

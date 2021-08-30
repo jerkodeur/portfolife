@@ -1,17 +1,47 @@
 import React from "react";
+import { useState } from "react";
 
-import axios from "axios";
-import { useEffect } from "react";
+import Input from "../../../commons/forms/Input";
 
 const ProjectForm = () => {
+  const [formErrors, setFormErrors] = useState({});
+  const [formDatas, setFormDatas] = useState({});
 
-  useEffect(() => {
-    axios.get('/projects')
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err))
-  }, [])
+  const handleForm = (e) => {
+    console.log(e.target.id, e.target.value);
+    setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
+  };
 
-  return <div>New project</div>;
+  const submitForm = (e) => {
+    e.preventDefault(e);
+  };
+  console.log(formDatas);
+  return (
+    <div className="project-form-container">
+      <h2>New project</h2>
+      <form onSubmit={submitForm}>
+        {/* Title */}
+        <Input
+          errors={formErrors.title}
+          id="title"
+          isRequired
+          label="titre"
+          placeholder="titre du projet"
+          setValue={(e) => handleForm(e)}
+        />
+
+        {/* short description */}
+        <Input
+          errors={formErrors.short_description}
+          id="short_description"
+          isRequired
+          label="courte description"
+          placeholder="description courte du projet (Apparaît dans les vignettes)"
+          setValue={(e) => handleForm(e)}
+        />
+      </form>
+    </div>
+  );
 };
 
-export default ProjectForm
+export default ProjectForm;

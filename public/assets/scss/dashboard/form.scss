@@ -1,0 +1,27 @@
+.project-form-container {
+    width: 100%;
+    form {
+        margin: auto;
+        width: 75%;
+
+        label {
+            margin-top: 1em;
+        }
+
+        input {
+            margin-bottom: 0.25em;
+            padding: 0.25em 0.5em;
+            outline: none;
+            &::placeholder {
+                color: rgb(206, 203, 180) !important;
+            }
+        }
+        small.container-error {
+            margin-top: 0.5em;
+            background-color: red;
+            padding: 0.25em 0.5em;
+            border-radius: 3px;
+            color: #fff;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.dashboard {
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: rgb(34, 33, 33);
+        width: 100%;
+        h2 {
+            font-size: 1.4em;
+            text-shadow: 1px 1px 0 #000;
+            color: $theme-color;
+            opacity: 0.65;
+            padding: 0.5em;
+            margin: 0;
+            &:hover {
+                opacity: 1;
+                color: $theme-color;
+                text-shadow: 2px 2px 3px rgb(34, 33, 33);
+            }
+        }
+        button {
+            font-weight: bold;
+            margin: 1em 0.5em;
+            padding: 0.15em 0.5em;
+            &:last-of-type {
+                margin-right: 1em;
+            }
+        }
+    }
+}

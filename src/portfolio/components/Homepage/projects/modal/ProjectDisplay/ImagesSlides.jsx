@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Thumbnail from "./Thumbnail";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const ImagesSlides = ({ nbImages, prefix, bgColor }) => {
+const ImagesSlides = ({ nbImages, prefix, bgColor, ...props }) => {
   const [selected, setSelected] = useState(1);
   const [imgName, setImgName] = useState("");
 
@@ -30,7 +30,8 @@ const ImagesSlides = ({ nbImages, prefix, bgColor }) => {
   };
 
   useEffect(() => {
-    const image = require(`../../../../../../public/assets/images/projects/${prefix}/${prefix}_img_${selected}.png`);
+
+    const image = require(`../../../../../../../public/assets/images/projects/${prefix}/${prefix}_img_${selected}.png`);
     setImgName(image);
     document.documentElement.style.setProperty("--bg-slider", bgColor);
   }, [selected, bgColor, prefix]);
@@ -58,7 +59,7 @@ const ImagesSlides = ({ nbImages, prefix, bgColor }) => {
       </div>
       <div className="miniatures-container">
         {[...Array(nbImages)].map((item, index) => {
-          const image = require(`../../../../../../public/assets/images/projects/${prefix}/${prefix}_img_${
+          const image = require(`../../../../../../../public/assets/images/projects/${prefix}/${prefix}_img_${
             index + 1
           }.png`);
           return (

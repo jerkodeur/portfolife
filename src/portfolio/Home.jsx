@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 
-import Helmet from "../component/common/Helmet";
 import ScrollableAnchor, { configureAnchors } from "react-scrollable-anchor";
 import ScrollToTop from "react-scroll-up";
 import { FiChevronUp } from "react-icons/fi";
 
-import AboutMe from "../component/personal/AboutMe";
-import ConnectForm from "../component/personal/connexion/ConnectForm";
-import ContactOne from "../elements/contact/ContactOne";
-import Header from "../component/header/HeaderThree";
-import Presentation from "../component/personal/Presentation";
-import Projects from "../component/personal/projects/Projects";
+import AboutMe from "./components/Homepage/aboutMe/AboutMe";
+import ConnectForm from "./components/Homepage/connexion/ConnectForm";
+import Contact from "./components/Homepage/Contact";
+import Header from "./components/Homepage/Header";
+import Helmet from "../component/common/Helmet";
+import Presentation from "./components/Homepage/Presentation";
+import Projects from "./components/Homepage/projects/Projects";
 
 // Offset all anchors by -60 to account for a fixed header
 // and scroll more quickly than the default 400ms
 configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
+
   const [displayConnection, setDisplayConnection] = useState(false);
   const [isConnect, setIsConnect] = useState(false);
 
@@ -91,7 +92,7 @@ const PersonalPortfolio = () => {
       {/* Start Portfolio Area */}
       <ScrollableAnchor id={"contact"}>
         <div className="portfolio-area pb--120 bg_color--1">
-          <ContactOne />
+          <Contact />
         </div>
       </ScrollableAnchor>
       {/* End Portfolio Area */}

@@ -5,10 +5,10 @@ import { Route, useRouteMatch } from "react-router";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import ProjectList from "./pages/projects/ProjectList";
-import NewProject from "./pages/projects/NewProject";
+import ProjectForm from "./pages/projects/ProjectForm";
 import Sidebar from "./Sidebar";
 
-const Dashboard = () => {
+const DashboardHome = () => {
   const { path } = useRouteMatch();
   return (
     <div className="dashboard">
@@ -16,13 +16,15 @@ const Dashboard = () => {
       <div className="main-layout">
         <Sidebar />
         <main className="main-container">
-          <Route exact path={`${path}/`} component={Home} />
+          <Route exact path={`${path}/`}>
+            <Home />
+          </Route>
           <Route path={`${path}/projects`} component={ProjectList} />
-          <Route path={`${path}/new-project`} component={NewProject} />
+          <Route path={`${path}/new-project`} component={ProjectForm} />
         </main>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardHome;

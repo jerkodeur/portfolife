@@ -1,10 +1,10 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
-import ProgressBdd from "../../blocks/progressbar/ProgressBdd";
-import ProgressMain from "../../blocks/progressbar/ProgressMain";
-import ProgressLanguage from "../../blocks/progressbar/ProgressLanguage";
-import ProgressOther from "../../blocks/progressbar/ProgressOther";
+import ProgressBdd from "./progressBars/ProgressBdd";
+import ProgressMain from "./progressBars/ProgressMain";
+import ProgressLanguage from "./progressBars/ProgressLanguage";
+import ProgressOther from "./progressBars/ProgressOther";
 
 const steps = [
   {
@@ -63,7 +63,7 @@ const steps = [
   }
 ];
 
-const TabsTwo = (props) => {
+const AboutTabs = (props) => {
   const [tab1, tab2, tab3, tab4, tab5] = [
     "En vedette",
     "Langages",
@@ -200,4 +200,4 @@ const TabsTwo = (props) => {
   );
 };
 
-export default TabsTwo;
+export default AboutTabs;

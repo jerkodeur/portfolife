@@ -5,46 +5,40 @@ import Axios from "axios";
 import jwt from "jsonwebtoken";
 import Proptypes from "prop-types";
 import toaster from "toasted-notes";
+import Toast from "../../commons/Toast";
 import { FaWindowClose } from "react-icons/fa";
-
-import Toast from "../../../elements/common/Toast";
-import "toasted-notes/src/styles.css";
 
 const ConnectForm = ({ switchConnexion, handleConnexion }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const toasterOptions = {
+    position: "top-right",
+    duration: 5000
+  }
+
   const handleForm = (e) => {
     e.preventDefault(e);
     Axios.post("/admins", { email, password })
       .then((res) => {
-        const token = res.headers["x-access-token"];
+        const token = res.headers["x-access-token"]
+
         localStorage.clear();
         localStorage.setItem("token", token);
         localStorage.setItem("pseudo", jwt.decode(token).pseudo);
-        toaster.notify(
-          <Toast
-            styleType="toaster-success"
-            content={`Bienvenue ${
-              jwt.decode(token).pseudo
-            }, tu es bien connecté !`}
-          />,
-          { position: "top-right", duration: 5000 }
-        );
+
+        toaster.notify(<Toast style='success' message={`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`} />, toasterOptions);
         switchConnexion(true);
+
       })
       .catch((err) => {
-        toaster.notify(
-          <Toast
-            styleType="toaster-fail"
-            content={`Une erreur est survenue, le serveur a répondu: '${err.response.data.message}'`}
-          />,
-          { position: "top-right", duration: 5000 }
-        );
         setEmail("");
         setPassword("");
+
+        toaster.notify(<Toast style='fail' message={`Une erreur est survenue, le serveur a répondu: '${err.response.data.message}'`} />, toasterOptions)
       });
   };
+
 
   return (
     <div className="connect-container">

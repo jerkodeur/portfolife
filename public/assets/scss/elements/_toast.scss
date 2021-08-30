@@ -2,7 +2,7 @@
     padding: 0 !important;
 
     .toaster-success {
-        color: white;
+        color: 000;
         font-weight: 700;
         background-color: $theme-color !important;
         padding: 1rem;
@@ -12,7 +12,6 @@
         font-weight: 700;
         background-color: $pinterest !important;
         padding: 1rem;
-
     }
 }
 .Toaster__alert_close {

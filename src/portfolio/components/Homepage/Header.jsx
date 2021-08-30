@@ -1,8 +1,10 @@
 import React from "react";
 
-import propTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import propTypes from "prop-types";
 import Scrollspy from "react-scrollspy";
+import toaster from "toasted-notes";
+import Toast from "../commons/Toast";
 
 import { FaLinkedinIn, FaGithub, FaUserSlash } from "react-icons/fa";
 import { FiX, FiMenu } from "react-icons/fi";
@@ -14,11 +16,13 @@ const SocialShare = [
     link: "https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/"
   }
 ];
-const HeaderThree = ({
-  color = "default-color",
-  isConnect,
-  switchConnexion
-}) => {
+const Header = ({color = "default-color", isConnect,switchConnexion}) => {
+
+  const toasterOptions = {
+    position: "top-right",
+    duration: 5000
+  }
+
   const menuTrigger = () =>
     document.querySelector(".header-wrapper").classList.toggle("menu-open");
 
@@ -27,6 +31,7 @@ const HeaderThree = ({
 
   const disconnnect = () => {
     localStorage.clear();
+    toaster.notify(<Toast style='success' message="Déconnexion effectuée !" />, toasterOptions);
     switchConnexion(false);
   };
 
@@ -35,9 +40,9 @@ const HeaderThree = ({
   window.addEventListener("scroll", function () {
     const value = window.scrollY;
     if (value > 100) {
-      document.querySelector(".header--fixed").classList.add("sticky");
+      document.querySelector(".header--fixed") && document.querySelector(".header--fixed").classList.add("sticky");
     } else {
-      document.querySelector(".header--fixed").classList.remove("sticky");
+      document.querySelector(".header--fixed") && document.querySelector(".header--fixed").classList.remove("sticky");
     }
   });
 
@@ -62,7 +67,6 @@ const HeaderThree = ({
               currentClassName="is-current"
               offset={-200}
             >
-              {/* <li><a href="#home">Home</a></li> */}
               <li>
                 <a href="#about">À propos de moi</a>
               </li>
@@ -130,10 +134,10 @@ const HeaderThree = ({
   );
 };
 
-HeaderThree.propTypes = {
+Header.propTypes = {
   color: propTypes.string,
   isConnect: propTypes.bool.isRequired,
   switchConnexion: propTypes.func.isRequired
 };
 
-export default HeaderThree;
+export default Header;

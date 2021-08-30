@@ -1,8 +1,8 @@
 import React from "react";
 
 const ProjectFooter = ({ project }) => {
-  const view = require("../../../../../../public/assets/images/icons/www.svg");
-  const gitHub = require("../../../../../../public/assets/images/icons/github.png");
+  const view = require("../../../../../../../public/assets/images/icons/www.svg");
+  const gitHub = require("../../../../../../../public/assets/images/icons/github.png");
 
   return (
     <div className="project-footer">

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Proptypes from "prop-types";
 
-import TabTwo from "../../elements/tab/TabTwo";
+import AboutTabs from "./AboutTabs";
 
 const AboutMe = ({ toogleConnexion }) => {
   const [aboutImg, setAboutImg] = useState();
@@ -36,7 +36,7 @@ const AboutMe = ({ toogleConnexion }) => {
                 <p className="description">{description}</p>
               </div>
               <div className="row mt--30 tab-container">
-                <TabTwo tabStyle="tab-style--1" />
+                <AboutTabs tabStyle="tab-style--1" />
               </div>
             </div>
           </div>

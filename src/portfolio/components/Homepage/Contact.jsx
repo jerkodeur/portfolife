@@ -1,12 +1,18 @@
 import React, { Component } from "react";
+
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
-import toaster from "toasted-notes";
-
 import { FaLinkedin, FaGithub, FaAddressCard } from "react-icons/fa";
-import Toast from "./../common/Toast";
-import "toasted-notes/src/styles.css";
-class ContactOne extends Component {
+
+import toaster from "toasted-notes";
+import Toast from "../commons/Toast";
+
+const toasterOptions = {
+    position: "top-right",
+    duration: 5000
+}
+
+class Contact extends Component {
   state = {
     rnName: "",
     rnEmail: "",
@@ -18,7 +24,7 @@ class ContactOne extends Component {
 
   handleSubmit = (event) => {
     this.setState({ errors: [] });
-    event.preventDefault();
+    event.preventDefault(event);
 
     const { rnName, rnEmail, rnSubject, rnMessage } = this.state;
     const fields = [
@@ -28,7 +34,6 @@ class ContactOne extends Component {
       { rnMessage: rnMessage }
     ];
     const errors = [];
-
     fields.map((field) => {
       const key = Object.keys(field);
       const value = Object.values(field);
@@ -44,6 +49,7 @@ class ContactOne extends Component {
       return this.setState({ errors: errors });
     });
     if (errors.length === 0) {
+
       const templateId = "porfolife_message";
 
       this.sendFeedback(templateId, {
@@ -54,13 +60,7 @@ class ContactOne extends Component {
         contact_mail: this.state.rnEmail
       });
     } else {
-      toaster.notify(
-        <Toast
-          styleType="toaster-fail"
-          content="Des erreurs ont été détectées !"
-        />,
-        { position: "top-right", duration: 5000 }
-      );
+      return toaster.notify(<Toast style='fail' message="Des erreurs ont été détectées !" />, toasterOptions)
     }
   };
 
@@ -79,24 +79,10 @@ class ContactOne extends Component {
           rnSubject: "",
           rnName: ""
         });
-        return toaster.notify(
-          <Toast
-            styleType="toaster-success"
-            content="Votre message a bien été envoyé !"
-          />,
-          { position: "top-right", duration: 5000 }
-        );
+        return toaster.notify(<Toast style='succes' message="Votre message a bien été envoyé !" />, toasterOptions)
       })
-      // Handle errors here however you like, or use a React error boundary
-      .catch((err) =>
-        toaster.notify(
-          <Toast
-            content="Une erreur est survenue, veuillez réessayer ou contacter l'administrateur"
-            styleType="toaster-fail"
-          />,
-          { position: "top-right", duration: 5000 }
-        )
-      );
+      .catch(() => toaster.notify(<Toast style='fail' message="Une erreur est survenue, veuillez réessayer ou contacter l'administrateur" />, toasterOptions))
+
   };
 
   handleFormErrors = (field) => {
@@ -288,4 +274,4 @@ class ContactOne extends Component {
     );
   }
 }
-export default ContactOne;
+export default Contact;

@@ -2,20 +2,21 @@ import React from "react";
 import { useState } from "react";
 
 import Input from "../../../commons/forms/Input";
+import MdEditor from "../../../commons/forms/MdEditor";
 
 const ProjectForm = () => {
-  const [formErrors, setFormErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({ description: ["empty"] });
   const [formDatas, setFormDatas] = useState({});
+  const [mdDescription, setMdDescription] = useState();
 
   const handleForm = (e) => {
-    console.log(e.target.id, e.target.value);
     setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
   };
 
   const submitForm = (e) => {
     e.preventDefault(e);
   };
-  console.log(formDatas);
+
   return (
     <div className="project-form-container">
       <h2>New project</h2>
@@ -38,6 +39,14 @@ const ProjectForm = () => {
           label="courte description"
           placeholder="description courte du projet (Apparaît dans les vignettes)"
           setValue={(e) => handleForm(e)}
+        />
+        {/* Description */}
+        <MdEditor
+          value={mdDescription}
+          setValue={setMdDescription}
+          errors={formErrors.description}
+          label="description du projet"
+          isRequired
         />
       </form>
     </div>

@@ -23,5 +23,17 @@
             border-radius: 3px;
             color: #fff;
         }
+        textarea {
+            &.mde-text {
+                background-color: #fff;
+            }
+        }
+        .mde-preview {
+            background-color: #000;
+            color: #e5e9db;
+            h3 {
+                color: $theme-color;
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ import propTypes from "prop-types";
 const Input = (props) => {
   const { errors, type, setValue, isRequired, id, placeholder, label } = props;
 
-  console.log(errors);
   return (
     <div className="form-group">
       <label htmlFor={id}>

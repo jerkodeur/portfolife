@@ -9,6 +9,7 @@
         }
 
         input {
+            border-color: #000;
             margin-bottom: 0.25em;
             padding: 0.25em 0.5em;
             outline: none;
@@ -28,10 +29,16 @@
             color: #fff;
         }
         textarea {
+            border: 1pt solid #000 !important;
+            border-radius: 2px;
             margin-bottom: 0.25em;
             &.mde-text {
                 background-color: #fff;
             }
+        }
+        .mde-header {
+            border: 1pt solid #000;
+            border-radius: 2px;
         }
         .mde-preview {
             background-color: #000;
@@ -100,6 +107,45 @@
 
             .slider.round:before {
                 border-radius: 50%;
+            }
+        }
+        fieldset {
+            margin-top: 1em;
+            box-shadow: 1px 1px 4px #000;
+            border-color: #000;
+            background-color: $theme-color;
+            border-radius: 2px;
+            padding: 0 1em 1em;
+            legend {
+                border-radius: 8px;
+                background-color: #000;
+                color: $theme-color;
+                box-shadow: 2px 2px 5px #000;
+                padding: 0 0.5em;
+                margin: 1em;
+                width: auto;
+                font-size: 1em;
+            }
+        }
+        .techno-wrapper {
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: flex-start;
+
+            li {
+                background-color: #fff;
+                list-style-type: none;
+                box-shadow: 1px 1px 2px #000;
+                border-radius: 40px;
+                padding: 0 0.5em;
+                margin: 0.25em;
+            }
+            .selected {
+                background-color: #000;
+                color: $theme-color;
+                font-weight: bold;
             }
         }
     }

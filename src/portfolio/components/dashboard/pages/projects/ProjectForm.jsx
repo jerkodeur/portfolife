@@ -1,19 +1,62 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import axios from "axios";
 
 import Input from "../../../commons/forms/Input";
 import MdEditor from "../../../commons/forms/MdEditor";
+import toaster from "toasted-notes";
+import Toast from "../../../commons/Toast";
+
+const toasterOptions = {
+  position: "top-right",
+  duration: 5000
+};
 
 const ProjectForm = () => {
+  const token = localStorage.getItem("token");
   const [formErrors, setFormErrors] = useState({ url_github: ["empty"] });
   const [formDatas, setFormDatas] = useState({
     background: "#ffffff",
-    active: false
+    active: false,
+    technos: [6]
   });
   const [mdDescription, setMdDescription] = useState();
+  const [technos, setTechnos] = useState();
+
+  useEffect(() => {
+    axios
+      .get("/technos", {
+        headers: { authorization: `Bearer: ${token}` }
+      })
+      .then((res) => setTechnos(res.data))
+      .catch(
+        (err) =>
+          console.log(err.response) ||
+          toaster.notify(
+            <Toast
+              style="fail"
+              message="Erreur lors de la récupération des technos"
+            />,
+            toasterOptions
+          )
+      );
+  }, [token]);
 
   const handleForm = (e) => {
     setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
+  };
+
+  const toggleSelectedTechnos = (e) => {
+    const techno = Number(e.target.id);
+    !formDatas.technos.includes(techno)
+      ? setFormDatas({
+          ...formDatas,
+          technos: [...formDatas.technos, techno]
+        })
+      : setFormDatas({
+          ...formDatas,
+          technos: [...formDatas.technos].filter((el) => el !== techno)
+        });
   };
 
   const submitForm = (e) => {
@@ -146,6 +189,26 @@ const ProjectForm = () => {
           label="description du projet"
           isRequired
         />
+        <fieldset>
+          <legend>Technos utilisées dans le projet</legend>
+          <ul className="techno-wrapper">
+            {technos &&
+              technos.map((techno) => {
+                return (
+                  <li
+                    id={techno.id}
+                    key={techno.id}
+                    className={
+                      formDatas.technos.includes(techno.id) ? "selected" : ""
+                    }
+                    onClick={toggleSelectedTechnos}
+                  >
+                    {techno.name}
+                  </li>
+                );
+              })}
+          </ul>
+        </fieldset>
       </form>
     </div>
   );

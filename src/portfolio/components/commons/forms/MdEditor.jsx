@@ -6,14 +6,13 @@ import ReactMarkdown from "react-markdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 const MdEditor = (props) => {
-  const { value, setValue, errors, isRequired, id, label } = props;
+  const { value, setValue, errors, isRequired, label } = props;
 
   const [selectedTab, setSelectedTab] = useState("write");
-  // const [value, setValue] = useState(placeholder);
 
   return (
     <div className="form-group">
-      <label htmlFor={id}>
+      <label>
         {label} {isRequired && " *"}
       </label>
       <ReactMde

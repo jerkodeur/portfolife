@@ -10,7 +10,7 @@ const ProjectList = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  return <div>Liste des projets</div>;
+  return <div className="project-list">Liste des projets</div>;
 };
 
 export default ProjectList;

@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
 import Input from "../../../commons/forms/Input";
 import MdEditor from "../../../commons/forms/MdEditor";
-import toaster from "toasted-notes";
-import Toast from "../../../commons/Toast";
-
-const toasterOptions = {
-  position: "top-right",
-  duration: 5000
-};
+import ProjectTechnos from "./new/ProjectTechnos";
 
 const ProjectForm = () => {
   const token = localStorage.getItem("token");
@@ -21,38 +15,6 @@ const ProjectForm = () => {
     technos: [6]
   });
   const [mdDescription, setMdDescription] = useState();
-  const [technos, setTechnos] = useState();
-  const [newTechno, setNewTechno] = useState({
-    priority: 1
-  });
-  const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get("/technos", {
-        headers: { authorization: `Bearer: ${token}` }
-      })
-      .then((res) => setTechnos(res.data))
-      .catch(
-        (err) =>
-          console.log(err.response) ||
-          toaster.notify(
-            <Toast
-              style="fail"
-              message="Erreur lors de la récupération des technos"
-            />,
-            toasterOptions
-          )
-      );
-  }, [token]);
-
-  const handleForm = (e) => {
-    setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
-  };
-
-  const handleNewTechno = (e) => {
-    setNewTechno({ ...newTechno, [e.target.id]: e.target.value });
-  };
 
   const toggleSelectedTechnos = (e) => {
     const techno = Number(e.target.id);
@@ -67,15 +29,14 @@ const ProjectForm = () => {
         });
   };
 
-  const addNewTechno = () => {
-    console.log(newTechno);
+  const handleForm = (e) => {
+    setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
   };
 
   const submitForm = (e) => {
     e.preventDefault(e);
   };
 
-  console.log(formDatas);
   return (
     <div className="project-form-container">
       <h1>Creation d'un nouveau projet</h1>
@@ -201,94 +162,11 @@ const ProjectForm = () => {
             max={20}
           />
         </fieldset>
-        <fieldset>
-          <legend>Technos utilisées dans le projet</legend>
-          <ul className="techno-wrapper">
-            {technos &&
-              technos.map((techno) => {
-                return (
-                  <li
-                    role="button"
-                    id={techno.id}
-                    key={techno.id}
-                    className={
-                      formDatas.technos.includes(techno.id) ? "selected" : ""
-                    }
-                    onClick={toggleSelectedTechnos}
-                  >
-                    {techno.name}
-                  </li>
-                );
-              })}
-            {!newTechnoFormDisplay && (
-              <li onClick={() => setNewTechnoFormDisplay(true)} role="link">
-                Ajouter une nouvelle techno...
-              </li>
-            )}
-          </ul>
-          {newTechnoFormDisplay && (
-            <div onSubmit={submitForm} id="newTechno">
-              <fieldset className="new-techno-container">
-                <legend>
-                  Ajout d'une nouvelle techno{" "}
-                  <span
-                    title="Fermer"
-                    onClick={() => setNewTechnoFormDisplay(false)}
-                  >
-                    X
-                  </span>
-                </legend>
-                <div className="multiple-fields-wrapper">
-                  {/* New techno name */}
-                  <Input
-                    errors={formErrors.newTechno && formErrors.newTechno.name}
-                    id="name"
-                    label="Nom"
-                    placeholder="Nom de la techno"
-                    isRequired
-                    value={newTechno.name}
-                    setValue={(e) => handleNewTechno(e)}
-                  />
-                  {/* New techno file name */}
-                  <Input
-                    errors={
-                      formErrors.newTechno && formErrors.newTechno.imageName
-                    }
-                    id="imageName"
-                    label="Fichier image"
-                    placeholder="image.ext"
-                    isRequired
-                    value={newTechno.imageName}
-                    setValue={(e) => handleNewTechno(e)}
-                  />
-                  {/* thumbmail images background color */}
-                  <Input
-                    errors={
-                      formErrors.newTechno && formErrors.newTechno.priority
-                    }
-                    id="priority"
-                    isRequired
-                    label="Priorité d'affichage"
-                    type="number"
-                    setValue={(e) => handleNewTechno(e)}
-                    value={newTechno.priority}
-                    min={1}
-                    max={3}
-                  />
-                </div>
-                <div className="form-group">
-                  <button
-                    className="btn btn-dark"
-                    type="submit"
-                    onClick={addNewTechno}
-                  >
-                    Valider
-                  </button>
-                </div>
-              </fieldset>
-            </div>
-          )}
-        </fieldset>
+        {/* Technos */}
+        <ProjectTechnos
+          selectedTechnos={formDatas.technos}
+          toggleSelectedTechnos={(e) => toggleSelectedTechnos(e)}
+        />
         {/* Active */}
         <label className="switch">
           <input

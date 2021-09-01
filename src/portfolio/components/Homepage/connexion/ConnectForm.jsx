@@ -15,30 +15,42 @@ const ConnectForm = ({ switchConnexion, handleConnexion }) => {
   const toasterOptions = {
     position: "top-right",
     duration: 5000
-  }
+  };
 
   const handleForm = (e) => {
     e.preventDefault(e);
     Axios.post("/admins", { email, password })
       .then((res) => {
-        const token = res.headers["x-access-token"]
+        const token = res.headers["x-access-token"];
 
         localStorage.clear();
         localStorage.setItem("token", token);
         localStorage.setItem("pseudo", jwt.decode(token).pseudo);
 
-        toaster.notify(<Toast style='success' message={`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`} />, toasterOptions);
+        toaster.notify(
+          <Toast
+            className="success"
+            message={`Bienvenue ${
+              jwt.decode(token).pseudo
+            }, tu es bien connecté !`}
+          />,
+          toasterOptions
+        );
         switchConnexion(true);
-
       })
       .catch((err) => {
         setEmail("");
         setPassword("");
 
-        toaster.notify(<Toast style='fail' message={`Une erreur est survenue, le serveur a répondu: '${err.response.data.message}'`} />, toasterOptions)
+        toaster.notify(
+          <Toast
+            className="fail"
+            message={`Une erreur est survenue, le serveur a répondu: '${err.response.data.message}'`}
+          />,
+          toasterOptions
+        );
       });
   };
-
 
   return (
     <div className="connect-container">

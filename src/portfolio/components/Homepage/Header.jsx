@@ -16,12 +16,11 @@ const SocialShare = [
     link: "https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/"
   }
 ];
-const Header = ({color = "default-color", isConnect,switchConnexion}) => {
-
+const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
   const toasterOptions = {
     position: "top-right",
     duration: 5000
-  }
+  };
 
   const menuTrigger = () =>
     document.querySelector(".header-wrapper").classList.toggle("menu-open");
@@ -31,7 +30,10 @@ const Header = ({color = "default-color", isConnect,switchConnexion}) => {
 
   const disconnnect = () => {
     localStorage.clear();
-    toaster.notify(<Toast style='success' message="Déconnexion effectuée !" />, toasterOptions);
+    toaster.notify(
+      <Toast className="success" message="Déconnexion effectuée !" />,
+      toasterOptions
+    );
     switchConnexion(false);
   };
 
@@ -40,9 +42,11 @@ const Header = ({color = "default-color", isConnect,switchConnexion}) => {
   window.addEventListener("scroll", function () {
     const value = window.scrollY;
     if (value > 100) {
-      document.querySelector(".header--fixed") && document.querySelector(".header--fixed").classList.add("sticky");
+      document.querySelector(".header--fixed") &&
+        document.querySelector(".header--fixed").classList.add("sticky");
     } else {
-      document.querySelector(".header--fixed") && document.querySelector(".header--fixed").classList.remove("sticky");
+      document.querySelector(".header--fixed") &&
+        document.querySelector(".header--fixed").classList.remove("sticky");
     }
   });
 

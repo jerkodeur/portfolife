@@ -8,9 +8,9 @@ import toaster from "toasted-notes";
 import Toast from "../commons/Toast";
 
 const toasterOptions = {
-    position: "top-right",
-    duration: 5000
-}
+  position: "top-right",
+  duration: 5000
+};
 
 class Contact extends Component {
   state = {
@@ -49,7 +49,6 @@ class Contact extends Component {
       return this.setState({ errors: errors });
     });
     if (errors.length === 0) {
-
       const templateId = "porfolife_message";
 
       this.sendFeedback(templateId, {
@@ -60,7 +59,10 @@ class Contact extends Component {
         contact_mail: this.state.rnEmail
       });
     } else {
-      return toaster.notify(<Toast style='fail' message="Des erreurs ont été détectées !" />, toasterOptions)
+      return toaster.notify(
+        <Toast className="fail" message="Des erreurs ont été détectées !" />,
+        toasterOptions
+      );
     }
   };
 
@@ -79,10 +81,23 @@ class Contact extends Component {
           rnSubject: "",
           rnName: ""
         });
-        return toaster.notify(<Toast style='succes' message="Votre message a bien été envoyé !" />, toasterOptions)
+        return toaster.notify(
+          <Toast
+            className="succes"
+            message="Votre message a bien été envoyé !"
+          />,
+          toasterOptions
+        );
       })
-      .catch(() => toaster.notify(<Toast style='fail' message="Une erreur est survenue, veuillez réessayer ou contacter l'administrateur" />, toasterOptions))
-
+      .catch(() =>
+        toaster.notify(
+          <Toast
+            className="fail"
+            message="Une erreur est survenue, veuillez réessayer ou contacter l'administrateur"
+          />,
+          toasterOptions
+        )
+      );
   };
 
   handleFormErrors = (field) => {

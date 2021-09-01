@@ -27,7 +27,7 @@ body {
 
         .main-container {
             width: 85%;
-            background-color: $theme-color;
+            background-color: darken($theme-color, 3%);
             min-height: 100%;
             padding-bottom: 2em;
         }

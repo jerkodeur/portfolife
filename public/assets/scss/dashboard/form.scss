@@ -17,8 +17,7 @@
                 color: rgb(206, 203, 180) !important;
             }
             &[type="color"] {
-                width: 25%;
-                padding: 0;
+                padding: 0.15em 0.35em;
             }
         }
         small.container-error {
@@ -28,6 +27,7 @@
             border-radius: 3px;
             color: #fff;
         }
+        // Markdown editor
         textarea {
             border: 1pt solid #000 !important;
             border-radius: 2px;
@@ -146,6 +146,15 @@
                 background-color: #000;
                 color: $theme-color;
                 font-weight: bold;
+            }
+        }
+        .multiple-fields-wrapper {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            .form-group {
+                width: 100%;
+                margin: 0 1em 0.5em;
             }
         }
     }

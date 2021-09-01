@@ -22,6 +22,10 @@ const ProjectForm = () => {
   });
   const [mdDescription, setMdDescription] = useState();
   const [technos, setTechnos] = useState();
+  const [newTechno, setNewTechno] = useState({
+    priority: 1
+  });
+  const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(true);
 
   useEffect(() => {
     axios
@@ -46,6 +50,10 @@ const ProjectForm = () => {
     setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
   };
 
+  const handleNewTechno = (e) => {
+    setNewTechno({ ...newTechno, [e.target.id]: e.target.value });
+  };
+
   const toggleSelectedTechnos = (e) => {
     const techno = Number(e.target.id);
     !formDatas.technos.includes(techno)
@@ -59,6 +67,10 @@ const ProjectForm = () => {
         });
   };
 
+  const addNewTechno = () => {
+    console.log(newTechno);
+  };
+
   const submitForm = (e) => {
     e.preventDefault(e);
   };
@@ -66,7 +78,7 @@ const ProjectForm = () => {
   console.log(formDatas);
   return (
     <div className="project-form-container">
-      <h2>New project</h2>
+      <h1>Creation d'un nouveau projet</h1>
       <form onSubmit={submitForm}>
         <fieldset>
           <legend>Informations générales</legend>
@@ -92,13 +104,13 @@ const ProjectForm = () => {
           />
           {/* short description */}
           <Input
-            errors={formErrors.short_description}
-            id="short_description"
+            errors={formErrors.shortDescription}
+            id="shortDescription"
             isRequired
             label="courte description"
             placeholder="description courte du projet (Apparaît dans les vignettes)"
             setValue={(e) => handleForm(e)}
-            value={formDatas.short_description}
+            value={formDatas.shortDescription}
           />
           {/* Description */}
           <MdEditor
@@ -123,49 +135,49 @@ const ProjectForm = () => {
           />
           {/* Context url */}
           <Input
-            errors={formErrors.context_url}
-            id="context_url"
+            errors={formErrors.contextUrl}
+            id="contextUrl"
             label="Lien de l'établissement"
             placeholder="Lien de l'établissement du contexte"
             type="url"
             setValue={(e) => handleForm(e)}
-            value={formDatas.context_url}
+            value={formDatas.contextUrl}
           />
         </fieldset>
         <fieldset className="multiple-fields-wrapper">
           <legend>Liens du projet</legend>
           {/* github url */}
           <Input
-            errors={formErrors.url_github}
-            id="url_github"
+            errors={formErrors.urlGithub}
+            id="urlGithub"
             label="Lien vers le dépôt github"
             placeholder="Insérer le lien du dépôt github"
             type="url"
             setValue={(e) => handleForm(e)}
-            value={formDatas.url_github}
+            value={formDatas.urlGithub}
           />
           {/* project preview url */}
           <Input
-            errors={formErrors.url_test}
-            id="url_test"
+            errors={formErrors.urlTest}
+            id="urlTest"
             label="Lien vers la page de test"
             placeholder="Insérer le lien de la page de test"
             type="url"
             setValue={(e) => handleForm(e)}
-            value={formDatas.url_test}
+            value={formDatas.urlTest}
           />
         </fieldset>
         <fieldset className="multiple-fields-wrapper">
           <legend>Images</legend>
           {/* image prefix  */}
           <Input
-            errors={formErrors.img_prefix}
-            id="img_prefix"
+            errors={formErrors.imgPrefix}
+            id="imgPrefix"
             isRequired
             label="Préfixe des images"
             placeholder="Ajouter un prefix"
             setValue={(e) => handleForm(e)}
-            value={formDatas.img_prefix}
+            value={formDatas.imgPrefix}
           />
           {/* thumbmail images background color */}
           <Input
@@ -178,13 +190,13 @@ const ProjectForm = () => {
           />
           {/* thumbmail images background color */}
           <Input
-            errors={formErrors.nb_images}
-            id="nb_images"
+            errors={formErrors.nbImages}
+            id="nbImages"
             isRequired
             label="Nombres d'images"
             type="number"
             setValue={(e) => handleForm(e)}
-            value={formDatas.nb_images}
+            value={formDatas.nbImages}
             min={0}
             max={20}
           />
@@ -196,6 +208,7 @@ const ProjectForm = () => {
               technos.map((techno) => {
                 return (
                   <li
+                    role="button"
                     id={techno.id}
                     key={techno.id}
                     className={
@@ -207,7 +220,74 @@ const ProjectForm = () => {
                   </li>
                 );
               })}
+            {!newTechnoFormDisplay && (
+              <li onClick={() => setNewTechnoFormDisplay(true)} role="link">
+                Ajouter une nouvelle techno...
+              </li>
+            )}
           </ul>
+          {newTechnoFormDisplay && (
+            <div onSubmit={submitForm} id="newTechno">
+              <fieldset className="new-techno-container">
+                <legend>
+                  Ajout d'une nouvelle techno{" "}
+                  <span
+                    title="Fermer"
+                    onClick={() => setNewTechnoFormDisplay(false)}
+                  >
+                    X
+                  </span>
+                </legend>
+                <div className="multiple-fields-wrapper">
+                  {/* New techno name */}
+                  <Input
+                    errors={formErrors.newTechno && formErrors.newTechno.name}
+                    id="name"
+                    label="Nom"
+                    placeholder="Nom de la techno"
+                    isRequired
+                    value={newTechno.name}
+                    setValue={(e) => handleNewTechno(e)}
+                  />
+                  {/* New techno file name */}
+                  <Input
+                    errors={
+                      formErrors.newTechno && formErrors.newTechno.imageName
+                    }
+                    id="imageName"
+                    label="Fichier image"
+                    placeholder="image.ext"
+                    isRequired
+                    value={newTechno.imageName}
+                    setValue={(e) => handleNewTechno(e)}
+                  />
+                  {/* thumbmail images background color */}
+                  <Input
+                    errors={
+                      formErrors.newTechno && formErrors.newTechno.priority
+                    }
+                    id="priority"
+                    isRequired
+                    label="Priorité d'affichage"
+                    type="number"
+                    setValue={(e) => handleNewTechno(e)}
+                    value={newTechno.priority}
+                    min={1}
+                    max={3}
+                  />
+                </div>
+                <div className="form-group">
+                  <button
+                    className="btn btn-dark"
+                    type="submit"
+                    onClick={addNewTechno}
+                  >
+                    Valider
+                  </button>
+                </div>
+              </fieldset>
+            </div>
+          )}
         </fieldset>
         {/* Active */}
         <label className="switch">
@@ -222,6 +302,11 @@ const ProjectForm = () => {
           <span className="slider round"></span>
         </label>
         <label htmlFor="active">Publier le projet ?</label>
+        <div className="submit-container">
+          <button type="submit" className="submit-button">
+            Ajouter le projet
+          </button>
+        </div>
       </form>
     </div>
   );

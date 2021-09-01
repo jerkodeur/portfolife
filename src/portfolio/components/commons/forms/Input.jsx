@@ -12,13 +12,16 @@ const Input = (props) => {
     isRequired,
     id,
     placeholder,
-    label,
     regex,
     min,
     max
   } = props;
-  let options = { id, placeholder, type };
 
+  const label =
+    props.label &&
+    props.label[0].toUpperCase() + props.label.slice(1).toLowerCase();
+
+  let options = { id, placeholder, type };
   options = type === "number" ? { ...options, min, max } : options;
   options = regex ? { ...options, regex } : options;
 

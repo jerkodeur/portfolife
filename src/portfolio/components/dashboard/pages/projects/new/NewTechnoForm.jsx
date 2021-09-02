@@ -63,7 +63,7 @@ const NewTechnoForm = ({
 
 NewTechnoForm.propTypes = {
   setNewTechnoFormDisplay: propTypes.func.isRequired,
-  errors: propTypes.objectOf(propTypes.arrayOf(propTypes.string)),
+  errors: propTypes.objectOf(propTypes.string),
   newTechno: propTypes.shape({
     name: propTypes.string,
     imageName: propTypes.string,

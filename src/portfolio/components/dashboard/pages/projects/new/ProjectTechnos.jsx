@@ -94,6 +94,41 @@ const ProjectTechnos = (props) => {
       );
 
       return setFormErrors(errors);
+    } else {
+      const { name, imageName: image_name, priority } = newTechno;
+      axios
+        .post(
+          "/technos/",
+          { name, image_name, priority },
+          {
+            headers: { authorization: `Bearer: ${token}` }
+          }
+        )
+        .then((res) => {
+          toaster.notify(
+            <Toast
+              className="success"
+              message={`La techno ${newTechno.name} a bien été ajoutée !`}
+            />,
+            toasterOptions
+          );
+          setNewTechno({
+            name: "",
+            imageName: "",
+            priority: 1
+          });
+          setNewTechnoFormDisplay(false);
+          return fetchTechnos();
+        })
+        .catch((err) =>
+          toaster.notify(
+            <Toast
+              className="fail"
+              message={`Erreur lors de la création de la nouvelle techno, ${err.response.data.message}`}
+            />,
+            toasterOptions
+          )
+        );
     }
   };
 

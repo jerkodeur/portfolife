@@ -22,7 +22,7 @@ const ProjectTechnos = (props) => {
   const [newTechno, setNewTechno] = useState({
     name: "",
     imageName: "",
-    priority: "1"
+    priority: 1
   });
 
   const fetchTechnos = () => {
@@ -56,7 +56,45 @@ const ProjectTechnos = (props) => {
   };
 
   const addNewTechno = () => {
-    console.log(newTechno);
+    let nb_errors = 0;
+    const errors = {};
+
+    if (newTechno.name === "") {
+      errors.name = "empty";
+      nb_errors++;
+    } else if (!/\w{2,}/.test(newTechno.name)) {
+      errors.name = "minLength";
+      nb_errors++;
+    }
+    if (newTechno.imageName === "") {
+      errors.imageName = "empty";
+      nb_errors++;
+    } else if (!/\w{2,}/.test(newTechno.imageName)) {
+      errors.imageName = "minLength";
+      nb_errors++;
+    }
+    if (newTechno.priority === "") {
+      errors.priority = "empty";
+      nb_errors++;
+    } else if (
+      !/^[1-3]{1}$/.test(newTechno.priority) ||
+      typeof Number(newTechno.priority) !== "number"
+    ) {
+      errors.priority = "format";
+      nb_errors++;
+    }
+
+    if (nb_errors > 0) {
+      toaster.notify(
+        <Toast
+          className="fail"
+          message="La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !"
+        />,
+        toasterOptions
+      );
+
+      return setFormErrors(errors);
+    }
   };
 
   return (

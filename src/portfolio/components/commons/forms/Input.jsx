@@ -6,7 +6,7 @@ const Input = (props) => {
   const {
     value,
     defaultValue,
-    errors,
+    error,
     type,
     setValue,
     isRequired,
@@ -16,7 +16,6 @@ const Input = (props) => {
     min,
     max
   } = props;
-
   const label =
     props.label &&
     props.label[0].toUpperCase() + props.label.slice(1).toLowerCase();
@@ -24,6 +23,19 @@ const Input = (props) => {
   let options = { id, placeholder, type };
   options = type === "number" ? { ...options, min, max } : options;
   options = regex ? { ...options, regex } : options;
+
+  const displayError = (code) => {
+    switch (code) {
+      case "empty":
+        return "* Ce champ est requis";
+
+      case "minLength":
+        return `* Doit comporter au moins ${props.formatOptions.minLength} caractères`;
+
+      default:
+        return "* Ce champ comporte est mal renseigné";
+    }
+  };
 
   return (
     <div className="form-group">
@@ -36,7 +48,9 @@ const Input = (props) => {
         {...options}
         className="form-control"
       />
-      {errors && <small className="container-error">Ce champ est requis</small>}
+      {error && (
+        <small className="container-error">{displayError(error)}</small>
+      )}
     </div>
   );
 };
@@ -44,12 +58,15 @@ const Input = (props) => {
 Input.defaultProps = {
   isRequired: false,
   type: "text",
-  value: ""
+  value: "",
+  formatOptions: {
+    minLength: 2
+  }
 };
 
 Input.propTypes = {
   defaultValue: propTypes.any,
-  errors: propTypes.arrayOf(propTypes.string),
+  error: propTypes.string,
   id: propTypes.string.isRequired,
   isRequired: propTypes.bool.isRequired,
   label: propTypes.string,

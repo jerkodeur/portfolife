@@ -18,7 +18,7 @@ const ProjectForm = () => {
   const [formDatas, setFormDatas] = useState({
     background: "#ffffff",
     active: false,
-    technos: [6]
+    technos: []
   });
   const [mdDescription, setMdDescription] = useState();
 
@@ -34,15 +34,18 @@ const ProjectForm = () => {
           technos: [...formDatas.technos].filter((el) => el !== techno)
         });
   };
-
+  const handleClassError = (array) => {
+    return array.reduce((acc, curr) => {
+      return formErrors[curr] ? true : acc;
+    }, false);
+  };
   const handleForm = (e) => {
     setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
   };
 
   const submitForm = (e) => {
     e.preventDefault(e);
-
-    addProject();
+    return addProject();
   };
 
   const addProject = () => {
@@ -115,27 +118,31 @@ const ProjectForm = () => {
         type: ["boolean"]
       }
     };
-
     const errorfields = CheckFormFields(constraints);
     if (Object.values(errorfields).some((el) => el)) {
       toaster.notify(
-        <Toast
-          className="fail"
-          message="Le projet n'a pas été ajouté, des erreurs ont été détectées !"
-        />,
+        <Toast className="fail" message="Le projet n'a pas été ajouté, des erreurs ont été détectées !" />,
         toasterOptions
       );
-      setFormErrors(errorfields);
+      return setFormErrors(errorfields);
     }
+    toaster.notify(<Toast className="success" message="Bravo, tout est renseigné !!!" />, toasterOptions);
+    setFormErrors({});
+    return setFormDatas({
+      background: "#ffffff",
+      active: false,
+      technos: []
+    });
   };
-
   return (
     <div className="project-form-container">
-      <h1>Creation d'un nouveau projet</h1>
+      <h1>Création d'un nouveau projet</h1>
       <NewProjectForm
+        addProject={addProject}
         submitForm={submitForm}
         formErrors={formErrors}
         formDatas={formDatas}
+        handleClassError={handleClassError}
         handleForm={handleForm}
         setFormDatas={setFormDatas}
         mdDescription={mdDescription}

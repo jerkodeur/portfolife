@@ -15,7 +15,7 @@ const toasterOptions = {
 
 const ProjectTechnos = (props) => {
   const token = localStorage.getItem("token");
-  const { selectedTechnos, toggleSelectedTechnos, error } = props;
+  const { selectedTechnos, toggleSelectedTechnos, error, handleClassError } = props;
 
   const [technoFormErrors, setTechnoFormErrors] = useState({});
   const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
@@ -34,10 +34,7 @@ const ProjectTechnos = (props) => {
         (err) =>
           console.log(err.response) ||
           toaster.notify(
-            <Toast
-              className="fail"
-              message="Erreur lors de la récupération des technos"
-            />,
+            <Toast className="fail" message="Erreur lors de la récupération des technos" />,
             toasterOptions
           )
       );
@@ -78,10 +75,7 @@ const ProjectTechnos = (props) => {
 
     if (Object.values(errorfields).some((el) => el)) {
       toaster.notify(
-        <Toast
-          className="fail"
-          message="La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !"
-        />,
+        <Toast className="fail" message="La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !" />,
         toasterOptions
       );
       setTechnoFormErrors(errorfields);
@@ -97,10 +91,7 @@ const ProjectTechnos = (props) => {
         )
         .then((res) => {
           toaster.notify(
-            <Toast
-              className="success"
-              message={`La techno ${newTechno.name} a bien été ajoutée !`}
-            />,
+            <Toast className="success" message={`La techno ${newTechno.name} a bien été ajoutée !`} />,
             toasterOptions
           );
           setNewTechno({
@@ -122,7 +113,7 @@ const ProjectTechnos = (props) => {
   };
 
   return (
-    <fieldset>
+    <fieldset className={handleClassError(["technos"]) && "error"}>
       <legend>Technos utilisées dans le projet</legend>
       <ul className="techno-wrapper">
         {technos &&
@@ -132,11 +123,7 @@ const ProjectTechnos = (props) => {
                 role="button"
                 id={techno.id}
                 key={techno.id}
-                className={
-                  selectedTechnos && selectedTechnos.includes(techno.id)
-                    ? "selected"
-                    : ""
-                }
+                className={selectedTechnos && selectedTechnos.includes(techno.id) ? "selected" : ""}
                 onClick={toggleSelectedTechnos}
               >
                 {techno.name}
@@ -149,11 +136,7 @@ const ProjectTechnos = (props) => {
           </li>
         )}
       </ul>
-      {error && (
-        <small className="container-error">
-          Aucune techno n'a été sélectionnée !
-        </small>
-      )}
+      {error && <small className={`container-error ${error && "mt-3"}`}>Aucune techno n'a été sélectionnée !</small>}
       {newTechnoFormDisplay && (
         <NewTechnoForm
           errors={technoFormErrors}

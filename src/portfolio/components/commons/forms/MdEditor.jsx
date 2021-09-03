@@ -11,18 +11,17 @@ const MdEditor = (props) => {
 
   return (
     <div className="form-group">
-      <label>
+      <label className={error && "error"}>
         {label} {isRequired && " *"}
       </label>
       <ReactMde
+        className="error"
         minEditorHeight="350"
         value={value}
         onChange={setValue}
         selectedTab={selectedTab}
         onTabChange={setSelectedTab}
-        generateMarkdownPreview={(markdown) =>
-          Promise.resolve(<ReactMarkdown source={markdown} />)
-        }
+        generateMarkdownPreview={(markdown) => Promise.resolve(<ReactMarkdown source={markdown} />)}
       />
       {error && <small className="container-error">{error}</small>}
     </div>

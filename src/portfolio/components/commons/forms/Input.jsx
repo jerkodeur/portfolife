@@ -3,36 +3,22 @@ import React from "react";
 import propTypes from "prop-types";
 
 const Input = (props) => {
-  const {
-    value,
-    defaultValue,
-    error,
-    type,
-    setValue,
-    isRequired,
-    id,
-    placeholder,
-    regex,
-    min,
-    max
-  } = props;
-  const label =
-    props.label &&
-    props.label[0].toUpperCase() + props.label.slice(1).toLowerCase();
+  const { value, defaultValue, error, type, setValue, isRequired, id, placeholder, regex, min, max } = props;
+  const label = props.label && props.label[0].toUpperCase() + props.label.slice(1).toLowerCase();
 
   let options = { id, placeholder, type };
   options = type === "number" ? { ...options, min, max } : options;
   options = regex ? { ...options, regex } : options;
   return (
     <div className="form-group">
-      <label htmlFor={id}>
+      <label htmlFor={id} className={error && "error"}>
         {label} {isRequired && " *"}
       </label>
       <input
         value={!value && defaultValue ? defaultValue : value}
         onChange={setValue}
         {...options}
-        className="form-control"
+        className={`form-control ${error && "error"}`}
       />
       {error && <small className="container-error">{error}</small>}
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
+import CheckFormFields from "../../../../commons/forms/CheckFormFields";
 import propTypes from "prop-types";
 import toaster from "toasted-notes";
 import Toast from "../../../../commons/Toast";
@@ -20,8 +21,6 @@ const ProjectTechnos = (props) => {
   const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
   const [technos, setTechnos] = useState();
   const [newTechno, setNewTechno] = useState({
-    name: "",
-    imageName: "",
     priority: 1
   });
 
@@ -56,35 +55,28 @@ const ProjectTechnos = (props) => {
   };
 
   const addNewTechno = () => {
-    let nb_errors = 0;
-    const errors = {};
+    const constraints = {
+      name: {
+        value: newTechno.name,
+        required: true,
+        uniq: [true, technos.map((techno) => techno.name)]
+      },
+      imageName: {
+        value: newTechno.imageName,
+        required: true,
+        uniq: [true, technos.map((techno) => techno.image_name)]
+      },
+      priority: {
+        value: Number(newTechno.priority),
+        required: true,
+        regex: /^[1-3]{1}$/,
+        type: ["number"]
+      }
+    };
 
-    if (newTechno.name === "") {
-      errors.name = "empty";
-      nb_errors++;
-    } else if (!/\w{2,}/.test(newTechno.name)) {
-      errors.name = "minLength";
-      nb_errors++;
-    }
-    if (newTechno.imageName === "") {
-      errors.imageName = "empty";
-      nb_errors++;
-    } else if (!/\w{2,}/.test(newTechno.imageName)) {
-      errors.imageName = "minLength";
-      nb_errors++;
-    }
-    if (newTechno.priority === "") {
-      errors.priority = "empty";
-      nb_errors++;
-    } else if (
-      !/^[1-3]{1}$/.test(newTechno.priority) ||
-      typeof Number(newTechno.priority) !== "number"
-    ) {
-      errors.priority = "format";
-      nb_errors++;
-    }
+    const errorfields = CheckFormFields(constraints);
 
-    if (nb_errors > 0) {
+    if (Object.values(errorfields).some((el) => el)) {
       toaster.notify(
         <Toast
           className="fail"
@@ -92,8 +84,7 @@ const ProjectTechnos = (props) => {
         />,
         toasterOptions
       );
-
-      return setFormErrors(errors);
+      setFormErrors(errorfields);
     } else {
       const { name, imageName: image_name, priority } = newTechno;
       axios
@@ -113,8 +104,6 @@ const ProjectTechnos = (props) => {
             toasterOptions
           );
           setNewTechno({
-            name: "",
-            imageName: "",
             priority: 1
           });
           setNewTechnoFormDisplay(false);

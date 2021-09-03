@@ -24,19 +24,6 @@ const Input = (props) => {
   options = type === "number" ? { ...options, min, max } : options;
   options = regex ? { ...options, regex } : options;
 
-  const displayError = (code) => {
-    switch (code) {
-      case "empty":
-        return "* Ce champ est requis";
-
-      case "minLength":
-        return `* Doit comporter au moins ${props.formatOptions.minLength} caractères`;
-
-      default:
-        return "* Ce champ comporte est mal renseigné";
-    }
-  };
-
   return (
     <div className="form-group">
       <label htmlFor={id}>
@@ -48,9 +35,7 @@ const Input = (props) => {
         {...options}
         className="form-control"
       />
-      {error && (
-        <small className="container-error">{displayError(error)}</small>
-      )}
+      {error && <small className="container-error">{error}</small>}
     </div>
   );
 };

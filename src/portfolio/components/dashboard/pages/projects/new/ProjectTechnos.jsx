@@ -15,9 +15,9 @@ const toasterOptions = {
 
 const ProjectTechnos = (props) => {
   const token = localStorage.getItem("token");
-  const { selectedTechnos, toggleSelectedTechnos } = props;
+  const { selectedTechnos, toggleSelectedTechnos, error } = props;
 
-  const [formErrors, setFormErrors] = useState({});
+  const [technoFormErrors, setTechnoFormErrors] = useState({});
   const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
   const [technos, setTechnos] = useState();
   const [newTechno, setNewTechno] = useState({
@@ -84,7 +84,7 @@ const ProjectTechnos = (props) => {
         />,
         toasterOptions
       );
-      setFormErrors(errorfields);
+      setTechnoFormErrors(errorfields);
     } else {
       const { name, imageName: image_name, priority } = newTechno;
       axios
@@ -149,9 +149,14 @@ const ProjectTechnos = (props) => {
           </li>
         )}
       </ul>
+      {error && (
+        <small className="container-error">
+          Aucune techno n'a été sélectionnée !
+        </small>
+      )}
       {newTechnoFormDisplay && (
         <NewTechnoForm
-          errors={formErrors}
+          errors={technoFormErrors}
           newTechno={newTechno}
           handleNewTechno={handleNewTechno}
           setNewTechnoFormDisplay={setNewTechnoFormDisplay}
@@ -163,6 +168,7 @@ const ProjectTechnos = (props) => {
 };
 
 ProjectTechnos.propTypes = {
+  error: propTypes.string.isRequired,
   selectedTechnos: propTypes.arrayOf(propTypes.number),
   toggleSelectedTechnos: propTypes.func.isRequired
 };

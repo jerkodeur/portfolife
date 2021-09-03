@@ -53,7 +53,7 @@ const NewTechnoForm = ({
         />
       </div>
       <div className="form-group">
-        <button className="btn btn-dark" type="submit" onClick={addNewTechno}>
+        <button className="btn btn-dark" type="button" onClick={addNewTechno}>
           Valider
         </button>
       </div>

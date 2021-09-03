@@ -2,13 +2,19 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-import Input from "../../../commons/forms/Input";
-import MdEditor from "../../../commons/forms/MdEditor";
-import ProjectTechnos from "./new/ProjectTechnos";
+import NewProjectForm from "./new/NewProjectForm";
+import CheckFormFields from "../../../commons/forms/CheckFormFields";
+import toaster from "toasted-notes";
+import Toast from "../../../commons/Toast";
+
+const toasterOptions = {
+  position: "top-right",
+  duration: 5000
+};
 
 const ProjectForm = () => {
   const token = localStorage.getItem("token");
-  const [formErrors, setFormErrors] = useState({ url_github: ["empty"] });
+  const [formErrors, setFormErrors] = useState({});
   const [formDatas, setFormDatas] = useState({
     background: "#ffffff",
     active: false,
@@ -35,157 +41,107 @@ const ProjectForm = () => {
 
   const submitForm = (e) => {
     e.preventDefault(e);
+
+    addProject();
+  };
+
+  const addProject = () => {
+    const constraints = {
+      date: {
+        value: formDatas.date,
+        required: true,
+        regex: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
+        type: ["string"]
+      },
+      title: {
+        value: formDatas.title,
+        required: true,
+        type: ["string"]
+      },
+      shortDescription: {
+        value: formDatas.shortDescription,
+        required: true,
+        type: ["string"]
+      },
+      mdDescription: {
+        value: mdDescription,
+        required: true,
+        type: ["string"]
+      },
+      context: {
+        value: formDatas.context,
+        required: true,
+        type: ["string"]
+      },
+      contextUrl: {
+        value: formDatas.contextUrl,
+        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
+        type: ["string"]
+      },
+      urlGithub: {
+        value: formDatas.urlGithub,
+        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
+        type: ["string"]
+      },
+      urlTest: {
+        value: formDatas.urlTest,
+        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
+        type: ["string"]
+      },
+      imgPrefix: {
+        value: formDatas.imgPrefix,
+        required: true,
+        type: ["string"]
+      },
+      background: {
+        value: formDatas.background,
+        required: true,
+        regex: /^#(?:[0-9a-fA-F]{3}){1,2}$/
+      },
+      nbImages: {
+        required: true,
+        value: Number(formDatas.nbImages),
+        type: ["number"],
+        range: [0, 20]
+      },
+      technos: {
+        value: formDatas.technos,
+        required: true,
+        type: ["object"],
+        length: 1
+      },
+      active: {
+        value: formDatas.active,
+        type: ["boolean"]
+      }
+    };
+
+    const errorfields = CheckFormFields(constraints);
+    if (Object.values(errorfields).some((el) => el)) {
+      toaster.notify(
+        <Toast
+          className="fail"
+          message="Le projet n'a pas été ajouté, des erreurs ont été détectées !"
+        />,
+        toasterOptions
+      );
+      setFormErrors(errorfields);
+    }
   };
 
   return (
     <div className="project-form-container">
       <h1>Creation d'un nouveau projet</h1>
-      <form onSubmit={submitForm}>
-        <fieldset>
-          <legend>Informations générales</legend>
-          {/* project date */}
-          <Input
-            errors={formErrors.date}
-            id="date"
-            isRequired
-            label="Date du projet"
-            type="date"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.date}
-          />
-          {/* Title */}
-          <Input
-            errors={formErrors.title}
-            id="title"
-            isRequired
-            label="titre"
-            placeholder="titre du projet"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.title}
-          />
-          {/* short description */}
-          <Input
-            errors={formErrors.shortDescription}
-            id="shortDescription"
-            isRequired
-            label="courte description"
-            placeholder="description courte du projet (Apparaît dans les vignettes)"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.shortDescription}
-          />
-          {/* Description */}
-          <MdEditor
-            value={mdDescription}
-            setValue={setMdDescription}
-            errors={formErrors.description}
-            label="description du projet"
-            isRequired
-          />
-        </fieldset>
-        <fieldset>
-          <legend>Contexte du projet</legend>
-          {/* Context */}
-          <Input
-            errors={formErrors.context}
-            id="context"
-            isRequired
-            label="Contexte"
-            placeholder="Entreprise ou école ou a été réalisé le projet"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.context}
-          />
-          {/* Context url */}
-          <Input
-            errors={formErrors.contextUrl}
-            id="contextUrl"
-            label="Lien de l'établissement"
-            placeholder="Lien de l'établissement du contexte"
-            type="url"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.contextUrl}
-          />
-        </fieldset>
-        <fieldset className="multiple-fields-wrapper">
-          <legend>Liens du projet</legend>
-          {/* github url */}
-          <Input
-            errors={formErrors.urlGithub}
-            id="urlGithub"
-            label="Lien vers le dépôt github"
-            placeholder="Insérer le lien du dépôt github"
-            type="url"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.urlGithub}
-          />
-          {/* project preview url */}
-          <Input
-            errors={formErrors.urlTest}
-            id="urlTest"
-            label="Lien vers la page de test"
-            placeholder="Insérer le lien de la page de test"
-            type="url"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.urlTest}
-          />
-        </fieldset>
-        <fieldset className="multiple-fields-wrapper">
-          <legend>Images</legend>
-          {/* image prefix  */}
-          <Input
-            errors={formErrors.imgPrefix}
-            id="imgPrefix"
-            isRequired
-            label="Préfixe des images"
-            placeholder="Ajouter un prefix"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.imgPrefix}
-          />
-          {/* thumbmail images background color */}
-          <Input
-            errors={formErrors.background}
-            id="background"
-            label="Couleur de fond carousel d'images"
-            type="color"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.background}
-          />
-          {/* thumbmail images background color */}
-          <Input
-            errors={formErrors.nbImages}
-            id="nbImages"
-            isRequired
-            label="Nombres d'images"
-            type="number"
-            setValue={(e) => handleForm(e)}
-            value={formDatas.nbImages}
-            min={0}
-            max={20}
-          />
-        </fieldset>
-        {/* Technos */}
-        <ProjectTechnos
-          selectedTechnos={formDatas.technos}
-          toggleSelectedTechnos={(e) => toggleSelectedTechnos(e)}
-        />
-        {/* Active */}
-        <label className="switch">
-          <input
-            type="checkbox"
-            checked={formDatas.active && "checked"}
-            id="active"
-            onChange={() =>
-              setFormDatas({ ...formDatas, active: !formDatas.active })
-            }
-          />
-          <span className="slider round"></span>
-        </label>
-        <label htmlFor="active">Publier le projet ?</label>
-        <div className="submit-container">
-          <button type="submit" className="submit-button">
-            Ajouter le projet
-          </button>
-        </div>
-      </form>
+      <NewProjectForm
+        submitForm={submitForm}
+        formErrors={formErrors}
+        formDatas={formDatas}
+        handleForm={handleForm}
+        setFormDatas={setFormDatas}
+        mdDescription={mdDescription}
+        setMdDescription={setMdDescription}
+        toggleSelectedTechnos={toggleSelectedTechnos}
+      />
     </div>
   );
 };

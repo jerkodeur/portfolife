@@ -23,7 +23,6 @@ const Input = (props) => {
   let options = { id, placeholder, type };
   options = type === "number" ? { ...options, min, max } : options;
   options = regex ? { ...options, regex } : options;
-
   return (
     <div className="form-group">
       <label htmlFor={id}>

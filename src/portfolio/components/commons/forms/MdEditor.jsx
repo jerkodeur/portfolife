@@ -6,8 +6,7 @@ import ReactMarkdown from "react-markdown";
 import "react-mde/lib/styles/css/react-mde-all.css";
 
 const MdEditor = (props) => {
-  const { value, setValue, errors, isRequired, label } = props;
-
+  const { value, setValue, error, isRequired, label } = props;
   const [selectedTab, setSelectedTab] = useState("write");
 
   return (
@@ -25,13 +24,13 @@ const MdEditor = (props) => {
           Promise.resolve(<ReactMarkdown source={markdown} />)
         }
       />
-      {errors && <small className="container-error">Ce champ est requis</small>}
+      {error && <small className="container-error">{error}</small>}
     </div>
   );
 };
 
 MdEditor.propTypes = {
-  errors: propTypes.arrayOf(propTypes.string),
+  error: propTypes.string,
   label: propTypes.string,
   isRequired: propTypes.bool.isRequired,
   setValue: propTypes.func.isRequired,

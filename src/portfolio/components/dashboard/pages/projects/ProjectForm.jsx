@@ -126,6 +126,16 @@ const ProjectForm = () => {
       );
       return setFormErrors(errorfields);
     }
+
+    axios.post(
+      "/projects/",
+      { ...formDatas, description: mdDescription },
+      {
+        headers: {
+          authorization: "Bearer: " + token
+        }
+      }
+    );
     toaster.notify(<Toast className="success" message="Bravo, tout est renseigné !!!" />, toasterOptions);
     setFormErrors({});
     return setFormDatas({

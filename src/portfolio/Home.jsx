@@ -17,37 +17,33 @@ import Projects from "./components/Homepage/projects/Projects";
 configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
-  const [displayConnection, setDisplayConnection] = useState(false);
+  const [displayConnectionForm, setDisplayConnectionForm] = useState(false);
   const [isConnect, setIsConnect] = useState(false);
-
-  const pseudo = sessionStorage.getItem("pseudo");
+  const [pseudo, setPseudo] = useState("");
 
   useEffect(() => {
-    isConnect && setDisplayConnection(false);
+    setPseudo(isConnect ? sessionStorage.getItem("pseudo") : "");
+    setDisplayConnectionForm(false);
   }, [isConnect]);
 
-  useEffect(() => {
-    pseudo && setIsConnect(true);
-  }, [pseudo]);
-
-  const handleConnexion = () => {
-    !isConnect && setDisplayConnection(!displayConnection);
+  const switchConnectionForm = (bool) => {
+    setDisplayConnectionForm(bool);
   };
 
-  const switchConnexion = (bool) => {
+  const switchConnection = (bool) => {
     setIsConnect(bool);
   };
 
   return (
     <>
       <Helmet pageTitle="Personal Portfolio" />
-      <Header color="color-black" isConnect={isConnect} switchConnexion={switchConnexion} />
+      <Header color="color-black" isConnect={isConnect} switchConnection={setIsConnect} />
 
       <Presentation />
-      {displayConnection && <ConnectForm switchConnexion={switchConnexion} handleConnexion={handleConnexion} />}
+      {displayConnectionForm && <ConnectForm switchConnexion={switchConnection} displayForm={switchConnectionForm} />}
       <ScrollableAnchor id={"about"}>
         <div className="about-area about-position-top pb--60  bg_color--3">
-          <AboutMe toogleConnexion={handleConnexion} />
+          <AboutMe isConnect={isConnect} displayForm={switchConnectionForm} />
         </div>
       </ScrollableAnchor>
 

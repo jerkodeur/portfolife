@@ -3,8 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import propTypes from "prop-types";
 import Scrollspy from "react-scrollspy";
-import toaster from "toasted-notes";
-import Toast from "../commons/Toast";
+import ToasterDisplay from "../../helpers/ToasterDisplay";
 
 import { FaLinkedinIn, FaGithub, FaUserSlash } from "react-icons/fa";
 import { FiX, FiMenu } from "react-icons/fi";
@@ -16,20 +15,15 @@ const SocialShare = [
     link: "https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/"
   }
 ];
-const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
-  const toasterOptions = {
-    position: "top-right",
-    duration: 5000
-  };
-
+const Header = ({ color = "default-color", isConnect, switchConnection }) => {
   const menuTrigger = () => document.querySelector(".header-wrapper").classList.toggle("menu-open");
 
   const CLoseMenuTrigger = () => document.querySelector(".header-wrapper").classList.remove("menu-open");
 
   const disconnnect = () => {
     sessionStorage.clear();
-    toaster.notify(<Toast className="success" message="Déconnexion effectuée !" />, toasterOptions);
-    switchConnexion(false);
+    ToasterDisplay("Déconnexion effectuée !");
+    switchConnection(false);
   };
 
   // stickyHeader () {}
@@ -93,7 +87,10 @@ const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
               ))}
             </ul>
           </div>
-          {isConnect && <FaUserSlash size="20" className="text-warning ml-3" onClick={disconnnect} />}
+          <span className="link">
+            {isConnect && <FaUserSlash size="20" className="text-warning ml-3" onClick={disconnnect} />}
+          </span>
+
           <div className="header-btn">
             <a className="rn-btn dark-color" href="/assets/files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
               <span>Télécharger mon CV</span>
@@ -120,7 +117,7 @@ const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
 Header.propTypes = {
   color: propTypes.string,
   isConnect: propTypes.bool.isRequired,
-  switchConnexion: propTypes.func.isRequired
+  switchConnection: propTypes.func.isRequired
 };
 
 export default Header;

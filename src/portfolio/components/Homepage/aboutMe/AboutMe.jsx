@@ -6,7 +6,7 @@ import Proptypes from "prop-types";
 
 import AboutTabs from "./AboutTabs";
 
-const AboutMe = ({ toogleConnexion }) => {
+const AboutMe = ({ isConnect, displayForm }) => {
   const [aboutImg, setAboutImg] = useState();
 
   const description =
@@ -31,7 +31,7 @@ const AboutMe = ({ toogleConnexion }) => {
             <div className="about-inner inner pt--100">
               <div className="section-title">
                 <h2 className="title">
-                  À propos de <span onClick={toogleConnexion}> moi</span>
+                  À propos de {!isConnect ? <span onClick={() => displayForm(true)}> moi</span> : "moi"}
                 </h2>
                 <p className="description">{description}</p>
               </div>
@@ -47,7 +47,8 @@ const AboutMe = ({ toogleConnexion }) => {
 };
 
 AboutMe.propTypes = {
-  toogleConnexion: Proptypes.func.isRequired
+  isConnect: Proptypes.bool.isRequired,
+  displayForm: Proptypes.func.isRequired
 };
 
 export default AboutMe;

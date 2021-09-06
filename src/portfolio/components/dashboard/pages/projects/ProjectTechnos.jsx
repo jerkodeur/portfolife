@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
-import CheckFormFields from "../../../../commons/forms/CheckFormFields";
+import CheckFormFields from "../../../commons/forms/CheckFormFields";
 import propTypes from "prop-types";
 import toaster from "toasted-notes";
-import Toast from "../../../../commons/Toast";
+import Toast from "../../../commons/Toast";
 
-import NewTechnoForm from "./NewTechnoForm";
+import NewTechnoForm from "./new/NewTechnoForm";
 
 const toasterOptions = {
   position: "top-right",

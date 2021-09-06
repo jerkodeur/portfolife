@@ -4,10 +4,9 @@ import propTypes from "prop-types";
 
 import Input from "../../../../commons/forms/Input";
 import MdEditor from "../../../../commons/forms/MdEditor";
-import ProjectTechnos from "./ProjectTechnos";
+import ProjectTechnos from "../ProjectTechnos";
 
-const NewProjectForm = ({
-  addProject,
+const ProjectForm = ({
   submitForm,
   formErrors,
   formDatas,
@@ -173,7 +172,7 @@ const NewProjectForm = ({
   </form>
 );
 
-NewProjectForm.prototype = {
+ProjectForm.prototype = {
   addProject: propTypes.func.isRequired,
   submitForm: propTypes.func.isRequired,
   formErrors: propTypes.objectOf(propTypes.string),
@@ -186,4 +185,4 @@ NewProjectForm.prototype = {
   toggleSelectedTechno: propTypes.func.isRequired
 };
 
-export default NewProjectForm;
+export default ProjectForm;

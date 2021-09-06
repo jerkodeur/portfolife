@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-import NewProjectForm from "./new/NewProjectForm";
+import ProjectForm from "./new/ProjectForm";
 import CheckFormFields from "../../../commons/forms/CheckFormFields";
 import toaster from "toasted-notes";
 import Toast from "../../../commons/Toast";
@@ -12,7 +12,7 @@ const toasterOptions = {
   duration: 5000
 };
 
-const ProjectForm = () => {
+const ProjectCreateAndEdit = () => {
   const token = localStorage.getItem("token");
   const [formErrors, setFormErrors] = useState({});
   const [formDatas, setFormDatas] = useState({
@@ -147,7 +147,7 @@ const ProjectForm = () => {
   return (
     <div className="project-form-container">
       <h1>Création d'un nouveau projet</h1>
-      <NewProjectForm
+      <ProjectForm
         addProject={addProject}
         submitForm={submitForm}
         formErrors={formErrors}
@@ -163,4 +163,4 @@ const ProjectForm = () => {
   );
 };
 
-export default ProjectForm;
+export default ProjectCreateAndEdit;

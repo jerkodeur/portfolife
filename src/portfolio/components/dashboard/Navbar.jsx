@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useRouteMatch, useHistory } from "react-router-dom";
 
+import ToasterDisplay from "../../helpers/ToasterDisplay";
+
 const Navbar = () => {
-  let history = useHistory();
+  const history = useHistory();
   const { url } = useRouteMatch();
+  const [authUser, setAuthUser] = useState("");
 
-  let user = localStorage.getItem("pseudo").toLowerCase();
-  user = user[0].toUpperCase() + user.slice(1);
+  useEffect(() => {
+    setAuthUser(sessionStorage.getItem("pseudo"));
+  }, []);
 
-  const deconnexion = () => {
-    localStorage.clear();
+  const deconnectUser = () => {
+    sessionStorage.clear();
+    ToasterDisplay(`Déconnexion effectuée, à bientôt ${authUser} !`);
     history.push("/");
-  }
+  };
 
   return (
     <nav className="navbar">
       <h2>
-        <Link to={`${url}`}>{user} Dashboard</Link>
+        <Link to={`${url}`}>{authUser} Dashboard</Link>
       </h2>
       <div>
-        <button type="button" className="btn btn-danger" onClick={() => deconnexion()}>Déconnexion</button>
-        <Link to='/'><button type="button" className="btn btn-warning">Quitter</button></Link>
+        <button type="button" className="btn btn-danger" onClick={deconnectUser}>
+          Déconnexion
+        </button>
+        <Link to="/">
+          <button type="button" className="btn btn-warning">
+            Quitter
+          </button>
+        </Link>
       </div>
     </nav>
   );

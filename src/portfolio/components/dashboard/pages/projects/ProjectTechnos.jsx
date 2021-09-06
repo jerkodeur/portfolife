@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
-import CheckFormFields from "../../../commons/forms/CheckFormFields";
 import propTypes from "prop-types";
-import toaster from "toasted-notes";
-import Toast from "../../../commons/Toast";
 
+import CheckFormFields from "../../../commons/forms/CheckFormFields";
+import ToasterDisplay from "../../../../helpers/ToasterDisplay";
 import NewTechnoForm from "./new/NewTechnoForm";
-
-const toasterOptions = {
-  position: "top-right",
-  duration: 5000
-};
 
 const ProjectTechnos = (props) => {
   const token = sessionStorage.getItem("token");
@@ -31,12 +25,7 @@ const ProjectTechnos = (props) => {
       })
       .then((res) => setTechnos(res.data))
       .catch(
-        (err) =>
-          console.log(err.response) ||
-          toaster.notify(
-            <Toast className="fail" message="Erreur lors de la récupération des technos" />,
-            toasterOptions
-          )
+        (err) => console.log(err.response) || ToasterDisplay("Erreur lors de la récupération des technos", "fail")
       );
   };
 
@@ -74,10 +63,8 @@ const ProjectTechnos = (props) => {
     const errorfields = CheckFormFields(constraints);
 
     if (Object.values(errorfields).some((el) => el)) {
-      toaster.notify(
-        <Toast className="fail" message="La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !" />,
-        toasterOptions
-      );
+      ToasterDisplay("La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !", "fail");
+
       setTechnoFormErrors(errorfields);
     } else {
       const { name, imageName: image_name, priority } = newTechno;
@@ -90,10 +77,8 @@ const ProjectTechnos = (props) => {
           }
         )
         .then((res) => {
-          toaster.notify(
-            <Toast className="success" message={`La techno ${newTechno.name} a bien été ajoutée !`} />,
-            toasterOptions
-          );
+          ToasterDisplay(`La techno ${newTechno.name} a bien été ajoutée !`);
+
           setNewTechno({
             priority: 1
           });
@@ -101,13 +86,7 @@ const ProjectTechnos = (props) => {
           return fetchTechnos();
         })
         .catch((err) =>
-          toaster.notify(
-            <Toast
-              className="fail"
-              message={`Erreur lors de la création de la nouvelle techno, ${err.response.data.message}`}
-            />,
-            toasterOptions
-          )
+          ToasterDisplay(`Erreur lors de la création de la nouvelle techno, ${err.response.data.message}`, "fail")
         );
     }
   };

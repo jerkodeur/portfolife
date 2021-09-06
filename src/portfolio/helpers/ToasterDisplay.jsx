@@ -1,7 +1,13 @@
 import React from "react";
 
-import Toast from "../components/commons/Toast";
 import toaster from "toasted-notes";
+import "toasted-notes/src/styles.css";
+
+const Toast = ({ message, className }) => (
+  <div>
+    <div className={`toaster-${className}`}>{message}</div>
+  </div>
+);
 
 const defaultOptions = {
   position: "top-right",

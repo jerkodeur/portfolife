@@ -4,13 +4,7 @@ import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
 import { FaLinkedin, FaGithub, FaAddressCard } from "react-icons/fa";
 
-import toaster from "toasted-notes";
-import Toast from "../commons/Toast";
-
-const toasterOptions = {
-  position: "top-right",
-  duration: 5000
-};
+import ToasterDisplay from "../../helpers/ToasterDisplay";
 
 class Contact extends Component {
   state = {
@@ -27,19 +21,13 @@ class Contact extends Component {
     event.preventDefault(event);
 
     const { rnName, rnEmail, rnSubject, rnMessage } = this.state;
-    const fields = [
-      { rnName: rnName },
-      { rnEmail: rnEmail },
-      { rnSubject: rnSubject },
-      { rnMessage: rnMessage }
-    ];
+    const fields = [{ rnName: rnName }, { rnEmail: rnEmail }, { rnSubject: rnSubject }, { rnMessage: rnMessage }];
     const errors = [];
     fields.map((field) => {
       const key = Object.keys(field);
       const value = Object.values(field);
 
-      const emailRegEx =
-        /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
+      const emailRegEx = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
 
       if (value[0].length === 0) {
         errors.push({ [key[0]]: "empty" });
@@ -59,10 +47,7 @@ class Contact extends Component {
         contact_mail: this.state.rnEmail
       });
     } else {
-      return toaster.notify(
-        <Toast className="fail" message="Des erreurs ont été détectées !" />,
-        toasterOptions
-      );
+      return ToasterDisplay("Des erreurs ont été détectées !", "fail");
     }
   };
 
@@ -81,23 +66,9 @@ class Contact extends Component {
           rnSubject: "",
           rnName: ""
         });
-        return toaster.notify(
-          <Toast
-            className="succes"
-            message="Votre message a bien été envoyé !"
-          />,
-          toasterOptions
-        );
+        return ToasterDisplay("Votre message a bien été envoyé !");
       })
-      .catch(() =>
-        toaster.notify(
-          <Toast
-            className="fail"
-            message="Une erreur est survenue, veuillez réessayer ou contacter l'administrateur"
-          />,
-          toasterOptions
-        )
-      );
+      .catch(() => ToasterDisplay("Une erreur est survenue, veuillez réessayer ou contacter l'administrateur", "fail"));
   };
 
   handleFormErrors = (field) => {
@@ -126,15 +97,11 @@ class Contact extends Component {
         break;
     }
 
-    const error = this.state.errors.filter(
-      (value) => Object.keys(value)[0] === field
-    );
+    const error = this.state.errors.filter((value) => Object.keys(value)[0] === field);
 
     if (error.length > 0) {
       if (field === "rnEmail") {
-        const empty = Object.values(error).filter((value) =>
-          Object.values(value).includes("empty")
-        );
+        const empty = Object.values(error).filter((value) => Object.values(value).includes("empty"));
         return empty.length > 0 ? message : message2;
       } else {
         return message;
@@ -152,9 +119,7 @@ class Contact extends Component {
                 <h2 className="title">Me contacter</h2>
                 <div className="contact-icons">
                   <span
-                    onMouseOver={() =>
-                      this.getTextIcon("Voir mon profil Linkedin")
-                    }
+                    onMouseOver={() => this.getTextIcon("Voir mon profil Linkedin")}
                     onMouseOut={() => this.getTextIcon("")}
                   >
                     <a
@@ -166,9 +131,7 @@ class Contact extends Component {
                     </a>
                   </span>
                   <span
-                    onMouseOver={() =>
-                      this.getTextIcon("Voir mon dépôt Github")
-                    }
+                    onMouseOver={() => this.getTextIcon("Voir mon dépôt Github")}
                     onMouseOut={() => this.getTextIcon("")}
                   >
                     <a
@@ -184,22 +147,16 @@ class Contact extends Component {
                     onMouseOver={() => this.getTextIcon("Télécharger mon CV")}
                     onMouseOut={() => this.getTextIcon("")}
                   >
-                    <a
-                      href="/assets/files/Potié Jérôme - Développeur Web.pdf"
-                      download
-                    >
+                    <a href="/assets/files/Potié Jérôme - Développeur Web.pdf" download>
                       <FaAddressCard size="60" />
                     </a>
                   </span>
                 </div>
                 <div className="icons-descr">{this.state.textIcon}</div>
                 <p className="description">
-                  Je suis disponible pour un entretien téléphonique au:{" "}
-                  <a href="tel:0660814774">06.60.81.47.74</a> ou par mail:
-                  <a href="mailto:jerome.potie@gmail.com">
-                    {" "}
-                    jerome.potie@gmail.com
-                  </a>{" "}
+                  Je suis disponible pour un entretien téléphonique au: <a href="tel:0660814774">06.60.81.47.74</a> ou
+                  par mail:
+                  <a href="mailto:jerome.potie@gmail.com"> jerome.potie@gmail.com</a>{" "}
                 </p>
               </div>
               <div className="form-wrapper">
@@ -215,9 +172,7 @@ class Contact extends Component {
                     }}
                     placeholder="Quel est votre nom"
                   />
-                  <small className="form-errors">
-                    {this.handleFormErrors("rnName")}
-                  </small>
+                  <small className="form-errors">{this.handleFormErrors("rnName")}</small>
 
                   <label htmlFor="item02">E-mail *</label>
                   <input
@@ -230,9 +185,7 @@ class Contact extends Component {
                     }}
                     placeholder="Adresse e-mail à laquelle je pourrais vous joindre"
                   />
-                  <small className="form-errors">
-                    {this.handleFormErrors("rnEmail")}
-                  </small>
+                  <small className="form-errors">{this.handleFormErrors("rnEmail")}</small>
 
                   <label htmlFor="item03">Sujet *</label>
                   <input
@@ -245,9 +198,7 @@ class Contact extends Component {
                     }}
                     placeholder="Indiquez le sujet de votre message"
                   />
-                  <small className="form-errors">
-                    {this.handleFormErrors("rnSubject")}
-                  </small>
+                  <small className="form-errors">{this.handleFormErrors("rnSubject")}</small>
 
                   <label htmlFor="item04">Message *</label>
                   <textarea
@@ -260,9 +211,7 @@ class Contact extends Component {
                     }}
                     placeholder="Inscrivez ici le contenu de votre message"
                   />
-                  <small className="form-errors">
-                    {this.handleFormErrors("rnMessage")}
-                  </small>
+                  <small className="form-errors">{this.handleFormErrors("rnMessage")}</small>
 
                   <div className="m-auto w-100 text-center">
                     <button

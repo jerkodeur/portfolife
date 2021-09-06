@@ -2,15 +2,9 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
+import ToasterDisplay from "../../../../helpers/ToasterDisplay";
 import ProjectForm from "./new/ProjectForm";
 import CheckFormFields from "../../../commons/forms/CheckFormFields";
-import toaster from "toasted-notes";
-import Toast from "../../../commons/Toast";
-
-const toasterOptions = {
-  position: "top-right",
-  duration: 5000
-};
 
 const ProjectCreateAndEdit = () => {
   const token = sessionStorage.getItem("token");
@@ -122,10 +116,8 @@ const ProjectCreateAndEdit = () => {
     };
     const errorfields = CheckFormFields(constraints);
     if (Object.values(errorfields).some((el) => el)) {
-      toaster.notify(
-        <Toast className="fail" message="Le projet n'a pas été ajouté, des erreurs ont été détectées !" />,
-        toasterOptions
-      );
+      ToasterDisplay("Le projet n'a pas été ajouté, des erreurs ont été détectées !", "fail");
+
       return setFormErrors(errorfields);
     }
 
@@ -138,8 +130,8 @@ const ProjectCreateAndEdit = () => {
         }
       }
     );
-    toaster.notify(<Toast className="success" message="Bravo, tout est renseigné !!!" />, toasterOptions);
-    setFormErrors({});
+    ToasterDisplay("Le projet a été ajouté avec succès");
+
     return setFormDatas({
       background: "#ffffff",
       active: false,
@@ -150,7 +142,6 @@ const ProjectCreateAndEdit = () => {
     <div className="project-form-container">
       <h1>Création d'un nouveau projet</h1>
       <ProjectForm
-        addProject={addProject}
         submitForm={submitForm}
         formErrors={formErrors}
         formDatas={formDatas}

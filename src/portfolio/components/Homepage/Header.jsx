@@ -22,18 +22,13 @@ const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
     duration: 5000
   };
 
-  const menuTrigger = () =>
-    document.querySelector(".header-wrapper").classList.toggle("menu-open");
+  const menuTrigger = () => document.querySelector(".header-wrapper").classList.toggle("menu-open");
 
-  const CLoseMenuTrigger = () =>
-    document.querySelector(".header-wrapper").classList.remove("menu-open");
+  const CLoseMenuTrigger = () => document.querySelector(".header-wrapper").classList.remove("menu-open");
 
   const disconnnect = () => {
-    localStorage.clear();
-    toaster.notify(
-      <Toast className="success" message="Déconnexion effectuée !" />,
-      toasterOptions
-    );
+    sessionStorage.clear();
+    toaster.notify(<Toast className="success" message="Déconnexion effectuée !" />, toasterOptions);
     switchConnexion(false);
   };
 
@@ -42,11 +37,9 @@ const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
   window.addEventListener("scroll", function () {
     const value = window.scrollY;
     if (value > 100) {
-      document.querySelector(".header--fixed") &&
-        document.querySelector(".header--fixed").classList.add("sticky");
+      document.querySelector(".header--fixed") && document.querySelector(".header--fixed").classList.add("sticky");
     } else {
-      document.querySelector(".header--fixed") &&
-        document.querySelector(".header--fixed").classList.remove("sticky");
+      document.querySelector(".header--fixed") && document.querySelector(".header--fixed").classList.remove("sticky");
     }
   });
 
@@ -93,30 +86,16 @@ const Header = ({ color = "default-color", isConnect, switchConnexion }) => {
             <ul className="social-share social-style--2 color-theme d-flex justify-content-start liststyle">
               {SocialShare.map((val, i) => (
                 <li key={i}>
-                  <a
-                    href={`${val.link}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={`${val.link}`} target="_blank" rel="noopener noreferrer">
                     {val.Social}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-          {isConnect && (
-            <FaUserSlash
-              size="20"
-              className="text-warning ml-3"
-              onClick={disconnnect}
-            />
-          )}
+          {isConnect && <FaUserSlash size="20" className="text-warning ml-3" onClick={disconnnect} />}
           <div className="header-btn">
-            <a
-              className="rn-btn dark-color"
-              href="/assets/files/Potié Jérôme - Développeur Web Fullstack.pdf"
-              download
-            >
+            <a className="rn-btn dark-color" href="/assets/files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
               <span>Télécharger mon CV</span>
             </a>
           </div>

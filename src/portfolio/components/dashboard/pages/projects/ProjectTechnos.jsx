@@ -14,7 +14,7 @@ const toasterOptions = {
 };
 
 const ProjectTechnos = (props) => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const { selectedTechnos, toggleSelectedTechnos, error, handleClassError } = props;
 
   const [technoFormErrors, setTechnoFormErrors] = useState({});

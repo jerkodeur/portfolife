@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 
 const DashboardHome = () => {
   const { path } = useRouteMatch();
+
   return (
     <div className="dashboard">
       <Navbar />

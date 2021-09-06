@@ -23,17 +23,12 @@ const ConnectForm = ({ switchConnexion, handleConnexion }) => {
       .then((res) => {
         const token = res.headers["x-access-token"];
 
-        localStorage.clear();
-        localStorage.setItem("token", token);
-        localStorage.setItem("pseudo", jwt.decode(token).pseudo);
+        sessionStorage.clear();
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("pseudo", jwt.decode(token).pseudo);
 
         toaster.notify(
-          <Toast
-            className="success"
-            message={`Bienvenue ${
-              jwt.decode(token).pseudo
-            }, tu es bien connecté !`}
-          />,
+          <Toast className="success" message={`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`} />,
           toasterOptions
         );
         switchConnexion(true);
@@ -62,19 +57,9 @@ const ConnectForm = ({ switchConnexion, handleConnexion }) => {
       </div>
       <form>
         <label htmlFor="email">E-mail</label>
-        <input
-          type="text"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <label htmlFor="password">Mot de passe</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <button onClick={handleForm} className="btn btn-warning">
           Connexion
         </button>

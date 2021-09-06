@@ -17,11 +17,10 @@ import Projects from "./components/Homepage/projects/Projects";
 configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
-
   const [displayConnection, setDisplayConnection] = useState(false);
   const [isConnect, setIsConnect] = useState(false);
 
-  const pseudo = localStorage.getItem("pseudo");
+  const pseudo = sessionStorage.getItem("pseudo");
 
   useEffect(() => {
     isConnect && setDisplayConnection(false);
@@ -42,19 +41,10 @@ const PersonalPortfolio = () => {
   return (
     <>
       <Helmet pageTitle="Personal Portfolio" />
-      <Header
-        color="color-black"
-        isConnect={isConnect}
-        switchConnexion={switchConnexion}
-      />
+      <Header color="color-black" isConnect={isConnect} switchConnexion={switchConnexion} />
 
       <Presentation />
-      {displayConnection && (
-        <ConnectForm
-          switchConnexion={switchConnexion}
-          handleConnexion={handleConnexion}
-        />
-      )}
+      {displayConnection && <ConnectForm switchConnexion={switchConnexion} handleConnexion={handleConnexion} />}
       <ScrollableAnchor id={"about"}>
         <div className="about-area about-position-top pb--60  bg_color--3">
           <AboutMe toogleConnexion={handleConnexion} />

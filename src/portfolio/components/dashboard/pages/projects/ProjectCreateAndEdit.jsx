@@ -13,7 +13,7 @@ const toasterOptions = {
 };
 
 const ProjectCreateAndEdit = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const [formErrors, setFormErrors] = useState({});
   const [formDatas, setFormDatas] = useState({
     background: "#ffffff",
@@ -34,11 +34,13 @@ const ProjectCreateAndEdit = () => {
           technos: [...formDatas.technos].filter((el) => el !== techno)
         });
   };
+
   const handleClassError = (array) => {
     return array.reduce((acc, curr) => {
       return formErrors[curr] ? true : acc;
     }, false);
   };
+
   const handleForm = (e) => {
     setFormDatas({ ...formDatas, [e.target.id]: e.target.value });
   };

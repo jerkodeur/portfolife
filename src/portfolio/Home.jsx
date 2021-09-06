@@ -37,7 +37,7 @@ const PersonalPortfolio = () => {
   return (
     <>
       <Helmet pageTitle="Personal Portfolio" />
-      <Header color="color-black" isConnect={isConnect} switchConnection={setIsConnect} />
+      <Header color="color-black" isConnect={isConnect} switchConnection={setIsConnect} pseudo={pseudo} />
 
       <Presentation />
       {displayConnectionForm && <ConnectForm switchConnexion={switchConnection} displayForm={switchConnectionForm} />}

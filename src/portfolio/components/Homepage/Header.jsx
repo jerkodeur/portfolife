@@ -15,14 +15,14 @@ const SocialShare = [
     link: "https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/"
   }
 ];
-const Header = ({ color = "default-color", isConnect, switchConnection }) => {
+const Header = ({ color = "default-color", isConnect, switchConnection, pseudo }) => {
   const menuTrigger = () => document.querySelector(".header-wrapper").classList.toggle("menu-open");
 
   const CLoseMenuTrigger = () => document.querySelector(".header-wrapper").classList.remove("menu-open");
 
   const disconnnect = () => {
     sessionStorage.clear();
-    ToasterDisplay("Déconnexion effectuée !");
+    ToasterDisplay(`Au revoir ${pseudo}, tu as bien été déconnecté !`);
     switchConnection(false);
   };
 
@@ -117,7 +117,8 @@ const Header = ({ color = "default-color", isConnect, switchConnection }) => {
 Header.propTypes = {
   color: propTypes.string,
   isConnect: propTypes.bool.isRequired,
-  switchConnection: propTypes.func.isRequired
+  switchConnection: propTypes.func.isRequired,
+  pseudo: propTypes.string
 };
 
 export default Header;

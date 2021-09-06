@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 
 import axios from "axios";
 
+import AdminRoute from "./portfolio/helpers/AdminRoute";
 // Create Import File
 import "./index.scss";
 
@@ -75,7 +76,9 @@ class Root extends Component {
       <BrowserRouter basename={"/"}>
         <Switch>
           <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-          <Route path={`/dashboard`} component={Dashboard} />
+          <AdminRoute path={`${process.env.PUBLIC_URL}/dashboard`}>
+            <Dashboard />
+          </AdminRoute>
           {/* <Route exact path={`${process.env.PUBLIC_URL}/main-demo`} component={MainDemo}/> */}
           {/* <Route
             exact

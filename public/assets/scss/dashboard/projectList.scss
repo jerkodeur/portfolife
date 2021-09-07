@@ -1,0 +1,19 @@
+.project-list-container {
+    table {
+        box-shadow: -2px -2px 4px $dark;
+        border-radius: 4px;
+        margin: 2em auto;
+        width: 98%;
+        tr {
+            th {
+                text-align: center;
+                vertical-align: middle;
+                box-shadow: 2px 2px 4px #000;
+            }
+            &.project-main-categories {
+            }
+            &.project-categories {
+            }
+        }
+    }
+}

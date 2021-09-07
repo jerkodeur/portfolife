@@ -1,11 +1,16 @@
 .project-list-container {
+    margin: auto;
     table {
+        line-height: 1.2;
+        overflow-y: scroll;
         box-shadow: -2px -2px 4px $dark;
         border-radius: 4px;
-        margin: 2em auto;
-        width: 98%;
+        margin: 2em;
+        width: 96%;
         tr {
             th {
+                white-space: nowrap;
+                padding: 1em;
                 text-align: center;
                 vertical-align: middle;
                 box-shadow: 2px 2px 4px #000;
@@ -13,6 +18,45 @@
             &.project-main-categories {
             }
             &.project-categories {
+                th {
+                    &:nth-of-type(1) {
+                        width: 15%;
+                    }
+                    &:nth-of-type(2) {
+                        width: 22%;
+                    }
+                    &:nth-of-type(3) {
+                        width: 10%;
+                    }
+                    &:nth-of-type(4) {
+                        width: 10%;
+                    }
+                    &:nth-of-type(5) {
+                        width: 1%;
+                    }
+                    &:nth-of-type(6) {
+                        width: 10%;
+                    }
+                    &:nth-of-type(7) {
+                        width: 4%;
+                    }
+                    &:nth-of-type(8) {
+                        width: 2%;
+                    }
+                }
+            }
+            td {
+                margin: auto;
+                padding: 0em 0.5em;
+                box-shadow: 2px 2px 4px $dark;
+                border-top: 1pt solid $dark;
+                text-align: center;
+                .switch {
+                    margin: 0.1em 0 0 0.25em;
+                    .slider.round {
+                        border-radius: 5px;
+                    }
+                }
             }
         }
     }

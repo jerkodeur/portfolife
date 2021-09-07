@@ -3,7 +3,7 @@ import React from "react";
 import propTypes from "prop-types";
 
 const Input = (props) => {
-  const { value, defaultValue, error, type, setValue, isRequired, id, placeholder, regex, min, max } = props;
+  const { value, defaultValue, error, type, setValue, isRequired, id, placeholder, regex, min, max, dataId } = props;
   const label = props.label && props.label[0].toUpperCase() + props.label.slice(1).toLowerCase();
 
   let options = { id, placeholder, type };
@@ -15,6 +15,7 @@ const Input = (props) => {
         {label} {isRequired && " *"}
       </label>
       <input
+        data-id={dataId && dataId}
         value={!value && defaultValue ? defaultValue : value}
         onChange={setValue}
         {...options}
@@ -35,6 +36,7 @@ Input.defaultProps = {
 };
 
 Input.propTypes = {
+  dataId: propTypes.number,
   defaultValue: propTypes.any,
   error: propTypes.string,
   id: propTypes.string.isRequired,

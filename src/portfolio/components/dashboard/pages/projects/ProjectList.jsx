@@ -5,9 +5,13 @@ import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "reac
 
 import Input from "../../../commons/forms/Input";
 import ToasterDisplay from "../../../../helpers/ToasterDisplay";
+import ConfirmModal from "../../../commons/ConfirmModal";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState({});
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteProjectId, setDeleteProjectId] = useState("");
+  const [labelToDelete, setlabelToDelete] = useState("");
 
   useEffect(() => {
     axios
@@ -21,6 +25,8 @@ const ProjectList = () => {
         (err) => console.log(err.response) || ToasterDisplay("Erreur lors de la récupération des projets", "fail")
       );
   }, []);
+
+  useEffect(() => console.log("projects update"), [projects]);
 
   const formatLink = (url) => {
     const urlRegex = /(https?:\/\/(www\.)?)(.{10})/g;
@@ -57,6 +63,27 @@ const ProjectList = () => {
           console.log(err.response) ||
           ToasterDisplay("Une erreur est survenue lors de la mise à jour du champ !", "fail")
       );
+  };
+
+  const displayDeleteModal = (id, label) => {
+    setDeleteProjectId(id);
+    setlabelToDelete(label);
+    setShowDeleteModal(true);
+  };
+
+  const deleteProject = (e) => {
+    axios
+      .delete(`/projects/${e.target.dataset.id}`, {
+        headers: {
+          authorization: "Bearer: " + sessionStorage.getItem("token")
+        }
+      })
+      .then((res) => {
+        ToasterDisplay("Le projet a été supprimé avec succès !");
+        setProjects(res.data);
+      })
+      .catch((err) => console.log(err.response) || ToasterDisplay("Erreur lors de la suppression du projet !", "fail"));
+    setShowDeleteModal(false);
   };
 
   return (
@@ -129,7 +156,7 @@ const ProjectList = () => {
                         value={active}
                         checked={active && "checked"}
                         id="active"
-                        onClick={(e) => handleChange(e)}
+                        onChange={(e) => handleChange(e)}
                       />
                       <span className="slider round"></span>
                     </label>
@@ -139,7 +166,7 @@ const ProjectList = () => {
                       <FaEdit />
                     </span>
                     <span>
-                      <FaTrashAlt />
+                      <FaTrashAlt onClick={() => displayDeleteModal(id, title)} />
                     </span>
                   </td>
                 </tr>
@@ -147,6 +174,18 @@ const ProjectList = () => {
             })}
         </tbody>
       </table>
+      {showDeleteModal && (
+        <ConfirmModal
+          className="danger"
+          dataId={deleteProjectId}
+          dataLabel={labelToDelete}
+          handleClose={() => setShowDeleteModal(false)}
+          message={`Êtes-vous sûr de vouloir supprimer le projet ${labelToDelete}?`}
+          show={showDeleteModal}
+          title={`Suppression du projet ${labelToDelete}`}
+          validate={deleteProject}
+        />
+      )}
     </div>
   );
 };

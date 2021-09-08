@@ -117,26 +117,33 @@ const ProjectCreateAndEdit = () => {
     const errorfields = CheckFormFields(constraints);
     if (Object.values(errorfields).some((el) => el)) {
       ToasterDisplay("Le projet n'a pas été ajouté, des erreurs ont été détectées !", "fail");
-
       return setFormErrors(errorfields);
     }
 
-    axios.post(
-      "/projects/",
-      { ...formDatas, description: mdDescription },
-      {
-        headers: {
-          authorization: "Bearer: " + token
+    axios
+      .post(
+        "/projects/",
+        { ...formDatas, description: mdDescription },
+        {
+          headers: {
+            authorization: "Bearer: " + token
+          }
         }
-      }
-    );
-    ToasterDisplay("Le projet a été ajouté avec succès");
-
-    return setFormDatas({
-      background: "#ffffff",
-      active: false,
-      technos: []
-    });
+      )
+      .then(() => {
+        setMdDescription("");
+        ToasterDisplay("Le projet a été ajouté avec succès");
+        return setFormDatas({
+          background: "#ffffff",
+          active: false,
+          technos: []
+        });
+      })
+      .catch(
+        (err) =>
+          console.log(err.response) ||
+          ToasterDisplay("Une erreur est survenue lors de l'ajout du nouveau projet", "fail")
+      );
   };
   return (
     <div className="project-form-container">

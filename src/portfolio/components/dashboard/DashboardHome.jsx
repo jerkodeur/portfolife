@@ -14,16 +14,14 @@ const DashboardHome = () => {
   return (
     <div className="dashboard">
       <Navbar />
-      <div className="main-layout">
-        <Sidebar />
-        <main className="main-container">
-          <Route exact path={`${path}/`}>
-            <Home />
-          </Route>
-          <Route path={`${path}/projects`} component={ProjectList} />
-          <Route path={`${path}/new-project`} component={ProjectCreateAndEdit} />
-        </main>
-      </div>
+      <Sidebar />
+      <main className="main-container">
+        <Route exact path={`${path}/`}>
+          <Home />
+        </Route>
+        <Route path={`${path}/projects`} component={ProjectList} />
+        <Route path={`${path}/new-project`} component={ProjectCreateAndEdit} />
+      </main>
     </div>
   );
 };

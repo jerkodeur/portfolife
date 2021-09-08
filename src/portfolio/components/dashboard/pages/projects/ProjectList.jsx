@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
+import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "react-icons/fa";
 
 import Input from "../../../commons/forms/Input";
 import ToasterDisplay from "../../../../helpers/ToasterDisplay";
@@ -43,7 +44,7 @@ const ProjectList = () => {
       )
       .then((res) => {
         const updateProjects = Array.from(projects).reduce((acc, project) => {
-          if (project.mainDatas.id === res.data.updated[0].id) {
+          if (project.mainDatas.id === res.data.mainDatas.id) {
             project.mainDatas[key] = value;
           }
           acc.push(project);
@@ -66,7 +67,8 @@ const ProjectList = () => {
           <tr className="project-main-categories">
             <th colSpan="4">Informations principales</th>
             <th colSpan="3">Images</th>
-            <th rowSpan="2">Actif</th>
+            <th rowSpan="2">Star</th>
+            <th rowSpan="2">Actions</th>
           </tr>
           <tr className="project-categories">
             <th>Titre</th>
@@ -118,7 +120,6 @@ const ProjectList = () => {
                       setValue={(e) => handleChange(e)}
                       value={background ?? ""}
                     />
-                    {/* {background} */}
                   </td>
                   <td>
                     <label className="switch">
@@ -132,6 +133,14 @@ const ProjectList = () => {
                       />
                       <span className="slider round"></span>
                     </label>
+                  </td>
+                  <td className="actions">
+                    <span>
+                      <FaEdit />
+                    </span>
+                    <span>
+                      <FaTrashAlt />
+                    </span>
                   </td>
                 </tr>
               );

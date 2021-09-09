@@ -7,8 +7,6 @@ import axios from "axios";
 import AdminRoute from "./portfolio/helpers/AdminRoute";
 // Create Import File
 import "./index.scss";
-import $ from 'jquery';
-import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 // // Common Layout
 // import Layout from "./component/common/App";

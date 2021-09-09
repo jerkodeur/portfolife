@@ -4,7 +4,7 @@ import { Route, useRouteMatch } from "react-router";
 
 import Home from "./Home";
 import Navbar from "./Navbar";
-import ProjectList from "./pages/projects/ProjectList";
+import ProjectList from "./pages/projects/list/ProjectList";
 import ProjectCreateAndEdit from "./pages/projects/ProjectCreateAndEdit";
 import Sidebar from "./Sidebar";
 

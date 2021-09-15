@@ -13,7 +13,7 @@ const ProjectList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteProjectId, setDeleteProjectId] = useState("");
   const [labelToDelete, setlabelToDelete] = useState("");
-  const [updatedField, setUpdatedField] = useState({ label: "imgPrefix", id: 11, error: "", value: "" });
+  const [updatedField, setUpdatedField] = useState({});
 
   useEffect(() => {
     axios
@@ -28,37 +28,11 @@ const ProjectList = () => {
       );
   }, []);
 
-  useEffect(() => console.log("project update"), [projects]);
-
   const handleChange = (e) => {
     const key = e.target.id;
     let value = e.target.value;
     if (key === "active") value = value === "0" ? 1 : 0;
-    axios
-      .patch(
-        `/projects/async/${e.target.dataset.id}`,
-        { key, value },
-        {
-          headers: {
-            authorization: "Bearer: " + sessionStorage.getItem("token")
-          }
-        }
-      )
-      .then((res) => {
-        const updateProjects = Array.from(projects).reduce((acc, project) => {
-          if (project.mainDatas.id === res.data.mainDatas.id) {
-            project.mainDatas[key] = value;
-          }
-          acc.push(project);
-          return acc;
-        }, []);
-        setProjects(updateProjects);
-      })
-      .catch(
-        (err) =>
-          console.log(err.response) ||
-          ToasterDisplay("Une erreur est survenue lors de la mise à jour du champ !", "fail")
-      );
+    return updateAsyncProjectField(e.target.dataset.id, key, value);
   };
 
   const displayDeleteModal = (id, label) => {
@@ -84,6 +58,38 @@ const ProjectList = () => {
       setUpdatedField({ ...updatedField, error: errorfield[updatedField.label] });
       return ToasterDisplay(`Impossible de modifier la valeur, ${errorfield[updatedField.label]} `, "fail");
     }
+    const { id, label, value } = updatedField;
+    return updateAsyncProjectField(id, label, value);
+  };
+
+  const updateAsyncProjectField = (id, key, value) => {
+    axios
+      .patch(
+        `/projects/async/${id}`,
+        { key, value },
+        {
+          headers: {
+            authorization: "Bearer: " + sessionStorage.getItem("token")
+          }
+        }
+      )
+      .then((res) => {
+        const updateProjects = Array.from(projects).reduce((acc, project) => {
+          if (project.mainDatas.id === res.data.mainDatas.id) {
+            project.mainDatas = res.data.mainDatas;
+          }
+          acc.push(project);
+          return acc;
+        }, []);
+        ToasterDisplay("Mise à jour réussie !");
+        setUpdatedField({});
+        setProjects(updateProjects);
+      })
+      .catch(
+        (err) =>
+          console.log(err.response.data.message) ||
+          ToasterDisplay("Une erreur est survenue lors de la mise à jour du champ !", "fail")
+      );
   };
 
   const deleteProject = (e) => {
@@ -97,7 +103,10 @@ const ProjectList = () => {
         ToasterDisplay("Le projet a été supprimé avec succès !");
         setProjects(res.data);
       })
-      .catch((err) => console.log(err.response) || ToasterDisplay("Erreur lors de la suppression du projet !", "fail"));
+      .catch(
+        (err) =>
+          console.log(err.response.data.message) || ToasterDisplay("Erreur lors de la suppression du projet !", "fail")
+      );
     setShowDeleteModal(false);
   };
 

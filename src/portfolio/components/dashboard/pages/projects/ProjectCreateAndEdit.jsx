@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 import ToasterDisplay from "../../../../helpers/ToasterDisplay";
 import ProjectForm from "./new/ProjectForm";
 import CheckFormFields from "../../../commons/forms/CheckFormFields";
 
 const ProjectCreateAndEdit = () => {
+  const history = useHistory();
   const token = sessionStorage.getItem("token");
+
   const [formErrors, setFormErrors] = useState({});
   const [formDatas, setFormDatas] = useState({
     background: "#ffffff",
@@ -133,11 +136,7 @@ const ProjectCreateAndEdit = () => {
       .then(() => {
         setMdDescription("");
         ToasterDisplay("Le projet a été ajouté avec succès");
-        return setFormDatas({
-          background: "#ffffff",
-          active: false,
-          technos: []
-        });
+        history.push("/dashboard/projects");
       })
       .catch(
         (err) =>

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
-import ToasterDisplay from "../../../../../helpers/ToasterDisplay";
+
+import CheckFormFields from "../../../../commons/forms/CheckFormFields";
 import ConfirmModal from "../../../../commons/ConfirmModal";
+import projectConstraints from "../projectConstraints";
 import ProjectListContainer from "./ProjectListContainer";
+import ToasterDisplay from "../../../../../helpers/ToasterDisplay";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState();
@@ -64,8 +67,23 @@ const ProjectList = () => {
     setShowDeleteModal(true);
   };
 
+  const keyPressHandler = (e) => {
+    if (e.key === "Enter") {
+      handleUpdatedField();
+    }
+  };
+
   const handleUpdatedField = (e) => {
-    setUpdatedField({ ...updatedField, value: e.target.value });
+    const fieldToCheck = {};
+    fieldToCheck[updatedField.label] = projectConstraints[updatedField.label];
+    fieldToCheck[updatedField.label].value = updatedField.value;
+
+    // Verify if errors
+    const errorfield = CheckFormFields(fieldToCheck);
+    if (Object.values(errorfield).some((el) => el)) {
+      setUpdatedField({ ...updatedField, error: errorfield[updatedField.label] });
+      return ToasterDisplay(`Impossible de modifier la valeur, ${errorfield[updatedField.label]} `, "fail");
+    }
   };
 
   const deleteProject = (e) => {
@@ -89,7 +107,7 @@ const ProjectList = () => {
         projects={projects}
         handleChange={handleChange}
         displayDeleteModal={displayDeleteModal}
-        handleUpdatedField={handleUpdatedField}
+        keyPressHandler={keyPressHandler}
         updatedField={updatedField}
         setUpdatedField={setUpdatedField}
       />

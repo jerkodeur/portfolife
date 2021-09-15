@@ -33,7 +33,7 @@ const ConfirmModal = ({ className, dataId, handleClose, message, show, title, va
 
 ConfirmModal.propTypes = {
   className: propTypes.string,
-  dataId: propTypes.oneOfType(["number", "string"].isRequired),
+  dataId: propTypes.oneOfType([propTypes.number, propTypes.string]).isRequired,
   dataLabel: propTypes.string.isRequired,
   handleClose: propTypes.func.isRequired,
   show: propTypes.bool.isRequired,

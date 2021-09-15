@@ -41,9 +41,9 @@ const projectConstraints = {
         regex: /^#(?:[0-9a-fA-F]{3}){1,2}$/
       },
       nbImages: {
-        required: true,
-        type: ["number"],
-        range: [0, 20]
+        type: ["number", "string"],
+          range: [0, 20],
+        regex: /^(?:[1-9]|0[1-9]|1[0-9]|20)$/
       },
       technos: {
         required: true,

@@ -11,7 +11,7 @@ const switchAndReturnMessageError = (entry) => {
   let value = entry[1].value;
   const constraints = Object.keys(entry[1]);
 
-  if (constraints.includes("required") && !value) return "Ce champs est requis !";
+  if (constraints.includes("required") && !value) return "Le champs est requis !";
   else if (!value) return null;
   else if (constraints.includes("type") && !entry[1].type.some((el) => el === typeof value))
     return "Type de donnée incorrect";

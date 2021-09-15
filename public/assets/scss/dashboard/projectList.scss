@@ -1,5 +1,8 @@
 .project-list-container {
     margin: auto;
+    form {
+        width: 100%;
+    }
     table {
         line-height: 1.2;
         box-shadow: -2px -2px 4px $dark;
@@ -39,7 +42,7 @@
                         width: 18%;
                     }
                     &:nth-of-type(5) {
-                        width: 1%;
+                        width: 6%;
                     }
                     &:nth-of-type(6) {
                         width: 8%;

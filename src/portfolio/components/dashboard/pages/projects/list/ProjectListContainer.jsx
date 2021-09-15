@@ -6,12 +6,12 @@ import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "reac
 import Input from "../../../../commons/forms/Input";
 
 const ProjectListContainer = ({
-  projects,
-  handleChange,
   displayDeleteModal,
-  updatedField,
-  handleUpdatedField,
-  setUpdatedField
+  handleChange,
+  keyPressHandler,
+  projects,
+  setUpdatedField,
+  updatedField
 }) => {
   const formatLink = (url) => {
     const urlRegex = /(https?:\/\/(www\.)?)(.{10})/g;
@@ -21,175 +21,204 @@ const ProjectListContainer = ({
 
   return (
     <div className="project-list-container">
-      <h1>Liste des projets</h1>
-      <table>
-        <thead>
-          <tr className="project-main-categories">
-            <th colSpan="4">Informations principales</th>
-            <th colSpan="3">Images</th>
-            <th rowSpan="2">Star</th>
-            <th rowSpan="2">Actions</th>
-          </tr>
-          <tr className="project-categories">
-            <th>Titre</th>
-            <th>Description Courte</th>
-            <th>Github</th>
-            <th>Url de test</th>
-            <th>Nb</th>
-            <th>Préfixe</th>
-            <th>Fond</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects &&
-            Array.from(projects).map((project) => {
-              const { mainDatas } = project;
-              const {
-                active,
-                background,
-                context,
-                context_url: contextUrl,
-                date,
-                description,
-                id,
-                img_prefix: imgPrefix,
-                nb_images: nbImages,
-                priority,
-                short_description: shortDescription,
-                title,
-                url_github: urlGithub,
-                url_test: urlTest,
-                ...rest
-              } = mainDatas;
-              const extractDate = new Date(date).toLocaleString();
-              const dateRegex = /([0-9]{2}.){2}[0-9]{4}/g;
-              const convertDate = extractDate.match(dateRegex)[0];
-              return (
-                <tr key={id}>
-                  {/* Title */}
-                  <td onClick={() => setUpdatedField({ label: "title", id: id, value: title })}>
-                    {updatedField.label === "title" && updatedField.id === id ? (
-                      <Input
-                        error={updatedField.error}
-                        placeholder="titre du projet"
-                        id="title"
-                        setValue={(e) => setUpdatedField({ label: "title", id: id, value: e.target.value })}
-                        value={updatedField.value}
-                      />
-                    ) : (
-                      title
-                    )}
-                  </td>
-                  {/* short description */}
-                  <td onClick={() => setUpdatedField({ label: "shortDescription", id: id, value: shortDescription })}>
-                    {updatedField.label === "shortDescription" && updatedField.id === id ? (
-                      <Input
-                        error={updatedField.error}
-                        placeholder="description courte du projet (Apparaît dans les vignettes)"
-                        id="shortDescription"
-                        setValue={(e) => setUpdatedField({ label: "shortDescription", id: id, value: e.target.value })}
-                        value={updatedField.value}
-                      />
-                    ) : (
-                      shortDescription
-                    )}
-                  </td>
-                  {/* github url */}
-                  <td onClick={() => setUpdatedField({ label: "urlGithub", id: id, value: urlGithub })}>
-                    {updatedField.label === "urlGithub" && updatedField.id === id ? (
-                      <Input
-                        error={updatedField.error}
-                        placeholder="Url Github"
-                        id="urlGithub"
-                        setValue={(e) => setUpdatedField({ label: "urlGithub", id: id, value: e.target.value })}
-                        value={updatedField.value}
-                        type="url"
-                      />
-                    ) : (
-                      urlGithub && formatLink(urlGithub)
-                    )}
-                  </td>
-                  {/* project preview url */}
-                  <td onClick={() => setUpdatedField({ label: "urlTest", id: id, value: urlTest })}>
-                    {updatedField.label === "urlTest" && updatedField.id === id ? (
-                      <Input
-                        error={updatedField.error}
-                        placeholder="Url preview"
-                        id="urlTest"
-                        setValue={(e) => setUpdatedField({ label: "urlTest", id: id, value: e.target.value })}
-                        value={updatedField.value}
-                        type="url"
-                      />
-                    ) : (
-                      urlTest && formatLink(urlTest)
-                    )}
-                  </td>
+      <form onSubmit={(e) => e.preventDefault(e)}>
+        <h1>Liste des projets</h1>
+        <table>
+          <thead>
+            <tr className="project-main-categories">
+              <th colSpan="4">Informations principales</th>
+              <th colSpan="3">Images</th>
+              <th rowSpan="2">Star</th>
+              <th rowSpan="2">Actions</th>
+            </tr>
+            <tr className="project-categories">
+              <th>Titre</th>
+              <th>Description Courte</th>
+              <th>Github</th>
+              <th>Url de test</th>
+              <th>Nb</th>
+              <th>Préfixe</th>
+              <th>Fond</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projects &&
+              Array.from(projects).map((project) => {
+                const { mainDatas } = project;
+                const {
+                  active,
+                  background,
+                  context,
+                  context_url: contextUrl,
+                  date,
+                  description,
+                  id,
+                  img_prefix: imgPrefix,
+                  nb_images: nbImages,
+                  priority,
+                  short_description: shortDescription,
+                  title,
+                  url_github: urlGithub,
+                  url_test: urlTest,
+                  ...rest
+                } = mainDatas;
+                const extractDate = new Date(date).toLocaleString();
+                const dateRegex = /([0-9]{2}.){2}[0-9]{4}/g;
+                const convertDate = extractDate.match(dateRegex)[0];
+                return (
+                  <tr key={id}>
+                    {/* Title */}
+                    <td onClick={() => setUpdatedField({ label: "title", id, value: title })}>
+                      {updatedField.label === "title" && updatedField.id === id ? (
+                        <Input
+                          autoFocus
+                          displayError={false}
+                          error={updatedField.error}
+                          id="title"
+                          onBlur={() => setUpdatedField({})}
+                          onKeyPress={keyPressHandler}
+                          placeholder="titre"
+                          setValue={(e) => setUpdatedField({ label: "title", id, value: e.target.value })}
+                          value={updatedField.value ?? undefined}
+                        />
+                      ) : (
+                        title
+                      )}
+                    </td>
+                    {/* short description */}
+                    <td onClick={() => setUpdatedField({ label: "shortDescription", id, value: shortDescription })}>
+                      {updatedField.label === "shortDescription" && updatedField.id === id ? (
+                        <Input
+                          autoFocus
+                          displayError={false}
+                          error={updatedField.error}
+                          id="shortDescription"
+                          onBlur={() => setUpdatedField({})}
+                          onKeyPress={keyPressHandler}
+                          placeholder="Description courte"
+                          setValue={(e) => setUpdatedField({ label: "shortDescription", id, value: e.target.value })}
+                          value={updatedField.value ?? undefined}
+                        />
+                      ) : (
+                        shortDescription
+                      )}
+                    </td>
+                    {/* github url */}
+                    <td onClick={() => setUpdatedField({ label: "urlGithub", id, value: urlGithub })}>
+                      {updatedField.label === "urlGithub" && updatedField.id === id ? (
+                        <Input
+                          autoFocus
+                          displayError={false}
+                          error={updatedField.error}
+                          id="urlGithub"
+                          onBlur={() => setUpdatedField({})}
+                          onKeyPress={keyPressHandler}
+                          placeholder="Url Github"
+                          setValue={(e) => setUpdatedField({ label: "urlGithub", id, value: e.target.value })}
+                          type="url"
+                          value={updatedField.value ?? undefined}
+                        />
+                      ) : (
+                        urlGithub && formatLink(urlGithub)
+                      )}
+                    </td>
+                    {/* project preview url */}
+                    <td onClick={() => setUpdatedField({ label: "urlTest", id, value: urlTest })}>
+                      {updatedField.label === "urlTest" && updatedField.id === id ? (
+                        <Input
+                          autoFocus
+                          displayError={false}
+                          error={updatedField.error}
+                          id="urlTest"
+                          onBlur={() => setUpdatedField({})}
+                          onKeyPress={keyPressHandler}
+                          placeholder="Url preview"
+                          setValue={(e) => setUpdatedField({ label: "urlTest", id, value: e.target.value })}
+                          type="url"
+                          value={updatedField.value ?? undefined}
+                        />
+                      ) : (
+                        urlTest && formatLink(urlTest)
+                      )}
+                    </td>
 
-                  {/* Number of images */}
-                  <td onClick={() => setUpdatedField({ label: "nbImages", id: id, value: nbImages.toString() })}>
-                    {updatedField.label === "nbImages" && updatedField.id === id ? (
+                    {/* Number of images */}
+                    <td onClick={() => setUpdatedField({ label: "nbImages", id, value: nbImages.toString() })}>
+                      {updatedField.label === "nbImages" && updatedField.id === id ? (
+                        <Input
+                          autoFocus
+                          displayError={false}
+                          id="nbImages"
+                          error={updatedField.error}
+                          min={0}
+                          max={20}
+                          onBlur={() => setUpdatedField({})}
+                          onKeyPress={keyPressHandler}
+                          setValue={(e) => setUpdatedField({ label: "nbImages", id, value: parseInt(e.target.value) })}
+                          type="number"
+                          defaultValue={0}
+                          value={parseInt(updatedField.value) ?? undefined}
+                        />
+                      ) : (
+                        nbImages
+                      )}
+                    </td>
+                    {/* image prefix  */}
+                    <td onClick={() => setUpdatedField({ label: "imgPrefix", id, value: imgPrefix })}>
+                      {updatedField.label === "imgPrefix" && updatedField.id === id ? (
+                        <Input
+                          autoFocus
+                          displayError={false}
+                          error={updatedField.error}
+                          id="imgPrefix"
+                          onBlur={() => setUpdatedField({})}
+                          onKeyPress={keyPressHandler}
+                          placeholder="Préfixe images"
+                          setValue={(e) => setUpdatedField({ label: "imgPrefix", id, value: e.target.value })}
+                          value={updatedField.value ?? undefined}
+                        />
+                      ) : (
+                        imgPrefix
+                      )}
+                    </td>
+                    <td>
                       <Input
-                        error={updatedField.error}
-                        id="nbImages"
-                        setValue={(e) => setUpdatedField({ label: "nbImages", id: id, value: e.target.value })}
-                        value={updatedField.value}
-                        type="number"
-                        min={0}
-                        max={20}
+                        autoFocus
+                        dataId={id}
+                        displayError={false}
+                        id="background"
+                        type="color"
+                        setValue={(e) => handleChange(e)}
+                        value={background ?? ""}
                       />
-                    ) : (
-                      nbImages
-                    )}
-                  </td>
-                  {/* image prefix  */}
-                  <td onClick={() => setUpdatedField({ label: "imgPrefix", id: id, value: imgPrefix })}>
-                    {updatedField.label === "imgPrefix" && updatedField.id === id ? (
-                      <Input
-                        error={updatedField.error}
-                        id="imgPrefix"
-                        placeholder="Ajouter un prefix"
-                        setValue={(e) => setUpdatedField({ label: "imgPrefix", id: id, value: e.target.value })}
-                        value={updatedField.value}
-                      />
-                    ) : (
-                      imgPrefix
-                    )}
-                  </td>
-                  <td>
-                    <Input
-                      dataId={id}
-                      id="background"
-                      type="color"
-                      setValue={(e) => handleChange(e)}
-                      value={background ?? ""}
-                    />
-                  </td>
-                  <td>
-                    <label className="switch">
-                      <input
-                        data-id={id}
-                        type="checkbox"
-                        value={active}
-                        checked={active && "checked"}
-                        id="active"
-                        onChange={(e) => handleChange(e)}
-                      />
-                      <span className="slider round"></span>
-                    </label>
-                  </td>
-                  <td className="actions">
-                    <span>
-                      <FaEdit />
-                    </span>
-                    <span>
-                      <FaTrashAlt onClick={() => displayDeleteModal(id, title)} />
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+                    </td>
+                    <td>
+                      <label className="switch">
+                        <input
+                          data-id={id}
+                          type="checkbox"
+                          value={active}
+                          checked={active && "checked"}
+                          id="active"
+                          onChange={(e) => handleChange(e)}
+                        />
+                        <span className="slider round"></span>
+                      </label>
+                    </td>
+                    <td className="actions">
+                      <span>
+                        <FaEdit />
+                      </span>
+                      <span>
+                        <FaTrashAlt onClick={() => displayDeleteModal(id, title)} />
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </form>
     </div>
   );
 };
@@ -197,6 +226,7 @@ const ProjectListContainer = ({
 ProjectListContainer.propTypes = {
   displayDeleteModal: propTypes.func.isRequired,
   handleChange: propTypes.func.isRequired,
+  keyPressHandler: propTypes.func.isRequired,
   projects: propTypes.arrayOf(
     propTypes.shape({
       mainDatas: propTypes.shape({
@@ -221,7 +251,13 @@ ProjectListContainer.propTypes = {
         }).isRequired
       ).isRequired
     })
-  )
+  ),
+  setUpdatedField: propTypes.func.isRequired,
+  updatedField: propTypes.shape({
+    id: propTypes.number,
+    value: propTypes.oneOfType([propTypes.string, propTypes.number, propTypes.array]),
+    error: propTypes.string
+  }).isRequired
 };
 
 export default ProjectListContainer;

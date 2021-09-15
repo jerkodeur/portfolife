@@ -70,8 +70,6 @@ const ProjectCreateAndEdit = () => {
       objectWithFieldConstraints[currentField] = projectConstraints[currentField];
       if (currentField === "mdDescription") {
         objectWithFieldConstraints[currentField].value = mdDescription;
-      } else if (currentField === "nbImages") {
-        objectWithFieldConstraints[currentField].value = Number(formDatas.nbImages);
       } else {
         objectWithFieldConstraints[currentField].value = formDatas[currentField];
       }

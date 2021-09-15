@@ -10,6 +10,7 @@ const ProjectList = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteProjectId, setDeleteProjectId] = useState("");
   const [labelToDelete, setlabelToDelete] = useState("");
+  const [updatedField, setUpdatedField] = useState({ label: "imgPrefix", id: 11, error: "", value: "" });
 
   useEffect(() => {
     axios
@@ -80,7 +81,13 @@ const ProjectList = () => {
 
   return (
     <>
-      <ProjectListContainer projects={projects} handleChange={handleChange} displayDeleteModal={displayDeleteModal} />
+      <ProjectListContainer
+        projects={projects}
+        handleChange={handleChange}
+        displayDeleteModal={displayDeleteModal}
+        updatedField={updatedField}
+        setUpdatedField={setUpdatedField}
+      />
       {showDeleteModal && (
         <ConfirmModal
           className="danger"

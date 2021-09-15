@@ -5,7 +5,7 @@ import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "reac
 
 import Input from "../../../../commons/forms/Input";
 
-const ProjectListContainer = ({ projects, handleChange, displayDeleteModal }) => {
+const ProjectListContainer = ({ projects, handleChange, displayDeleteModal, updatedField, setUpdatedField }) => {
   const formatLink = (url) => {
     const urlRegex = /(https?:\/\/(www\.)?)(.{10})/g;
     let urlFormated = url.replace(urlRegex, "$3");
@@ -64,7 +64,19 @@ const ProjectListContainer = ({ projects, handleChange, displayDeleteModal }) =>
                   <td>{urlGithub && formatLink(urlGithub)}</td>
                   <td>{urlTest && formatLink(urlTest)}</td>
                   <td>{nbImages}</td>
-                  <td>{imgPrefix}</td>
+                  <td>
+                    {updatedField.label === "imgPrefix" && updatedField.id === id ? (
+                      <Input
+                        error={updatedField.error}
+                        id="imgPrefix"
+                        placeholder="Ajouter un prefix"
+                        // onChange={(e) => setUpdatedField({ ...updatedField, value: e.target.value })}
+                        value={imgPrefix}
+                      />
+                    ) : (
+                      imgPrefix
+                    )}
+                  </td>
                   <td>
                     <Input
                       dataId={id}

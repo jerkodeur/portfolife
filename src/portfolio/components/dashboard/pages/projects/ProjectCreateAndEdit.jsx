@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import ToasterDisplay from "../../../../helpers/ToasterDisplay";
 import ProjectForm from "./new/ProjectForm";
 import CheckFormFields from "../../../commons/forms/CheckFormFields";
+import projectConstraints from "./projectConstraints";
 
 const ProjectCreateAndEdit = () => {
   const history = useHistory();
@@ -48,81 +49,43 @@ const ProjectCreateAndEdit = () => {
   };
 
   const addProject = () => {
-    const constraints = {
-      date: {
-        value: formDatas.date,
-        required: true,
-        regex: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
-        type: ["string"]
-      },
-      title: {
-        value: formDatas.title,
-        required: true,
-        type: ["string"]
-      },
-      shortDescription: {
-        value: formDatas.shortDescription,
-        required: true,
-        type: ["string"]
-      },
-      mdDescription: {
-        value: mdDescription,
-        required: true,
-        type: ["string"]
-      },
-      context: {
-        value: formDatas.context,
-        required: true,
-        type: ["string"]
-      },
-      contextUrl: {
-        value: formDatas.contextUrl,
-        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
-        type: ["string"]
-      },
-      urlGithub: {
-        value: formDatas.urlGithub,
-        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
-        type: ["string"]
-      },
-      urlTest: {
-        value: formDatas.urlTest,
-        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
-        type: ["string"]
-      },
-      imgPrefix: {
-        value: formDatas.imgPrefix,
-        required: true,
-        type: ["string"]
-      },
-      background: {
-        value: formDatas.background,
-        required: true,
-        regex: /^#(?:[0-9a-fA-F]{3}){1,2}$/
-      },
-      nbImages: {
-        required: true,
-        value: Number(formDatas.nbImages),
-        type: ["number"],
-        range: [0, 20]
-      },
-      technos: {
-        value: formDatas.technos,
-        required: true,
-        type: ["object"],
-        length: 1
-      },
-      active: {
-        value: formDatas.active,
-        type: ["boolean"]
+    const formFieldsToCheck = [
+      "date",
+      "title",
+      "shortDescription",
+      "context",
+      "contextUrl",
+      "urlGithub",
+      "urlTest",
+      "mdDescription",
+      "imgPrefix",
+      "background",
+      "nbImages",
+      "technos",
+      "active"
+    ];
+
+    // Create an object with project fieds contraints and the corresponding state values
+    const fieldsToCheck = formFieldsToCheck.reduce((objectWithFieldConstraints, currentField) => {
+      objectWithFieldConstraints[currentField] = projectConstraints[currentField];
+      if (currentField === "mdDescription") {
+        objectWithFieldConstraints[currentField].value = mdDescription;
+      } else if (currentField === "nbImages") {
+        objectWithFieldConstraints[currentField].value = Number(formDatas.nbImages);
+      } else {
+        objectWithFieldConstraints[currentField].value = formDatas[currentField];
       }
-    };
-    const errorfields = CheckFormFields(constraints);
+      return objectWithFieldConstraints;
+    }, {});
+
+    // Verify if errors
+    const errorfields = CheckFormFields(fieldsToCheck);
     if (Object.values(errorfields).some((el) => el)) {
       ToasterDisplay("Le projet n'a pas été ajouté, des erreurs ont été détectées !", "fail");
       return setFormErrors(errorfields);
     }
 
+    // If not persist the project in database and return to the projects list page
     axios
       .post(
         "/projects/",

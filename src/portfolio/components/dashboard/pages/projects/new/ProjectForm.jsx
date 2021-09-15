@@ -130,7 +130,7 @@ const ProjectForm = ({
         setValue={(e) => handleForm(e)}
         value={formDatas.background}
       />
-      {/* thumbmail images background color */}
+      {/* Number of images */}
       <Input
         error={formErrors.nbImages}
         id="nbImages"

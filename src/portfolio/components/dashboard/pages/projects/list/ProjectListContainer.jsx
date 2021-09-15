@@ -5,7 +5,14 @@ import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "reac
 
 import Input from "../../../../commons/forms/Input";
 
-const ProjectListContainer = ({ projects, handleChange, displayDeleteModal, updatedField, setUpdatedField }) => {
+const ProjectListContainer = ({
+  projects,
+  handleChange,
+  displayDeleteModal,
+  updatedField,
+  handleUpdatedField,
+  setUpdatedField
+}) => {
   const formatLink = (url) => {
     const urlRegex = /(https?:\/\/(www\.)?)(.{10})/g;
     let urlFormated = url.replace(urlRegex, "$3");
@@ -59,19 +66,90 @@ const ProjectListContainer = ({ projects, handleChange, displayDeleteModal, upda
               const convertDate = extractDate.match(dateRegex)[0];
               return (
                 <tr key={id}>
-                  <td>{title}</td>
-                  <td>{shortDescription}</td>
-                  <td>{urlGithub && formatLink(urlGithub)}</td>
-                  <td>{urlTest && formatLink(urlTest)}</td>
-                  <td>{nbImages}</td>
-                  <td>
+                  {/* Title */}
+                  <td onClick={() => setUpdatedField({ label: "title", id: id, value: title })}>
+                    {updatedField.label === "title" && updatedField.id === id ? (
+                      <Input
+                        error={updatedField.error}
+                        placeholder="titre du projet"
+                        id="title"
+                        setValue={(e) => setUpdatedField({ label: "title", id: id, value: e.target.value })}
+                        value={updatedField.value}
+                      />
+                    ) : (
+                      title
+                    )}
+                  </td>
+                  {/* short description */}
+                  <td onClick={() => setUpdatedField({ label: "shortDescription", id: id, value: shortDescription })}>
+                    {updatedField.label === "shortDescription" && updatedField.id === id ? (
+                      <Input
+                        error={updatedField.error}
+                        placeholder="description courte du projet (Apparaît dans les vignettes)"
+                        id="shortDescription"
+                        setValue={(e) => setUpdatedField({ label: "shortDescription", id: id, value: e.target.value })}
+                        value={updatedField.value}
+                      />
+                    ) : (
+                      shortDescription
+                    )}
+                  </td>
+                  {/* github url */}
+                  <td onClick={() => setUpdatedField({ label: "urlGithub", id: id, value: urlGithub })}>
+                    {updatedField.label === "urlGithub" && updatedField.id === id ? (
+                      <Input
+                        error={updatedField.error}
+                        placeholder="Url Github"
+                        id="urlGithub"
+                        setValue={(e) => setUpdatedField({ label: "urlGithub", id: id, value: e.target.value })}
+                        value={updatedField.value}
+                        type="url"
+                      />
+                    ) : (
+                      urlGithub && formatLink(urlGithub)
+                    )}
+                  </td>
+                  {/* project preview url */}
+                  <td onClick={() => setUpdatedField({ label: "urlTest", id: id, value: urlTest })}>
+                    {updatedField.label === "urlTest" && updatedField.id === id ? (
+                      <Input
+                        error={updatedField.error}
+                        placeholder="Url preview"
+                        id="urlTest"
+                        setValue={(e) => setUpdatedField({ label: "urlTest", id: id, value: e.target.value })}
+                        value={updatedField.value}
+                        type="url"
+                      />
+                    ) : (
+                      urlTest && formatLink(urlTest)
+                    )}
+                  </td>
+
+                  {/* Number of images */}
+                  <td onClick={() => setUpdatedField({ label: "nbImages", id: id, value: nbImages.toString() })}>
+                    {updatedField.label === "nbImages" && updatedField.id === id ? (
+                      <Input
+                        error={updatedField.error}
+                        id="nbImages"
+                        setValue={(e) => setUpdatedField({ label: "nbImages", id: id, value: e.target.value })}
+                        value={updatedField.value}
+                        type="number"
+                        min={0}
+                        max={20}
+                      />
+                    ) : (
+                      nbImages
+                    )}
+                  </td>
+                  {/* image prefix  */}
+                  <td onClick={() => setUpdatedField({ label: "imgPrefix", id: id, value: imgPrefix })}>
                     {updatedField.label === "imgPrefix" && updatedField.id === id ? (
                       <Input
                         error={updatedField.error}
                         id="imgPrefix"
                         placeholder="Ajouter un prefix"
-                        // onChange={(e) => setUpdatedField({ ...updatedField, value: e.target.value })}
-                        value={imgPrefix}
+                        setValue={(e) => setUpdatedField({ label: "imgPrefix", id: id, value: e.target.value })}
+                        value={updatedField.value}
                       />
                     ) : (
                       imgPrefix

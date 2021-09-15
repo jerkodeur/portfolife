@@ -64,6 +64,10 @@ const ProjectList = () => {
     setShowDeleteModal(true);
   };
 
+  const handleUpdatedField = (e) => {
+    setUpdatedField({ ...updatedField, value: e.target.value });
+  };
+
   const deleteProject = (e) => {
     axios
       .delete(`/projects/${e.target.dataset.id}`, {
@@ -85,6 +89,7 @@ const ProjectList = () => {
         projects={projects}
         handleChange={handleChange}
         displayDeleteModal={displayDeleteModal}
+        handleUpdatedField={handleUpdatedField}
         updatedField={updatedField}
         setUpdatedField={setUpdatedField}
       />

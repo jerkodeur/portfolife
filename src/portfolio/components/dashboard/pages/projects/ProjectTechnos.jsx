@@ -5,12 +5,11 @@ import propTypes from "prop-types";
 
 import CheckFormFields from "../../../commons/forms/CheckFormFields";
 import ToasterDisplay from "../../../../helpers/ToasterDisplay";
-import NewTechnoForm from "./new/NewTechnoForm";
+import NewTechnoForm from "./list/projectFormComponents/NewTechnoForm";
 
 const ProjectTechnos = (props) => {
   const token = sessionStorage.getItem("token");
   const { selectedTechnos, toggleSelectedTechnos, error, handleClassError } = props;
-
   const [technoFormErrors, setTechnoFormErrors] = useState({});
   const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
   const [technos, setTechnos] = useState();
@@ -92,7 +91,7 @@ const ProjectTechnos = (props) => {
   };
 
   return (
-    <fieldset className={handleClassError(["technos"]) && "error"}>
+    <fieldset className={handleClassError(["technos"]) ? "error" : undefined}>
       <legend>Technos utilisées dans le projet</legend>
       <ul className="techno-wrapper">
         {technos &&
@@ -127,6 +126,10 @@ const ProjectTechnos = (props) => {
       )}
     </fieldset>
   );
+};
+
+ProjectTechnos.defaultProps = {
+  error: ""
 };
 
 ProjectTechnos.propTypes = {

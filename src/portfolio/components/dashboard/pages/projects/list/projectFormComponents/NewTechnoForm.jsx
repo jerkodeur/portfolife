@@ -1,15 +1,9 @@
 import React from "react";
 
-import Input from "../../../../commons/forms/Input";
+import Input from "../../../../../commons/forms/Input";
 import propTypes from "prop-types";
 
-const NewTechnoForm = ({
-  setNewTechnoFormDisplay,
-  errors,
-  newTechno,
-  handleNewTechno,
-  addNewTechno
-}) => (
+const NewTechnoForm = ({ setNewTechnoFormDisplay, errors, newTechno, handleNewTechno, addNewTechno }) => (
   <div id="newTechno">
     <fieldset className="new-techno-container" role="form">
       <legend>
@@ -67,8 +61,7 @@ NewTechnoForm.propTypes = {
   newTechno: propTypes.shape({
     name: propTypes.string,
     imageName: propTypes.string,
-    priority: propTypes.oneOfType([propTypes.number, propTypes.string])
-      .isRequired
+    priority: propTypes.oneOfType([propTypes.number, propTypes.string]).isRequired
   }),
   handleNewTechno: propTypes.func.isRequired,
   addNewTechno: propTypes.func.isRequired

@@ -64,6 +64,19 @@
                         border-radius: 5px;
                     }
                 }
+                &:nth-of-type(1) {
+                    svg {
+                        padding: 0.1em;
+                        cursor: pointer;
+                        font-size: 1.6em;
+                        border-radius: 10px;
+                        box-shadow: 2px 2px 4px $dark;
+                        &:hover {
+                            color: #fff;
+                            box-shadow: 3px 3px 6px $dark;
+                        }
+                    }
+                }
                 &.actions {
                     padding: 0.25em;
                     span:nth-of-type(1) {
@@ -86,6 +99,16 @@
                                 color: red;
                             }
                         }
+                    }
+                }
+            }
+            &.show-more-container {
+                background-color: $dark;
+                color: $theme-color;
+                td {
+                    text-align: left;
+                    h3 {
+                        color: $theme-color;
                     }
                 }
             }

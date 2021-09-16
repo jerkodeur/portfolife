@@ -14,6 +14,7 @@ const ProjectList = () => {
   const [deleteProjectId, setDeleteProjectId] = useState("");
   const [labelToDelete, setlabelToDelete] = useState("");
   const [updatedField, setUpdatedField] = useState({});
+  const [showMoreContent, setShowMoreContent] = useState({ id: 5 });
 
   useEffect(() => {
     axios
@@ -81,7 +82,7 @@ const ProjectList = () => {
           acc.push(project);
           return acc;
         }, []);
-        ToasterDisplay("Mise à jour réussie !");
+        ToasterDisplay("Mise à jour réussie !", "success", { duration: 1500, position: "bottom-left" });
         setUpdatedField({});
         setProjects(updateProjects);
       })
@@ -118,6 +119,8 @@ const ProjectList = () => {
         displayDeleteModal={displayDeleteModal}
         keyPressHandler={keyPressHandler}
         updatedField={updatedField}
+        showMoreContent={showMoreContent}
+        setShowMoreContent={setShowMoreContent}
         setUpdatedField={setUpdatedField}
       />
       {showDeleteModal && (

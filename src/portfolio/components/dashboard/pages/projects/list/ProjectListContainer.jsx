@@ -1,7 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import propTypes from "prop-types";
 
-import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "react-icons/fa";
+import ShowMoreContent from "./ShowMoreContent";
+
+import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaEdit, FaTrashAlt } from "react-icons/fa";
 
 import Input from "../../../../commons/forms/Input";
 
@@ -10,6 +12,8 @@ const ProjectListContainer = ({
   handleChange,
   keyPressHandler,
   projects,
+  showMoreContent,
+  setShowMoreContent,
   setUpdatedField,
   updatedField
 }) => {
@@ -26,6 +30,9 @@ const ProjectListContainer = ({
         <table>
           <thead>
             <tr className="project-main-categories">
+              <th rowSpan="2">
+                <FaPlus />
+              </th>
               <th colSpan="4">Informations principales</th>
               <th colSpan="3">Images</th>
               <th rowSpan="2">Star</th>
@@ -44,176 +51,181 @@ const ProjectListContainer = ({
           <tbody>
             {projects &&
               Array.from(projects).map((project) => {
-                const { mainDatas } = project;
+                const { mainDatas, technos } = project;
                 const {
                   active,
                   background,
-                  context,
-                  context_url: contextUrl,
-                  date,
-                  description,
+                  // context,
+                  // context_url: contextUrl,
+                  // date,
+                  // description,
                   id,
                   img_prefix: imgPrefix,
                   nb_images: nbImages,
-                  priority,
+                  // priority,
                   short_description: shortDescription,
                   title,
                   url_github: urlGithub,
                   url_test: urlTest,
                   ...rest
                 } = mainDatas;
-                const extractDate = new Date(date).toLocaleString();
-                const dateRegex = /([0-9]{2}.){2}[0-9]{4}/g;
-                const convertDate = extractDate.match(dateRegex)[0];
                 return (
-                  <tr key={id}>
-                    {/* Title */}
-                    <td onClick={() => setUpdatedField({ label: "title", id, value: title })}>
-                      {updatedField.label === "title" && updatedField.id === id ? (
-                        <Input
-                          autoFocus
-                          displayError={false}
-                          error={updatedField.error}
-                          id="title"
-                          onBlur={() => setUpdatedField({})}
-                          onKeyPress={keyPressHandler}
-                          placeholder="titre"
-                          setValue={(e) => setUpdatedField({ label: "title", id, value: e.target.value })}
-                          value={updatedField.value ?? undefined}
-                        />
-                      ) : (
-                        title
-                      )}
-                    </td>
-                    {/* short description */}
-                    <td onClick={() => setUpdatedField({ label: "shortDescription", id, value: shortDescription })}>
-                      {updatedField.label === "shortDescription" && updatedField.id === id ? (
-                        <Input
-                          autoFocus
-                          displayError={false}
-                          error={updatedField.error}
-                          id="shortDescription"
-                          onBlur={() => setUpdatedField({})}
-                          onKeyPress={keyPressHandler}
-                          placeholder="Description courte"
-                          setValue={(e) => setUpdatedField({ label: "shortDescription", id, value: e.target.value })}
-                          value={updatedField.value ?? undefined}
-                        />
-                      ) : (
-                        shortDescription
-                      )}
-                    </td>
-                    {/* github url */}
-                    <td onClick={() => setUpdatedField({ label: "urlGithub", id, value: urlGithub })}>
-                      {updatedField.label === "urlGithub" && updatedField.id === id ? (
-                        <Input
-                          autoFocus
-                          displayError={false}
-                          error={updatedField.error}
-                          id="urlGithub"
-                          onBlur={() => setUpdatedField({})}
-                          onKeyPress={keyPressHandler}
-                          placeholder="Url Github"
-                          setValue={(e) => setUpdatedField({ label: "urlGithub", id, value: e.target.value })}
-                          type="url"
-                          value={updatedField.value ?? undefined}
-                        />
-                      ) : (
-                        urlGithub && formatLink(urlGithub)
-                      )}
-                    </td>
-                    {/* project preview url */}
-                    <td onClick={() => setUpdatedField({ label: "urlTest", id, value: urlTest })}>
-                      {updatedField.label === "urlTest" && updatedField.id === id ? (
-                        <Input
-                          autoFocus
-                          displayError={false}
-                          error={updatedField.error}
-                          id="urlTest"
-                          onBlur={() => setUpdatedField({})}
-                          onKeyPress={keyPressHandler}
-                          placeholder="Url preview"
-                          setValue={(e) => setUpdatedField({ label: "urlTest", id, value: e.target.value })}
-                          type="url"
-                          value={updatedField.value ?? undefined}
-                        />
-                      ) : (
-                        urlTest && formatLink(urlTest)
-                      )}
-                    </td>
+                  <Fragment key={id}>
+                    <tr>
+                      <td>
+                        <FaChevronCircleDown />
+                      </td>
+                      {/* Title */}
+                      <td onClick={() => setUpdatedField({ label: "title", id, value: title })}>
+                        {updatedField.label === "title" && updatedField.id === id ? (
+                          <Input
+                            autoFocus
+                            displayError={false}
+                            error={updatedField.error}
+                            id="title"
+                            onBlur={() => setUpdatedField({})}
+                            onKeyPress={keyPressHandler}
+                            placeholder="titre"
+                            setValue={(e) => setUpdatedField({ label: "title", id, value: e.target.value })}
+                            value={updatedField.value ?? undefined}
+                          />
+                        ) : (
+                          title
+                        )}
+                      </td>
+                      {/* short description */}
+                      <td onClick={() => setUpdatedField({ label: "shortDescription", id, value: shortDescription })}>
+                        {updatedField.label === "shortDescription" && updatedField.id === id ? (
+                          <Input
+                            autoFocus
+                            displayError={false}
+                            error={updatedField.error}
+                            id="shortDescription"
+                            onBlur={() => setUpdatedField({})}
+                            onKeyPress={keyPressHandler}
+                            placeholder="Description courte"
+                            setValue={(e) => setUpdatedField({ label: "shortDescription", id, value: e.target.value })}
+                            value={updatedField.value ?? undefined}
+                          />
+                        ) : (
+                          shortDescription
+                        )}
+                      </td>
+                      {/* github url */}
+                      <td onClick={() => setUpdatedField({ label: "urlGithub", id, value: urlGithub })}>
+                        {updatedField.label === "urlGithub" && updatedField.id === id ? (
+                          <Input
+                            autoFocus
+                            displayError={false}
+                            error={updatedField.error}
+                            id="urlGithub"
+                            onBlur={() => setUpdatedField({})}
+                            onKeyPress={keyPressHandler}
+                            placeholder="Url Github"
+                            setValue={(e) => setUpdatedField({ label: "urlGithub", id, value: e.target.value })}
+                            type="url"
+                            value={updatedField.value ?? undefined}
+                          />
+                        ) : (
+                          urlGithub && formatLink(urlGithub)
+                        )}
+                      </td>
+                      {/* project preview url */}
+                      <td onClick={() => setUpdatedField({ label: "urlTest", id, value: urlTest })}>
+                        {updatedField.label === "urlTest" && updatedField.id === id ? (
+                          <Input
+                            autoFocus
+                            displayError={false}
+                            error={updatedField.error}
+                            id="urlTest"
+                            onBlur={() => setUpdatedField({})}
+                            onKeyPress={keyPressHandler}
+                            placeholder="Url preview"
+                            setValue={(e) => setUpdatedField({ label: "urlTest", id, value: e.target.value })}
+                            type="url"
+                            value={updatedField.value ?? undefined}
+                          />
+                        ) : (
+                          urlTest && formatLink(urlTest)
+                        )}
+                      </td>
 
-                    {/* Number of images */}
-                    <td onClick={() => setUpdatedField({ label: "nbImages", id, value: nbImages.toString() })}>
-                      {updatedField.label === "nbImages" && updatedField.id === id ? (
+                      {/* Number of images */}
+                      <td onClick={() => setUpdatedField({ label: "nbImages", id, value: nbImages.toString() })}>
+                        {updatedField.label === "nbImages" && updatedField.id === id ? (
+                          <Input
+                            autoFocus
+                            displayError={false}
+                            id="nbImages"
+                            error={updatedField.error}
+                            min={0}
+                            max={20}
+                            onBlur={() => setUpdatedField({})}
+                            onKeyPress={keyPressHandler}
+                            setValue={(e) =>
+                              setUpdatedField({ label: "nbImages", id, value: parseInt(e.target.value) })
+                            }
+                            type="number"
+                            defaultValue={0}
+                            value={parseInt(updatedField.value) ?? undefined}
+                          />
+                        ) : (
+                          nbImages
+                        )}
+                      </td>
+                      {/* image prefix  */}
+                      <td onClick={() => setUpdatedField({ label: "imgPrefix", id, value: imgPrefix })}>
+                        {updatedField.label === "imgPrefix" && updatedField.id === id ? (
+                          <Input
+                            autoFocus
+                            displayError={false}
+                            error={updatedField.error}
+                            id="imgPrefix"
+                            onBlur={() => setUpdatedField({})}
+                            onKeyPress={keyPressHandler}
+                            placeholder="Préfixe images"
+                            setValue={(e) => setUpdatedField({ label: "imgPrefix", id, value: e.target.value })}
+                            value={updatedField.value ?? undefined}
+                          />
+                        ) : (
+                          imgPrefix
+                        )}
+                      </td>
+                      <td>
                         <Input
                           autoFocus
+                          dataId={id}
                           displayError={false}
-                          id="nbImages"
-                          error={updatedField.error}
-                          min={0}
-                          max={20}
-                          onBlur={() => setUpdatedField({})}
-                          onKeyPress={keyPressHandler}
-                          setValue={(e) => setUpdatedField({ label: "nbImages", id, value: parseInt(e.target.value) })}
-                          type="number"
-                          defaultValue={0}
-                          value={parseInt(updatedField.value) ?? undefined}
+                          id="background"
+                          type="color"
+                          setValue={(e) => handleChange(e)}
+                          value={background ?? ""}
                         />
-                      ) : (
-                        nbImages
-                      )}
-                    </td>
-                    {/* image prefix  */}
-                    <td onClick={() => setUpdatedField({ label: "imgPrefix", id, value: imgPrefix })}>
-                      {updatedField.label === "imgPrefix" && updatedField.id === id ? (
-                        <Input
-                          autoFocus
-                          displayError={false}
-                          error={updatedField.error}
-                          id="imgPrefix"
-                          onBlur={() => setUpdatedField({})}
-                          onKeyPress={keyPressHandler}
-                          placeholder="Préfixe images"
-                          setValue={(e) => setUpdatedField({ label: "imgPrefix", id, value: e.target.value })}
-                          value={updatedField.value ?? undefined}
-                        />
-                      ) : (
-                        imgPrefix
-                      )}
-                    </td>
-                    <td>
-                      <Input
-                        autoFocus
-                        dataId={id}
-                        displayError={false}
-                        id="background"
-                        type="color"
-                        setValue={(e) => handleChange(e)}
-                        value={background ?? ""}
-                      />
-                    </td>
-                    <td>
-                      <label className="switch">
-                        <input
-                          data-id={id}
-                          type="checkbox"
-                          value={active}
-                          checked={active && "checked"}
-                          id="active"
-                          onChange={(e) => handleChange(e)}
-                        />
-                        <span className="slider round"></span>
-                      </label>
-                    </td>
-                    <td className="actions">
-                      <span>
-                        <FaEdit />
-                      </span>
-                      <span>
-                        <FaTrashAlt onClick={() => displayDeleteModal(id, title)} />
-                      </span>
-                    </td>
-                  </tr>
+                      </td>
+                      <td>
+                        <label className="switch">
+                          <input
+                            data-id={id}
+                            type="checkbox"
+                            value={active}
+                            checked={active && "checked"}
+                            id="active"
+                            onChange={(e) => handleChange(e)}
+                          />
+                          <span className="slider round"></span>
+                        </label>
+                      </td>
+                      <td className="actions">
+                        <span>
+                          <FaEdit />
+                        </span>
+                        <span>
+                          <FaTrashAlt onClick={() => displayDeleteModal(id, title)} />
+                        </span>
+                      </td>
+                    </tr>
+                    {showMoreContent.id === id && <ShowMoreContent datas={{ ...rest, id, title, technos }} />}
+                  </Fragment>
                 );
               })}
           </tbody>
@@ -252,6 +264,10 @@ ProjectListContainer.propTypes = {
       ).isRequired
     })
   ),
+  showMoreContent: propTypes.shape({
+    id: propTypes.number.isRequired
+  }),
+  setShowMoreContent: propTypes.func.isRequired,
   setUpdatedField: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,

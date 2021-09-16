@@ -1,19 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import propTypes from "prop-types";
 
+import ProjectTechnos from "../ProjectTechnos";
+
 const ShowMoreContent = ({ datas }) => {
+  const [formErrors, setFormErrors] = useState({});
+
+  const { context, context_url: contextUrl, date, description, id, technos, title } = datas;
+
+  const technoIds = technos.reduce((ids, currentTechno) => {
+    ids.push(currentTechno.id);
+    return ids;
+  }, []);
+
   const convertDate = (rawDate) => {
     const extractDate = new Date(rawDate).toLocaleString();
     const dateRegex = /([0-9]{2}.){2}[0-9]{4}/g;
     return extractDate.match(dateRegex)[0];
   };
-  const { context, context_url: contextUrl, date, description, id, technos, title } = datas;
+
+  const toggleSelectedTechnos = (e) => {
+    const techno = Number(e.target.id);
+    const newTechnos = !technos.includes(techno) ? [...technos, techno] : technos.filter((el) => el !== techno);
+  };
+
+  const handleClassError = (array) => {
+    return array.reduce((acc, curr) => {
+      return formErrors[curr] ? true : acc;
+    }, false);
+  };
 
   return (
     <tr className="show-more-container">
       <td colSpan="10">
         <h3>{title}</h3>
+        <ProjectTechnos
+          selectedTechnos={technoIds}
+          toggleSelectedTechnos={toggleSelectedTechnos}
+          error={formErrors.technos}
+          handleClassError={handleClassError}
+        />
       </td>
     </tr>
   );

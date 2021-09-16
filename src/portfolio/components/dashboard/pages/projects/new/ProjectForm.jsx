@@ -2,6 +2,7 @@ import React from "react";
 
 import propTypes from "prop-types";
 
+import ContextForm from "../list/projectFormComponents/ContextForm";
 import Input from "../../../../commons/forms/Input";
 import MdEditor from "../../../../commons/forms/MdEditor";
 import ProjectTechnos from "../ProjectTechnos";
@@ -59,29 +60,7 @@ const ProjectForm = ({
         isRequired
       />
     </fieldset>
-    <fieldset className={(formErrors.context || formErrors.contextUrl) && "error"}>
-      <legend>Contexte du projet</legend>
-      {/* Context */}
-      <Input
-        error={formErrors.context}
-        id="context"
-        isRequired
-        label="Contexte"
-        placeholder="Entreprise ou école ou a été réalisé le projet"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.context}
-      />
-      {/* Context url */}
-      <Input
-        error={formErrors.contextUrl}
-        id="contextUrl"
-        label="Lien de l'établissement"
-        placeholder="Lien de l'établissement du contexte"
-        type="url"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.contextUrl}
-      />
-    </fieldset>
+    <ContextForm handleForm={handleForm} formDatas={formDatas} formErrors={formErrors} />
     <fieldset className={`multiple-fields-wrapper ${(formErrors.urlGithub || formErrors.urlTest) && "error"}`}>
       <legend>Liens du projet</legend>
       {/* github url */}

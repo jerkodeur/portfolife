@@ -10,11 +10,12 @@ import Input from "../../../../commons/forms/Input";
 const ProjectListContainer = ({
   displayDeleteModal,
   handleChange,
+  handleShowMoreContent,
   keyPressHandler,
   projects,
-  showMoreContent,
-  setShowMoreContent,
   setUpdatedField,
+  showMoreContent,
+  toggleSelectedTechnos,
   updatedField
 }) => {
   const formatLink = (url) => {
@@ -73,7 +74,7 @@ const ProjectListContainer = ({
                   <Fragment key={id}>
                     <tr>
                       <td>
-                        <FaChevronCircleDown />
+                        <FaChevronCircleDown onClick={() => handleShowMoreContent(id)} />
                       </td>
                       {/* Title */}
                       <td onClick={() => setUpdatedField({ label: "title", id, value: title })}>
@@ -224,7 +225,9 @@ const ProjectListContainer = ({
                         </span>
                       </td>
                     </tr>
-                    {showMoreContent.id === id && <ShowMoreContent datas={{ ...rest, id, title, technos }} />}
+                    {showMoreContent && showMoreContent === id && (
+                      <ShowMoreContent datas={{ ...rest, id, title, technos, toggleSelectedTechnos }} />
+                    )}
                   </Fragment>
                 );
               })}
@@ -238,6 +241,7 @@ const ProjectListContainer = ({
 ProjectListContainer.propTypes = {
   displayDeleteModal: propTypes.func.isRequired,
   handleChange: propTypes.func.isRequired,
+  handleShowMoreContent: propTypes.func.isRequired,
   keyPressHandler: propTypes.func.isRequired,
   projects: propTypes.arrayOf(
     propTypes.shape({
@@ -264,11 +268,9 @@ ProjectListContainer.propTypes = {
       ).isRequired
     })
   ),
-  showMoreContent: propTypes.shape({
-    id: propTypes.number.isRequired
-  }),
-  setShowMoreContent: propTypes.func.isRequired,
   setUpdatedField: propTypes.func.isRequired,
+  showMoreContent: propTypes.number,
+  toggleSelectedTechnos: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,
     value: propTypes.oneOfType([propTypes.string, propTypes.number, propTypes.array]),

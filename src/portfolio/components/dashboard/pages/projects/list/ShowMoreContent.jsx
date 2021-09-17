@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import propTypes from "prop-types";
 
@@ -7,12 +7,7 @@ import ProjectTechnos from "../ProjectTechnos";
 const ShowMoreContent = ({ datas }) => {
   const [formErrors, setFormErrors] = useState({});
 
-  const { context, context_url: contextUrl, date, description, id, technos, title } = datas;
-
-  const technoIds = technos.reduce((ids, currentTechno) => {
-    ids.push(currentTechno.id);
-    return ids;
-  }, []);
+  const { context, context_url: contextUrl, date, description, id, technos, title, toggleSelectedTechnos } = datas;
 
   const convertDate = (rawDate) => {
     const extractDate = new Date(rawDate).toLocaleString();
@@ -20,10 +15,10 @@ const ShowMoreContent = ({ datas }) => {
     return extractDate.match(dateRegex)[0];
   };
 
-  const toggleSelectedTechnos = (e) => {
-    const techno = Number(e.target.id);
-    const newTechnos = !technos.includes(techno) ? [...technos, techno] : technos.filter((el) => el !== techno);
-  };
+  const technoIds = technos.reduce((ids, currentTechno) => {
+    ids.push(currentTechno.id);
+    return ids;
+  }, []);
 
   const handleClassError = (array) => {
     return array.reduce((acc, curr) => {
@@ -60,7 +55,8 @@ ShowMoreContent.propTypes = {
         image_name: propTypes.string.isRequired
       }).isRequired
     ).isRequired,
-    title: propTypes.string.isRequired
+    title: propTypes.string.isRequired,
+    toggleSelectedTechnos: propTypes.func.isRequired
   })
 };
 

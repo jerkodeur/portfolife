@@ -2,13 +2,13 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import FormLinks from "../list/projectFormComponents/FormLinks";
-import FormMainInfos from "../list/projectFormComponents/FormMainInfos";
-import FormContext from "../list/projectFormComponents/FormContext";
+import FormLinks from "../projectForms/FormLinks";
+import FormMainInfos from "../projectForms/FormMainInfos";
+import FormContext from "../projectForms/FormContext";
 import Input from "../../../../commons/forms/Input";
 import ProjectTechnos from "../ProjectTechnos";
 
-const ProjectForm = ({
+const ProjectFormContainer = ({
   submitForm,
   formErrors,
   formDatas,
@@ -97,7 +97,7 @@ const ProjectForm = ({
   </form>
 );
 
-ProjectForm.prototype = {
+ProjectFormContainer.prototype = {
   addProject: propTypes.func.isRequired,
   submitForm: propTypes.func.isRequired,
   formErrors: propTypes.objectOf(propTypes.string),
@@ -110,4 +110,4 @@ ProjectForm.prototype = {
   toggleSelectedTechno: propTypes.func.isRequired
 };
 
-export default ProjectForm;
+export default ProjectFormContainer;

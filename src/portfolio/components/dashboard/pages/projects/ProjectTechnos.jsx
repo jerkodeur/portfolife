@@ -5,7 +5,7 @@ import propTypes from "prop-types";
 
 import CheckFormFields from "../../../commons/forms/CheckFormFields";
 import ToasterDisplay from "../../../../helpers/ToasterDisplay";
-import NewTechnoForm from "./list/projectFormComponents/NewTechnoForm";
+import NewTechnoForm from "./projectForms/NewTechnoForm";
 
 const ProjectTechnos = (props) => {
   const token = sessionStorage.getItem("token");

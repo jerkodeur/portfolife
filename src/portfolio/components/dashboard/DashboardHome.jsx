@@ -5,7 +5,7 @@ import { Route, useRouteMatch } from "react-router";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import ProjectList from "./pages/projects/list/ProjectList";
-import ProjectCreate from "./pages/projects/ProjectCreate";
+import ProjectCreate from "./pages/projects/new/ProjectCreate";
 import Sidebar from "./Sidebar";
 
 const DashboardHome = () => {

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-import ToasterDisplay from "../../../../helpers/ToasterDisplay";
-import ProjectForm from "./new/ProjectForm";
-import CheckFormFields from "../../../commons/forms/CheckFormFields";
-import projectConstraints from "./projectConstraints";
+import ToasterDisplay from "../../../../../helpers/ToasterDisplay";
+import ProjectForm from "./ProjectFormContainer";
+import CheckFormFields from "../../../../commons/forms/CheckFormFields";
+import projectConstraints from "../projectConstraints";
 
 const ProjectCreateAndEdit = () => {
   const history = useHistory();

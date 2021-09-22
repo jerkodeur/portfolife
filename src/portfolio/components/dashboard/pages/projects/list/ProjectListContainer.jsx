@@ -56,10 +56,6 @@ const ProjectListContainer = ({
                 const {
                   active,
                   background,
-                  // context,
-                  // context_url: contextUrl,
-                  // date,
-                  // description,
                   id,
                   img_prefix: imgPrefix,
                   nb_images: nbImages,

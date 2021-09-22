@@ -2,8 +2,8 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import Input from "../../../../../commons/forms/Input";
-import MdEditor from "../../../../../commons/forms/MdEditor";
+import Input from "../../../../commons/forms/Input";
+import MdEditor from "../../../../commons/forms/MdEditor";
 
 const FormMainInfos = ({ formDatas, formErrors, handleForm, handleClassError, mdDescription, setMdDescription }) => {
   const { date, title, shortDescription } = formDatas;

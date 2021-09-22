@@ -1,6 +1,6 @@
 import React from "react";
 
-import Input from "../../../../../commons/forms/Input";
+import Input from "../../../../commons/forms/Input";
 import propTypes from "prop-types";
 
 const NewTechnoForm = ({ setNewTechnoFormDisplay, errors, newTechno, handleNewTechno, addNewTechno }) => (

@@ -1,7 +1,7 @@
 import React from "react";
 
 import propTypes from "prop-types";
-import Input from "../../../../../commons/forms/Input";
+import Input from "../../../../commons/forms/Input";
 
 const FormContext = ({ formErrors, handleForm, formDatas, keyPressHandler, updatedField }) => {
   const { context, contextUrl } = formDatas;

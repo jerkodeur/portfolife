@@ -8,9 +8,8 @@ import projectConstraints from "../projectConstraints";
 import ProjectListContainer from "./ProjectListContainer";
 import ToasterDisplay from "../../../../../helpers/ToasterDisplay";
 
-const token = sessionStorage.getItem("token");
-
 const ProjectList = () => {
+  const token = sessionStorage.getItem("token");
   const [deleteProjectId, setDeleteProjectId] = useState("");
   const [labelToDelete, setlabelToDelete] = useState("");
   const [projects, setProjects] = useState();
@@ -121,24 +120,27 @@ const ProjectList = () => {
   // Manage the key pressed for trigger one specific field update
   const keyPressHandler = (e) => {
     if (e.key === "Enter") {
-      handleUpdatedField();
+      handleUpdatedField(e);
     }
   };
 
   // Verify if errors on the updated field, if not call the updated function
   const handleUpdatedField = (e) => {
+    const key = e.target.id;
+    const value = e.target.value;
     const fieldToCheck = {};
-    fieldToCheck[updatedField.label] = projectConstraints[updatedField.label];
-    fieldToCheck[updatedField.label].value = updatedField.value;
+
+    fieldToCheck[key] = projectConstraints[key];
+    fieldToCheck[key].value = value;
 
     // Verify if errors
     const errorfield = CheckFormFields(fieldToCheck);
     if (Object.values(errorfield).some((el) => el)) {
-      setUpdatedField({ ...updatedField, error: errorfield[updatedField.label] });
-      return ToasterDisplay(`Impossible de modifier la valeur, ${errorfield[updatedField.label]} `, "fail");
+      setUpdatedField({ ...updatedField, error: errorfield[key] });
+      return ToasterDisplay(`Impossible de modifier la valeur, ${errorfield[key]} `, "fail");
     }
-    const { id, label, value } = updatedField;
-    return updateAsyncProjectField(id, label, value);
+    const { id } = updatedField;
+    return updateAsyncProjectField(id, key, value);
   };
 
   // Request the server to update the selected field

@@ -73,11 +73,14 @@ const ProjectListContainer = ({
                 return (
                   <Fragment key={id}>
                     <tr>
-                      <td>
+                      <td className={showMoreContent === id ? "selected" : undefined}>
                         <FaChevronCircleDown onClick={() => handleShowMoreContent(id)} />
                       </td>
                       {/* Title */}
-                      <td onClick={() => setUpdatedField({ label: "title", id, value: title })}>
+                      <td
+                        onClick={() => setUpdatedField({ label: "title", id, value: title })}
+                        className={showMoreContent === id ? "selected" : undefined}
+                      >
                         {updatedField.label === "title" && updatedField.id === id ? (
                           <Input
                             autoFocus
@@ -226,7 +229,12 @@ const ProjectListContainer = ({
                       </td>
                     </tr>
                     {showMoreContent && showMoreContent === id && (
-                      <ShowMoreContent datas={{ ...rest, id, title, technos, toggleSelectedTechnos }} />
+                      <ShowMoreContent
+                        datas={{ ...rest, id, title, technos, toggleSelectedTechnos }}
+                        keyPressHandler={keyPressHandler}
+                        setUpdatedField={setUpdatedField}
+                        updatedField={updatedField}
+                      />
                     )}
                   </Fragment>
                 );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import axios from "axios";
 import propTypes from "prop-types";
@@ -17,7 +17,7 @@ const ProjectTechnos = (props) => {
     priority: 1
   });
 
-  const fetchTechnos = () => {
+  const fetchTechnos = useCallback(() => {
     axios
       .get("/technos", {
         headers: { authorization: `Bearer: ${token}` }
@@ -26,14 +26,11 @@ const ProjectTechnos = (props) => {
       .catch(
         (err) => console.log(err.response) || ToasterDisplay("Erreur lors de la récupération des technos", "fail")
       );
-  };
+  }, [setTechnos, token]);
 
   useEffect(() => {
     fetchTechnos();
-    return () => {
-      fetchTechnos();
-    };
-  }, []);
+  }, [fetchTechnos]);
 
   const handleNewTechno = (e) => {
     setNewTechno({ ...newTechno, [e.target.id]: e.target.value });
@@ -76,7 +73,7 @@ const ProjectTechnos = (props) => {
           }
         )
         .then((res) => {
-          ToasterDisplay(`La techno ${newTechno.name} a bien été ajoutée !`);
+          console.log(res.data) && ToasterDisplay(`La techno ${newTechno.name} a bien été ajoutée !`);
 
           setNewTechno({
             priority: 1

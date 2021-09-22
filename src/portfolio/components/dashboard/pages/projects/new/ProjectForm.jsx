@@ -2,9 +2,10 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import ContextForm from "../list/projectFormComponents/ContextForm";
+import FormLinks from "../list/projectFormComponents/FormLinks";
+import FormMainInfos from "../list/projectFormComponents/FormMainInfos";
+import FormContext from "../list/projectFormComponents/FormContext";
 import Input from "../../../../commons/forms/Input";
-import MdEditor from "../../../../commons/forms/MdEditor";
 import ProjectTechnos from "../ProjectTechnos";
 
 const ProjectForm = ({
@@ -19,71 +20,16 @@ const ProjectForm = ({
   toggleSelectedTechnos
 }) => (
   <form onSubmit={submitForm}>
-    <fieldset className={handleClassError(["date", "title", "shortDescription", "mdDescription"]) && "error"}>
-      <legend>Informations générales</legend>
-      {/* project date */}
-      <Input
-        error={formErrors.date}
-        id="date"
-        isRequired
-        label="Date du projet"
-        type="date"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.date}
-      />
-      {/* Title */}
-      <Input
-        error={formErrors.title}
-        id="title"
-        isRequired
-        label="titre"
-        placeholder="titre du projet"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.title}
-      />
-      {/* short description */}
-      <Input
-        error={formErrors.shortDescription}
-        id="shortDescription"
-        isRequired
-        label="courte description"
-        placeholder="description courte du projet (Apparaît dans les vignettes)"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.shortDescription}
-      />
-      {/* Description */}
-      <MdEditor
-        value={mdDescription}
-        setValue={setMdDescription}
-        error={formErrors.mdDescription}
-        label="description du projet"
-        isRequired
-      />
-    </fieldset>
-    <ContextForm handleForm={handleForm} formDatas={formDatas} formErrors={formErrors} />
-    <fieldset className={`multiple-fields-wrapper ${(formErrors.urlGithub || formErrors.urlTest) && "error"}`}>
-      <legend>Liens du projet</legend>
-      {/* github url */}
-      <Input
-        error={formErrors.urlGithub}
-        id="urlGithub"
-        label="Lien vers le dépôt github"
-        placeholder="Insérer le lien du dépôt github"
-        type="url"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.urlGithub}
-      />
-      {/* project preview url */}
-      <Input
-        error={formErrors.urlTest}
-        id="urlTest"
-        label="Lien vers la page de test"
-        placeholder="Insérer le lien de la page de test"
-        type="url"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.urlTest}
-      />
-    </fieldset>
+    <FormMainInfos
+      handleForm={handleForm}
+      formDatas={formDatas}
+      formErrors={formErrors}
+      handleClassError={handleClassError}
+      mdDescription={mdDescription}
+      setMdDescription={setMdDescription}
+    />
+    <FormContext handleForm={handleForm} formDatas={formDatas} formErrors={formErrors} />
+    <FormLinks handleForm={handleForm} formDatas={formDatas} formErrors={formErrors} />
     <fieldset
       className={`multiple-fields-wrapper ${
         (formErrors.imgPrefix || formErrors.background || formErrors.nbImages) && "error"
@@ -114,7 +60,7 @@ const ProjectForm = ({
         error={formErrors.nbImages}
         id="nbImages"
         isRequired
-        label="Nombres d'images"
+        label="Nb images (min: 1, max: 20)"
         type="number"
         setValue={(e) => handleForm(e)}
         value={formDatas.nbImages}

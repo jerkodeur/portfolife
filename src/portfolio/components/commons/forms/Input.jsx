@@ -21,6 +21,7 @@ const Input = (props) => {
     onKeyPress,
     onBlur
   } = props;
+
   const label = props.label && props.label[0].toUpperCase() + props.label.slice(1).toLowerCase();
 
   let options = { id, placeholder, type, onKeyPress, onBlur, autoFocus };
@@ -28,15 +29,26 @@ const Input = (props) => {
   options = regex ? { ...options, regex } : options;
   return (
     <div className="form-group">
-      <label htmlFor={id} className={error && "error"}>
-        {label} {isRequired && " *"}
-      </label>
+      <div>
+        <label htmlFor={id} className={error ? "error" : undefined}>
+          {label} {isRequired && " *"}
+        </label>
+        {type === "url" && /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/.test(value) && (
+          <span className="url-test" style={{ textAlign: "right" }}>
+            [
+            <a href={value} target="_blank" rel="noopener noreferrer">
+              Tester l'url
+            </a>
+            ]
+          </span>
+        )}
+      </div>
       <input
         data-id={dataId && dataId}
         value={!value && defaultValue ? defaultValue : value}
         onChange={setValue}
         {...options}
-        className={`form-control ${error && "error"}`}
+        className={`form-control ${error ? "error" : ""}`}
       />
       {error && displayError && <small className="container-error">{error}</small>}
     </div>

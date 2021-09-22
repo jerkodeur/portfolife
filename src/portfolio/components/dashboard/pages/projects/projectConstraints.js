@@ -21,15 +21,15 @@ const projectConstraints = {
         type: ["string"]
       },
       contextUrl: {
-        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
+        regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
         type: ["string"]
       },
       urlGithub: {
-        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
+        regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
         type: ["string"]
       },
       urlTest: {
-        regex: /(https?):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/,
+        regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
         type: ["string"]
       },
       imgPrefix: {
@@ -40,9 +40,10 @@ const projectConstraints = {
         required: true,
         regex: /^#(?:[0-9a-fA-F]{3}){1,2}$/
       },
-      nbImages: {
+  nbImages: {
+        required: true,
         type: ["number", "string"],
-          range: [0, 20],
+        range: [0, 20],
         regex: /^(?:[1-9]|0[1-9]|1[0-9]|20)$/
       },
       technos: {

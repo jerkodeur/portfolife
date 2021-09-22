@@ -5,7 +5,7 @@ import { Route, useRouteMatch } from "react-router";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import ProjectList from "./pages/projects/list/ProjectList";
-import ProjectCreateAndEdit from "./pages/projects/ProjectCreateAndEdit";
+import ProjectCreate from "./pages/projects/ProjectCreate";
 import Sidebar from "./Sidebar";
 
 const DashboardHome = () => {
@@ -20,7 +20,7 @@ const DashboardHome = () => {
           <Home />
         </Route>
         <Route path={`${path}/projects`} component={ProjectList} />
-        <Route path={`${path}/new-project`} component={ProjectCreateAndEdit} />
+        <Route path={`${path}/new-project`} component={ProjectCreate} />
       </main>
     </div>
   );

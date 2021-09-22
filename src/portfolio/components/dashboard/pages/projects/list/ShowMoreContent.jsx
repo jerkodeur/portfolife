@@ -5,8 +5,9 @@ import ReactMarkdown from "react-markdown";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 
+import EditFormDescription from "../projectForms/EditFormDescription";
 import FormContext from "../projectForms/FormContext";
-import ProjectTechnos from "../ProjectTechnos";
+import ShowProjectImages from "./ShowProjectImages";
 import ShowTechnos from "../../../../Homepage/projects/modal/ProjectDisplay/ShowTechnos.jsx";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,19 +18,9 @@ registerLocale("fr", fr);
 const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField }) => {
   const [formErrors, setFormErrors] = useState({});
 
-  const { context, context_url: contextUrl, date, description, id, technos, title, toggleSelectedTechnos } = datas;
+  const { context, context_url: contextUrl, date, description, id, technos, toggleSelectedTechnos } = datas;
   const [startDate, setStartDate] = useState(new Date(date));
-
-  const convertDate = (rawDate) => {
-    const extractDate = new Date(rawDate).toLocaleString();
-    const dateRegex = /([0-9]{2}.){2}[0-9]{4}/g;
-    return extractDate.match(dateRegex)[0];
-  };
-
-  const technoIds = technos.reduce((ids, currentTechno) => {
-    ids.push(currentTechno.id);
-    return ids;
-  }, []);
+  const [showTab, setShowTab] = useState("preview");
 
   const handleClassError = (array) => {
     return array.reduce((acc, curr) => {
@@ -60,21 +51,40 @@ const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField
           keyPressHandler={keyPressHandler}
           updatedField={updatedField}
         />
-        {/* <ProjectTechnos
-          selectedTechnos={technoIds}
-          toggleSelectedTechnos={toggleSelectedTechnos}
-          error={formErrors.technos}
-          handleClassError={handleClassError}
-        /> */}
         <div className="breadcrumb-project">
-          <span className="selected description">Aperçu</span>
-          <span>Édition</span>
-          <span>Images</span>
+          <span
+            className={`${showTab === "preview" && "selected"} description`}
+            onClick={() => showTab !== "preview" && setShowTab("preview")}
+          >
+            Aperçu
+          </span>
+          <span
+            className={`${showTab === "edit" && "selected"}`}
+            onClick={() => showTab !== "edit" && setShowTab("edit")}
+          >
+            Édition
+          </span>
+          <span
+            className={`${showTab === "imgPreview" && "selected"}`}
+            onClick={() => showTab !== "imgPreview" && setShowTab("imgPreview")}
+          >
+            Images
+          </span>
         </div>
-        <div className="markdown-descr-preview">
-          <ShowTechnos technos={technos} />
-          <ReactMarkdown>{description}</ReactMarkdown>
-        </div>
+        {showTab === "preview" && (
+          <div className="markdown-descr-preview">
+            <ShowTechnos technos={technos} />
+            <ReactMarkdown>{description}</ReactMarkdown>
+          </div>
+        )}
+        {showTab === "edit" && (
+          <EditFormDescription
+            technos={technos}
+            toggleSelectedTechnos={toggleSelectedTechnos}
+            handleClassError={handleClassError}
+          />
+        )}
+        {showTab === "imgPreview" && <ShowProjectImages />}
       </td>
     </tr>
   );

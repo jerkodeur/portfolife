@@ -7,6 +7,7 @@ import { registerLocale } from "react-datepicker";
 
 import FormContext from "./projectFormComponents/FormContext";
 import ProjectTechnos from "../ProjectTechnos";
+import ShowTechnos from "../../../../Homepage/projects/modal/ProjectDisplay/ShowTechnos.jsx";
 
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
@@ -71,6 +72,7 @@ const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField
           <span>Images</span>
         </div>
         <div className="markdown-descr-preview">
+          <ShowTechnos technos={technos} />
           <ReactMarkdown>{description}</ReactMarkdown>
         </div>
       </td>

@@ -246,13 +246,11 @@
             @extend .project-description;
         }
         .display-technos {
-            width: 90%;
+            @extend .display-img-techno;
             margin: auto;
-
             img {
-                height: 4em;
-                padding-right: 1em;
                 margin-top: 1.5em;
+                height: 4em;
             }
         }
     }
@@ -275,20 +273,4 @@
 }
 .ReactModal__Body--open {
     overflow-y: hidden;
-}
-
-.project-description {
-    margin: 2rem auto 0;
-    padding-bottom: 1rem;
-    color: rgb(229, 233, 219);
-    font-size: 1.2em;
-    h3 {
-        color: $theme-color;
-    }
-    h4 {
-        font-size: 1.1em;
-        padding-left: 0.5em;
-        color: #fff;
-    }
-    width: 90%;
 }

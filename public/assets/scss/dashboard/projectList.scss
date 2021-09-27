@@ -1,8 +1,6 @@
 .project-list-container {
     margin: auto;
-    form {
-        width: 100%;
-    }
+    width: 100%;
     table {
         line-height: 1.2;
         box-shadow: -2px -2px 4px $dark;
@@ -194,6 +192,7 @@
                         background-color: #000;
                         color: #fff;
                         cursor: unset;
+                        padding-bottom: 0.2em;
                         &.description {
                             background-color: #000;
                             color: rgb(229, 233, 219);
@@ -202,6 +201,35 @@
                             color: #000;
                             border-bottom: none;
                         }
+                    }
+                }
+                .edit-descr-container {
+                    background-color: #000;
+                    margin-top: 0.35em;
+                    padding-top: 0.5em;
+                    padding-bottom: 1em;
+                    border-radius: 0;
+                    .submit-container {
+                        button {
+                            background-color: #000;
+                            color: #fff;
+                            padding: 0.25em 0.5em;
+                            box-shadow: 2px 2px 4px #fff, inset 2px 2px 4px #fff;
+                            margin-bottom: 0.25em;
+
+                            &:hover {
+                                font-size: 1.5em;
+                                color: $theme-color;
+                                box-shadow: 2px 2px 4px $theme-color, inset 2px 2px 4px $theme-color;
+                            }
+                        }
+                    }
+                }
+                .techno-wrapper {
+                    margin-top: 1.25em;
+                    margin-bottom: 1em;
+                    fieldset {
+                        border-radius: 0 0 8px 8px;
                     }
                 }
             }

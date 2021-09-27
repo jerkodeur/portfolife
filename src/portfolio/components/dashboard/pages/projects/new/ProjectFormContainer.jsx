@@ -19,7 +19,7 @@ const ProjectFormContainer = ({
   setMdDescription,
   toggleSelectedTechnos
 }) => (
-  <form onSubmit={submitForm}>
+  <form onSubmit={submitForm} className="form-container">
     <FormMainInfos
       handleForm={handleForm}
       formDatas={formDatas}

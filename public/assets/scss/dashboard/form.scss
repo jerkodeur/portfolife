@@ -1,148 +1,55 @@
-.project-form-container,
-.project-list-container {
-    width: 100%;
-    form {
-        margin: auto;
-        width: 75%;
+.form-container {
+    margin: auto;
 
+    label {
+        @extend .label;
+    }
+    input {
+        @extend .input;
+    }
+    small.container-error {
+        @extend .container-error;
+    }
+
+    fieldset {
+        width: 100%;
+        margin-top: 2em;
+        box-shadow: 1px 1px 4px #000;
+        border-color: #000;
+        background-color: $theme-color;
+        border-radius: 2px;
+        padding: 0 1em 1em;
+        &.error {
+            border-color: red;
+            box-shadow: 1px 1px 4px red;
+            legend {
+                padding: 0.5em;
+                font-weight: bold;
+                box-shadow: 1px 1px 3px red;
+                background-color: #000;
+                color: red;
+            }
+        }
+        legend {
+            border-radius: 8px;
+            background-color: #000;
+            color: $theme-color;
+            box-shadow: 2px 2px 5px #000;
+            padding: 0 0.5em;
+            margin: 1em;
+            width: auto;
+            font-size: 1em;
+        }
         label {
             margin-top: 1em;
             &.error {
                 color: red;
                 font-weight: bold;
+                margin-bottom: 0.25em;
             }
         }
-
-        input {
-            border: none;
-            box-shadow: 2px 2px 4px #000;
-            padding: 0.25em 0.5em;
-            outline: none;
-            &::placeholder {
-                color: rgb(206, 203, 180) !important;
-            }
-            &[type="color"] {
-                padding: 0.15em 0.35em;
-            }
-            &.error {
-                border-width: 2px;
-                border: none;
-                box-shadow: 2px 2px 4px red, -1px -1px 4px red;
-            }
-        }
-        small.container-error {
-            display: inline-block;
-            box-shadow: 1px 1px 2px #000;
-            margin: -1em 0.5em 0 0;
-            background-color: red;
-            padding: 0.25em 0.5em;
-            border-radius: 3px;
-            color: #fff;
-            font-weight: bold;
-        }
-        // Markdown editor
-        .react-mde {
-            border-radius: 5px;
-            box-shadow: 2px 2px 4px #000;
-        }
-        textarea {
-            border-radius: 2px;
-            &.mde-text {
-                background-color: #fff;
-            }
-        }
-        .mde-header {
-            border-radius: 2px;
-        }
-        .mde-preview {
-            background-color: #000;
-            color: #e5e9db;
-            h3 {
-                color: $theme-color;
-            }
-        }
-
-        fieldset {
-            width: 100%;
-            margin-top: 2em;
-            box-shadow: 1px 1px 4px #000;
-            border-color: #000;
-            background-color: $theme-color;
-            border-radius: 2px;
-            padding: 0 1em 1em;
-            &.error {
-                border-color: red;
-                box-shadow: 1px 1px 4px red;
-                legend {
-                    padding: 0.5em;
-                    font-weight: bold;
-                    box-shadow: 1px 1px 3px red;
-                    background-color: #000;
-                    color: red;
-                }
-            }
-            legend {
-                border-radius: 8px;
-                background-color: #000;
-                color: $theme-color;
-                box-shadow: 2px 2px 5px #000;
-                padding: 0 0.5em;
-                margin: 1em;
-                width: auto;
-                font-size: 1em;
-            }
-            label {
-                margin-top: 1em;
-                &.error {
-                    color: red;
-                    font-weight: bold;
-                    margin-bottom: 0.25em;
-                }
-            }
-            &.new-techno-container {
-                background-color: $theme-color;
-                margin-top: 1.5em;
-                margin-bottom: 1em;
-                padding: 0;
-                legend {
-                    display: flex;
-                    justify-content: space-between;
-                    background-color: $theme-color;
-                    color: #000;
-                    padding-right: 0;
-                    span {
-                        cursor: pointer;
-                        margin-left: 0.5em;
-                        border-radius: 0 8px 8px 0;
-                        padding: 0 0.5em;
-                        background-color: #000;
-                        color: #fff;
-                        font-weight: bold;
-                        &:hover {
-                            color: $theme-color;
-                        }
-                    }
-                }
-                button {
-                    padding: 0.25em 0;
-                    width: 100%;
-                    background-color: $dark;
-                    border-radius: 0;
-                    border: none;
-                    font-weight: bold;
-                    &:hover {
-                        background-color: #000;
-                        color: $theme-color;
-                    }
-                }
-                .form-group {
-                    padding-top: 0;
-                    margin-bottom: 0 !important;
-                }
-                .multiple-fields-wrapper {
-                    margin-bottom: 1.5em;
-                }
-            }
+        &.new-techno-container {
+            @extend .techno-container;
         }
     }
 }
@@ -209,40 +116,6 @@ label.switch {
     }
 }
 
-.techno-wrapper {
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: flex-start;
-
-    li {
-        color: #000;
-        cursor: pointer;
-        background-color: #fff;
-        list-style-type: none;
-        box-shadow: 1px 1px 2px #000;
-        border-radius: 40px;
-        padding: 0 0.5em;
-        margin: 0.25em;
-        &:hover {
-            box-shadow: 3px 3px 5px #000;
-        }
-        &[role="link"] {
-            background-color: $theme-color;
-            box-shadow: none;
-            &:hover {
-                font-weight: bold;
-            }
-        }
-    }
-    .selected {
-        background-color: #000;
-        color: $theme-color;
-        font-weight: bold;
-    }
-}
-
 .multiple-fields-wrapper {
     color: #000;
     display: flex;
@@ -274,5 +147,198 @@ label.switch {
             color: #fff;
             font-size: 1.55em;
         }
+    }
+}
+
+// Default input style
+.input {
+    border: none;
+    box-shadow: 2px 2px 4px #000;
+    padding: 0.25em 0.5em;
+    outline: none;
+    &::placeholder {
+        color: rgb(206, 203, 180) !important;
+    }
+    &[type="color"] {
+        padding: 0.15em 0.35em;
+    }
+    &.error {
+        border-width: 2px;
+        border: none;
+        box-shadow: 2px 2px 4px red, -1px -1px 4px red;
+    }
+}
+
+// Default label style
+.label {
+    margin-top: 1em;
+    &.error {
+        color: red;
+        font-weight: bold;
+    }
+}
+
+.container-error {
+    display: inline-block;
+    box-shadow: 1px 1px 2px #000;
+    margin: -1em 0.5em 0 0;
+    background-color: red;
+    padding: 0.25em 0.5em;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: bold;
+}
+
+// Markdown editor
+.react-mde {
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #000;
+}
+textarea {
+    border-radius: 2px;
+    &.mde-text {
+        background-color: #fff;
+        font-size: 1.1em;
+    }
+}
+.mde-header {
+    border-bottom: 3px double #000 !important;
+    .mde-header-item {
+        padding: 0.15em;
+        svg {
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+            width: 1.2em;
+            height: 1.2em;
+        }
+        &:hover {
+            border-radius: 4px;
+            background-color: $theme-color;
+            box-shadow: 2px 2px 2px $dark;
+        }
+    }
+    .mde-tabs {
+        margin-bottom: 0.15em;
+        button {
+            margin-right: 0.5em !important;
+            font-weight: bold;
+            border: none !important;
+            padding: 0.5em;
+            content: "Edition";
+            border-radius: 4px !important;
+            &.selected {
+                background-color: $theme-color;
+                box-shadow: 2px 2px 3px $dark;
+                cursor: unset;
+            }
+            &:not(.selected) {
+                &:hover {
+                    box-shadow: inset 1px 1px 2px $theme-color, 2px 2px 4px $dark;
+                }
+            }
+        }
+    }
+
+    svg {
+        border-radius: 0;
+    }
+}
+.mde-text {
+    box-shadow: 0 -2px 3px #000;
+}
+
+.mde-preview {
+    padding: 0.5em;
+    background-color: #000;
+    color: #e5e9db;
+    h3 {
+        color: $theme-color;
+    }
+    p,
+    li {
+        font-size: 1.2em;
+    }
+    ul {
+        line-height: 1.5em;
+    }
+}
+
+// Techno switch containers
+.techno-container {
+    background-color: $theme-color;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    padding: 0;
+    legend {
+        display: flex;
+        justify-content: space-between;
+        background-color: $theme-color;
+        color: #000;
+        padding-right: 0;
+        span {
+            cursor: pointer;
+            margin-left: 0.5em;
+            border-radius: 0 8px 8px 0;
+            padding: 0 0.5em;
+            background-color: #000;
+            color: #fff;
+            font-weight: bold;
+            &:hover {
+                color: $theme-color;
+            }
+        }
+    }
+    button {
+        padding: 0.25em 0;
+        width: 100%;
+        background-color: $dark;
+        border-radius: 0;
+        border: none;
+        font-weight: bold;
+        &:hover {
+            background-color: #000;
+            color: $theme-color;
+        }
+    }
+    .form-group {
+        padding-top: 0;
+        margin-bottom: 0 !important;
+    }
+    .multiple-fields-wrapper {
+        margin-bottom: 1.5em;
+    }
+}
+.techno-wrapper {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: flex-start;
+
+    li {
+        color: #000;
+        cursor: pointer;
+        background-color: #fff;
+        list-style-type: none;
+        box-shadow: 1px 1px 2px #000;
+        border-radius: 40px;
+        padding: 0 0.5em;
+        margin: 0.25em;
+        &:hover {
+            box-shadow: 3px 3px 5px #000;
+        }
+        &[role="link"] {
+            background-color: $theme-color;
+            box-shadow: none;
+            &:hover {
+                font-weight: bold;
+            }
+        }
+    }
+    .selected {
+        background-color: #000;
+        color: $theme-color;
+        font-weight: bold;
     }
 }

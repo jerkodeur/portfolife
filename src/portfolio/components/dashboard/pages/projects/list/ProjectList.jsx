@@ -194,7 +194,7 @@ const ProjectList = () => {
   };
 
   return (
-    <>
+    <div className="project-list-container">
       <ProjectListContainer
         displayDeleteModal={displayDeleteModal}
         handleChange={handleChange}
@@ -218,7 +218,7 @@ const ProjectList = () => {
           validate={deleteProject}
         />
       )}
-    </>
+    </div>
   );
 };
 

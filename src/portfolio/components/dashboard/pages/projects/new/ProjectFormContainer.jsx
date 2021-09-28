@@ -73,7 +73,7 @@ const ProjectFormContainer = ({
       handleClassError={handleClassError}
       error={formErrors.technos}
       selectedTechnos={formDatas.technos}
-      toggleSelectedTechnos={(e) => toggleSelectedTechnos(e)}
+      toggleSelectedTechnos={toggleSelectedTechnos}
     />
     {/* Active */}
     <label className="switch">

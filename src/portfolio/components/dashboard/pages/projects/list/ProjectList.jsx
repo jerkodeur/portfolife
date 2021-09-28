@@ -31,14 +31,6 @@ const ProjectList = () => {
       );
   }, []);
 
-  // handle the asynchrone one project field change
-  const handleChange = (e) => {
-    const key = e.target.id;
-    let value = e.target.value;
-    if (key === "active") value = value === "0" ? 1 : 0;
-    return updateAsyncProjectField(e.target.dataset.id, key, value);
-  };
-
   // Set delete modal statements and show it
   const displayDeleteModal = (id, label) => {
     setDeleteProjectId(id);
@@ -141,6 +133,14 @@ const ProjectList = () => {
     }
     const { id } = updatedField;
     return updateAsyncProjectField(id, key, value);
+  };
+
+  // handle the asynchrone one project field change
+  const handleChange = (e) => {
+    const key = e.target.id;
+    let value = e.target.value;
+    if (key === "active") value = value === "0" ? 1 : 0;
+    return updateAsyncProjectField(e.target.dataset.id, key, value);
   };
 
   // Request the server to update the selected field

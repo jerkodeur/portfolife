@@ -6,6 +6,7 @@ import CheckFormFields from "../../../../commons/forms/CheckFormFields";
 import ConfirmModal from "../../../../commons/ConfirmModal";
 import projectConstraints from "../projectConstraints";
 import ProjectListContainer from "./ProjectListContainer";
+import ProjectTechnos from "../ProjectTechnos";
 import ToasterDisplay from "../../../../../helpers/ToasterDisplay";
 
 const ProjectList = () => {
@@ -44,7 +45,7 @@ const ProjectList = () => {
   };
 
   // Decide if a project techno is added or removed on click and triggers an action based on
-  const toggleSelectedTechnos = (e) => {
+  const toggleSelectedTechnos = (e, technos) => {
     const clickedTechnoId = Number(e.target.id);
     const technoIsInProject = projects.reduce((acc, curr) => {
       if (curr.mainDatas.id === showMoreContent) {
@@ -52,9 +53,26 @@ const ProjectList = () => {
       }
       return acc;
     }, false);
+    if (technos.length === 1 && technoIsInProject)
+      return ToasterDisplay("Au moins une techno doit être sélectionnée !", "fail");
     technoIsInProject
       ? removeTechnoFromProject(showMoreContent, clickedTechnoId)
       : addTechnoInProject(showMoreContent, clickedTechnoId);
+  };
+
+  // const handleClassError = (array) => {
+  //   return array.reduce((acc, curr) => {
+  //     return updatedField.error ? true : acc;
+  //   }, false);
+  // };
+
+  const TechnoSwitcher = (props) => {
+    return (
+      <ProjectTechnos
+        selectedTechnos={props.technoIds}
+        toggleSelectedTechnos={(e) => toggleSelectedTechnos(e, props.technoIds)}
+      />
+    );
   };
 
   // Add a techno on the current modified project
@@ -203,7 +221,7 @@ const ProjectList = () => {
         projects={projects}
         setUpdatedField={setUpdatedField}
         showMoreContent={showMoreContent}
-        toggleSelectedTechnos={toggleSelectedTechnos}
+        TechnoSwitcher={TechnoSwitcher}
         updatedField={updatedField}
       />
       {showDeleteModal && (

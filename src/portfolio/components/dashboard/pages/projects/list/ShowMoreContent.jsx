@@ -15,7 +15,7 @@ import fr from "date-fns/locale/fr";
 
 registerLocale("fr", fr);
 
-const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField, toggleSelectedTechnos }) => {
+const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField, TechnoSwitcher }) => {
   const [formErrors, setFormErrors] = useState({});
 
   const { context, context_url: contextUrl, date, description, id, technos } = datas;
@@ -90,7 +90,8 @@ const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField
             handleDescription={setMdDescription}
             submitDescription={submitDescription}
             technos={technos}
-            toggleSelectedTechnos={toggleSelectedTechnos}
+            TechnoSwitcher={TechnoSwitcher}
+            id={id}
           />
         )}
         {showTab === "imgPreview" && <ShowProjectImages />}
@@ -115,7 +116,7 @@ ShowMoreContent.propTypes = {
     ).isRequired
   }),
   setUpdatedField: propTypes.func.isRequired,
-  toggleSelectedTechnos: propTypes.func.isRequired,
+  TechnoSwitcher: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,
     value: propTypes.oneOfType([propTypes.string, propTypes.number, propTypes.array]),

@@ -15,7 +15,7 @@ const ProjectListContainer = ({
   projects,
   setUpdatedField,
   showMoreContent,
-  toggleSelectedTechnos,
+  TechnoSwitcher,
   updatedField
 }) => {
   const formatLink = (url) => {
@@ -224,7 +224,7 @@ const ProjectListContainer = ({
                   {showMoreContent && showMoreContent === id && (
                     <ShowMoreContent
                       datas={{ ...rest, id, technos }}
-                      toggleSelectedTechnos={toggleSelectedTechnos}
+                      TechnoSwitcher={TechnoSwitcher}
                       keyPressHandler={keyPressHandler}
                       setUpdatedField={setUpdatedField}
                       updatedField={updatedField}
@@ -271,7 +271,7 @@ ProjectListContainer.propTypes = {
   ),
   setUpdatedField: propTypes.func.isRequired,
   showMoreContent: propTypes.number,
-  toggleSelectedTechnos: propTypes.func.isRequired,
+  TechnoSwitcher: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,
     value: propTypes.oneOfType([propTypes.string, propTypes.number, propTypes.array]),

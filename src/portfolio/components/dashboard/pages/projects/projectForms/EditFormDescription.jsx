@@ -3,15 +3,15 @@ import React from "react";
 import propTypes from "prop-types";
 
 import MdEditor from "../../../../commons/forms/MdEditor";
-import ProjectTechnos from "../ProjectTechnos";
 
 const EditFormDescription = ({
   description,
   handleClassError,
   handleDescription,
+  id,
   submitDescription,
   technos,
-  toggleSelectedTechnos
+  TechnoSwitcher
 }) => {
   const technoIds = technos.reduce((ids, currentTechno) => {
     ids.push(currentTechno.id);
@@ -37,12 +37,7 @@ const EditFormDescription = ({
           </div>
         </fieldset>
         <div className="techno-wrapper">
-          <ProjectTechnos
-            selectedTechnos={technoIds}
-            toggleSelectedTechnos={toggleSelectedTechnos}
-            // error={formErrors.technos}
-            handleClassError={handleClassError}
-          />
+          <TechnoSwitcher technoIds={technoIds} />
         </div>
       </form>
     </div>
@@ -53,6 +48,7 @@ EditFormDescription.propTypes = {
   description: propTypes.string.isRequired,
   handleClassError: propTypes.func.isRequired,
   handleDescription: propTypes.func.isRequired,
+  id: propTypes.number.isRequired,
   submitDescription: propTypes.func.isRequired,
   technos: propTypes.arrayOf(
     propTypes.shape({
@@ -61,7 +57,7 @@ EditFormDescription.propTypes = {
       image_name: propTypes.string.isRequired
     }).isRequired
   ).isRequired,
-  toggleSelectedTechnos: propTypes.func.isRequired
+  TechnoSwitcher: propTypes.func.isRequired
 };
 
 export default EditFormDescription;

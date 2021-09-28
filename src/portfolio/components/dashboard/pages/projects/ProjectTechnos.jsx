@@ -9,7 +9,7 @@ import NewTechnoForm from "./projectForms/NewTechnoForm";
 
 const ProjectTechnos = (props) => {
   const token = sessionStorage.getItem("token");
-  const { selectedTechnos, toggleSelectedTechnos, error, handleClassError } = props;
+  const { selectedTechnos, toggleSelectedTechnos, error } = props;
   const [technoFormErrors, setTechnoFormErrors] = useState({});
   const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
   const [technos, setTechnos] = useState();
@@ -88,7 +88,7 @@ const ProjectTechnos = (props) => {
   };
 
   return (
-    <fieldset className={handleClassError(["technos"]) ? "error" : undefined}>
+    <fieldset className={error ? "error" : undefined}>
       <legend>Technos utilisées dans le projet</legend>
       <ul className="techno-wrapper">
         {technos &&
@@ -130,7 +130,7 @@ ProjectTechnos.defaultProps = {
 };
 
 ProjectTechnos.propTypes = {
-  error: propTypes.string.isRequired,
+  error: propTypes.string,
   selectedTechnos: propTypes.arrayOf(propTypes.number),
   toggleSelectedTechnos: propTypes.func.isRequired
 };

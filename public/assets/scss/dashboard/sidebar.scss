@@ -1,0 +1,31 @@
+.sidebar {
+    grid-area: sidebar;
+    background-color: rgb(34, 33, 33);
+    color: #fff;
+    .category {
+        padding-top: 0.5em;
+        .title {
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+            color: #fff;
+            box-shadow: -2px -8px 26px $theme-color;
+            font-weight: bold;
+            padding: 0.5em 0 0.5em 0.5em;
+        }
+        li:not(.title) {
+            padding-left: 1.5em;
+            color: rgb(218, 208, 208);
+            &:hover {
+                color: #fff;
+                text-shadow: 1px 1px #000 2px;
+                font-weight: bold;
+            }
+        }
+    }
+    a {
+        &.active {
+            color: $theme-color;
+            font-weight: bold;
+        }
+    }
+}

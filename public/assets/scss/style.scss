@@ -10,6 +10,11 @@
 	STYLESHEET INDEXING
 	|
 	|
+	|
+	|___ Dashboard
+	|	|
+	|	|___ style
+	|
 	|___ Default Styles
 	|	|
 	|	|___ variables
@@ -94,6 +99,7 @@
 @import "common/pagination";
 @import "common/socialicon";
 @import "common/footer";
+@import "common/modal";
 
 /**************************************
     Elements Styles
@@ -135,3 +141,8 @@
 @import "template/service-details";
 @import "template/dark-version";
 @import "template/preview";
+
+/**************************************
+    Dashboard Styles
+***************************************/
+@import "dashboard/style.scss";

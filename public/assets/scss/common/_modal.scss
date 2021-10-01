@@ -1,0 +1,51 @@
+.confirm-modal {
+    background-color: rgba($color: $dark, $alpha: 0.8);
+    .modal-header {
+        padding: 0.5em 0.5em 0;
+        margin: 0;
+    }
+    .modal-content {
+        background-color: $dark;
+    }
+
+    &.danger {
+        .modal-header {
+            border-bottom: none;
+            button.close {
+                color: #fff;
+                text-shadow: none;
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+        .modal-body {
+            margin: 0 1em;
+            background-color: $theme-color;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .modal-title {
+            color: $theme-color;
+            opacity: 0.65;
+        }
+        .modal-content {
+            box-shadow: 2px 2px 20px #000;
+        }
+        .modal-footer {
+            border-top: none;
+            button {
+                border: none;
+                background-color: red;
+                font-weight: bold;
+                color: $dark;
+                &:hover {
+                    background-color: lighten(red, $amount: 15%);
+                    color: #000;
+                    box-shadow: 2px 2px 4px darken(red, $amount: 15%);
+                }
+            }
+        }
+    }
+}

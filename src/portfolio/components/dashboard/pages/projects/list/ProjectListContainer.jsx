@@ -1,20 +1,21 @@
 import React, { Fragment } from "react";
+
 import propTypes from "prop-types";
 
+import Input from "../../../../commons/forms/Input";
 import ShowMoreContent from "./ShowMoreContent";
 
 import { FaChevronCircleDown, FaChevronCircleUp, FaPlus, FaEdit, FaTrashAlt } from "react-icons/fa";
 
-import Input from "../../../../commons/forms/Input";
-
 const ProjectListContainer = ({
+  currentProjectId,
+  DescriptionElt,
   displayDeleteModal,
   handleChange,
   handleShowMoreContent,
   keyPressHandler,
   projects,
   setUpdatedField,
-  showMoreContent,
   TechnoSwitcher,
   updatedField
 }) => {
@@ -65,18 +66,24 @@ const ProjectListContainer = ({
                 url_test: urlTest,
                 ...rest
               } = mainDatas;
+              const isCurrent = currentProjectId === id;
+              const isUpdatedField = updatedField.id === id;
               return (
                 <Fragment key={id}>
                   <tr>
-                    <td className={showMoreContent === id ? "selected" : undefined}>
-                      <FaChevronCircleDown onClick={() => handleShowMoreContent(id)} />
+                    <td className={isCurrent ? "selected" : undefined}>
+                      {isCurrent ? (
+                        <FaChevronCircleUp onClick={() => handleShowMoreContent(null)} />
+                      ) : (
+                        <FaChevronCircleDown onClick={() => handleShowMoreContent(id)} />
+                      )}
                     </td>
                     {/* Title */}
                     <td
                       onClick={() => setUpdatedField({ label: "title", id, value: title })}
-                      className={showMoreContent === id ? "selected" : undefined}
+                      className={isCurrent ? "selected" : undefined}
                     >
-                      {updatedField.label === "title" && updatedField.id === id ? (
+                      {updatedField.label === "title" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
@@ -94,7 +101,7 @@ const ProjectListContainer = ({
                     </td>
                     {/* short description */}
                     <td onClick={() => setUpdatedField({ label: "shortDescription", id, value: shortDescription })}>
-                      {updatedField.label === "shortDescription" && updatedField.id === id ? (
+                      {updatedField.label === "shortDescription" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
@@ -112,7 +119,7 @@ const ProjectListContainer = ({
                     </td>
                     {/* github url */}
                     <td onClick={() => setUpdatedField({ label: "urlGithub", id, value: urlGithub })}>
-                      {updatedField.label === "urlGithub" && updatedField.id === id ? (
+                      {updatedField.label === "urlGithub" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
@@ -131,7 +138,7 @@ const ProjectListContainer = ({
                     </td>
                     {/* project preview url */}
                     <td onClick={() => setUpdatedField({ label: "urlTest", id, value: urlTest })}>
-                      {updatedField.label === "urlTest" && updatedField.id === id ? (
+                      {updatedField.label === "urlTest" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
@@ -151,7 +158,7 @@ const ProjectListContainer = ({
 
                     {/* Number of images */}
                     <td onClick={() => setUpdatedField({ label: "nbImages", id, value: nbImages.toString() })}>
-                      {updatedField.label === "nbImages" && updatedField.id === id ? (
+                      {updatedField.label === "nbImages" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
@@ -172,7 +179,7 @@ const ProjectListContainer = ({
                     </td>
                     {/* image prefix  */}
                     <td onClick={() => setUpdatedField({ label: "imgPrefix", id, value: imgPrefix })}>
-                      {updatedField.label === "imgPrefix" && updatedField.id === id ? (
+                      {updatedField.label === "imgPrefix" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
@@ -221,9 +228,10 @@ const ProjectListContainer = ({
                       </span>
                     </td>
                   </tr>
-                  {showMoreContent && showMoreContent === id && (
+                  {isCurrent && (
                     <ShowMoreContent
                       datas={{ ...rest, id, technos }}
+                      DescriptionElt={DescriptionElt}
                       TechnoSwitcher={TechnoSwitcher}
                       keyPressHandler={keyPressHandler}
                       setUpdatedField={setUpdatedField}
@@ -240,6 +248,8 @@ const ProjectListContainer = ({
 };
 
 ProjectListContainer.propTypes = {
+  currentProjectId: propTypes.number,
+  DescriptionElt: propTypes.func.isRequired,
   displayDeleteModal: propTypes.func.isRequired,
   handleChange: propTypes.func.isRequired,
   handleShowMoreContent: propTypes.func.isRequired,
@@ -270,7 +280,6 @@ ProjectListContainer.propTypes = {
     })
   ),
   setUpdatedField: propTypes.func.isRequired,
-  showMoreContent: propTypes.number,
   TechnoSwitcher: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,

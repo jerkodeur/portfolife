@@ -2,39 +2,32 @@ import React, { useState } from "react";
 
 import propTypes from "prop-types";
 import ReactMarkdown from "react-markdown";
-import DatePicker from "react-datepicker";
-import { registerLocale } from "react-datepicker";
 
-import EditFormDescription from "../projectForms/EditFormDescription";
 import FormContext from "../projectForms/FormContext";
 import ShowProjectImages from "./ShowProjectImages";
 import ShowTechnos from "../../../../Homepage/projects/modal/ProjectDisplay/ShowTechnos.jsx";
 
+import { registerLocale } from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 
 registerLocale("fr", fr);
 
-const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField, TechnoSwitcher }) => {
-  const [formErrors, setFormErrors] = useState({});
-
+const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField, setUpdatedField, TechnoSwitcher }) => {
   const { context, context_url: contextUrl, date, description, id, technos } = datas;
-  const [startDate, setStartDate] = useState(new Date(date));
-  const [mdDescription, setMdDescription] = useState();
 
+  const [mdDescription, setMdDescription] = useState(description);
   const [showTab, setShowTab] = useState("preview");
-
-  const handleClassError = (array) => {
-    return array.reduce((acc, curr) => {
-      return formErrors[curr] ? true : acc;
-    }, false);
-  };
+  const [startDate, setStartDate] = useState(new Date(date));
 
   const handleForm = (e) => setUpdatedField({ id, label: e.target.id, value: e.target.value });
-  const submitDescription = (e) => {
-    e.preventDefault(e);
-    setUpdatedField({ id, label: "description", value: mdDescription });
-  };
+
+  const getTechnoIds = (arrayOfTechnos) =>
+    arrayOfTechnos.reduce((ids, currentTechno) => {
+      ids.push(currentTechno.id);
+      return ids;
+    }, []);
 
   return (
     <tr className="show-more-container">
@@ -51,13 +44,16 @@ const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField
             maxDate={new Date()}
           />
         </div>
-        <FormContext
-          formDatas={{ context, contextUrl }}
-          handleForm={handleForm}
-          keyPressHandler={keyPressHandler}
-          updatedField={updatedField}
-        />
-        <div className="breadcrumb-project">
+        <div className="context-layout">
+          <FormContext
+            formDatas={{ context, contextUrl }}
+            handleForm={handleForm}
+            keyPressHandler={keyPressHandler}
+            updatedField={updatedField}
+          />
+        </div>
+
+        <div className="project-tabs-layout">
           <span
             className={`${showTab === "preview" && "selected"} description`}
             onClick={() => showTab !== "preview" && setShowTab("preview")}
@@ -84,15 +80,12 @@ const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField
           </div>
         )}
         {showTab === "edit" && (
-          <EditFormDescription
-            description={description}
-            handleClassError={handleClassError}
-            handleDescription={setMdDescription}
-            submitDescription={submitDescription}
-            technos={technos}
-            TechnoSwitcher={TechnoSwitcher}
-            id={id}
-          />
+          <>
+            <DescriptionElt value={mdDescription} setValue={setMdDescription} />
+            <div className="techno-wrapper">
+              <TechnoSwitcher technoIds={getTechnoIds(technos)} />
+            </div>
+          </>
         )}
         {showTab === "imgPreview" && <ShowProjectImages />}
       </td>
@@ -101,6 +94,7 @@ const ShowMoreContent = ({ datas, keyPressHandler, updatedField, setUpdatedField
 };
 
 ShowMoreContent.propTypes = {
+  DescriptionElt: propTypes.func.isRequired,
   datas: propTypes.shape({
     id: propTypes.number.isRequired,
     context: propTypes.string.isRequired,

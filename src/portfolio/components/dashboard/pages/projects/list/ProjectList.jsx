@@ -1,71 +1,73 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
-
 import CheckFormFields from "../../../../commons/forms/CheckFormFields";
 import ConfirmModal from "../../../../commons/ConfirmModal";
+import MdEditor from "../../../../commons/forms/MdEditor";
 import projectConstraints from "../projectConstraints";
 import ProjectListContainer from "./ProjectListContainer";
 import ProjectTechnos from "../ProjectTechnos";
 import ToasterDisplay from "../../../../../helpers/ToasterDisplay";
 
+import { checkIfTechnoIsInProject } from "../../../service/technos";
+import { updateListOfProjects, updateProjectTechnos } from "../../../service/projects";
+import { newProjectTechno, removeProjectTechno } from "../../../controllers/technoController";
+import { deleteProject, getAllProjects, updateOneField } from "../../../controllers/projectController";
+
 const ProjectList = () => {
-  const token = sessionStorage.getItem("token");
   const [deleteProjectId, setDeleteProjectId] = useState("");
   const [labelToDelete, setlabelToDelete] = useState("");
   const [projects, setProjects] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [showMoreContent, setShowMoreContent] = useState(null);
+  const [currentProjectId, setCurrentProjectId] = useState(null);
   const [updatedField, setUpdatedField] = useState({});
 
   // Fetch projects on page load
   useEffect(() => {
-    axios
-      .get("/projects", {
-        headers: {
-          authorization: "Bearer: " + sessionStorage.getItem("token")
-        }
-      })
-      .then((res) => setProjects(res.data))
-      .catch(
-        (err) => console.log(err.response) || ToasterDisplay("Erreur lors de la récupération des projets", "fail")
-      );
+    getAllProjects()
+      .then((projects) => setProjects(projects))
+      .catch((err) => console.error(err) || ToasterDisplay("Erreur lors de la récupération des projets", "fail"));
   }, []);
-
-  // Set delete modal statements and show it
-  const displayDeleteModal = (id, label) => {
-    setDeleteProjectId(id);
-    setlabelToDelete(label);
-    setShowDeleteModal(true);
-  };
 
   // Define if a show more container is displayed
   const handleShowMoreContent = (id) => {
-    setShowMoreContent(showMoreContent === id ? null : id);
+    setCurrentProjectId(currentProjectId === id ? null : id);
   };
 
-  // Decide if a project techno is added or removed on click and triggers an action based on
-  const toggleSelectedTechnos = (e, technos) => {
-    const clickedTechnoId = Number(e.target.id);
-    const technoIsInProject = projects.reduce((acc, curr) => {
-      if (curr.mainDatas.id === showMoreContent) {
-        return (acc = curr.technos.filter((techno) => techno.id === clickedTechnoId).length > 0 && true);
-      }
-      return acc;
-    }, false);
-    if (technos.length === 1 && technoIsInProject)
-      return ToasterDisplay("Au moins une techno doit être sélectionnée !", "fail");
-    technoIsInProject
-      ? removeTechnoFromProject(showMoreContent, clickedTechnoId)
-      : addTechnoInProject(showMoreContent, clickedTechnoId);
+  //--------------------------------------------- Description editing handlers -------------------------------//
+  //----------------------------------------------------------------------------------------------------------//
+
+  const DescriptionElt = (props) => {
+    return (
+      <div className="edit-descr-wrapper">
+        <form onSubmit={(e) => submitDescription(e, props.value)}>
+          <fieldset className="edit-descr-container">
+            <MdEditor
+              value={props.value}
+              setValue={props.setValue}
+              error={updatedField.label === "description" ? updatedField.error : ""}
+              label="Modifier la description du projet"
+              isRequired
+            />
+            <div className="submit-container">
+              <button type="submit" className="submit-button">
+                Enregistrer les modifications
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    );
   };
 
-  // const handleClassError = (array) => {
-  //   return array.reduce((acc, curr) => {
-  //     return updatedField.error ? true : acc;
-  //   }, false);
-  // };
+  const submitDescription = (e, value) => {
+    e.preventDefault(e);
+    if (!value)
+      return setUpdatedField({ label: "description", id: currentProjectId, error: "Ce champs ne peut être vide !" });
+    return updateAsyncProjectField(currentProjectId, "description", value);
+  };
 
+  //--------------------------------------------- Techno Switcher --------------------------------------------//
+  //----------------------------------------------------------------------------------------------------------//
   const TechnoSwitcher = (props) => {
     return (
       <ProjectTechnos
@@ -75,57 +77,39 @@ const ProjectList = () => {
     );
   };
 
-  // Add a techno on the current modified project
-  const addTechnoInProject = (projectId, technoId) => {
-    axios
-      .post(
-        `/projects/${projectId}/addTechno`,
-        { technoId: technoId },
-        {
-          headers: { authorization: `Bearer: ${token}` }
-        }
-      )
-      .then(
-        (res) =>
-          ToasterDisplay("Techno ajoutée !", "success", { position: "bottom-left", duration: 1500 }) &&
-          updateProjectTechnos(projectId, res.data)
-      )
-      .catch(
-        (err) =>
-          console.log(err.response.data.message) &&
-          ToasterDisplay("Erreur lors de l'ajout d'une nouvelle techno au projet", "fail")
-      );
+  // Decide if a project techno is added or removed on click and triggers an action based on
+  const toggleSelectedTechnos = (e, technos) => {
+    const clickedTechnoId = Number(e.target.id);
+    const technoIsInProject = checkIfTechnoIsInProject(projects, currentProjectId, clickedTechnoId);
+    if (technos.length === 1 && technoIsInProject)
+      return ToasterDisplay("Au moins une techno doit être sélectionnée !", "fail");
+    technoIsInProject
+      ? removeTechnoFromProject(currentProjectId, clickedTechnoId)
+      : addTechnoInProject(currentProjectId, clickedTechnoId);
   };
 
   // Remove a techno on the current modified project
-  const removeTechnoFromProject = (projectId, technoId) => {
-    axios
-      .delete(`/projects/${projectId}/technos/${technoId}`, {
-        headers: { authorization: `Bearer: ${token}` }
-      })
+  const removeTechnoFromProject = (projectId, technoId) =>
+    removeProjectTechno(projectId, technoId)
       .then(
-        (res) =>
+        (technos) =>
           ToasterDisplay("Techno retirée !", "success", { position: "bottom-left", duration: 1500 }) &&
-          updateProjectTechnos(projectId, res.data)
+          setProjects(updateProjectTechnos(projects, projectId, technos))
       )
-      .catch(
-        (err) =>
-          console.log(err.response.data.message) &&
-          ToasterDisplay("Erreur lors du retrait de la techno du projet !", "fail")
-      );
-  };
+      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors du retrait de la techno du projet !", "fail"));
 
-  // Change the state with the updated technos
-  const updateProjectTechnos = (projectId, technos) => {
-    const updatedProjects = projects.reduce((acc, curr) => {
-      if (curr.mainDatas.id === projectId) {
-        curr = { ...curr, technos };
-      }
-      acc.push(curr);
-      return acc;
-    }, []);
-    setProjects(updatedProjects);
-  };
+  // Add a techno on the current modified project
+  const addTechnoInProject = (projectId, technoId) =>
+    newProjectTechno(projectId, technoId)
+      .then(
+        (technos) =>
+          ToasterDisplay("Techno ajoutée !", "success", { position: "bottom-left", duration: 1500 }) &&
+          setProjects(updateProjectTechnos(projects, projectId, technos))
+      )
+      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de l'ajout de la techno au projet", "fail"));
+
+  //---------------------------------------- Update Fields handlers  ---------------------------------------//
+  //--------------------------------------------------------------------------------------------------------//
 
   // Manage the key pressed for trigger one specific field update
   const keyPressHandler = (e) => {
@@ -163,66 +147,52 @@ const ProjectList = () => {
 
   // Request the server to update the selected field
   const updateAsyncProjectField = (id, key, value) => {
-    axios
-      .patch(
-        `/projects/async/${id}`,
-        { key, value },
-        {
-          headers: {
-            authorization: "Bearer: " + sessionStorage.getItem("token")
-          }
-        }
-      )
-      .then((res) => {
-        const updateProjects = Array.from(projects).reduce((acc, project) => {
-          if (project.mainDatas.id === res.data.mainDatas.id) {
-            project.mainDatas = res.data.mainDatas;
-          }
-          acc.push(project);
-          return acc;
-        }, []);
+    updateOneField(id, { key, value })
+      .then((updatedProject) => {
+        const updateProjects = updateListOfProjects(projects, updatedProject);
         ToasterDisplay("Mise à jour réussie !", "success", { duration: 1500, position: "bottom-left" });
         setUpdatedField({});
         setProjects(updateProjects);
       })
       .catch(
         (err) =>
-          console.log(err.response.data.message) ||
-          ToasterDisplay("Une erreur est survenue lors de la mise à jour du champ !", "fail")
+          console.error(err) || ToasterDisplay("Une erreur est survenue lors de la mise à jour du champ !", "fail")
       );
   };
 
-  // Request the server to delete a project
-  const deleteProject = (e) => {
-    axios
-      .delete(`/projects/${e.target.dataset.id}`, {
-        headers: {
-          authorization: "Bearer: " + sessionStorage.getItem("token")
-        }
-      })
+  //--------------------------------------------- Delete project  ------------------------------------------//
+  //--------------------------------------------------------------------------------------------------------//
+
+  // Set delete modal statements and show it
+  const displayDeleteModal = (id, label) => {
+    setDeleteProjectId(id);
+    setlabelToDelete(label);
+    setShowDeleteModal(true);
+  };
+
+  const deleteCurrentProject = (e) => {
+    deleteProject(e.target.dataset.id)
       .then((res) => {
         ToasterDisplay("Le projet a été supprimé avec succès !");
-        setProjects(res.data);
+        setProjects(res);
       })
-      .catch(
-        (err) =>
-          console.log(err.response.data.message) || ToasterDisplay("Erreur lors de la suppression du projet !", "fail")
-      );
+      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de la suppression du projet !", "fail"));
     setShowDeleteModal(false);
   };
 
   return (
     <div className="project-list-container">
       <ProjectListContainer
+        projects={projects}
+        keyPressHandler={keyPressHandler}
         displayDeleteModal={displayDeleteModal}
         handleChange={handleChange}
-        handleShowMoreContent={handleShowMoreContent}
-        keyPressHandler={keyPressHandler}
-        projects={projects}
-        setUpdatedField={setUpdatedField}
-        showMoreContent={showMoreContent}
+        DescriptionElt={DescriptionElt}
         TechnoSwitcher={TechnoSwitcher}
+        currentProjectId={currentProjectId}
+        handleShowMoreContent={handleShowMoreContent}
         updatedField={updatedField}
+        setUpdatedField={setUpdatedField}
       />
       {showDeleteModal && (
         <ConfirmModal
@@ -233,7 +203,7 @@ const ProjectList = () => {
           message={`Êtes-vous sûr de vouloir supprimer le projet ${labelToDelete}?`}
           show={showDeleteModal}
           title={`Suppression du projet ${labelToDelete}`}
-          validate={deleteProject}
+          validate={deleteCurrentProject}
         />
       )}
     </div>

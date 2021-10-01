@@ -11,7 +11,7 @@ const MdEditor = (props) => {
 
   return (
     <div className="form-group">
-      <label className={error && "error"}>
+      <label className={error ? "error" : undefined}>
         {label} {isRequired && " *"}
       </label>
       <ReactMde

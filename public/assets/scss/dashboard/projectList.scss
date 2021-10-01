@@ -141,6 +141,7 @@
                     }
                 }
                 .calendar {
+                    border-radius: 4px 4px 0 0;
                     text-transform: uppercase;
                     background-color: $dark;
                     color: $theme-color;
@@ -149,12 +150,16 @@
                     margin-top: 0.5em;
                     font-size: 1.2em;
                 }
+                .context-layout {
+                    margin-top: -4rem;
+                }
+
                 fieldset {
-                    margin: -2em 0 0;
+                    width: 99%;
                     border-radius: 4px;
                 }
                 .breadcrumb-project {
-                    margin-top: 1.5rem;
+                    margin-top: 2.5rem;
                     font-weight: bold;
                     text-transform: uppercase;
 
@@ -226,10 +231,14 @@
                     }
                 }
                 .techno-wrapper {
-                    margin-top: 1.25em;
                     margin-bottom: 1em;
                     fieldset {
+                        margin-top: -0.75em;
                         border-radius: 0 0 8px 8px;
+                        padding-bottom: 0;
+                        &.new-techno-container {
+                            margin-top: 1rem;
+                        }
                     }
                 }
             }

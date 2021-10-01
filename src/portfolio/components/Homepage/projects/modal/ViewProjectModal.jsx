@@ -16,27 +16,18 @@ const ViewProjectModal = (props) => {
   const { show, onHide, isDisplay, toogleDisplay } = props;
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--bg-slider",
-      props.project.background
-    );
+    document.documentElement.style.setProperty("--bg-slider", props.project.background);
   }, []);
 
   return (
     <div>
-      <Modal
-        className="project-modal"
-        show={show}
-        onHide={onHide}
-        size="xl"
-        scrollable={true}
-      >
+      <Modal className="project-modal" show={show} onHide={onHide} size="xl" scrollable={true}>
         <ModalHeader>
           <ModalTitle>
             {mainDatas && mainDatas.title}
             <span onClick={onHide}>X</span>
           </ModalTitle>
-          <div className="breadcrumb-project">
+          <div className="project-tabs-layout">
             {isDisplay !== "description" ? (
               <span onClick={toogleDisplay} className="description">
                 Description
@@ -60,20 +51,14 @@ const ViewProjectModal = (props) => {
               <MarkdownDescription project={props.project} />
             </div>
           ) : (
-            <ImageSlides
-              nbImages={mainDatas.nb_images}
-              prefix={mainDatas.img_prefix}
-              bgColor={mainDatas.background}
-            />
+            <ImageSlides nbImages={mainDatas.nb_images} prefix={mainDatas.img_prefix} bgColor={mainDatas.background} />
           )}
         </ModalBody>
-        {props.project.mainDatas &&
-          (props.project.mainDatas.url_test ||
-            props.project.mainDatas.url_github) && (
-            <ModalFooter>
-              <ProjectFooter project={mainDatas} />
-            </ModalFooter>
-          )}
+        {props.project.mainDatas && (props.project.mainDatas.url_test || props.project.mainDatas.url_github) && (
+          <ModalFooter>
+            <ProjectFooter project={mainDatas} />
+          </ModalFooter>
+        )}
       </Modal>
     </div>
   );

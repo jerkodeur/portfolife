@@ -45,7 +45,7 @@ const Input = (props) => {
       </div>
       <input
         data-id={dataId && dataId}
-        value={!value && defaultValue ? defaultValue : value}
+        value={!value && defaultValue ? defaultValue : value || ""}
         onChange={setValue}
         {...options}
         className={`form-control ${error ? "error" : ""}`}
@@ -59,7 +59,6 @@ Input.defaultProps = {
   displayError: true,
   isRequired: false,
   type: "text",
-  value: "",
   formatOptions: {
     minLength: 2
   }

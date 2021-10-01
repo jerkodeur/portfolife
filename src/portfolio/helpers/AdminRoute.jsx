@@ -5,9 +5,18 @@ const AdminRoute = ({ children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={() => {
+      render={({ location }) => {
         const isAuthenticated = sessionStorage.getItem("pseudo") !== null && sessionStorage.getItem("token") !== null;
-        return isAuthenticated ? children : <Redirect to="/" />;
+        return isAuthenticated ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/",
+              state: { from: location }
+            }}
+          />
+        );
       }}
     />
   );

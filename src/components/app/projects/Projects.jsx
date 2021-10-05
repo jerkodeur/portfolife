@@ -4,7 +4,7 @@ import PortfolioList from "./PortfolioList";
 
 const Projects = () => {
   return (
-    <div className="portfolio-sacousel-inner mb--55 mb_sm--0">
+    <div className="mb--55 mb_sm--0">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">

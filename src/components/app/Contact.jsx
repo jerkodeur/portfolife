@@ -113,10 +113,10 @@ class Contact extends Component {
 
   render() {
     return (
-      <div className="contact-form--1">
+      <div className="contact-form">
         <div className="container">
-          <div className="row row--35 align-items-start">
-            <div className="col-lg-8 order-2 order-lg-1">
+          <div className="row align-items-start">
+            <div className="col-12 col-xl-7 order-2 order-lg-1">
               <div className="section-title text-center mb--50 mt--60">
                 <h2 className="title">Me contacter</h2>
                 <div className="contact-icons">
@@ -229,7 +229,7 @@ class Contact extends Component {
                 </form>
               </div>
             </div>
-            <div className="col-lg-4 order-1 order-lg-2 mt--125 img-contact">
+            <div className="col-xl-5 order-1 order-lg-2 mt--125 img-contact">
               <div className="thumbnail">
                 <img src={contactImg} alt="contact" />
               </div>

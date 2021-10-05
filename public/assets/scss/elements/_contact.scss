@@ -1,13 +1,11 @@
 // Contact Styles
 
-.contact-form--1 {
-
+.contact-form {
     label {
         display: block;
         margin-bottom: 0;
-        margin-top: 10px;
         text-align: left;
-        padding-left: .5rem;
+        padding-left: 0.5rem;
         color: #1f1f25;
     }
 
@@ -33,11 +31,12 @@
         height: 120px;
     }
     .form-errors {
+        display: inline-block;
         color: $pinterest;
         padding-top: 0;
         text-align: right;
         padding-left: 0.5em;
-        margin-bottom: 5em;
+        margin-bottom: 0.25em;
     }
     button {
         margin-top: 1rem;
@@ -46,88 +45,12 @@
         max-width: unset;
     }
     .img-contact {
-        @media #{$md-layout} {
-            display: none;
+        display: none;
+        @media #{$xl-breakdown} {
+            display: block;
         }
-    }
-}
-
-
-/*==========================
-    Contact Address
-============================*/
-
-.rn-address {
-    margin-top: 30px;
-    border: 1px solid #ebebeb;
-    padding: 40px;
-    border-radius: 10px;
-    padding-top: 54px;
-    background: #fff;
-    padding-bottom: 50px;
-    .icon {
-        border: 1px solid #ebebeb;
-        width: 78px;
-        height: 78px;
-        color: #f9004d;
-        line-height: 73px;
-        text-align: center;
-        border-radius: 100%;
-        background: #ffffff;
-        font-size: 28px;
-        position: absolute;
-        top: -13px;
-        left: 47px;
-        @extend %transition;
-    }
-    .inner {
-        h4 {
-            &.title {
-                font-size: 18px;
-                font-weight: 700;
-            }
-        }
-        p {
-            font-size: 18px;
-            margin-bottom: 0;
-            color: rgba(29, 29, 36, 0.75);
-            @media #{$lg-layout} {
-                font-size: 16px;
-            }
-            @media #{$md-layout} {
-                font-size: 16px;
-            }
-            @media #{$sm-layout} {
-                font-size: 16px;
-            }
-            br {
-
-                @media #{$lg-layout} {
-                    display: none;
-                }
-
-                @media #{$md-layout} {
-                    display: none;
-                }
-
-                @media #{$sm-layout} {
-                    display: none;
-                }
-            }
-            a {
-                color: rgba(29, 29, 36, 0.75);
-                @extend %transition;
-                &:hover {
-                    color: $theme-color;
-                }
-            }
-        }
-    }
-    &:hover {
-        .icon {
-            background: $theme-color;
-            border-color: $theme-color;
-            color: #fff;
+        .thumbnail {
+            text-align: center;
         }
     }
 }
@@ -136,22 +59,3 @@ input,
 textarea {
     @extend %transition;
 }
-
-.blog-comment-form .inner .rnform-group input:focus ,
-.blog-comment-form .inner .rnform-group textarea:focus {
-    border-color: $theme-color ;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

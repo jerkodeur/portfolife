@@ -10,7 +10,6 @@
 	STYLESHEET INDEXING
 	|
 	|
-	|
 	|___ Dashboard
 	|	|
 	|	|___ style
@@ -55,15 +54,8 @@
 	|	|___ contact
 	|	|___ connection
 	|
-	|___BLog Styles
-	|	|___ blog
-	|	|___ blog-details
-	|
 	|___Template Styles
 	|	|___ about
-	|	|___ portfolio-details
-	|	|___ service-details
-	|	|___ preview
 	|
 	|
 	|___ END STYLESHEET INDEXING
@@ -93,56 +85,28 @@
     Inner Styles
 ***************************************/
 
-@import "common/breadcrump";
+@import "common/breadcrumb";
 @import "common/section-title";
 @import "common/button";
-@import "common/pagination";
+// @import "common/pagination";
 @import "common/socialicon";
-@import "common/footer";
+// @import "common/footer";
 @import "common/modal";
 
 /**************************************
     Elements Styles
 ***************************************/
 
-@import "elements/accordion";
-@import "elements/brand";
-@import "elements/callto-action";
-@import "elements/column";
 @import "elements/contact";
 @import "elements/connection";
-@import "elements/counterup";
-@import "elements/list";
 @import "elements/portfolio";
-@import "elements/pricing";
 @import "elements/progress";
 @import "elements/projectModal";
-@import "elements/service";
 @import "elements/slider";
 @import "elements/tab";
-@import "elements/team";
-@import "elements/testimonial";
 @import "elements/toast";
 @import "elements/404";
 
-/**************************************
-    Blog Styles
-***************************************/
-
-@import "blog/blog";
-@import "blog/blog-details";
-
-/**************************************
-    Template Styles
-***************************************/
-
 @import "template/about";
-@import "template/portfolio-details";
-@import "template/service-details";
-@import "template/dark-version";
-@import "template/preview";
 
-/**************************************
-    Dashboard Styles
-***************************************/
 @import "dashboard/style.scss";

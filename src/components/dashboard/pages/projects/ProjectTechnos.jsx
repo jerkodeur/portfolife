@@ -1,32 +1,25 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-import axios from "axios";
 import propTypes from "prop-types";
 
 import CheckFormFields from "@components/commons/forms/CheckFormFields";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 import NewTechnoForm from "./projectForms/NewTechnoForm";
+import ToasterDisplay from "@components/commons/ToasterDisplay";
+
+import { getAllTechnos, addOneTechno } from "@controllers/technoController";
 
 const ProjectTechnos = (props) => {
-  const token = sessionStorage.getItem("token");
   const { selectedTechnos, toggleSelectedTechnos, error } = props;
   const [technoFormErrors, setTechnoFormErrors] = useState({});
   const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
   const [technos, setTechnos] = useState();
-  const [newTechno, setNewTechno] = useState({
-    priority: 1
-  });
+  const [newTechno, setNewTechno] = useState({});
 
   const fetchTechnos = useCallback(() => {
-    axios
-      .get("/technos", {
-        headers: { authorization: `Bearer: ${token}` }
-      })
-      .then((res) => setTechnos(res.data))
-      .catch(
-        (err) => console.log(err.response) || ToasterDisplay("Erreur lors de la récupération des technos", "fail")
-      );
-  }, [setTechnos, token]);
+    getAllTechnos()
+      .then((technos) => setTechnos(technos))
+      .catch((err) => console.log(err) && ToasterDisplay("Erreur lors de la récupération des technos", "fail"));
+  }, [setTechnos]);
 
   useEffect(() => {
     fetchTechnos();
@@ -63,27 +56,15 @@ const ProjectTechnos = (props) => {
 
       setTechnoFormErrors(errorfields);
     } else {
-      const { name, imageName: image_name, priority } = newTechno;
-      axios
-        .post(
-          "/technos/",
-          { name, image_name, priority },
-          {
-            headers: { authorization: `Bearer: ${token}` }
-          }
-        )
-        .then((res) => {
-          console.log(res.data) && ToasterDisplay(`La techno ${newTechno.name} a bien été ajoutée !`);
+      const { name, imageName: image_name } = newTechno;
+      addOneTechno({ name, image_name, priority: 1 })
+        .then(() => {
+          ToasterDisplay(`La techno ${newTechno.name} a bien été ajoutée !`);
 
-          setNewTechno({
-            priority: 1
-          });
           setNewTechnoFormDisplay(false);
           return fetchTechnos();
         })
-        .catch((err) =>
-          ToasterDisplay(`Erreur lors de la création de la nouvelle techno, ${err.response.data.message}`, "fail")
-        );
+        .catch((err) => console.log(err) && ToasterDisplay(`Erreur lors de la création de la nouvelle techno`, "fail"));
     }
   };
 

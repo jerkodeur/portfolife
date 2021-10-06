@@ -1,21 +1,28 @@
 import { request } from "@service/requests";
 
-export const getAllProjects = () =>
-  request("get", "/projects")
+export const addOneProject = (datas) =>
+  request("/projects/", "post", datas)
     .then((res) => res.data)
     .catch((err) => {
       throw new Error(err);
     });
 
 export const deleteProject = (projectId) =>
-  request("delete", `/projects/${projectId}`)
+  request(`/projects/${projectId}`, "delete")
+    .then((res) => res.data)
+    .catch((err) => {
+      throw new Error(err);
+    });
+
+export const getAllProjects = () =>
+  request("/projects")
     .then((res) => res.data)
     .catch((err) => {
       throw new Error(err);
     });
 
 export const updateOneField = (projectId, params) =>
-  request("put", `/projects/async/${projectId}`, params)
+  request(`/projects/async/${projectId}`, "put", params)
     .then((res) => res.data)
     .catch((err) => {
       throw new Error(err);

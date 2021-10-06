@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import Axios from "axios";
-
+import ToasterDisplay from "@components/commons/ToasterDisplay";
 import ViewProjectModal from "./modal/ViewProjectModal";
+
+import { getAllProjects } from "@controllers/projectController";
 
 const PortfolioList = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -29,9 +30,9 @@ const PortfolioList = (props) => {
   };
 
   useEffect(() => {
-    Axios.get("/projects")
-      .then((datas) => setProjects(datas.data))
-      .catch((error) => console.log("une erreur est survenue", error));
+    getAllProjects()
+      .then((projects) => setProjects(projects))
+      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de la récupération des projets", "fail"));
   }, []);
 
   return (

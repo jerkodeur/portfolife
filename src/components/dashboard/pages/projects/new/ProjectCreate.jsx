@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-
-import ToasterDisplay from "@components/commons/ToasterDisplay";
-import ProjectForm from "./ProjectFormContainer";
 import CheckFormFields from "@components/commons/forms/CheckFormFields";
 import projectConstraints from "../projectConstraints";
+import ProjectForm from "./ProjectFormContainer";
+import ToasterDisplay from "@components/commons/ToasterDisplay";
+
+import { useHistory } from "react-router-dom";
+import { addOneProject } from "@controllers/projectController";
 
 const ProjectCreateAndEdit = () => {
   const history = useHistory();
-  const token = sessionStorage.getItem("token");
 
   const [formErrors, setFormErrors] = useState({});
   const [formDatas, setFormDatas] = useState({
@@ -84,25 +83,14 @@ const ProjectCreateAndEdit = () => {
     }
 
     // If not persist the project in database and return to the projects list page
-    axios
-      .post(
-        "/projects/",
-        { ...formDatas, description: mdDescription },
-        {
-          headers: {
-            authorization: "Bearer: " + token
-          }
-        }
-      )
+    addOneProject({ ...formDatas, description: mdDescription })
       .then(() => {
         setMdDescription("");
         ToasterDisplay("Le projet a été ajouté avec succès");
         history.push("/dashboard/projects");
       })
       .catch(
-        (err) =>
-          console.log(err.response) ||
-          ToasterDisplay("Une erreur est survenue lors de l'ajout du nouveau projet", "fail")
+        (err) => console.log(err) && ToasterDisplay("Une erreur est survenue lors de l'ajout du nouveau projet", "fail")
       );
   };
   return (

@@ -25,7 +25,7 @@ const ProjectList = () => {
   useEffect(() => {
     getAllProjects()
       .then((projects) => setProjects(projects))
-      .catch((err) => console.error(err) || ToasterDisplay("Erreur lors de la récupération des projets", "fail"));
+      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de la récupération des projets", "fail"));
   }, []);
 
   // Define if a show more container is displayed

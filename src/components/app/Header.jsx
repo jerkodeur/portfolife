@@ -15,18 +15,17 @@ const SocialShare = [
     link: "https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/"
   }
 ];
-const Header = ({ color = "default-color", isConnect, switchConnection, pseudo }) => {
+const Header = ({ color = "default-color", isConnect, closeConnexion }) => {
   const menuTrigger = () => document.querySelector(".header-wrapper").classList.toggle("menu-open");
 
   const CLoseMenuTrigger = () => document.querySelector(".header-wrapper").classList.remove("menu-open");
 
   const disconnnect = () => {
+    const pseudo = sessionStorage.getItem("pseudo");
     sessionStorage.clear();
     ToasterDisplay(`Au revoir ${pseudo}, tu as bien été déconnecté !`);
-    switchConnection(false);
+    return closeConnexion();
   };
-
-  // stickyHeader () {}
 
   window.addEventListener("scroll", function () {
     const value = window.scrollY;
@@ -117,7 +116,7 @@ const Header = ({ color = "default-color", isConnect, switchConnection, pseudo }
 Header.propTypes = {
   color: propTypes.string,
   isConnect: propTypes.bool.isRequired,
-  switchConnection: propTypes.func.isRequired,
+  closeConnexion: propTypes.func.isRequired,
   pseudo: propTypes.string
 };
 

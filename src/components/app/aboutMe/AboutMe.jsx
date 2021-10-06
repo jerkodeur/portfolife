@@ -6,7 +6,7 @@ import Proptypes from "prop-types";
 
 import AboutTabs from "./AboutTabs";
 
-const AboutMe = ({ isConnect, displayForm }) => {
+const AboutMe = ({ isConnect, showConnectForm }) => {
   const [aboutImg, setAboutImg] = useState();
 
   const description =
@@ -31,7 +31,7 @@ const AboutMe = ({ isConnect, displayForm }) => {
             <div className="about-inner inner pt--100">
               <div className="section-title">
                 <h2 className="title">
-                  À propos de {!isConnect ? <span onClick={() => displayForm(true)}> moi</span> : "moi"}
+                  À propos de {!isConnect ? <span onClick={showConnectForm}> moi</span> : "moi"}
                 </h2>
                 <p className="description">{description}</p>
               </div>
@@ -48,7 +48,7 @@ const AboutMe = ({ isConnect, displayForm }) => {
 
 AboutMe.propTypes = {
   isConnect: Proptypes.bool.isRequired,
-  displayForm: Proptypes.func.isRequired
+  showConnectForm: Proptypes.func.isRequired
 };
 
 export default AboutMe;

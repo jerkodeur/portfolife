@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useBoolean } from "../helpers/customHooks";
 
 import ScrollableAnchor, { configureAnchors } from "react-scrollable-anchor";
 import ScrollToTop from "react-scroll-up";
@@ -17,33 +18,21 @@ import Projects from "@app/projects/Projects";
 configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
-  const [displayConnectionForm, setDisplayConnectionForm] = useState(false);
-  const [isConnect, setIsConnect] = useState(false);
-  const [pseudo, setPseudo] = useState("");
-
-  useEffect(() => {
-    setPseudo(isConnect ? sessionStorage.getItem("pseudo") : "");
-    setDisplayConnectionForm(false);
-  }, [isConnect]);
-
-  const switchConnectionForm = (bool) => {
-    setDisplayConnectionForm(bool);
-  };
-
-  const switchConnection = (bool) => {
-    setIsConnect(bool);
-  };
+  const [displayConnectForm, setDisplayConnectForm] = useBoolean(false);
+  const [isConnect, setIsConnect] = useBoolean(false);
 
   return (
     <>
       <Helmet pageTitle="Personal Portfolio" />
-      <Header color="color-black" isConnect={isConnect} switchConnection={setIsConnect} pseudo={pseudo} />
+      <Header color="color-black" isConnect={isConnect} closeConnexion={setIsConnect.off} />
 
       <Presentation />
-      {displayConnectionForm && <ConnectForm switchConnexion={switchConnection} displayForm={switchConnectionForm} />}
+      {displayConnectForm && (
+        <ConnectForm activeConnexion={setIsConnect.on} hideConnectForm={setDisplayConnectForm.off} />
+      )}
       <ScrollableAnchor id={"about"}>
         <div className="about-area about-position-top pb--60  bg_color--3">
-          <AboutMe isConnect={isConnect} displayForm={switchConnectionForm} />
+          <AboutMe isConnect={isConnect} showConnectForm={setDisplayConnectForm.on} />
         </div>
       </ScrollableAnchor>
 

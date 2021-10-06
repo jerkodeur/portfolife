@@ -7,7 +7,7 @@ import { FaWindowClose } from "react-icons/fa";
 
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 
-const ConnectForm = ({ switchConnexion, displayForm }) => {
+const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,7 +21,8 @@ const ConnectForm = ({ switchConnexion, displayForm }) => {
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("pseudo", jwt.decode(token).pseudo);
         ToasterDisplay(`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`);
-        return switchConnexion(true);
+        hideConnectForm();
+        return activeConnexion();
       })
       .catch((err) => {
         setEmail("");
@@ -34,7 +35,7 @@ const ConnectForm = ({ switchConnexion, displayForm }) => {
     <div className="connect-container">
       <div className="title">
         <h2>Interface de connexion:</h2>
-        <div className="icon" onClick={() => displayForm(false)}>
+        <div className="icon" onClick={hideConnectForm}>
           <FaWindowClose size="30" />
         </div>
       </div>
@@ -52,8 +53,8 @@ const ConnectForm = ({ switchConnexion, displayForm }) => {
 };
 
 ConnectForm.propTypes = {
-  switchConnexion: Proptypes.func.isRequired,
-  displayForm: Proptypes.func.isRequired
+  activeConnexion: Proptypes.func.isRequired,
+  hideConnectForm: Proptypes.func.isRequired
 };
 
 export default ConnectForm;

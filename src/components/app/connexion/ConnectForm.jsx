@@ -17,9 +17,9 @@ const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
       .then((res) => {
         const token = res.headers["x-access-token"];
 
-        sessionStorage.clear();
-        sessionStorage.setItem("token", token);
-        sessionStorage.setItem("pseudo", jwt.decode(token).pseudo);
+        localStorage.clear();
+        localStorage.setItem("token", token);
+        localStorage.setItem("pseudo", jwt.decode(token).pseudo);
         ToasterDisplay(`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`);
         hideConnectForm();
         return activeConnexion();

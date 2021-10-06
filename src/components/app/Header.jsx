@@ -21,8 +21,8 @@ const Header = ({ color = "default-color", isConnect, closeConnexion }) => {
   const CLoseMenuTrigger = () => document.querySelector(".header-wrapper").classList.remove("menu-open");
 
   const disconnnect = () => {
-    const pseudo = sessionStorage.getItem("pseudo");
-    sessionStorage.clear();
+    const pseudo = localStorage.getItem("pseudo");
+    localStorage.clear();
     ToasterDisplay(`Au revoir ${pseudo}, tu as bien été déconnecté !`);
     return closeConnexion();
   };

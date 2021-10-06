@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const token = sessionStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 export const request = (url, type = "get", params = {}) =>
   axios({

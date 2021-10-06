@@ -10,11 +10,11 @@ const Navbar = () => {
   const [authUser, setAuthUser] = useState("");
 
   useEffect(() => {
-    setAuthUser(sessionStorage.getItem("pseudo"));
+    setAuthUser(localStorage.getItem("pseudo"));
   }, []);
 
   const deconnectUser = () => {
-    sessionStorage.clear();
+    localStorage.clear();
     ToasterDisplay(`Déconnexion effectuée, à bientôt ${authUser} !`);
     history.push("/");
   };

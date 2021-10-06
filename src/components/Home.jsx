@@ -19,7 +19,7 @@ configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
   const [displayConnectForm, setDisplayConnectForm] = useBoolean(false);
-  const [isConnect, setIsConnect] = useBoolean(false);
+  const [isConnect, setIsConnect] = useBoolean(localStorage.getItem("token") ? true : false);
 
   return (
     <>

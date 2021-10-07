@@ -8,8 +8,8 @@ import ProjectListContainer from "./ProjectListContainer";
 import ProjectTechnos from "../ProjectTechnos";
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 
-import { checkIfTechnoIsInProject } from "@service/technos";
-import { updateListOfProjects, updateProjectTechnos } from "@service/projects";
+import { checkIfTechnoIsInProject } from "@handlers/technos";
+import { updateListOfProjects, updateProjectTechnos } from "@handlers/projects";
 import { newProjectTechno, removeProjectTechno } from "@controllers/technoController";
 import { deleteProject, getAllProjects, updateOneField } from "@controllers/projectController";
 

@@ -1,4 +1,4 @@
-import { request } from "@service/requests";
+import { request } from "@helpers/requests";
 
 export const addOneProject = (datas) =>
   request("/projects/", "post", datas)

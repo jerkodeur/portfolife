@@ -38,11 +38,12 @@ const Header = ({ isConnected, closeConnexion }) => {
 
         {/* Right header side  */}
         <div className="header-right">
+          {/* Social icons */}
+          <Social />
+          {/* Disconnect icon */}
           <span className="link">
             {isConnected && <FaUserSlash size="20" className="text-warning ml-3" onClick={closeConnexion} />}
           </span>
-          {/* Social icons */}
-          <Social />
           <div className="header-btn">
             <a className="rn-btn dark-color" href="@files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
               <span>Télécharger mon CV</span>

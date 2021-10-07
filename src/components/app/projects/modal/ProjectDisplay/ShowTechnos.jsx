@@ -2,7 +2,7 @@ import React from "react";
 
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 
-import { imageExist } from "@service/images";
+import { imageExist } from "@handlers/images";
 import notFoundImg from "@images/technos/notfound.png";
 
 const ShowTechnos = ({ technos }) => (

@@ -20,7 +20,7 @@ const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
       .catch((err) => {
         setEmail("");
         setPassword("");
-        return ToasterDisplay(`Une erreur est survenue, le serveur a répondu: '${err.response.data.message}'`, "fail");
+        return ToasterDisplay(`Une erreur est survenue, le serveur a répondu: ${err.message}`, "fail");
       });
   };
 

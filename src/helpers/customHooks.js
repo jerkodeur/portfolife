@@ -38,3 +38,13 @@ export const useConnexion = (initialValue) => {
 
   return [value, updateValue];
 };
+
+export const useHandleObjectForm = ({ initialValue }) => {
+  const [datas, setDatas] = useState({ initialValue });
+  const updateDatas = {
+    update: (key, value) => setDatas({ ...datas, [key]: value }),
+    reset: () => setDatas({})
+  };
+
+  return [datas, updateDatas];
+};

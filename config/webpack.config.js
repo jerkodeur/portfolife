@@ -264,6 +264,7 @@ module.exports = function (webpackEnv) {
         "@controllers": path.resolve(__dirname, "../src/controllers"),
         "@dashboard": path.resolve(__dirname, "../src/components/dashboard"),
         "@files": path.resolve(__dirname, "../public/assets/files"),
+        "@handlers": path.resolve(__dirname, "../src/handlers"),
         "@helpers": path.resolve(__dirname, "../src/helpers"),
         "@images": path.resolve(__dirname, "../public/assets/images"),
         "@service": path.resolve(__dirname, "../src/service"),

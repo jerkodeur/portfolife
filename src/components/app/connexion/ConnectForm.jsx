@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-import Axios from "axios";
-import jwt from "jsonwebtoken";
-import Proptypes from "prop-types";
+import propTypes from "prop-types";
 import { FaWindowClose } from "react-icons/fa";
 
+import { adminAuthentication } from "../../../controllers/userController";
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 
 const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
@@ -13,16 +12,10 @@ const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
 
   const handleForm = (e) => {
     e.preventDefault(e);
-    Axios.post("/admins", { email, password })
+    adminAuthentication({ email, password })
       .then((res) => {
-        const token = res.headers["x-access-token"];
-
-        localStorage.clear();
-        localStorage.setItem("token", token);
-        localStorage.setItem("pseudo", jwt.decode(token).pseudo);
-        ToasterDisplay(`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`);
+        activeConnexion(res.headers["x-access-token"]);
         hideConnectForm();
-        return activeConnexion();
       })
       .catch((err) => {
         setEmail("");
@@ -53,8 +46,8 @@ const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
 };
 
 ConnectForm.propTypes = {
-  activeConnexion: Proptypes.func.isRequired,
-  hideConnectForm: Proptypes.func.isRequired
+  activeConnexion: propTypes.func.isRequired,
+  hideConnectForm: propTypes.func.isRequired
 };
 
 export default ConnectForm;

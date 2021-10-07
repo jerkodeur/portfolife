@@ -1,19 +1,21 @@
 import React from "react";
 
+import { useConnexion } from "@helpers/customHooks";
 import { Route, useRouteMatch } from "react-router";
 
 import Home from "@dashboard/Home";
 import Navbar from "@dashboard/Navbar";
-import ProjectList from "@dashboard/pages/projects/list/ProjectList";
 import ProjectCreate from "@dashboard/pages/projects/new/ProjectCreate";
+import ProjectList from "@dashboard/pages/projects/list/ProjectList";
 import Sidebar from "@dashboard/Sidebar";
 
 const DashboardHome = () => {
   const { path } = useRouteMatch();
+  const [, setIsconnect] = useConnexion(localStorage.getItem("token") ? true : false);
 
   return (
     <div className="dashboard">
-      <Navbar />
+      <Navbar closeConnexion={setIsconnect.off} />
       <Sidebar />
       <main className="main-container">
         <Route exact path={`${path}/`}>

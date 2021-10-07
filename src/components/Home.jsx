@@ -1,5 +1,5 @@
 import React from "react";
-import { useBoolean } from "../helpers/customHooks";
+import { useBoolean, useConnexion } from "../helpers/customHooks";
 
 import ScrollableAnchor, { configureAnchors } from "react-scrollable-anchor";
 import ScrollToTop from "react-scroll-up";
@@ -19,7 +19,7 @@ configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
   const [displayConnectForm, setDisplayConnectForm] = useBoolean(false);
-  const [isConnected, setIsConnected] = useBoolean(localStorage.getItem("token") ? true : false);
+  const [isConnected, setIsConnected] = useConnexion(localStorage.getItem("token") ? true : false);
 
   return (
     <>

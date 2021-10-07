@@ -19,40 +19,41 @@ configureAnchors({ offset: -60, scrollDuration: 2000 });
 
 const PersonalPortfolio = () => {
   const [displayConnectForm, setDisplayConnectForm] = useBoolean(false);
-  const [isConnect, setIsConnect] = useBoolean(localStorage.getItem("token") ? true : false);
+  const [isConnected, setIsConnected] = useBoolean(localStorage.getItem("token") ? true : false);
 
   return (
     <>
       <Helmet pageTitle="Personal Portfolio" />
-      <Header color="color-black" isConnect={isConnect} closeConnexion={setIsConnect.off} />
+      <Header isConnected={isConnected} closeConnexion={setIsConnected.off} />
 
+      {/* Start Presentation Area */}
       <Presentation />
+
+      {/* Start Connexion Area */}
       {displayConnectForm && (
-        <ConnectForm activeConnexion={setIsConnect.on} hideConnectForm={setDisplayConnectForm.off} />
+        <ConnectForm activeConnexion={setIsConnected.on} hideConnectForm={setDisplayConnectForm.off} />
       )}
+
+      {/* Start AboutMe Area */}
       <ScrollableAnchor id={"about"}>
         <div className="about-area about-position-top pb--60  bg_color--3">
-          <AboutMe isConnect={isConnect} showConnectForm={setDisplayConnectForm.on} />
+          <AboutMe isConnected={isConnected} showConnectForm={setDisplayConnectForm.on} />
         </div>
       </ScrollableAnchor>
 
-      {/* Start Portfolio Area */}
+      {/* Start Projects Area */}
       <ScrollableAnchor id={"project"}>
         <div className="portfolio-area pb--60 bg_color--7">
           <Projects />
         </div>
       </ScrollableAnchor>
-      {/* End Portfolio Area */}
 
-      {/* Start Portfolio Area */}
+      {/* Start Contact Area */}
       <ScrollableAnchor id={"contact"}>
         <div className="portfolio-area pb--120 bg_color--1">
           <Contact />
         </div>
       </ScrollableAnchor>
-      {/* End Portfolio Area */}
-
-      {/* <FooterTwo /> */}
 
       {/* Start Back To Top */}
       <div className="backto-top">
@@ -60,7 +61,6 @@ const PersonalPortfolio = () => {
           <FiChevronUp />
         </ScrollToTop>
       </div>
-      {/* End Back To Top */}
     </>
   );
 };

@@ -1,32 +1,14 @@
 import React from "react";
 
-import { NavLink } from "react-router-dom";
 import propTypes from "prop-types";
-import Scrollspy from "react-scrollspy";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 
-import { FaLinkedinIn, FaGithub, FaUserSlash } from "react-icons/fa";
-import { FiX, FiMenu } from "react-icons/fi";
+import Navbar from "./header/Navbar";
+import Social from "./header/Social";
+import HamburgerMenu from "./header/HamburgerMenu";
 
-const SocialShare = [
-  { Social: <FaGithub size="20" />, link: "https://github.com/jerkodeur" },
-  {
-    Social: <FaLinkedinIn size="20" />,
-    link: "https://www.linkedin.com/in/j%C3%A9r%C3%B4me-poti%C3%A9/"
-  }
-];
-const Header = ({ color = "default-color", isConnect, closeConnexion }) => {
-  const menuTrigger = () => document.querySelector(".header-wrapper").classList.toggle("menu-open");
+import { FaUserSlash } from "react-icons/fa";
 
-  const CLoseMenuTrigger = () => document.querySelector(".header-wrapper").classList.remove("menu-open");
-
-  const disconnnect = () => {
-    const pseudo = localStorage.getItem("pseudo");
-    localStorage.clear();
-    ToasterDisplay(`Au revoir ${pseudo}, tu as bien été déconnecté !`);
-    return closeConnexion();
-  };
-
+const Header = ({ isConnected, closeConnexion }) => {
   window.addEventListener("scroll", function () {
     const value = window.scrollY;
     if (value > 100) {
@@ -47,66 +29,27 @@ const Header = ({ color = "default-color", isConnect, closeConnexion }) => {
   }
 
   return (
-    <header className={`header-area header-style-two header--fixed ${color}`}>
+    <header className={"header-area header-style-two header--fixed color-black"}>
       <div className="header-wrapper">
+        {/* Home page links */}
         <div className="header-left d-flex align-items-center">
-          <nav className="mainmenunav d-lg-block ml--50">
-            <Scrollspy
-              className="mainmenu"
-              items={["about", "project", "contact"]}
-              currentClassName="is-current"
-              offset={-200}
-            >
-              <li>
-                <a href="#about">À propos de moi</a>
-              </li>
-              <li>
-                <a href="#project">Mes projets</a>
-              </li>
-              <li>
-                <a href="#contact">Me contacter</a>
-              </li>
-              {isConnect && (
-                <li>
-                  <NavLink to="/dashboard">Dashboard</NavLink>
-                </li>
-              )}
-            </Scrollspy>
-          </nav>
+          <Navbar isConnected={isConnected} />
         </div>
-        <div className="header-right">
-          <div className="social-share-inner">
-            <ul className="social-share social-style--2 color-theme d-flex justify-content-start liststyle">
-              {SocialShare.map((val, i) => (
-                <li key={i}>
-                  <a href={`${val.link}`} target="_blank" rel="noopener noreferrer">
-                    {val.Social}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <span className="link">
-            {isConnect && <FaUserSlash size="20" className="text-warning ml-3" onClick={disconnnect} />}
-          </span>
 
+        {/* Right header side  */}
+        <div className="header-right">
+          <span className="link">
+            {isConnected && <FaUserSlash size="20" className="text-warning ml-3" onClick={closeConnexion} />}
+          </span>
+          {/* Social icons */}
+          <Social />
           <div className="header-btn">
             <a className="rn-btn dark-color" href="@files/Potié Jérôme - Développeur Web Fullstack.pdf" download>
               <span>Télécharger mon CV</span>
             </a>
           </div>
-          {/* Start Humberger Menu  */}
-          <div className="humberger-menu d-block d-lg-none pl--20">
-            <span onClick={menuTrigger} className="menutrigger text-white">
-              <FiMenu />
-            </span>
-          </div>
-          {/* End Humberger Menu  */}
-          <div className="close-menu d-block d-lg-none">
-            <span onClick={CLoseMenuTrigger} className="closeTrigger">
-              <FiX />
-            </span>
-          </div>
+
+          <HamburgerMenu />
         </div>
       </div>
     </header>
@@ -114,10 +57,8 @@ const Header = ({ color = "default-color", isConnect, closeConnexion }) => {
 };
 
 Header.propTypes = {
-  color: propTypes.string,
-  isConnect: propTypes.bool.isRequired,
-  closeConnexion: propTypes.func.isRequired,
-  pseudo: propTypes.string
+  isConnected: propTypes.bool.isRequired,
+  closeConnexion: propTypes.func.isRequired
 };
 
 export default Header;

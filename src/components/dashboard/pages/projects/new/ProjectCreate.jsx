@@ -65,14 +65,14 @@ const ProjectCreateAndEdit = () => {
     ];
 
     // Create an object with project fieds contraints and the corresponding state values
-    const fieldsToCheck = formFieldsToCheck.reduce((objectWithFieldConstraints, currentField) => {
-      objectWithFieldConstraints[currentField] = projectConstraints[currentField];
+    const fieldsToCheck = formFieldsToCheck.reduce((object, currentField) => {
+      object[currentField] = projectConstraints[currentField];
       if (currentField === "mdDescription") {
-        objectWithFieldConstraints[currentField].value = mdDescription;
+        object[currentField].value = mdDescription;
       } else {
-        objectWithFieldConstraints[currentField].value = formDatas[currentField];
+        object[currentField].value = formDatas[currentField];
       }
-      return objectWithFieldConstraints;
+      return object;
     }, {});
 
     // Verify if errors

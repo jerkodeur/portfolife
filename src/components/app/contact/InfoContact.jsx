@@ -32,7 +32,8 @@ const InfoContact = () => {
       </div>
       <div className="icons-descr">{iconDescr}</div>
       <p className="description">
-        Je suis disponible pour un entretien téléphonique au: <a href="tel:0660814774">06.60.81.47.74</a> ou par mail:
+        Je suis disponible pour un entretien téléphonique au: <a href="tel:0660814774">06.60.81.47.74</a>
+        <br /> ou par mail à l'adresse suivante:
         <a href="mailto:jerome.potie@gmail.com"> jerome.potie@gmail.com</a>{" "}
       </p>
     </div>

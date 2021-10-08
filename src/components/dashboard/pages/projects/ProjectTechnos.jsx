@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import propTypes from "prop-types";
 
-import CheckFormFields from "@components/commons/forms/CheckFormFields";
+import CheckFormFields from "@helpers/CheckFormFields";
 import NewTechnoForm from "./projectForms/NewTechnoForm";
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 

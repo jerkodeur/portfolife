@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHandleObjectForm } from "../../../helpers/customHooks";
 
-import CheckFormFields from "../../commons/forms/CheckFormFields";
+import CheckFormFields from "@helpers/CheckFormFields";
 import ContactForm from "./ContactForm";
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 

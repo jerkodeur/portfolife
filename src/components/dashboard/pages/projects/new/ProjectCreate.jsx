@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import CheckFormFields from "@components/commons/forms/CheckFormFields";
+import CheckFormFields from "@helpers/CheckFormFields";
 import projectConstraints from "../projectConstraints";
 import ProjectForm from "./ProjectFormContainer";
 import ToasterDisplay from "@components/commons/ToasterDisplay";

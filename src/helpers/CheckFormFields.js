@@ -1,3 +1,12 @@
+// data format:
+// {
+//    fieldName: {
+//        constraintName: constraintOptions,
+//        ....
+//    },
+// ....
+// }
+
 const CheckFormFields = (datas) => {
   const obj = {};
   Object.entries({ ...datas }).map((el) => {

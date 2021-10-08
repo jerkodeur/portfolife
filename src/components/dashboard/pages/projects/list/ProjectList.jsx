@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import CheckFormFields from "@components/commons/forms/CheckFormFields";
+import CheckFormFields from "@helpers/CheckFormFields";
 import ConfirmModal from "@components/commons/ConfirmModal";
 import MdEditor from "@components/commons/forms/MdEditor";
 import projectConstraints from "../projectConstraints";

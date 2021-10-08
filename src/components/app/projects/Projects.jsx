@@ -1,6 +1,6 @@
 import React from "react";
 
-import PortfolioList from "./PortfolioList";
+import ProjectList from "./ProjectList";
 
 const Projects = () => {
   return (
@@ -18,7 +18,7 @@ const Projects = () => {
           </div>
         </div>
         <div className="row">
-          <PortfolioList stylevariation="text-center mt--40" column="col-lg-4 col-md-6 col-sm-6 col-12" item="6" />
+          <ProjectList item={6} />
         </div>
       </div>
     </div>

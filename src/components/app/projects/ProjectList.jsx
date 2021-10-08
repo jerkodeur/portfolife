@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
+import propTypes from "prop-types";
 
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 import ViewProjectModal from "./modal/ViewProjectModal";
 
 import { getAllProjects } from "@controllers/projectController";
 
-const PortfolioList = (props) => {
+const ProjectList = ({ item }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedModal, setSelectedModal] = useState(false);
   const [projects, setProjects] = useState();
   const [isDisplay, setIsDisplay] = useState("description");
-
-  const { column, stylevariation } = props;
 
   const toggleModal = (project) => {
     document.documentElement.style.setProperty("--bg-slider", project.mainDatas.background);
@@ -44,20 +43,18 @@ const PortfolioList = (props) => {
           const image = `/assets/images/projects/${img_prefix}/${img_prefix}_preview.png`;
           // Define the preview css image variable for each project
           document.documentElement.style.setProperty(`--preview-img-${index}`, `url(${image})`);
-          let technoList = "";
-          // fetch the five main techno to display
-          project.technos.map((techno, index) => {
-            if (index < 5) {
-              technoList += techno.name + " / ";
-            }
-            return technoList;
-          });
-          technoList = technoList.slice(0, technoList.length - 2);
+
+          const technoList = project.technos
+            .reduce((technos, currTechno) => {
+              technos.push(currTechno.name);
+              return technos;
+            }, [])
+            .join(" / ");
 
           return (
-            index < 6 && (
-              <div className={`${column}`} key={id}>
-                <div className={`portfolio ${stylevariation}`}>
+            index < item && (
+              <div className="col-lg-4 col-md-6 col-sm-6 col-12" key={id}>
+                <div className="portfolio text-center mt--40">
                   <div className="thumbnail-inner">
                     <div className={`thumbnail image-${index}`}></div>
                     <div className={`bg-blr-image image-${index}`}></div>
@@ -77,9 +74,9 @@ const PortfolioList = (props) => {
                       </h4>
                       <p>{short_description}</p>
                       <div className="portfolio-button">
-                        <a className="rn-btn" onClick={() => toggleModal(project)}>
+                        <button type="button" className="rn-btn" onClick={() => toggleModal(project)}>
                           Voir en détail
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -98,4 +95,9 @@ const PortfolioList = (props) => {
     </>
   );
 };
-export default PortfolioList;
+
+ProjectList.propTypes = {
+  item: propTypes.number.isRequired
+};
+
+export default ProjectList;

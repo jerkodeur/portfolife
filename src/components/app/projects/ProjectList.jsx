@@ -4,28 +4,17 @@ import propTypes from "prop-types";
 import ViewProjectModal from "./modal/ViewProjectModal";
 
 import { getAllProjects } from "@controllers/projectController";
-import { useToaster } from "@helpers/customHooks";
+import { useToaster, useBoolean } from "@helpers/customHooks";
 
 const ProjectList = ({ item }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedModal, setSelectedModal] = useState(false);
+  const [showModal, setShowModal] = useBoolean(false);
+  const [selectedModal, setSelectedModal] = useState("");
   const [projects, setProjects] = useState();
-  const [isDisplay, setIsDisplay] = useState("description");
 
   const toggleModal = (project) => {
     document.documentElement.style.setProperty("--bg-slider", project.mainDatas.background);
     setSelectedModal(project);
-    setShowModal(true);
-  };
-
-  const toogleDisplay = (isDefault = "description") => {
-    isDisplay === "description" || !isDefault ? setIsDisplay("gallery") : setIsDisplay("description");
-  };
-
-  const hideModal = () => {
-    document.documentElement.style.setProperty("--bg-slider", "rgba(244, 245, 240, 0.561)");
-    setIsDisplay("description");
-    setShowModal(false);
+    setShowModal.on();
   };
 
   useEffect(() => {
@@ -81,13 +70,9 @@ const ProjectList = ({ item }) => {
                     </div>
                   </div>
                 </div>
-                <ViewProjectModal
-                  show={showModal}
-                  onHide={() => hideModal()}
-                  isDisplay={isDisplay}
-                  toogleDisplay={() => toogleDisplay()}
-                  project={selectedModal}
-                />
+                {selectedModal && (
+                  <ViewProjectModal isShowed={showModal} hideModal={setShowModal.off} project={selectedModal} />
+                )}
               </div>
             )
           );

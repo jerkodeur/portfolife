@@ -14,7 +14,8 @@ const ShowTechnos = ({ technos }) => (
         imageExist("technos", techno.image_name);
         img = require(`@images/technos/${techno.image_name}`);
       } catch (e) {
-        useToaster.fail("Image inconnue détectée", { position: "bottom-left", duration: 2500 });
+        process.env.REACT_APP_ENV === "dev" &&
+          useToaster.fail("Image inconnue détectée", { position: "bottom-left", duration: 2500 });
       }
       return <img src={img || notFoundImg} alt={techno.name} title={techno.name} key={index} />;
     })}

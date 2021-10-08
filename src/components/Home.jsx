@@ -1,5 +1,5 @@
 import React from "react";
-import { useBoolean, useConnexion } from "../helpers/customHooks";
+import { useBoolean, useConnexion } from "@helpers/customHooks";
 
 import ScrollableAnchor, { configureAnchors } from "react-scrollable-anchor";
 import ScrollToTop from "react-scroll-up";

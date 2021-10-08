@@ -4,9 +4,9 @@ import propTypes from "prop-types";
 
 import CheckFormFields from "@helpers/CheckFormFields";
 import NewTechnoForm from "./projectForms/NewTechnoForm";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 
 import { getAllTechnos, addOneTechno } from "@controllers/technoController";
+import { useToaster } from "@helpers/customHooks";
 
 const ProjectTechnos = (props) => {
   const { selectedTechnos, toggleSelectedTechnos, error } = props;
@@ -18,7 +18,7 @@ const ProjectTechnos = (props) => {
   const fetchTechnos = useCallback(() => {
     getAllTechnos()
       .then((technos) => setTechnos(technos))
-      .catch((err) => console.log(err) && ToasterDisplay("Erreur lors de la récupération des technos", "fail"));
+      .catch((err) => console.log(err) && useToaster.fail("Erreur lors de la récupération des technos"));
   }, [setTechnos]);
 
   useEffect(() => {
@@ -52,19 +52,19 @@ const ProjectTechnos = (props) => {
     const errorfields = CheckFormFields(constraints);
 
     if (Object.values(errorfields).some((el) => el)) {
-      ToasterDisplay("La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !", "fail");
+      useToaster.fail("La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !");
 
       setTechnoFormErrors(errorfields);
     } else {
       const { name, imageName: image_name } = newTechno;
       addOneTechno({ name, image_name, priority: 1 })
         .then(() => {
-          ToasterDisplay(`La techno ${newTechno.name} a bien été ajoutée !`);
+          useToaster.success(`La techno ${newTechno.name} a bien été ajoutée !`);
 
           setNewTechnoFormDisplay(false);
           return fetchTechnos();
         })
-        .catch((err) => console.log(err) && ToasterDisplay(`Erreur lors de la création de la nouvelle techno`, "fail"));
+        .catch((err) => console.log(err) && useToaster.fail(`Erreur lors de la création de la nouvelle techno`));
     }
   };
 

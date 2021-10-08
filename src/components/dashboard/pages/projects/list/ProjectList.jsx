@@ -6,12 +6,12 @@ import MdEditor from "@components/commons/forms/MdEditor";
 import projectConstraints from "../projectConstraints";
 import ProjectListContainer from "./ProjectListContainer";
 import ProjectTechnos from "../ProjectTechnos";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 
 import { checkIfTechnoIsInProject } from "@handlers/technos";
 import { updateListOfProjects, updateProjectTechnos } from "@handlers/projects";
 import { newProjectTechno, removeProjectTechno } from "@controllers/technoController";
 import { deleteProject, getAllProjects, updateOneField } from "@controllers/projectController";
+import { useToaster } from "@helpers/customHooks";
 
 const ProjectList = () => {
   const [deleteProjectId, setDeleteProjectId] = useState("");
@@ -25,7 +25,7 @@ const ProjectList = () => {
   useEffect(() => {
     getAllProjects()
       .then((projects) => setProjects(projects))
-      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de la récupération des projets", "fail"));
+      .catch((err) => console.error(err) && useToaster.fail("Erreur lors de la récupération des projets"));
   }, []);
 
   // Define if a show more container is displayed
@@ -82,7 +82,7 @@ const ProjectList = () => {
     const clickedTechnoId = Number(e.target.id);
     const technoIsInProject = checkIfTechnoIsInProject(projects, currentProjectId, clickedTechnoId);
     if (technos.length === 1 && technoIsInProject)
-      return ToasterDisplay("Au moins une techno doit être sélectionnée !", "fail");
+      return useToaster.fail("Au moins une techno doit être sélectionnée !");
     technoIsInProject
       ? removeTechnoFromProject(currentProjectId, clickedTechnoId)
       : addTechnoInProject(currentProjectId, clickedTechnoId);
@@ -93,20 +93,20 @@ const ProjectList = () => {
     removeProjectTechno(projectId, technoId)
       .then(
         (technos) =>
-          ToasterDisplay("Techno retirée !", "success", { position: "bottom-left", duration: 1500 }) &&
+          useToaster.success("Techno retirée !", { position: "bottom-left", duration: 1500 }) &&
           setProjects(updateProjectTechnos(projects, projectId, technos))
       )
-      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors du retrait de la techno du projet !", "fail"));
+      .catch((err) => console.error(err) && useToaster.fail("Erreur lors du retrait de la techno du projet !"));
 
   // Add a techno on the current modified project
   const addTechnoInProject = (projectId, technoId) =>
     newProjectTechno(projectId, technoId)
       .then(
         (technos) =>
-          ToasterDisplay("Techno ajoutée !", "success", { position: "bottom-left", duration: 1500 }) &&
+          useToaster.success("Techno ajoutée !", { position: "bottom-left", duration: 1500 }) &&
           setProjects(updateProjectTechnos(projects, projectId, technos))
       )
-      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de l'ajout de la techno au projet", "fail"));
+      .catch((err) => console.error(err) && useToaster.fail("Erreur lors de l'ajout de la techno au projet"));
 
   //---------------------------------------- Update Fields handlers  ---------------------------------------//
   //--------------------------------------------------------------------------------------------------------//
@@ -131,7 +131,7 @@ const ProjectList = () => {
     const errorfield = CheckFormFields(fieldToCheck);
     if (Object.values(errorfield).some((el) => el)) {
       setUpdatedField({ ...updatedField, error: errorfield[key] });
-      return ToasterDisplay(`Impossible de modifier la valeur, ${errorfield[key]} `, "fail");
+      return useToaster.fail(`Impossible de modifier la valeur, ${errorfield[key]} `);
     }
     const { id } = updatedField;
     return updateAsyncProjectField(id, key, value);
@@ -150,13 +150,12 @@ const ProjectList = () => {
     updateOneField(id, { key, value })
       .then((updatedProject) => {
         const updateProjects = updateListOfProjects(projects, updatedProject);
-        ToasterDisplay("Mise à jour réussie !", "success", { duration: 1500, position: "bottom-left" });
+        useToaster.success("Mise à jour réussie !", { duration: 1500, position: "bottom-left" });
         setUpdatedField({});
         setProjects(updateProjects);
       })
       .catch(
-        (err) =>
-          console.error(err) || ToasterDisplay("Une erreur est survenue lors de la mise à jour du champ !", "fail")
+        (err) => console.error(err) || useToaster.fail("Une erreur est survenue lors de la mise à jour du champ !")
       );
   };
 
@@ -173,10 +172,10 @@ const ProjectList = () => {
   const deleteCurrentProject = (e) => {
     deleteProject(e.target.dataset.id)
       .then((res) => {
-        ToasterDisplay("Le projet a été supprimé avec succès !");
+        useToaster.success("Le projet a été supprimé avec succès !");
         setProjects(res);
       })
-      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de la suppression du projet !", "fail"));
+      .catch((err) => console.error(err) && useToaster.fail("Erreur lors de la suppression du projet !"));
     setShowDeleteModal(false);
   };
 

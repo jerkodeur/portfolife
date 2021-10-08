@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import { FaWindowClose } from "react-icons/fa";
 
 import { adminAuthentication } from "../../../controllers/userController";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
+import { useToaster } from "@helpers/customHooks";
 
 const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ const ConnectForm = ({ activeConnexion, hideConnectForm }) => {
       .catch((err) => {
         setEmail("");
         setPassword("");
-        return ToasterDisplay(`Une erreur est survenue, le serveur a répondu: ${err.message}`, "fail");
+        return useToaster.fail(`Une erreur est survenue, le serveur a répondu: ${err.message}`);
       });
   };
 

@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import CheckFormFields from "@helpers/CheckFormFields";
 import projectConstraints from "../projectConstraints";
 import ProjectForm from "./ProjectFormContainer";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 
 import { useHistory } from "react-router-dom";
 import { addOneProject } from "@controllers/projectController";
+import { useToaster } from "@helpers/customHooks";
 
 const ProjectCreateAndEdit = () => {
   const history = useHistory();
@@ -78,7 +78,7 @@ const ProjectCreateAndEdit = () => {
     // Verify if errors
     const errorfields = CheckFormFields(fieldsToCheck);
     if (Object.values(errorfields).some((el) => el)) {
-      ToasterDisplay("Le projet n'a pas été ajouté, des erreurs ont été détectées !", "fail");
+      useToaster.fail("Le projet n'a pas été ajouté, des erreurs ont été détectées !");
       return setFormErrors(errorfields);
     }
 
@@ -86,12 +86,10 @@ const ProjectCreateAndEdit = () => {
     addOneProject({ ...formDatas, description: mdDescription })
       .then(() => {
         setMdDescription("");
-        ToasterDisplay("Le projet a été ajouté avec succès");
+        useToaster.success("Le projet a été ajouté avec succès");
         history.push("/dashboard/projects");
       })
-      .catch(
-        (err) => console.log(err) && ToasterDisplay("Une erreur est survenue lors de l'ajout du nouveau projet", "fail")
-      );
+      .catch((err) => console.log(err) && useToaster.fail("Une erreur est survenue lors de l'ajout du nouveau projet"));
   };
   return (
     <div className="project-form-container">

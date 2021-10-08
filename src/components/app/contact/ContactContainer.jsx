@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useHandleObjectForm } from "../../../helpers/customHooks";
+import { useHandleObjectForm, useToaster } from "@helpers/customHooks";
 
 import CheckFormFields from "@helpers/CheckFormFields";
 import ContactForm from "./ContactForm";
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 
 import { sendEmail } from "../../../service/sendEmail";
 import { contactConstraints, contactFormFields } from "./contactFormInfos";
@@ -19,9 +18,9 @@ const ContactContainer = () => {
       .then(() => {
         setFormContent.reset();
         setFormErrors({});
-        return ToasterDisplay("Votre message a bien été envoyé !");
+        return useToaster.success("Votre message a bien été envoyé !");
       })
-      .catch(() => ToasterDisplay("Une erreur est survenue, veuillez réessayer ou contacter l'administrateur", "fail"));
+      .catch(() => useToaster.fail("Une erreur est survenue, veuillez réessayer ou contacter l'administrateur"));
   };
 
   const handleFormErrors = () => {
@@ -32,7 +31,7 @@ const ContactContainer = () => {
     }, {});
     const errorfields = CheckFormFields(fieldsToCheck);
     if (Object.values(errorfields).some((el) => el)) {
-      ToasterDisplay("Le projet n'a pas été ajouté, des erreurs ont été détectées !", "fail");
+      useToaster.fail("Le projet n'a pas été ajouté, des erreurs ont été détectées !");
       setFormErrors(errorfields);
       return true;
     }

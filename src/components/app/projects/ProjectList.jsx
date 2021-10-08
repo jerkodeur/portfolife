@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import propTypes from "prop-types";
 
-import ToasterDisplay from "@components/commons/ToasterDisplay";
 import ViewProjectModal from "./modal/ViewProjectModal";
 
 import { getAllProjects } from "@controllers/projectController";
+import { useToaster } from "@helpers/customHooks";
 
 const ProjectList = ({ item }) => {
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +31,7 @@ const ProjectList = ({ item }) => {
   useEffect(() => {
     getAllProjects()
       .then((projects) => setProjects(projects))
-      .catch((err) => console.error(err) && ToasterDisplay("Erreur lors de la récupération des projets", "fail"));
+      .catch((err) => console.error(err) && useToaster.fail("Erreur lors de la récupération des projets"));
   }, []);
 
   return (

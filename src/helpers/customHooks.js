@@ -23,7 +23,7 @@ export const useConnexion = (initialValue) => {
     off: () => {
       const pseudo = localStorage.getItem("pseudo");
       localStorage.clear();
-      ToasterDisplay(`Déconnexion effectuée, à bientôt ${pseudo} !`);
+      useToaster.success(`Déconnexion effectuée, à bientôt ${pseudo} !`);
       setValue(false);
       history.push("/");
     },
@@ -31,7 +31,7 @@ export const useConnexion = (initialValue) => {
       localStorage.clear();
       localStorage.setItem("token", token);
       localStorage.setItem("pseudo", jwt.decode(token).pseudo);
-      ToasterDisplay(`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`);
+      useToaster.success(`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`);
       setValue(true);
     }
   };
@@ -47,4 +47,9 @@ export const useHandleObjectForm = ({ initialValue }) => {
   };
 
   return [datas, updateDatas];
+};
+
+export const useToaster = {
+  success: (message, options) => ToasterDisplay(message, "success", options),
+  fail: (message, options) => ToasterDisplay(message, "fail", options)
 };

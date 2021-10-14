@@ -12,6 +12,7 @@ import ShowTechnos from "./ProjectDisplay/ShowTechnos";
 import TabsLayout from "./ProjectDisplay/TabsLayout";
 
 import { useTabs } from "@helpers/customHooks";
+import { goToAnchor } from "react-scrollable-anchor";
 
 const ViewProjectModal = (props) => {
   const { mainDatas, technos, background } = props.project;
@@ -19,26 +20,23 @@ const ViewProjectModal = (props) => {
 
   const [showTab, setshowTab] = useTabs();
 
+  const onHide = () => {
+    setshowTab.reset();
+    hideModal();
+    goToAnchor("project");
+  };
+
   useEffect(() => {
     document.documentElement.style.setProperty("--bg-slider", background);
   }, [background]);
 
   return (
     <div>
-      <Modal
-        className="project-modal"
-        show={isShowed}
-        onHide={() => {
-          setshowTab.reset();
-          hideModal();
-        }}
-        size="xl"
-        scrollable={true}
-      >
+      <Modal className="project-modal" show={isShowed} onHide={onHide} size="xl" scrollable={true}>
         <ModalHeader>
           <ModalTitle>
             {mainDatas && mainDatas.title}
-            <span onClick={hideModal}>X</span>
+            <span onClick={onHide}>X</span>
           </ModalTitle>
           <TabsLayout showTab={showTab} setshowTab={setshowTab.set} />
         </ModalHeader>

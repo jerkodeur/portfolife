@@ -15,7 +15,7 @@ import Projects from "@app/projects/Projects";
 
 // Offset all anchors by -60 to account for a fixed header
 // and scroll more quickly than the default 400ms
-configureAnchors({ offset: -60, scrollDuration: 2000 });
+configureAnchors({ offset: -60, scrollDuration: 1500 });
 
 const PersonalPortfolio = () => {
   const [displayConnectForm, setDisplayConnectForm] = useBoolean(false);

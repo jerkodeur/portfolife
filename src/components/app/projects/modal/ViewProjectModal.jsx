@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import propTypes from "prop-types";
-import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalFooter from "react-bootstrap/ModalFooter";
+
+import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalTitle from "react-bootstrap/ModalTitle";
 
 import ImageSlides from "./ProjectDisplay/ImagesSlides";
 import MarkdownDescription from "./ProjectDisplay/MarkdownDescription";
 import ProjectFooter from "./ProjectDisplay/ProjectFooter";
 import ShowTechnos from "./ProjectDisplay/ShowTechnos";
+import TabsLayout from "./ProjectDisplay/TabsLayout";
 
-const tabs = ["description", "gallery"];
+import { useTabs } from "@helpers/customHooks";
 
 const ViewProjectModal = (props) => {
   const { mainDatas, technos, background } = props.project;
   const { isShowed, hideModal } = props;
 
-  const [showTab, setshowTab] = useState("description");
+  const [showTab, setshowTab] = useTabs();
 
   useEffect(() => {
     document.documentElement.style.setProperty("--bg-slider", background);
@@ -30,7 +29,7 @@ const ViewProjectModal = (props) => {
         className="project-modal"
         show={isShowed}
         onHide={() => {
-          setshowTab("description");
+          setshowTab.reset();
           hideModal();
         }}
         size="xl"
@@ -41,22 +40,10 @@ const ViewProjectModal = (props) => {
             {mainDatas && mainDatas.title}
             <span onClick={hideModal}>X</span>
           </ModalTitle>
-          <div className="project-tabs-layout">
-            {tabs.map((tab) =>
-              showTab !== tab ? (
-                <span onClick={() => setshowTab(tab)} className={tab} key={tab}>
-                  {tab}
-                </span>
-              ) : (
-                <span className={`selected ${tab}`} key={tab}>
-                  {tab}
-                </span>
-              )
-            )}
-          </div>
+          <TabsLayout showTab={showTab} setshowTab={setshowTab.set} />
         </ModalHeader>
         <ModalBody>
-          {showTab === "description" ? (
+          {showTab === 0 ? (
             <div className="main-description">
               <ShowTechnos technos={technos} />
               {mainDatas && <MarkdownDescription description={mainDatas.description} />}

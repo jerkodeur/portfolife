@@ -6,7 +6,7 @@ import ViewProjectModal from "./modal/ViewProjectModal";
 import { getAllProjects } from "@controllers/projectController";
 import { useToaster, useBoolean } from "@helpers/customHooks";
 
-const ProjectList = ({ item }) => {
+const ProjectList = ({ items }) => {
   const [showModal, setShowModal] = useBoolean(false);
   const [selectedModal, setSelectedModal] = useState("");
   const [projects, setProjects] = useState();
@@ -41,7 +41,7 @@ const ProjectList = ({ item }) => {
             .join(" / ");
 
           return (
-            index < item && (
+            index < items && (
               <div className="col-lg-4 col-md-6 col-sm-6 col-12" key={id}>
                 <div className="portfolio text-center mt--40">
                   <div className="thumbnail-inner">
@@ -82,7 +82,7 @@ const ProjectList = ({ item }) => {
 };
 
 ProjectList.propTypes = {
-  item: propTypes.number.isRequired
+  items: propTypes.number.isRequired
 };
 
 export default ProjectList;

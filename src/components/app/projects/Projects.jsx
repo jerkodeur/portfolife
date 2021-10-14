@@ -18,7 +18,7 @@ const Projects = () => {
           </div>
         </div>
         <div className="row">
-          <ProjectList item={6} />
+          <ProjectList items={6} />
         </div>
       </div>
     </div>

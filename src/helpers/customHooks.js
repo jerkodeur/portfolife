@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import jwt from "jsonwebtoken";
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 
+// Custom useBoolean (set to true, false or toggle the value)
 export const useBoolean = (initialValue) => {
   const [value, setValue] = useState(initialValue);
 
@@ -15,6 +16,7 @@ export const useBoolean = (initialValue) => {
   return [value, updateValue];
 };
 
+// Custom useConnexion (Handle connexion / deconnexion)
 export const useConnexion = (initialValue) => {
   const history = useHistory();
   const [value, setValue] = useState(initialValue);
@@ -39,6 +41,7 @@ export const useConnexion = (initialValue) => {
   return [value, updateValue];
 };
 
+// Custom useHandleObjectForm (Modify seleted data into an object an reset the state data)
 export const useHandleObjectForm = ({ initialValue }) => {
   const [datas, setDatas] = useState({ initialValue });
   const updateDatas = {
@@ -49,11 +52,13 @@ export const useHandleObjectForm = ({ initialValue }) => {
   return [datas, updateDatas];
 };
 
+// Custom useToaster (Display the success or fail modal)
 export const useToaster = {
   success: (message, options) => ToasterDisplay(message, "success", options),
   fail: (message, options) => ToasterDisplay(message, "fail", options)
 };
 
+// Custom useCounter (Handle a counter: increment, decrement, reset, set)
 export const useCounter = (initialValue) => {
   const [value, setValue] = useState(initialValue);
 
@@ -67,6 +72,7 @@ export const useCounter = (initialValue) => {
   return [value, updateDatas];
 };
 
+// Custom useSlider (Handle the selected element in a slider)
 export const useSlider = (initialValue, maxValue) => {
   const [value, setValue] = useCounter(initialValue);
 
@@ -89,4 +95,16 @@ export const useSlider = (initialValue, maxValue) => {
   };
 
   return [value, updateDatas];
+};
+
+// Custom useTabs (define and return the selected tab id)
+export const useTabs = (initialValue = 0) => {
+  const [value, setValue] = useState(initialValue);
+
+  const updateValue = {
+    set: (id) => setValue(id),
+    reset: () => setValue(initialValue)
+  };
+
+  return [value, updateValue];
 };

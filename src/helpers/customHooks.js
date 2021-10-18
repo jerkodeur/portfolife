@@ -42,7 +42,7 @@ export const useConnexion = (initialValue) => {
 };
 
 // Custom useHandleObjectForm (Modify seleted data into an object an reset the state data)
-export const useHandleObjectForm = ({ initialValue }) => {
+export const useHandleObjectForm = (initialValue = {}) => {
   const [datas, setDatas] = useState({ initialValue });
   const updateDatas = {
     update: (key, value) => setDatas({ ...datas, [key]: value }),

@@ -21,7 +21,7 @@ const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField,
   const [showTab, setShowTab] = useState("preview");
   const [startDate, setStartDate] = useState(new Date(date));
 
-  const handleForm = (e) => setUpdatedField({ id, label: e.target.id, value: e.target.value });
+  const handleForm = (e) => setUpdatedField.set({ id, label: e.target.id, value: e.target.value });
 
   const getTechnoIds = (arrayOfTechnos) =>
     arrayOfTechnos.reduce((ids, currentTechno) => {
@@ -49,6 +49,7 @@ const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField,
             formDatas={{ context, contextUrl }}
             handleForm={handleForm}
             keyPressHandler={keyPressHandler}
+            setUpdatedField={setUpdatedField}
             updatedField={updatedField}
           />
         </div>
@@ -109,7 +110,7 @@ ShowMoreContent.propTypes = {
       }).isRequired
     ).isRequired
   }),
-  setUpdatedField: propTypes.func.isRequired,
+  setUpdatedField: propTypes.object.isRequired,
   TechnoSwitcher: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,

@@ -80,7 +80,7 @@ const ProjectListContainer = ({
                     </td>
                     {/* Title */}
                     <td
-                      onClick={() => setUpdatedField({ label: "title", id, value: title })}
+                      onClick={() => setUpdatedField.set({ label: "title", id, value: title })}
                       className={isCurrent ? "selected" : undefined}
                     >
                       {updatedField.label === "title" && isUpdatedField ? (
@@ -89,7 +89,7 @@ const ProjectListContainer = ({
                           displayError={false}
                           error={updatedField.error}
                           id="title"
-                          onBlur={() => setUpdatedField({})}
+                          onBlur={setUpdatedField.reset}
                           onKeyPress={keyPressHandler}
                           placeholder="titre"
                           setValue={(e) => setUpdatedField({ label: "title", id, value: e.target.value })}
@@ -100,17 +100,19 @@ const ProjectListContainer = ({
                       )}
                     </td>
                     {/* short description */}
-                    <td onClick={() => setUpdatedField({ label: "shortDescription", id, value: shortDescription })}>
+                    <td onClick={() => setUpdatedField.set({ label: "shortDescription", id, value: shortDescription })}>
                       {updatedField.label === "shortDescription" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
                           error={updatedField.error}
                           id="shortDescription"
-                          onBlur={() => setUpdatedField({})}
+                          onBlur={setUpdatedField.reset}
                           onKeyPress={keyPressHandler}
                           placeholder="Description courte"
-                          setValue={(e) => setUpdatedField({ label: "shortDescription", id, value: e.target.value })}
+                          setValue={(e) =>
+                            setUpdatedField.set({ label: "shortDescription", id, value: e.target.value })
+                          }
                           value={updatedField.value ?? undefined}
                         />
                       ) : (
@@ -118,17 +120,17 @@ const ProjectListContainer = ({
                       )}
                     </td>
                     {/* github url */}
-                    <td onClick={() => setUpdatedField({ label: "urlGithub", id, value: urlGithub })}>
+                    <td onClick={() => setUpdatedField.set({ label: "urlGithub", id, value: urlGithub })}>
                       {updatedField.label === "urlGithub" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
                           error={updatedField.error}
                           id="urlGithub"
-                          onBlur={() => setUpdatedField({})}
+                          onBlur={setUpdatedField.reset}
                           onKeyPress={keyPressHandler}
                           placeholder="Url Github"
-                          setValue={(e) => setUpdatedField({ label: "urlGithub", id, value: e.target.value })}
+                          setValue={(e) => setUpdatedField.set({ label: "urlGithub", id, value: e.target.value })}
                           type="url"
                           value={updatedField.value ?? undefined}
                         />
@@ -137,17 +139,17 @@ const ProjectListContainer = ({
                       )}
                     </td>
                     {/* project preview url */}
-                    <td onClick={() => setUpdatedField({ label: "urlTest", id, value: urlTest })}>
+                    <td onClick={() => setUpdatedField.set({ label: "urlTest", id, value: urlTest })}>
                       {updatedField.label === "urlTest" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
                           error={updatedField.error}
                           id="urlTest"
-                          onBlur={() => setUpdatedField({})}
+                          onBlur={setUpdatedField.reset}
                           onKeyPress={keyPressHandler}
                           placeholder="Url preview"
-                          setValue={(e) => setUpdatedField({ label: "urlTest", id, value: e.target.value })}
+                          setValue={(e) => setUpdatedField.set({ label: "urlTest", id, value: e.target.value })}
                           type="url"
                           value={updatedField.value ?? undefined}
                         />
@@ -157,7 +159,7 @@ const ProjectListContainer = ({
                     </td>
 
                     {/* Number of images */}
-                    <td onClick={() => setUpdatedField({ label: "nbImages", id, value: nbImages.toString() })}>
+                    <td onClick={() => setUpdatedField.set({ label: "nbImages", id, value: nbImages.toString() })}>
                       {updatedField.label === "nbImages" && isUpdatedField ? (
                         <Input
                           autoFocus
@@ -166,9 +168,11 @@ const ProjectListContainer = ({
                           error={updatedField.error}
                           min={0}
                           max={20}
-                          onBlur={() => setUpdatedField({})}
+                          onBlur={setUpdatedField.reset}
                           onKeyPress={keyPressHandler}
-                          setValue={(e) => setUpdatedField({ label: "nbImages", id, value: parseInt(e.target.value) })}
+                          setValue={(e) =>
+                            setUpdatedField.set({ label: "nbImages", id, value: parseInt(e.target.value) })
+                          }
                           type="number"
                           defaultValue={0}
                           value={parseInt(updatedField.value) ?? undefined}
@@ -178,17 +182,17 @@ const ProjectListContainer = ({
                       )}
                     </td>
                     {/* image prefix  */}
-                    <td onClick={() => setUpdatedField({ label: "imgPrefix", id, value: imgPrefix })}>
+                    <td onClick={() => setUpdatedField.set({ label: "imgPrefix", id, value: imgPrefix })}>
                       {updatedField.label === "imgPrefix" && isUpdatedField ? (
                         <Input
                           autoFocus
                           displayError={false}
                           error={updatedField.error}
                           id="imgPrefix"
-                          onBlur={() => setUpdatedField({})}
+                          onBlur={setUpdatedField.reset}
                           onKeyPress={keyPressHandler}
                           placeholder="Préfixe images"
-                          setValue={(e) => setUpdatedField({ label: "imgPrefix", id, value: e.target.value })}
+                          setValue={(e) => setUpdatedField.set({ label: "imgPrefix", id, value: e.target.value })}
                           value={updatedField.value ?? undefined}
                         />
                       ) : (
@@ -279,7 +283,7 @@ ProjectListContainer.propTypes = {
       ).isRequired
     })
   ),
-  setUpdatedField: propTypes.func.isRequired,
+  setUpdatedField: propTypes.object.isRequired,
   TechnoSwitcher: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,

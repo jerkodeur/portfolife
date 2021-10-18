@@ -11,15 +11,15 @@ import { checkIfTechnoIsInProject } from "@handlers/technos";
 import { updateListOfProjects, updateProjectTechnos } from "@handlers/projects";
 import { newProjectTechno, removeProjectTechno } from "@controllers/technoController";
 import { deleteProject, getAllProjects, updateOneField } from "@controllers/projectController";
-import { useToaster } from "@helpers/customHooks";
+import { useToaster, useFullState } from "@helpers/customHooks";
 
 const ProjectList = () => {
   const [deleteProjectId, setDeleteProjectId] = useState("");
   const [labelToDelete, setlabelToDelete] = useState("");
   const [projects, setProjects] = useState();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [currentProjectId, setCurrentProjectId] = useState(null);
-  const [updatedField, setUpdatedField] = useState({});
+  const [currentProjectId, setCurrentProjectId] = useFullState(null);
+  const [updatedField, setUpdatedField] = useFullState({});
 
   // Fetch projects on page load
   useEffect(() => {
@@ -30,7 +30,8 @@ const ProjectList = () => {
 
   // Define if a show more container is displayed
   const handleShowMoreContent = (id) => {
-    setCurrentProjectId(currentProjectId === id ? null : id);
+    currentProjectId !== id ? setCurrentProjectId.set(id) : setCurrentProjectId.reset();
+    setUpdatedField.set({ ...updatedField, key: null, value: null });
   };
 
   //--------------------------------------------- Description editing handlers -------------------------------//
@@ -62,7 +63,11 @@ const ProjectList = () => {
   const submitDescription = (e, value) => {
     e.preventDefault(e);
     if (!value)
-      return setUpdatedField({ label: "description", id: currentProjectId, error: "Ce champs ne peut être vide !" });
+      return setUpdatedField.set({
+        label: "description",
+        id: currentProjectId,
+        error: "Ce champs ne peut être vide !"
+      });
     return updateAsyncProjectField(currentProjectId, "description", value);
   };
 
@@ -130,7 +135,7 @@ const ProjectList = () => {
     // Verify if errors
     const errorfield = CheckFormFields(fieldToCheck);
     if (Object.values(errorfield).some((el) => el)) {
-      setUpdatedField({ ...updatedField, error: errorfield[key] });
+      setUpdatedField.set({ ...updatedField, error: errorfield[key] });
       return useToaster.fail(`Impossible de modifier la valeur, ${errorfield[key]} `);
     }
     const { id } = updatedField;
@@ -151,7 +156,7 @@ const ProjectList = () => {
       .then((updatedProject) => {
         const updateProjects = updateListOfProjects(projects, updatedProject);
         useToaster.success("Mise à jour réussie !", { duration: 1500, position: "bottom-left" });
-        setUpdatedField({});
+        setUpdatedField.reset();
         setProjects(updateProjects);
       })
       .catch(

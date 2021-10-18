@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 
 import FormContext from "../projectForms/FormContext";
 import ShowProjectImages from "./ShowProjectImages";
-import ShowTechnos from "../../../../app/projects/modal/ProjectDisplay/ShowTechnos.jsx";
+import ShowTechnos from "@app/projects/modal/ProjectDisplay/ShowTechnos.jsx";
 
 import { registerLocale } from "react-datepicker";
 import DatePicker from "react-datepicker";

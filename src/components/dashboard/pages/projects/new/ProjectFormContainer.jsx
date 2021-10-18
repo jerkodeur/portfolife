@@ -2,11 +2,11 @@ import React from "react";
 
 import propTypes from "prop-types";
 
+import FormContext from "../projectForms/FormContext";
 import FormLinks from "../projectForms/FormLinks";
 import FormMainInfos from "../projectForms/FormMainInfos";
-import FormContext from "../projectForms/FormContext";
 import Input from "@components/commons/forms/Input";
-import ProjectTechnos from "../ProjectTechnos";
+import ProjectTechnos from "../technos/ProjectTechnos";
 
 const ProjectFormContainer = ({
   submitForm,
@@ -71,7 +71,7 @@ const ProjectFormContainer = ({
     {/* Technos */}
     <ProjectTechnos
       handleClassError={handleClassError}
-      error={formErrors.technos}
+      errors={formErrors.technos}
       selectedTechnos={formDatas.technos}
       toggleSelectedTechnos={toggleSelectedTechnos}
     />
@@ -99,14 +99,14 @@ const ProjectFormContainer = ({
 
 ProjectFormContainer.prototype = {
   addProject: propTypes.func.isRequired,
-  submitForm: propTypes.func.isRequired,
   formErrors: propTypes.objectOf(propTypes.string),
   formDatas: propTypes.shape.isRequired,
   handleClassError: propTypes.func.isRequired,
   handleForm: propTypes.func.isRequired,
-  setFormDatas: propTypes.func.isRequired,
   mdDescription: propTypes.string,
+  setFormDatas: propTypes.func.isRequired,
   setMdDescription: propTypes.func.isRequired,
+  submitForm: propTypes.func.isRequired,
   toggleSelectedTechno: propTypes.func.isRequired
 };
 

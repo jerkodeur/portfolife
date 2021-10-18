@@ -5,7 +5,7 @@ import ConfirmModal from "@components/commons/ConfirmModal";
 import MdEditor from "@components/commons/forms/MdEditor";
 import projectConstraints from "../projectConstraints";
 import ProjectListContainer from "./ProjectListContainer";
-import ProjectTechnos from "../ProjectTechnos";
+import ProjectTechnos from "../technos/ProjectTechnos";
 
 import { checkIfTechnoIsInProject } from "@handlers/technos";
 import { updateListOfProjects, updateProjectTechnos } from "@handlers/projects";

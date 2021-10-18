@@ -1,59 +1,30 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import propTypes from "prop-types";
 
-import CheckFormFields from "@helpers/CheckFormFields";
-import NewTechnoForm from "./projectForms/NewTechnoForm";
+import NewTechnoForm from "./NewTechnoForm";
 
-import { getAllTechnos, addOneTechno } from "@controllers/technoController";
-import { useToaster } from "@helpers/customHooks";
+import { addOneTechno } from "@controllers/technoController";
+import { checkTechnoFields } from "./newTechnoFields";
+import { useFetchTechnos } from "@helpers/customFetchHooks";
+import { useToaster, useBoolean, useHandleObjectForm } from "@helpers/customHooks";
 
 const ProjectTechnos = (props) => {
-  const { selectedTechnos, toggleSelectedTechnos, error } = props;
+  const { selectedTechnos, toggleSelectedTechnos, errors } = props;
   const [technoFormErrors, setTechnoFormErrors] = useState({});
-  const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useState(false);
-  const [technos, setTechnos] = useState();
-  const [newTechno, setNewTechno] = useState({});
-
-  const fetchTechnos = useCallback(() => {
-    getAllTechnos()
-      .then((technos) => setTechnos(technos))
-      .catch((err) => console.log(err) && useToaster.fail("Erreur lors de la récupération des technos"));
-  }, [setTechnos]);
+  const [newTechnoFormDisplay, setNewTechnoFormDisplay] = useBoolean(false);
+  const [technos, fetchTechnos] = useFetchTechnos();
+  const [newTechno, setNewTechno] = useHandleObjectForm();
 
   useEffect(() => {
     fetchTechnos();
   }, [fetchTechnos]);
 
-  const handleNewTechno = (e) => {
-    setNewTechno({ ...newTechno, [e.target.id]: e.target.value });
-  };
-
   const addNewTechno = () => {
-    const constraints = {
-      name: {
-        value: newTechno.name,
-        required: true,
-        uniq: [true, technos.map((techno) => techno.name)]
-      },
-      imageName: {
-        value: newTechno.imageName,
-        required: true,
-        uniq: [true, technos.map((techno) => techno.image_name)]
-      },
-      priority: {
-        value: Number(newTechno.priority),
-        required: true,
-        regex: /^[1-3]{1}$/,
-        type: ["number"]
-      }
-    };
-
-    const errorfields = CheckFormFields(constraints);
+    const errorfields = checkTechnoFields(newTechno, technos);
 
     if (Object.values(errorfields).some((el) => el)) {
       useToaster.fail("La nouvelle techno n'a pas été ajouté, des erreurs ont été détectées !");
-
       setTechnoFormErrors(errorfields);
     } else {
       const { name, imageName: image_name } = newTechno;
@@ -61,7 +32,7 @@ const ProjectTechnos = (props) => {
         .then(() => {
           useToaster.success(`La techno ${newTechno.name} a bien été ajoutée !`);
 
-          setNewTechnoFormDisplay(false);
+          setNewTechnoFormDisplay.off();
           return fetchTechnos();
         })
         .catch((err) => console.log(err) && useToaster.fail(`Erreur lors de la création de la nouvelle techno`));
@@ -69,7 +40,7 @@ const ProjectTechnos = (props) => {
   };
 
   return (
-    <fieldset className={error ? "error" : undefined}>
+    <fieldset className={errors ? "error" : undefined}>
       <legend>Technos utilisées dans le projet</legend>
       <ul className="techno-wrapper">
         {technos &&
@@ -87,19 +58,19 @@ const ProjectTechnos = (props) => {
             );
           })}
         {!newTechnoFormDisplay && (
-          <li onClick={() => setNewTechnoFormDisplay(true)} role="link">
+          <li onClick={() => setNewTechnoFormDisplay.on()} role="link">
             Ajouter une nouvelle techno...
           </li>
         )}
       </ul>
-      {error && <small className={`container-error ${error && "mt-3"}`}>Aucune techno n'a été sélectionnée !</small>}
+      {errors && <small className={`container-error ${errors && "mt-3"}`}>Aucune techno n'a été sélectionnée !</small>}
       {newTechnoFormDisplay && (
         <NewTechnoForm
-          errors={technoFormErrors}
-          newTechno={newTechno}
-          handleNewTechno={handleNewTechno}
-          setNewTechnoFormDisplay={setNewTechnoFormDisplay}
           addNewTechno={addNewTechno}
+          errors={technoFormErrors}
+          hideTechnoForm={setNewTechnoFormDisplay.off}
+          newTechno={newTechno}
+          updateNewTechno={setNewTechno.update}
         />
       )}
     </fieldset>
@@ -111,7 +82,7 @@ ProjectTechnos.defaultProps = {
 };
 
 ProjectTechnos.propTypes = {
-  error: propTypes.string,
+  errors: propTypes.string,
   selectedTechnos: propTypes.arrayOf(propTypes.number),
   toggleSelectedTechnos: propTypes.func.isRequired
 };

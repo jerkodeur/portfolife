@@ -108,3 +108,16 @@ export const useTabs = (initialValue = 0) => {
 
   return [value, updateValue];
 };
+
+// Custom useFullState (Improve the build-in useState)
+export const useFullState = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+
+  const updateValue = {
+    set: (newValue) => setValue(value !== newValue && newValue),
+    reset: () => setValue(initialValue),
+    clear: () => setValue(null)
+  };
+
+  return [value, updateValue];
+};

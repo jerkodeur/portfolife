@@ -2,41 +2,33 @@ import React from "react";
 
 import propTypes from "prop-types";
 import Input from "@components/commons/forms/Input";
+import { contextFormFields } from "../new/projectFields";
+import FieldsetSectionContainer from "./FieldsetSectionContainer";
 
-const FormContext = ({ formErrors, handleForm, formDatas, keyPressHandler, updatedField }) => {
-  const { context, contextUrl } = formDatas;
+const FormContext = ({ formErrors, handleForm, formDatas, keyPressHandler, setUpdatedField, updatedField }) => {
   const { label, value, error } = updatedField;
 
-  formErrors[label] = updatedField && error;
+  formErrors[label] = error;
 
   return (
-    <fieldset
-      className={`multiple-fields-wrapper ${formErrors.context || formErrors.contextUrl ? "error" : undefined}`}
-    >
-      <legend>Contexte du projet</legend>
-      {/* Context */}
-      <Input
-        onKeyPress={keyPressHandler}
-        error={formErrors.context}
-        id="context"
-        isRequired
-        label="Contexte"
-        placeholder="Entreprise ou école ou a été réalisé le projet"
-        setValue={(e) => handleForm(e)}
-        value={label === "context" ? value : context}
-      />
-      {/* Context url */}
-      <Input
-        onKeyPress={keyPressHandler}
-        error={formErrors.contextUrl}
-        id="contextUrl"
-        label="Lien de l'établissement"
-        placeholder="Lien de l'établissement du contexte"
-        type="url"
-        setValue={(e) => handleForm(e)}
-        value={label === "contextUrl" ? value : contextUrl}
-      />
-    </fieldset>
+    <>
+      <FieldsetSectionContainer
+        className="multiple-fields-wrapper"
+        errors={contextFormFields.some((el) => formErrors[el.id])}
+      >
+        {contextFormFields.map((field) => (
+          <Input
+            onBlur={() => setUpdatedField.set({ ...updatedField, value: formDatas[field.id], error: null })}
+            onKeyPress={keyPressHandler}
+            error={formErrors[field.id]}
+            key={field.id}
+            setValue={(e) => handleForm(e)}
+            value={label === field.id ? value : formDatas[field.id]}
+            {...field}
+          />
+        ))}
+      </FieldsetSectionContainer>
+    </>
   );
 };
 
@@ -52,6 +44,7 @@ FormContext.propTypes = {
   }).isRequired,
   formErrors: propTypes.objectOf(propTypes.string),
   handleForm: propTypes.func.isRequired,
+  setUpdatedField: propTypes.object.isRequired,
   updatedField: propTypes.shape()
 };
 

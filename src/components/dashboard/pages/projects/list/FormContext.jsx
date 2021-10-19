@@ -3,7 +3,7 @@ import React from "react";
 import propTypes from "prop-types";
 import Input from "@components/commons/forms/Input";
 import { contextFormFields } from "../new/projectFields";
-import FieldsetSectionContainer from "./FieldsetSectionContainer";
+import FieldsetSectionContainer from "@commons/forms/FieldsetSectionContainer";
 
 const FormContext = ({ formErrors, handleForm, formDatas, keyPressHandler, setUpdatedField, updatedField }) => {
   const { label, value, error } = updatedField;

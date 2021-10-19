@@ -2,7 +2,7 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import FieldsetSectionContainer from "../projectForms/FieldsetSectionContainer";
+import FieldsetSectionContainer from "@commons/forms/FieldsetSectionContainer";
 import InputGroup from "@commons/forms/InputGroup";
 import MdEditor from "@components/commons/forms/MdEditor";
 import ProjectTechnos from "../technos/ProjectTechnos";

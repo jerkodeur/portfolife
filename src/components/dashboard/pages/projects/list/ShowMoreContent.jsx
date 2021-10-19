@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import propTypes from "prop-types";
 import ReactMarkdown from "react-markdown";
 
-import FormContext from "../projectForms/FormContext";
+import FormContext from "./FormContext";
 import ShowProjectImages from "./ShowProjectImages";
 import ShowTechnos from "@app/projects/modal/ProjectDisplay/ShowTechnos.jsx";
 

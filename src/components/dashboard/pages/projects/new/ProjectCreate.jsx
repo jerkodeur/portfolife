@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 
-import axios from "axios";
-import { useHistory } from "react-router-dom";
-
-import ToasterDisplay from "@components/commons/ToasterDisplay";
-import ProjectForm from "./ProjectFormContainer";
-import CheckFormFields from "@components/commons/forms/CheckFormFields";
+import CheckFormFields from "@helpers/CheckFormFields";
 import projectConstraints from "../projectConstraints";
+import ProjectForm from "./ProjectFormContainer";
+
+import { useHistory } from "react-router-dom";
+import { addOneProject } from "@controllers/projectController";
+import { useToaster } from "@helpers/customHooks";
 
 const ProjectCreateAndEdit = () => {
   const history = useHistory();
-  const token = sessionStorage.getItem("token");
 
   const [formErrors, setFormErrors] = useState({});
   const [formDatas, setFormDatas] = useState({
@@ -66,44 +65,31 @@ const ProjectCreateAndEdit = () => {
     ];
 
     // Create an object with project fieds contraints and the corresponding state values
-    const fieldsToCheck = formFieldsToCheck.reduce((objectWithFieldConstraints, currentField) => {
-      objectWithFieldConstraints[currentField] = projectConstraints[currentField];
+    const fieldsToCheck = formFieldsToCheck.reduce((object, currentField) => {
+      object[currentField] = projectConstraints[currentField];
       if (currentField === "mdDescription") {
-        objectWithFieldConstraints[currentField].value = mdDescription;
+        object[currentField].value = mdDescription;
       } else {
-        objectWithFieldConstraints[currentField].value = formDatas[currentField];
+        object[currentField].value = formDatas[currentField];
       }
-      return objectWithFieldConstraints;
+      return object;
     }, {});
 
     // Verify if errors
     const errorfields = CheckFormFields(fieldsToCheck);
     if (Object.values(errorfields).some((el) => el)) {
-      ToasterDisplay("Le projet n'a pas été ajouté, des erreurs ont été détectées !", "fail");
+      useToaster.fail("Le projet n'a pas été ajouté, des erreurs ont été détectées !");
       return setFormErrors(errorfields);
     }
 
     // If not persist the project in database and return to the projects list page
-    axios
-      .post(
-        "/projects/",
-        { ...formDatas, description: mdDescription },
-        {
-          headers: {
-            authorization: "Bearer: " + token
-          }
-        }
-      )
+    addOneProject({ ...formDatas, description: mdDescription })
       .then(() => {
         setMdDescription("");
-        ToasterDisplay("Le projet a été ajouté avec succès");
+        useToaster.success("Le projet a été ajouté avec succès");
         history.push("/dashboard/projects");
       })
-      .catch(
-        (err) =>
-          console.log(err.response) ||
-          ToasterDisplay("Une erreur est survenue lors de l'ajout du nouveau projet", "fail")
-      );
+      .catch((err) => console.log(err) && useToaster.fail("Une erreur est survenue lors de l'ajout du nouveau projet"));
   };
   return (
     <div className="project-form-container">

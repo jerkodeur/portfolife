@@ -1,65 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+
 import PropTypes from "prop-types";
 
 import Thumbnail from "./Thumbnail";
+
+import { useSlider } from "@helpers/customHooks";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const ImagesSlides = ({ nbImages, prefix, bgColor, ...props }) => {
-  const [selected, setSelected] = useState(1);
+const ImagesSlides = ({ nbImages, prefix, bgColor }) => {
+  document.documentElement.style.setProperty("--bg-slider", bgColor);
+  const [selectedImg, setSelectedImg] = useSlider(1, nbImages);
   const [imgName, setImgName] = useState("");
 
-  const handleSelect = (index) => {
-    return setSelected(index);
-  };
-
-  const switchImage = (e) => {
-    const id = e.target.name;
-    if (id === "down") {
-      if (selected - 1 === 0) {
-        return setSelected(nbImages);
-      } else {
-        return setSelected(selected - 1);
-      }
-    } else {
-      if (selected + 1 > nbImages) {
-        return setSelected(1);
-      } else {
-        return setSelected(selected + 1);
-      }
-    }
-  };
+  const displayImage = useCallback(() => {
+    const image = require(`@images/projects/${prefix}/${prefix}_img_${selectedImg}.png`);
+    return setImgName(image);
+  }, [selectedImg, prefix]);
 
   useEffect(() => {
-    const image = require(`@images/projects/${prefix}/${prefix}_img_${selected}.png`);
-    setImgName(image);
-    document.documentElement.style.setProperty("--bg-slider", bgColor);
-  }, [selected, bgColor, prefix]);
+    displayImage();
+    return () => displayImage();
+  }, [displayImage]);
 
   return (
     <div className="main-slider">
       <div className="img-control">
         <div className="left-control">
-          <FaChevronLeft size="3em" onClick={(e) => switchImage(e)} name="down" />
+          <FaChevronLeft size="3em" onClick={() => setSelectedImg.down()} />
         </div>
-        <div className="img-container">{<img src={imgName} alt={prefix + selected} />}</div>
+        <div className="img-container">{<img src={imgName} alt={prefix + selectedImg} />}</div>
         <div className="right-control">
-          <FaChevronRight size="3em" onClick={(e) => switchImage(e)} name="up" />
+          <FaChevronRight size="3em" onClick={() => setSelectedImg.up()} />
         </div>
       </div>
       <div className="miniatures-container">
-        {[...Array(nbImages)].map((item, index) => {
+        {[...Array(nbImages)].map((_, index) => {
           const image = require(`@images/projects/${prefix}/${prefix}_img_${index + 1}.png`);
-          return <Thumbnail image={image} handleSelect={handleSelect} selected={selected} key={index} id={index + 1} />;
+          return (
+            <Thumbnail
+              image={image}
+              toggleImg={setSelectedImg.set}
+              selectedImg={selectedImg}
+              key={index}
+              id={index + 1}
+            />
+          );
         })}
       </div>
       <div className="breadcrumb-img">
-        <small onClick={(e) => switchImage(e)} name="down">
-          Précédente
-        </small>
+        <small onClick={() => setSelectedImg.down()}>Précédente</small>
         <span> ✠ </span>
-        <small onClick={(e) => switchImage(e)} name="up">
-          Suivante
-        </small>
+        <small onClick={() => setSelectedImg.up()}>Suivante</small>
       </div>
     </div>
   );

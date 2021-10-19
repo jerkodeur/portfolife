@@ -152,6 +152,15 @@ label.switch {
 
 // Default input style
 .input {
+    // Remove arrows on number type
+    -moz-appearance: textfield;
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    &::-o-inner-spin-button {
+        -o-appearance: none;
+    }
+
     border: none;
     box-shadow: 2px 2px 4px #000;
     padding: 0.25em 0.5em;
@@ -161,6 +170,9 @@ label.switch {
     }
     &[type="color"] {
         padding: 0.15em 0.35em;
+    }
+    &[type="number"] {
+        text-align: center;
     }
     &.error {
         border-width: 2px;

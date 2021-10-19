@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
+import DatePicker from "react-datepicker";
 import propTypes from "prop-types";
 import ReactMarkdown from "react-markdown";
 
-import FormContext from "../projectForms/FormContext";
+import FormContext from "./FormContext";
 import ShowProjectImages from "./ShowProjectImages";
-import ShowTechnos from "../../../../app/projects/modal/ProjectDisplay/ShowTechnos.jsx";
+import ShowTechnos from "@app/projects/modal/ProjectDisplay/ShowTechnos.jsx";
+
+import { useTabs } from "@helpers/customHooks";
+import { getTechnoIds } from "@handlers/technos";
 
 import { registerLocale } from "react-datepicker";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import fr from "date-fns/locale/fr";
 
@@ -18,30 +21,24 @@ const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField,
   const { context, context_url: contextUrl, date, description, id, technos } = datas;
 
   const [mdDescription, setMdDescription] = useState(description);
-  const [showTab, setShowTab] = useState("preview");
+  const [showTab, setShowTab] = useTabs("preview");
   const [startDate, setStartDate] = useState(new Date(date));
 
-  const handleForm = (e) => setUpdatedField({ id, label: e.target.id, value: e.target.value });
-
-  const getTechnoIds = (arrayOfTechnos) =>
-    arrayOfTechnos.reduce((ids, currentTechno) => {
-      ids.push(currentTechno.id);
-      return ids;
-    }, []);
+  const handleForm = (e) => setUpdatedField.set({ id, label: e.target.id, value: e.target.value });
 
   return (
     <tr className="show-more-container">
       <td colSpan="10">
         <div>
           <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            className="calendar"
             dateFormat="MMMM yyyy"
             locale="fr"
-            showMonthYearPicker
-            showFullMonthYearPicker
-            className="calendar"
             maxDate={new Date()}
+            onChange={(date) => setStartDate(date)}
+            selected={startDate}
+            showFullMonthYearPicker
+            showMonthYearPicker
           />
         </div>
         <div className="context-layout">
@@ -49,6 +46,7 @@ const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField,
             formDatas={{ context, contextUrl }}
             handleForm={handleForm}
             keyPressHandler={keyPressHandler}
+            setUpdatedField={setUpdatedField}
             updatedField={updatedField}
           />
         </div>
@@ -56,20 +54,14 @@ const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField,
         <div className="project-tabs-layout">
           <span
             className={`${showTab === "preview" && "selected"} description`}
-            onClick={() => showTab !== "preview" && setShowTab("preview")}
+            onClick={() => setShowTab.set("preview")}
           >
             Aperçu
           </span>
-          <span
-            className={`${showTab === "edit" && "selected"}`}
-            onClick={() => showTab !== "edit" && setShowTab("edit")}
-          >
+          <span className={`${showTab === "edit" && "selected"}`} onClick={() => setShowTab.set("edit")}>
             Édition
           </span>
-          <span
-            className={`${showTab === "imgPreview" && "selected"}`}
-            onClick={() => showTab !== "imgPreview" && setShowTab("imgPreview")}
-          >
+          <span className={`${showTab === "imgPreview" && "selected"}`} onClick={() => setShowTab.set("imgPreview")}>
             Images
           </span>
         </div>
@@ -94,13 +86,12 @@ const ShowMoreContent = ({ datas, DescriptionElt, keyPressHandler, updatedField,
 };
 
 ShowMoreContent.propTypes = {
-  DescriptionElt: propTypes.func.isRequired,
   datas: propTypes.shape({
-    id: propTypes.number.isRequired,
     context: propTypes.string.isRequired,
     context_url: propTypes.string,
     date: propTypes.string.isRequired,
     description: propTypes.string.isRequired,
+    id: propTypes.number.isRequired,
     technos: propTypes.arrayOf(
       propTypes.shape({
         id: propTypes.number.isRequired,
@@ -109,7 +100,8 @@ ShowMoreContent.propTypes = {
       }).isRequired
     ).isRequired
   }),
-  setUpdatedField: propTypes.func.isRequired,
+  DescriptionElt: propTypes.func.isRequired,
+  setUpdatedField: propTypes.object.isRequired,
   TechnoSwitcher: propTypes.func.isRequired,
   updatedField: propTypes.shape({
     id: propTypes.number,

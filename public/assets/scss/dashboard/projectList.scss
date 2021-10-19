@@ -21,14 +21,14 @@
                         width: 1%;
                     }
                     &:nth-of-type(4) {
-                        width: 110px;
+                        width: 80px;
                     }
                 }
             }
             &.project-categories {
                 th {
                     &:nth-of-type(1) {
-                        width: 12%;
+                        width: 15%;
                     }
                     &:nth-of-type(2) {
                         width: auto;
@@ -40,13 +40,14 @@
                         width: 18%;
                     }
                     &:nth-of-type(5) {
-                        width: 6%;
+                        width: 50px;
                     }
                     &:nth-of-type(6) {
-                        width: 8%;
+                        width: 1px;
+                        padding: 0.75em;
                     }
                     &:nth-of-type(7) {
-                        width: 3%;
+                        width: 1%;
                     }
                 }
             }
@@ -151,7 +152,8 @@
                     font-size: 1.2em;
                 }
                 .context-layout {
-                    margin-top: -4rem;
+                    margin-top: -2.8rem;
+                    margin-left: 0.5em;
                 }
 
                 fieldset {

@@ -1,59 +1,59 @@
 const projectConstraints = {
-    date: {
-        required: true,
-        regex: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
-        type: ["string"]
-      },
-      title: {
-        required: true,
-        type: ["string"]
-      },
-      shortDescription: {
-        required: true,
-        type: ["string"]
-      },
-      mdDescription: {
-        required: true,
-        type: ["string"]
-      },
-      context: {
-        required: true,
-        type: ["string"]
-      },
-      contextUrl: {
-        regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
-        type: ["string"]
-      },
-      urlGithub: {
-        regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
-        type: ["string"]
-      },
-      urlTest: {
-        regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
-        type: ["string"]
-      },
-      imgPrefix: {
-        required: true,
-        type: ["string"]
-      },
-      background: {
-        required: true,
-        regex: /^#(?:[0-9a-fA-F]{3}){1,2}$/
-      },
+  date: {
+    required: true,
+    regex: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
+    type: ["string"]
+  },
+  title: {
+    required: true,
+    type: ["string"]
+  },
+  shortDescription: {
+    required: true,
+    type: ["string"]
+  },
+  mdDescription: {
+    required: true,
+    type: ["string"]
+  },
+  context: {
+    required: true,
+    type: ["string"]
+  },
+  contextUrl: {
+    regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
+    type: ["string"]
+  },
+  urlGithub: {
+    regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
+    type: ["string"]
+  },
+  urlTest: {
+    regex: /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
+    type: ["string"]
+  },
+  imgPrefix: {
+    required: true,
+    type: ["string"]
+  },
+  background: {
+    required: true,
+    regex: /^#(?:[0-9a-fA-F]{3}){1,2}$/
+  },
   nbImages: {
-        required: true,
-        type: ["number", "string"],
-        range: [0, 20],
-        regex: /^(?:[1-9]|0[1-9]|1[0-9]|20)$/
-      },
-      technos: {
-        required: true,
-        type: ["object"],
-        length: 1
-      },
-      active: {
-        type: ["boolean"]
-      }
+    required: true,
+    type: ["number", "string"],
+    range: [0, 20],
+    regex: /^(?:[1-9]|0[1-9]|1[0-9]|20)$/
+  },
+  technos: {
+    required: true,
+    type: ["object"],
+    length: 1
+  },
+  active: {
+    type: ["boolean"]
+  }
 };
 
-export default projectConstraints
+export default projectConstraints;

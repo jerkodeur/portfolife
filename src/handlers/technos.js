@@ -5,3 +5,9 @@ export const checkIfTechnoIsInProject = (projects, currentProjectId, technoId) =
     }
     return acc;
   }, false);
+
+export const getTechnoIds = (arrayOfTechnos) =>
+  arrayOfTechnos.reduce((ids, currentTechno) => {
+    ids.push(currentTechno.id);
+    return ids;
+  }, []);

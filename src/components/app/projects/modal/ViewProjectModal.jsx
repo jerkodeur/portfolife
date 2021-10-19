@@ -1,60 +1,56 @@
 import React, { useEffect } from "react";
 
-import Modal from "react-bootstrap/Modal";
-import ModalTitle from "react-bootstrap/ModalTitle";
+import propTypes from "prop-types";
+
+import { Modal, ModalBody, ModalFooter, ModalTitle } from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalFooter from "react-bootstrap/ModalFooter";
 
 import ImageSlides from "./ProjectDisplay/ImagesSlides";
 import MarkdownDescription from "./ProjectDisplay/MarkdownDescription";
 import ProjectFooter from "./ProjectDisplay/ProjectFooter";
 import ShowTechnos from "./ProjectDisplay/ShowTechnos";
+import TabsLayout from "./ProjectDisplay/TabsLayout";
+
+import { useTabs } from "@helpers/customHooks";
+import { goToAnchor } from "react-scrollable-anchor";
 
 const ViewProjectModal = (props) => {
-  const { mainDatas, technos } = props.project;
-  const { show, onHide, isDisplay, toogleDisplay } = props;
+  const { mainDatas, technos, background } = props.project;
+  const { isShowed, hideModal } = props;
+
+  const [showTab, setshowTab] = useTabs();
+
+  const onHide = () => {
+    setshowTab.reset();
+    hideModal();
+    goToAnchor("project");
+  };
 
   useEffect(() => {
-    document.documentElement.style.setProperty("--bg-slider", props.project.background);
-  }, []);
+    document.documentElement.style.setProperty("--bg-slider", background);
+  }, [background]);
 
   return (
     <div>
-      <Modal className="project-modal" show={show} onHide={onHide} size="xl" scrollable={true}>
+      <Modal className="project-modal" show={isShowed} onHide={onHide} size="xl" scrollable={true}>
         <ModalHeader>
           <ModalTitle>
             {mainDatas && mainDatas.title}
             <span onClick={onHide}>X</span>
           </ModalTitle>
-          <div className="project-tabs-layout">
-            {isDisplay !== "description" ? (
-              <span onClick={toogleDisplay} className="description">
-                Description
-              </span>
-            ) : (
-              <span className="selected description">Description</span>
-            )}
-            {isDisplay !== "gallery" ? (
-              <span onClick={toogleDisplay} className="gallery">
-                Galerie
-              </span>
-            ) : (
-              <span className="selected gallery">Galerie</span>
-            )}
-          </div>
+          <TabsLayout showTab={showTab} setshowTab={setshowTab.set} />
         </ModalHeader>
         <ModalBody>
-          {isDisplay === "description" ? (
+          {showTab === 0 ? (
             <div className="main-description">
               <ShowTechnos technos={technos} />
-              <MarkdownDescription project={props.project} />
+              {mainDatas && <MarkdownDescription description={mainDatas.description} />}
             </div>
           ) : (
             <ImageSlides nbImages={mainDatas.nb_images} prefix={mainDatas.img_prefix} bgColor={mainDatas.background} />
           )}
         </ModalBody>
-        {props.project.mainDatas && (props.project.mainDatas.url_test || props.project.mainDatas.url_github) && (
+        {mainDatas && (mainDatas.url_test || mainDatas.url_github) && (
           <ModalFooter>
             <ProjectFooter project={mainDatas} />
           </ModalFooter>
@@ -64,4 +60,26 @@ const ViewProjectModal = (props) => {
   );
 };
 
+ViewProjectModal.propTypes = {
+  isShowed: propTypes.bool.isRequired,
+  hideModal: propTypes.func.isRequired,
+  project: propTypes.shape({
+    mainDatas: propTypes.shape({
+      background: propTypes.string.isRequired,
+      description: propTypes.string.isRequired,
+      img_prefix: propTypes.string.isRequired,
+      nb_images: propTypes.number.isRequired,
+      title: propTypes.string.isRequired,
+      url_github: propTypes.string,
+      url_test: propTypes.string
+    }).isRequired,
+    technos: propTypes.arrayOf(
+      propTypes.shape({
+        id: propTypes.number.isRequired,
+        image_name: propTypes.string.isRequired,
+        name: propTypes.string.isRequired
+      }).isRequired
+    ).isRequired
+  }).isRequired
+};
 export default ViewProjectModal;

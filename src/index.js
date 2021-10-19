@@ -5,7 +5,7 @@ import axios from "axios";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 
-import AdminRoute from "@helpers/AdminRoute";
+import AdminRoute from "@service/AdminRoute";
 
 import "./index.scss";
 import "bootstrap/dist/js/bootstrap.bundle.min";

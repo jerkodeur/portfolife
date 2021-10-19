@@ -1,7 +1,5 @@
 import React from "react";
 import Header from "@app/Header";
-import ScrollToTop from "react-scroll-up";
-import { FiChevronUp } from "react-icons/fi";
 
 const error404 = () => (
   <>
@@ -26,14 +24,6 @@ const error404 = () => (
       </div>
     </div>
     {/* End Page Error  */}
-
-    {/* Start Back To Top */}
-    <div className="backto-top">
-      <ScrollToTop showUnder={160}>
-        <FiChevronUp />
-      </ScrollToTop>
-    </div>
-    {/* End Back To Top */}
   </>
 );
 

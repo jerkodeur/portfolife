@@ -4,7 +4,7 @@ import { useHandleObjectForm, useToaster } from "@helpers/customHooks";
 import CheckFormFields from "@helpers/CheckFormFields";
 import ContactForm from "./ContactForm";
 
-import { sendEmail } from "../../../service/sendEmail";
+import { sendEmail } from "@service/sendEmail";
 import { contactConstraints, contactFormFields } from "./contactFormInfos";
 
 const ContactContainer = () => {

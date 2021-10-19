@@ -2,7 +2,7 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import Input from "../../commons/forms/Input";
+import Input from "@commons/forms/Input";
 
 const ContactForm = ({ handleSubmit, setFormContent, fields, content, errors }) => (
   <form onSubmit={handleSubmit}>

@@ -2,7 +2,7 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaEraser } from "react-icons/fa";
 import ProjectListContent from "./ProjectListContent";
 
 const ProjectListContainer = ({ projects, ...props }) => {
@@ -18,7 +18,9 @@ const ProjectListContainer = ({ projects, ...props }) => {
             <th colSpan="4">Informations principales</th>
             <th colSpan="3">Images</th>
             <th rowSpan="2">Star</th>
-            <th rowSpan="2">Actions</th>
+            <th rowSpan="2" title="Supprimer le projet">
+              <FaEraser size="25" />
+            </th>
           </tr>
           <tr className="project-categories">
             <th>Titre</th>

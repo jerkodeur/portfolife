@@ -90,9 +90,6 @@ const ProjectListContent = ({
           </td>
           <td className="actions">
             <span>
-              <FaEdit />
-            </span>
-            <span>
               <FaTrashAlt onClick={() => displayDeleteModal(id, mainDatas.title)} />
             </span>
           </td>

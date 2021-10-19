@@ -102,7 +102,7 @@ export const useTabs = (initialValue = 0) => {
   const [value, setValue] = useState(initialValue);
 
   const updateValue = {
-    set: (id) => setValue(id),
+    set: (id) => id !== value && setValue(id),
     reset: () => setValue(initialValue)
   };
 
@@ -114,7 +114,7 @@ export const useFullState = (initialValue) => {
   const [value, setValue] = useState(initialValue);
 
   const updateValue = {
-    set: (newValue) => setValue(value !== newValue && newValue),
+    set: (newValue) => value !== newValue && setValue(newValue),
     reset: () => setValue(initialValue),
     clear: () => setValue(null)
   };

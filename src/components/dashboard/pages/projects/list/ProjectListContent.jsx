@@ -5,7 +5,7 @@ import propTypes from "prop-types";
 import Input from "@components/commons/forms/Input";
 import ShowMoreContent from "./ShowMoreContent";
 
-import { FaChevronCircleDown, FaChevronCircleUp, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaChevronCircleDown, FaChevronCircleUp, FaTrashAlt } from "react-icons/fa";
 import { asyncProjectFields } from "./asyncProjectFields";
 import { camelToSnakeCase, formatLink } from "@helpers/helpers";
 

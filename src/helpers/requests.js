@@ -7,5 +7,5 @@ export const request = (url, type = "get", params = {}) =>
     method: type,
     url: url,
     data: params,
-    headers: { authorization: `Bearer: ${token}` }
+    headers: { Authorization: `Bearer: ${token}` }
   });

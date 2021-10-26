@@ -1,37 +1,26 @@
 import React, { useState, useEffect } from "react";
-
-import Axios from "axios";
+import propTypes from "prop-types";
 
 import ViewProjectModal from "./modal/ViewProjectModal";
 
-const PortfolioList = (props) => {
-  const [showModal, setShowModal] = useState(false);
-  const [selectedModal, setSelectedModal] = useState(false);
-  const [projects, setProjects] = useState();
-  const [isDisplay, setIsDisplay] = useState("description");
+import { getAllProjects } from "@controllers/projectController";
+import { useToaster, useBoolean } from "@helpers/customHooks";
 
-  const { column, stylevariation } = props;
+const ProjectList = ({ items }) => {
+  const [showModal, setShowModal] = useBoolean(false);
+  const [selectedModal, setSelectedModal] = useState("");
+  const [projects, setProjects] = useState();
 
   const toggleModal = (project) => {
     document.documentElement.style.setProperty("--bg-slider", project.mainDatas.background);
     setSelectedModal(project);
-    setShowModal(true);
-  };
-
-  const toogleDisplay = (isDefault = "description") => {
-    isDisplay === "description" || !isDefault ? setIsDisplay("gallery") : setIsDisplay("description");
-  };
-
-  const hideModal = () => {
-    document.documentElement.style.setProperty("--bg-slider", "rgba(244, 245, 240, 0.561)");
-    setIsDisplay("description");
-    setShowModal(false);
+    setShowModal.on();
   };
 
   useEffect(() => {
-    Axios.get("/projects")
-      .then((datas) => setProjects(datas.data))
-      .catch((error) => console.log("une erreur est survenue", error));
+    getAllProjects()
+      .then((projects) => setProjects(projects))
+      .catch((err) => console.error(err) && useToaster.fail("Erreur lors de la récupération des projets"));
   }, []);
 
   return (
@@ -43,20 +32,18 @@ const PortfolioList = (props) => {
           const image = `/assets/images/projects/${img_prefix}/${img_prefix}_preview.png`;
           // Define the preview css image variable for each project
           document.documentElement.style.setProperty(`--preview-img-${index}`, `url(${image})`);
-          let technoList = "";
-          // fetch the five main techno to display
-          project.technos.map((techno, index) => {
-            if (index < 5) {
-              technoList += techno.name + " / ";
-            }
-            return technoList;
-          });
-          technoList = technoList.slice(0, technoList.length - 2);
+
+          const technoList = project.technos
+            .reduce((technos, currTechno) => {
+              technos.push(currTechno.name);
+              return technos;
+            }, [])
+            .join(" / ");
 
           return (
-            index < 6 && (
-              <div className={`${column}`} key={id}>
-                <div className={`portfolio ${stylevariation}`}>
+            index < items && (
+              <div className="col-lg-4 col-md-6 col-sm-6 col-12" key={id}>
+                <div className="portfolio text-center mt--40">
                   <div className="thumbnail-inner">
                     <div className={`thumbnail image-${index}`}></div>
                     <div className={`bg-blr-image image-${index}`}></div>
@@ -76,20 +63,16 @@ const PortfolioList = (props) => {
                       </h4>
                       <p>{short_description}</p>
                       <div className="portfolio-button">
-                        <a className="rn-btn" onClick={() => toggleModal(project)}>
+                        <button type="button" className="rn-btn" onClick={() => toggleModal(project)}>
                           Voir en détail
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <ViewProjectModal
-                  show={showModal}
-                  onHide={() => hideModal()}
-                  isDisplay={isDisplay}
-                  toogleDisplay={() => toogleDisplay()}
-                  project={selectedModal}
-                />
+                {selectedModal && (
+                  <ViewProjectModal isShowed={showModal} hideModal={setShowModal.off} project={selectedModal} />
+                )}
               </div>
             )
           );
@@ -97,4 +80,9 @@ const PortfolioList = (props) => {
     </>
   );
 };
-export default PortfolioList;
+
+ProjectList.propTypes = {
+  items: propTypes.number.isRequired
+};
+
+export default ProjectList;

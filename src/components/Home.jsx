@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useBoolean, useConnexion } from "@helpers/customHooks";
 
 import ScrollableAnchor, { configureAnchors } from "react-scrollable-anchor";
 import ScrollToTop from "react-scroll-up";
@@ -14,56 +15,45 @@ import Projects from "@app/projects/Projects";
 
 // Offset all anchors by -60 to account for a fixed header
 // and scroll more quickly than the default 400ms
-configureAnchors({ offset: -60, scrollDuration: 2000 });
+configureAnchors({ offset: -60, scrollDuration: 1500 });
 
 const PersonalPortfolio = () => {
-  const [displayConnectionForm, setDisplayConnectionForm] = useState(false);
-  const [isConnect, setIsConnect] = useState(false);
-  const [pseudo, setPseudo] = useState("");
-
-  useEffect(() => {
-    setPseudo(isConnect ? sessionStorage.getItem("pseudo") : "");
-    setDisplayConnectionForm(false);
-  }, [isConnect]);
-
-  const switchConnectionForm = (bool) => {
-    setDisplayConnectionForm(bool);
-  };
-
-  const switchConnection = (bool) => {
-    setIsConnect(bool);
-  };
+  const [displayConnectForm, setDisplayConnectForm] = useBoolean(false);
+  const [isConnected, setIsConnected] = useConnexion(localStorage.getItem("token") ? true : false);
 
   return (
     <>
       <Helmet pageTitle="Personal Portfolio" />
-      <Header color="color-black" isConnect={isConnect} switchConnection={setIsConnect} pseudo={pseudo} />
+      <Header isConnected={isConnected} closeConnexion={setIsConnected.off} />
 
+      {/* Start Presentation Area */}
       <Presentation />
-      {displayConnectionForm && <ConnectForm switchConnexion={switchConnection} displayForm={switchConnectionForm} />}
+
+      {/* Start Connexion Area */}
+      {displayConnectForm && (
+        <ConnectForm activeConnexion={setIsConnected.on} hideConnectForm={setDisplayConnectForm.off} />
+      )}
+
+      {/* Start AboutMe Area */}
       <ScrollableAnchor id={"about"}>
         <div className="about-area about-position-top pb--60  bg_color--3">
-          <AboutMe isConnect={isConnect} displayForm={switchConnectionForm} />
+          <AboutMe isConnected={isConnected} showConnectForm={setDisplayConnectForm.on} />
         </div>
       </ScrollableAnchor>
 
-      {/* Start Portfolio Area */}
+      {/* Start Projects Area */}
       <ScrollableAnchor id={"project"}>
         <div className="portfolio-area pb--60 bg_color--7">
           <Projects />
         </div>
       </ScrollableAnchor>
-      {/* End Portfolio Area */}
 
-      {/* Start Portfolio Area */}
+      {/* Start Contact Area */}
       <ScrollableAnchor id={"contact"}>
         <div className="portfolio-area pb--120 bg_color--1">
           <Contact />
         </div>
       </ScrollableAnchor>
-      {/* End Portfolio Area */}
-
-      {/* <FooterTwo /> */}
 
       {/* Start Back To Top */}
       <div className="backto-top">
@@ -71,7 +61,6 @@ const PersonalPortfolio = () => {
           <FiChevronUp />
         </ScrollToTop>
       </div>
-      {/* End Back To Top */}
     </>
   );
 };

@@ -1,13 +1,22 @@
+// data format:
+// {
+//    fieldName: {
+//        constraintName: constraintOptions,
+//        ....
+//    },
+// ....
+// }
+
 const CheckFormFields = (datas) => {
   const obj = {};
   Object.entries({ ...datas }).map((el) => {
     obj[el[0]] = {};
-    return (obj[el[0]] = switchAndReturnMessageError(el));
+    return (obj[el[0]] = switchErrors(el));
   });
   return obj;
 };
 
-const switchAndReturnMessageError = (entry) => {
+const switchErrors = (entry) => {
   let value = entry[1].value;
   const constraints = Object.keys(entry[1]);
 

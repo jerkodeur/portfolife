@@ -13,7 +13,7 @@ const defaultOptions = {
   position: "top-right",
   duration: 5000
 };
-const ToasterDisplay = (message, type = "success", options = defaultOptions) => {
+const ToasterDisplay = (message, type, options = defaultOptions) => {
   return toaster.notify(<Toast className={type} message={message} />, options);
 };
 

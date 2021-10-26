@@ -1,23 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Thumbnail = ({ image, selected, handleSelect, id }) => {
+const Thumbnail = ({ image, selectedImg, toggleImg, id }) => {
   return (
-    <div className="miniature" onClick={() => handleSelect(id)}>
-      <img
-        className={selected === id ? "selected" : undefined}
-        src={image}
-        alt={"slide" + selected}
-      />
+    <div className="miniature" onClick={() => toggleImg(id)}>
+      <img className={selectedImg === id ? "selected" : undefined} src={image} alt={"slide" + selectedImg} />
     </div>
   );
 };
 
 Thumbnail.propTypes = {
-  handleSelect: PropTypes.func.isRequired,
+  toggleImg: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
-  selected: PropTypes.number.isRequired
+  selectedImg: PropTypes.number.isRequired
 };
 
 export default Thumbnail;

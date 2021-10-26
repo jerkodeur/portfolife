@@ -1,17 +1,14 @@
 import React from "react";
 
-import Modal from "react-bootstrap/Modal";
-import ModalTitle from "react-bootstrap/ModalTitle";
+import { Modal, ModalTitle, ModalBody, ModalFooter } from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalFooter from "react-bootstrap/ModalFooter";
 
 import propTypes from "prop-types";
 
 const ConfirmModal = ({ className, dataId, handleClose, message, show, title, validate }) => (
   <div>
     <Modal
-      className={`confirm-modal ${className && className}`}
+      className={`confirm-modal ${className ? className : undefined}`}
       show={show}
       onHide={() => handleClose()}
       size="md"

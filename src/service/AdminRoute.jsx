@@ -6,7 +6,7 @@ const AdminRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) => {
-        const isAuthenticated = sessionStorage.getItem("pseudo") !== null && sessionStorage.getItem("token") !== null;
+        const isAuthenticated = localStorage.getItem("pseudo") !== null && localStorage.getItem("token") !== null;
         return isAuthenticated ? (
           children
         ) : (

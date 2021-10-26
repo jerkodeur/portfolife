@@ -2,79 +2,72 @@ import React from "react";
 
 import propTypes from "prop-types";
 
-import FormLinks from "../projectForms/FormLinks";
-import FormMainInfos from "../projectForms/FormMainInfos";
-import FormContext from "../projectForms/FormContext";
-import Input from "@components/commons/forms/Input";
-import ProjectTechnos from "../ProjectTechnos";
+import FieldsetSectionContainer from "@commons/forms/FieldsetSectionContainer";
+import InputGroup from "@commons/forms/InputGroup";
+import MdEditor from "@components/commons/forms/MdEditor";
+import ProjectTechnos from "../technos/ProjectTechnos";
+
+import { contextFormFields, imageFormFields, linkFormFields, MainFormFields } from "./projectFields";
 
 const ProjectFormContainer = ({
-  submitForm,
   formErrors,
   formDatas,
   handleClassError,
   handleForm,
-  setFormDatas,
   mdDescription,
+  setFormDatas,
   setMdDescription,
+  submitForm,
   toggleSelectedTechnos
 }) => (
   <form onSubmit={submitForm} className="form-container">
-    <FormMainInfos
-      handleForm={handleForm}
-      formDatas={formDatas}
-      formErrors={formErrors}
-      handleClassError={handleClassError}
-      mdDescription={mdDescription}
-      setMdDescription={setMdDescription}
-    />
-    <FormContext handleForm={handleForm} formDatas={formDatas} formErrors={formErrors} />
-    <FormLinks handleForm={handleForm} formDatas={formDatas} formErrors={formErrors} />
-    <fieldset
-      className={`multiple-fields-wrapper ${
-        (formErrors.imgPrefix || formErrors.background || formErrors.nbImages) && "error"
-      }`}
+    {/* Main section  */}
+    <FieldsetSectionContainer errors={MainFormFields.some((el) => formErrors[el.id])} name="Informations générales">
+      <InputGroup errors={formErrors} datas={formDatas} handleDatas={handleForm} fields={MainFormFields} />
+      <MdEditor
+        value={mdDescription}
+        setValue={setMdDescription}
+        error={formErrors.mdDescription}
+        label="description du projet"
+        isRequired
+      />
+    </FieldsetSectionContainer>
+
+    {/* Context section  */}
+    <FieldsetSectionContainer
+      errors={contextFormFields.some((el) => formErrors[el.id])}
+      name="Contexte du projet"
+      className="multiple-fields-wrapper"
     >
-      <legend>Images</legend>
-      {/* image prefix  */}
-      <Input
-        error={formErrors.imgPrefix}
-        id="imgPrefix"
-        isRequired
-        label="Préfixe des images"
-        placeholder="Ajouter un prefix"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.imgPrefix}
-      />
-      {/* thumbmail images background color */}
-      <Input
-        error={formErrors.background}
-        id="background"
-        label="Couleur de fond carousel d'images"
-        type="color"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.background}
-      />
-      {/* Number of images */}
-      <Input
-        error={formErrors.nbImages}
-        id="nbImages"
-        isRequired
-        label="Nb images (min: 1, max: 20)"
-        type="number"
-        setValue={(e) => handleForm(e)}
-        value={formDatas.nbImages}
-        min={0}
-        max={20}
-      />
-    </fieldset>
-    {/* Technos */}
+      <InputGroup errors={formErrors} datas={formDatas} handleDatas={handleForm} fields={contextFormFields} />
+    </FieldsetSectionContainer>
+
+    {/* Links section */}
+    <FieldsetSectionContainer
+      errors={linkFormFields.some((el) => formErrors[el.id])}
+      name="Liens du projet"
+      className="multiple-fields-wrapper"
+    >
+      <InputGroup errors={formErrors} datas={formDatas} handleDatas={handleForm} fields={linkFormFields} />
+    </FieldsetSectionContainer>
+
+    {/* Images section */}
+    <FieldsetSectionContainer
+      errors={imageFormFields.some((el) => formErrors[el.id])}
+      name="Images"
+      className="multiple-fields-wrapper"
+    >
+      <InputGroup errors={formErrors} datas={formDatas} handleDatas={handleForm} fields={imageFormFields} />
+    </FieldsetSectionContainer>
+
+    {/* Technos section */}
     <ProjectTechnos
       handleClassError={handleClassError}
-      error={formErrors.technos}
+      errors={formErrors.technos}
       selectedTechnos={formDatas.technos}
       toggleSelectedTechnos={toggleSelectedTechnos}
     />
+
     {/* Active */}
     <label className="switch">
       <input
@@ -99,14 +92,14 @@ const ProjectFormContainer = ({
 
 ProjectFormContainer.prototype = {
   addProject: propTypes.func.isRequired,
-  submitForm: propTypes.func.isRequired,
   formErrors: propTypes.objectOf(propTypes.string),
   formDatas: propTypes.shape.isRequired,
   handleClassError: propTypes.func.isRequired,
   handleForm: propTypes.func.isRequired,
-  setFormDatas: propTypes.func.isRequired,
   mdDescription: propTypes.string,
+  setFormDatas: propTypes.func.isRequired,
   setMdDescription: propTypes.func.isRequired,
+  submitForm: propTypes.func.isRequired,
   toggleSelectedTechno: propTypes.func.isRequired
 };
 

@@ -4,7 +4,6 @@ import ExpBar from "./ExpBar";
 
 const ProgressOther = (props) => {
   return (
-    // Start Single Progressbar
     <>
       <div className={`rn-progress-bar ${props.ProgressStyle}`}>
         <div className="single-progress custom-color--3">
@@ -29,7 +28,6 @@ const ProgressOther = (props) => {
       </div>
       <ExpBar />
     </>
-    // {/* // End Progress Bar */}
   );
 };
 

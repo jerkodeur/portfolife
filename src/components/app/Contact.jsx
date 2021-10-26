@@ -6,7 +6,7 @@ import { FaLinkedin, FaGithub, FaAddressCard } from "react-icons/fa";
 
 import ToasterDisplay from "@components/commons/ToasterDisplay";
 
-import contactImg from "@images/about/about-6.jpg";
+import contactImg from "@images/contact.jpg";
 
 class Contact extends Component {
   state = {

@@ -40,7 +40,7 @@ const Presentation = () => {
     <div className="slider-wrapper">
       {SlideList.map((value, index) => (
         <div
-          className="slide personal-portfolio-slider slider-paralax slider-style-3 d-flex align-items-center justify-content-center bg_image bg_image--33"
+          className="slide slider-paralax slider-style-3 d-flex align-items-center justify-content-center bg_image"
           key={index}
         >
           <div className="container">
@@ -48,19 +48,11 @@ const Presentation = () => {
               <div className="col-lg-12 ">
                 <div className={`inner ${value.textPosition}`}>
                   {value.pre && <span>{value.pre}</span>}
-                  {value.title && (
-                    <h1
-                      className="title"
-                      dangerouslySetInnerHTML={{ __html: value.title }}
-                    ></h1>
-                  )}
+                  {value.title && <h1 className="title" dangerouslySetInnerHTML={{ __html: value.title }}></h1>}
                   {value.transition && <span>{value.transition}</span>}
                   {value.title2 && (
                     <>
-                      <h1
-                        className="title d-inline"
-                        dangerouslySetInnerHTML={{ __html: value.title2 }}
-                      />
+                      <h1 className="title d-inline" dangerouslySetInnerHTML={{ __html: value.title2 }} />
                       <h1 className="title d-inline">
                         <span className="text-anim" id="text-anim" />
                       </h1>

@@ -46,7 +46,6 @@ const ProjectList = ({ items }) => {
                 <div className="portfolio text-center mt--40">
                   <div className="thumbnail-inner">
                     <div className={`thumbnail image-${index}`}></div>
-                    <div className={`bg-blr-image image-${index}`}></div>
                   </div>
                   <div className="content">
                     <div className="inner">

@@ -104,46 +104,6 @@
         }
     }
 
-    .bg-blr-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-        background-color: #0a0a0a;
-        background-image: url(/assets/images/portfolio/portfolio-1.jpg);
-        @extend %transition;
-        transform: translateY(38px);
-        opacity: 0;
-        z-index: 1;
-
-        &.image-0 {
-            background-image: var(--preview-img-0);
-        }
-
-        &.image-1 {
-            background-image: var(--preview-img-1);
-        }
-
-        &.image-2 {
-            background-image: var(--preview-img-2);
-        }
-
-        &.image-3 {
-            background-image: var(--preview-img-3);
-        }
-
-        &.image-4 {
-            background-image: var(--preview-img-4);
-        }
-
-        &.image-5 {
-            background-image: var(--preview-img-5);
-        }
-    }
-
     .content {
         position: absolute;
         bottom: 40px;

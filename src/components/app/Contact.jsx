@@ -3,7 +3,7 @@ import React from "react";
 import ContactContainer from "./contact/ContactContainer";
 import InfoContact from "./contact/InfoContact";
 
-import contactImg from "@images/about/about-6.jpg";
+import contactImg from "@images/contact.jpg";
 
 const Contact = () => (
   <div className="contact-form">

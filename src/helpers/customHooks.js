@@ -22,10 +22,10 @@ export const useConnexion = (initialValue) => {
   const [value, setValue] = useState(initialValue);
 
   const updateValue = {
-    off: () => {
+    off: (message = "Déconnexion effectuée") => {
       const pseudo = localStorage.getItem("pseudo");
       localStorage.clear();
-      useToaster.success(`Déconnexion effectuée, à bientôt ${pseudo} !`);
+      useToaster.success(`${message}, à bientôt ${pseudo} !`);
       setValue(false);
       history.push("/");
     },
@@ -33,6 +33,7 @@ export const useConnexion = (initialValue) => {
       localStorage.clear();
       localStorage.setItem("token", token);
       localStorage.setItem("pseudo", jwt.decode(token).pseudo);
+      localStorage.setItem("role", jwt.decode(token).role);
       useToaster.success(`Bienvenue ${jwt.decode(token).pseudo}, tu es bien connecté !`);
       setValue(true);
     }

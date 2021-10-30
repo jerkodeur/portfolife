@@ -42,7 +42,7 @@ const Header = ({ isConnected, closeConnexion }) => {
           <Social />
           {/* Disconnect icon */}
           <span className="link">
-            {isConnected && <FaUserSlash size="20" className="text-warning ml-3" onClick={closeConnexion} />}
+            {isConnected && <FaUserSlash size="20" className="text-warning ml-3" onClick={() => closeConnexion()} />}
           </span>
           <div className="header-btn">
             <a className="rn-btn dark-color" href="@files/Potié Jérôme - Développeur Web Fullstack.pdf" download>

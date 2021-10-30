@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { useToaster, useConnexion } from "../helpers/customHooks";
 
 const AdminRoute = ({ children, ...rest }) => {
-  const [, setConnection] = useConnexion();
+  const [, setConnection] = useConnexion(localStorage.getItem("token") ? true : false);
   let token = localStorage.getItem("token");
   let decodedToken = jwt.decode(token);
   let currentDate = new Date();

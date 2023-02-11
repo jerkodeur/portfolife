@@ -1,8 +1,8 @@
 # portfolife
-Retrouvez mon portfolio, 
+Retrouvez mon portfolio,
 vous pourrez y retrouver tous mes récents projects, mon histoire, mes compétences...
 
-Tout une partie de ma vie en somme !
+Tout une partie de ma vie en somme !!!
 
 ![](https://github.com/jerkodeur/portfolife/blob/main/public/assets/images/projects/portfolife.png)
 

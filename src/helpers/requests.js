@@ -7,5 +7,5 @@ export const request = (url, type = "get", params = {}) =>
     method: type,
     url: url,
     data: params,
-    headers: { Authorization: `Bearer: ${token}` }
+    headers: { Authorization: `Bearer: ${token}`, mode: "cors" }
   });

@@ -1,8 +1,9 @@
 {
   "name": "trydo",
   "version": "0.1.0",
+  "proxy": "https://portfolife.herokuapp.com",
+  "homepage": "https://portfolife.netlify.app/",
   "private": true,
-  "homepage": "http://trydo.rainbowit.net",
   "basename": "/",
   "dependencies": {
     "@svgr/webpack": "4.1.0",

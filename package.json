@@ -1,7 +1,6 @@
 {
   "name": "trydo",
   "version": "0.1.0",
-  "proxy": "https://portfolife.herokuapp.com",
   "homepage": "https://portfolife.netlify.app/",
   "private": true,
   "basename": "/",
